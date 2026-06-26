@@ -2,7 +2,7 @@
 title: Glossary
 category: Glossary
 tags: [glossary, terms, llm-context]
-relatedDocs: [Overview, Architecture]
+relatedDocs: [Overview, Architecture, AI-Pipeline]
 relatedFiles: [PROJECT_CONTRACT.md]
 updatedAt: 2026-06-26
 ---
@@ -23,13 +23,18 @@ updatedAt: 2026-06-26
 | --- | --- |
 | RTSP | 카메라 또는 sample video를 MediaMTX로 publish하는 실시간 스트리밍 프로토콜 |
 | HLS | HTTP segment 기반 영상 재생 방식. fallback 경로로 적합하지만 지연이 큼 |
-| WebRTC | 브라우저 저지연 실시간 재생 방식. WHEP endpoint로 연결 |
+| WebRTC | 브라우저 저지연 실시간 재생 방식. MediaMTX WHEP endpoint로 연결 |
 | MQTT | AI worker가 안전 이벤트를 publish하고 Backend가 subscribe하는 메시징 프로토콜 |
-| LSTM | keypoint sequence를 받아 Normal/Faint 행동을 분류하는 시계열 모델 |
+| LSTM | keypoint sequence를 받아 `Normal/Faint` 행동을 분류하는 시계열 모델 |
 | YOLO | 사람 bbox와 pose keypoint를 추출하는 detector 계열 |
 | ByteTrack | frame 간 동일 인물 track continuity를 유지하는 tracker |
 | FCM | 모바일 push notification에 사용할 수 있는 Firebase Cloud Messaging |
 | MediaMTX | RTSP ingest와 HLS/WebRTC playback endpoint를 제공하는 media server |
+| cameraLoginId | 카메라 경로, Backend registry, Frontend stream URL, MQTT `streamId`를 묶는 표준 식별자 |
+| FP | False Positive. 실제 Normal인데 Faint로 판단한 수 |
+| FN | False Negative. 실제 Faint인데 놓친 수 |
+| threshold | Faint probability를 이벤트 후보로 볼 기준값 |
+| hard-negative | 모델이 Faint로 오판한 Normal sample. 오탐 감소 학습에 사용 |
 
 ## 입력
 
@@ -41,7 +46,12 @@ updatedAt: 2026-06-26
 
 ## 동작 흐름
 
-새 문서 작성 시 이 용어를 우선 사용하고, 다른 이름이 필요하면 Glossary에 alias를 추가한다.
+```text
+new document or bug note
+-> reuse Glossary terms
+-> add alias only when needed
+-> keep architecture and schema wording consistent
+```
 
 ## 관련 파일
 
@@ -52,10 +62,11 @@ updatedAt: 2026-06-26
 
 - [Overview](Overview.md)
 - [Architecture](Architecture.md)
+- [AI-Pipeline](AI-Pipeline.md)
 
 ## 주의사항
 
-`cameraLoginId`는 카메라 경로와 Backend mapping의 표준 식별자다. 단순 표시명이나 DB numeric id와 섞어 쓰지 않는다.
+`cameraLoginId`는 표시명이나 DB numeric id와 섞어 쓰지 않는다. RTSP/WebRTC/HLS/MQTT path를 잇는 운영 식별자다.
 
 ## 후속 작업
 

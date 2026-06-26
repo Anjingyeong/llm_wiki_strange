@@ -4,6 +4,11 @@ type MarkdownRendererProps = {
   readonly markdown: string;
 };
 
+function codeLanguageClass(language: string): string {
+  const normalized = language.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+  return normalized ? `language-${normalized}` : 'language-text';
+}
+
 export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
   const blocks = parseMarkdownBlocks(markdown);
 
@@ -72,7 +77,7 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
               <figure className={block.language === 'mermaid' ? 'codeBlock mermaidBlock' : 'codeBlock'} key={`code-${index}`}>
                 <figcaption>{block.language || 'text'}</figcaption>
                 <pre>
-                  <code>{block.code}</code>
+                  <code className={codeLanguageClass(block.language)}>{block.code}</code>
                 </pre>
               </figure>
             );

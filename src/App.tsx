@@ -31,7 +31,7 @@ export function App() {
         <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
         <main className="notFound">
           <h1>문서를 찾을 수 없습니다</h1>
-          <p>요청한 Wiki 경로가 존재하지 않습니다. 좌측 네비게이션이나 검색으로 문서를 다시 선택하세요.</p>
+          <p>요청한 Wiki 경로가 존재하지 않습니다. 왼쪽 네비게이션이나 검색으로 문서를 다시 선택하세요.</p>
           <button onClick={() => selectDocument(initial.slug)} type="button">
             Overview로 이동
           </button>

@@ -53,8 +53,8 @@ function excerptFrom(body) {
 
 function searchableText(body) {
   return body
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/[#>*_`|[\]()]/g, ' ')
+    .replace(/```(\w+)?\r?\n([\s\S]*?)```/g, ' $1 $2 ')
+    .replace(/[#>*`|[\]()]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
