@@ -11,11 +11,14 @@ updatedAt: 2026-06-26
 
 ## 목적
 
-Pose extractor별 keypoint sequence가 LSTM Normal/Faint 판단에 미치는 영향을 정리한다.
+Pose extractor(YOLO 코드 계열)에 따른 keypoint sequence 질이 LSTM의 Normal/Faint 판단에 어떻게 영향을 주는지, GPU PC에서 실행한 downstream LSTM 평가 결과를 기준으로 정리한다.
 
 ## 배경
 
-이전 로컬 `benchmark/results/lstm_sequence_length_8_16_30/summary.csv`는 `missing_metadata` 상태라 실제 성능 판단에 쓸 수 없었다. 이후 GPU PC에서 실행된 `lstm_extractor_comparison_fast` 결과를 로컬로 받아 확정 지표로 반영했다.
+이전 로컬에서 확인한 `benchmark/results/lstm_sequence_length_8_16_30/summary.csv`는 `missing_metadata` 상태라 성능 판단에 쓸 수 없었다. 이후 GPU PC에서 실행된 `lstm_extractor_comparison_fast` 결과를 로컬로 받아 확정 지표로 반영했다.
+
+이 문서는 해당 결과가 어떤 코드 경로에서 생성됐는지, 신뢰할 수 없는 이전 결과와 어떻게 구분되는지, threshold별 운영 성격이 어떻게 달라지는지를 정리한다.
+
 
 ## 핵심 내용
 

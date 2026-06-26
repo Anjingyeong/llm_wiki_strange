@@ -11,11 +11,11 @@ updatedAt: 2026-06-26
 
 ## 목적
 
-Camera → MediaMTX → AI → MQTT → Backend → DB/WebSocket → Frontend 흐름을 한 장의 계약으로 이해한다.
+Camera → MediaMTX → AI → MQTT → Backend → DB/WebSocket → Frontend 흐름을 한 장의 계약으로 이해하고, 통합 시 가장 자주 깨지는 지점을 미리 파악할 수 있도록 정리한다.
 
 ## 배경
 
-프로젝트는 AI, Backend, Frontend, Infra가 분리되어 있다. 통합에서 가장 자주 깨지는 지점은 카메라 식별자, 스트림 path, MQTT payload, WebSocket 알림 scope다.
+프로젝트는 AI, Backend, Frontend, Infra가 nested repository 형태로 분리되어 있다. 연결 실패의 대부분은 카메라 식별자 불일치에서 시작된다. `cameraLoginId`가 RTSP path, MediaMTX 경로, MQTT `streamId`, Backend camera registry, Frontend stream URL에서 서로 다른 값으로 쓰이면 영상은 누락되고 이벤트 매핑도 실패한다. 이 문서는 그 표준을 한 곳에 고정한다.
 
 ## 핵심 내용
 

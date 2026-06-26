@@ -11,11 +11,13 @@ updatedAt: 2026-06-26
 
 ## 목적
 
-RTSP 입력에서 MQTT 이벤트까지 이어지는 AI worker의 판단 흐름을 LLM이 빠르게 복원할 수 있게 정리한다.
+RTSP 입력에서 MQTT 이벤트까지 이어지는 AI worker의 판단 흐름을 LLM과 개발자가 빠르게 복원할 수 있게 정리한다. 영상 취득, 사람 감지, 행동 분류, 이벤트 발행 각 단계의 역할과 연결 방식을 한 문서에서 확인할 수 있어야 한다.
 
 ## 배경
 
-현재 방향은 YOLO를 재학습하는 것이 아니라 `YOLO26n-pose`로 사람과 keypoint를 추출하고, track별 keypoint sequence를 LSTM에 넣어 `Normal/Faint`를 판단하는 것이다.
+현재 AI 방향은 YOLO를 직접 재학습하는 것이 아니라 `YOLO26n-pose`로 사람의 bbox와 17개 COCO keypoint를 추출한 뒤, ByteTrack으로 track별 연속성을 유지하고, track별 keypoint sequence를 LSTM에 넣어 `Normal/Faint`를 판단하는 구조다.
+
+이 접근은 frame 단위 단순 포즈 판단이 아니라 시간 맥락을 활용해 실신 이벤트를 구분한다는 점에서, 관제 서비스의 오탐·미탐 균형을 threshold 조정으로 유연하게 다룰 수 있다는 장점이 있다.
 
 ## 핵심 내용
 

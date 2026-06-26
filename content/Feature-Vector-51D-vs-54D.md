@@ -11,11 +11,13 @@ updatedAt: 2026-06-26
 
 ## 목적
 
-기존 51D keypoint feature와 현재 54D feature 확장 구조를 실제 코드 기준으로 정리한다.
+51D keypoint feature와 54D feature 확장 구조를 실제 코드 경로 기준으로 비교·정리한다. LSTM이 어떤 feature를 입력으로 받는지, 각 차원이 어디에서 계산되는지 한 곳에서 확인할 수 있어야 한다.
 
 ## 배경
 
-초기 설명에서는 LSTM 입력을 17개 keypoint x `(x, y, confidence)`인 51D로 설명했다. 최신 코드에서는 이 51D에 3개 motion feature를 붙여 54D를 만든다.
+초기 설명에서 LSTM 입력은 17개 COCO keypoint의 `(x, y, confidence)`를 정규화한 51D였다. 실신은 정적인 자세만이 아니라 시간에 따른 중심 하강·속도·몸통 기울기 변화로 드러나므로, 최신 코드는 이 51D에 `center_drop`, `velocity`, `torso_angle` 3개의 handcrafted motion feature를 붙여 54D를 만든다.
+
+51D와 54D의 성능 비교 수치는 아직 동일 조건에서 실험하지 않았다. 확인된 것은 현재 운영 코드가 54D를 표준으로 사용한다는 사실이다.
 
 ## 핵심 내용
 
