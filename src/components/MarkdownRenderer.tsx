@@ -1,4 +1,5 @@
 import { headingId, inlineMarkdown, parseMarkdownBlocks } from '../lib/markdown';
+import { MermaidDiagram } from './MermaidDiagram';
 
 type MarkdownRendererProps = {
   readonly markdown: string;
@@ -73,6 +74,9 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
             );
           }
           case 'code':
+            if (block.language.trim().toLowerCase() === 'mermaid') {
+              return <MermaidDiagram chart={block.code} diagramId={`diagram-${index}`} key={`mermaid-${index}`} />;
+            }
             return (
               <figure className={block.language === 'mermaid' ? 'codeBlock mermaidBlock' : 'codeBlock'} key={`code-${index}`}>
                 <figcaption>{block.language || 'text'}</figcaption>

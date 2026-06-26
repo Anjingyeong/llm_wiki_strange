@@ -48,14 +48,24 @@ AI 파이프라인은 다음 요소로 구성된다.
 
 ## 동작 흐름
 
-```text
-RTSP frame
--> YOLO26n-pose detects person keypoints
--> ByteTrack assigns trackId
--> per-track keypoint sequence buffer
--> LSTM predicts Normal/Faint
--> threshold and hard-negative policy
--> MQTT event JSON
+```mermaid
+flowchart TD
+  RTSP[RTSP frame read]
+  YOLO[YOLO26n-pose<br/>person/keypoint detection]
+  Track[ByteTrack<br/>trackId assignment]
+  Buffer[Keypoint sequence buffer]
+  Feature[Feature vector<br/>51D keypoints + 3D motion = 54D]
+  LSTM[LSTM action classification<br/>Normal/Faint]
+  Policy[threshold + cooldown<br/>continuous-frame policy]
+  MQTT[MQTT publish<br/>safety/events]
+
+  RTSP --> YOLO
+  YOLO --> Track
+  Track --> Buffer
+  Buffer --> Feature
+  Feature --> LSTM
+  LSTM --> Policy
+  Policy --> MQTT
 ```
 
 ## 관련 파일

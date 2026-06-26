@@ -19,7 +19,7 @@ Pose extractor별 keypoint sequence가 LSTM Normal/Faint 판단에 미치는 영
 
 ## 핵심 내용
 
-기본 threshold 기준 `yolo26n-pose`가 Faint Recall 0.750877로 가장 높다. FN은 142개로 후보군 중 가장 적다.
+기본 threshold 기준 `yolo26n-pose`가 Faint Recall 0.750877로 가장 높다. FN은 142개로 후보군 중 가장 적다. 이 결과는 pose extractor별 downstream LSTM 비교이며, 현재 코드 기준 keypoint feature는 51D에 motion feature 3개를 붙인 54D 구조다.
 
 | Model | Eval Normal | Eval Faint | Pred Normal | Pred Faint | FP | FN | Recall | Precision | F1 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -72,10 +72,14 @@ video clip
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/yolo26n-pose/summary.json`
 - `docs/wiki/data/modelMetrics.json`
+- `strange_ai/ai/action/motion_features.py`
+- `benchmark/results/lstm_sequence_length_8_16_30/summary.csv`
 
 ## 관련 문서
 
 - [LSTM](LSTM.md)
+- [Feature-Vector-51D-vs-54D](Feature-Vector-51D-vs-54D.md)
+- [LSTM-Sequence-Length-Comparison](LSTM-Sequence-Length-Comparison.md)
 - [Model-Comparison](Model-Comparison.md)
 - [Model-Decision-YOLO26n](Model-Decision-YOLO26n.md)
 

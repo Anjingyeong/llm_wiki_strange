@@ -30,6 +30,8 @@ updatedAt: 2026-06-26
 | `benchmark/results/model_benchmark.md` | local file | same six models | No | CSV와 동일하게 성공 row 없음 |
 | `benchmark/results/lstm_sequence_length_8_16_30/summary.csv` | local file | YOLO26n only | No | `missing_metadata` 상태라 성능값으로 사용 불가 |
 | `benchmark/results/lstm_sequence_length_8_16_30/*/raw_result.json` | local file | YOLO26n only | No | metadata 누락으로 dry-run 실패 기록 |
+| `strange_ai/ai/action/motion_features.py` | local code | feature extraction | Yes | 51D keypoint feature에 `center_drop`, `velocity`, `torso_angle` 3개를 붙여 54D를 만드는 구조 확인 |
+| `strange_ai/benchmark/compare_lstm_extractors.py` | local code | LSTM benchmark | Yes | `sequence_to_features`에서 motion feature를 붙이고 benchmark output을 생성하는 경로 확인 |
 
 ## 입력
 
@@ -58,12 +60,16 @@ PowerShell local file search
 - `pose_model_summary.csv`
 - `benchmark/results/model_benchmark.csv`
 - `benchmark/results/lstm_sequence_length_8_16_30/summary.csv`
+- `strange_ai/ai/action/motion_features.py`
+- `strange_ai/benchmark/compare_lstm_extractors.py`
 
 ## 관련 문서
 
 - [Model-Comparison](Model-Comparison.md)
 - [Model-Decision-YOLO26n](Model-Decision-YOLO26n.md)
 - [LSTM-Experiment-Results](LSTM-Experiment-Results.md)
+- [LSTM-Sequence-Length-Comparison](LSTM-Sequence-Length-Comparison.md)
+- [Feature-Vector-51D-vs-54D](Feature-Vector-51D-vs-54D.md)
 
 ## 주의사항
 

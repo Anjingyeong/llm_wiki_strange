@@ -295,6 +295,39 @@ input {
   border-color: var(--accent);
 }
 
+.mermaidDiagram {
+  max-width: 100%;
+  overflow: hidden;
+  margin: 22px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.mermaidDiagram figcaption {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.mermaidDiagramViewport {
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.mermaidDiagramViewport svg {
+  display: block;
+  min-width: 680px;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.mermaidFallback figcaption {
+  color: var(--code-text);
+}
+
 .tableWrap {
   overflow-x: auto;
 }
