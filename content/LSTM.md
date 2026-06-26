@@ -30,7 +30,7 @@ AI worker는 frame 단위 YOLO 결과를 곧바로 이벤트로 만들지 않는
 | base keypoint feature | 51D | 17 keypoints x `(x, y, confidence)` |
 | motion feature | 3D | `center_drop`, `velocity`, `torso_angle` |
 | final keypoint feature | 54D | `append_motion_features(base_features)` |
-| default sequence length | 8 또는 16 경로 혼재 | RTSP config는 8/4, `compare_lstm_extractors.py` 기본은 16/8 |
+| default sequence length | 30 / 15 통일 완료 | 모든 학습/실험/실가동 스크립트 및 버퍼 클래스 기본값을 30/15로 일치시킴 |
 | class | `Normal`, `Faint` | classifier/default benchmark |
 | threshold audit | 0.3, 0.4, 0.5, 0.6, 0.7 | benchmark output |
 
