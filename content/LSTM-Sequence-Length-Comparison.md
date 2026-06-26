@@ -3,7 +3,7 @@ title: LSTM Sequence Length Comparison
 category: Experiments
 tags: [lstm, sequence-length, benchmark, yolo26n, smoke-test, full-evaluation]
 relatedDocs: [LSTM, LSTM-Experiment-Results, Benchmark-History]
-relatedFiles: [gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
+relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
 updatedAt: 2026-06-26
 ---
 
@@ -19,7 +19,7 @@ sequence length는 판단 지연과 행동 문맥 사이의 trade-off다. 짧은
 
 ## 핵심 내용
 
-로컬 `gpu_benchmark_dump` 폴더의 8/16/30 sequence length 비교 실험 결과를 정리한다.
+로컬 `gpu_results_import` 폴더의 8/16/30 sequence length 비교 실험 결과를 정리한다.
 평가는 크게 **Smoke Test**와 **전체 데이터셋 평가 (Full Dataset Evaluation v2)**로 나뉜다.
 
 ### 1. Full Dataset Evaluation (v2)
@@ -77,8 +77,8 @@ flowchart LR
 
 ## 관련 파일
 
-- `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
-- `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.md`
+- `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
+- `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.md`
 - `strange_ai/scripts/run_lstm_sequence_length_comparison.py`
 
 ## 관련 문서

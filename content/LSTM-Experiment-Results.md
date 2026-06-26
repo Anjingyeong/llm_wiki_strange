@@ -3,7 +3,7 @@ title: LSTM Experiment Results
 category: AI Pipeline
 tags: [lstm, experiment-results, threshold, model-comparison, yolo26n, split-test-audit]
 relatedDocs: [LSTM, Model-Comparison, Benchmark-History]
-relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, docs/wiki/data/modelMetrics.json, gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json]
+relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, docs/wiki/data/modelMetrics.json, gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json]
 updatedAt: 2026-06-26
 ---
 
@@ -66,7 +66,7 @@ Faint 탐지(Recall) 최우선 확보와 현장 오탐(FP) 제어 사이의 균�
 - Pose model: `yolo26n-pose.pt`, `yolo26s-pose.pt`, `yolo11n-pose.pt`, `yolo11s-pose.pt`, `yolov8n-pose.pt`, `yolov8s-pose.pt`
 - LSTM 입력: keypoint sequence
 - 클래스: `Normal`, `Faint`
-- 최종 평가 로그: `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- 최종 평가 로그: `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
 - 소규모 비교 평가 결과: `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
 
 ## 출력
@@ -89,8 +89,8 @@ video clip
 
 ## 관련 파일
 
-- `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
-- `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/confusion_matrix.csv`
+- `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/confusion_matrix.csv`
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/yolo26n-pose/summary.json`
 - `docs/wiki/data/modelMetrics.json`

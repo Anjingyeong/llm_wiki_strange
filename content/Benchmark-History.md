@@ -3,7 +3,7 @@ title: Benchmark History
 category: Experiments
 tags: [benchmark-history, evidence, searched-paths, yolo, gpu-benchmark]
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
-relatedFiles: [gpu_benchmark_dump/PROJECT_SUMMARY.md, gpu_benchmark_dump/lstm_eval_digest.txt, gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv]
+relatedFiles: [gpu_results_import/PROJECT_SUMMARY.md, gpu_results_import/lstm_eval_digest.txt, gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv]
 updatedAt: 2026-06-26
 ---
 
@@ -21,13 +21,13 @@ updatedAt: 2026-06-26
 
 | File | Evidence | Models | Used | Reason |
 | --- | --- | --- | --- | --- |
-| `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json` | 최종 대규모 Stratified Split 평가 결과 | yolo26n | **Yes (Authoritative)** | 최종 대규모 데이터셋(Normal 1,392 / Faint 1,392) 기반 최종 평가 및 threshold 감사 결과로 사용 |
-| `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv` | 8/16/30 sequence length full_v2 결과 | yolo26n (8, 16, 30) | **Yes** | 14만 시퀀스 대규모 sequence length 비교 지표로 활용. (8 프레임은 OOM 실패) |
-| `gpu_benchmark_dump/sequence_length_smoke.log` | 8/16/30 sequence length smoke 결과 | yolo26n (8, 16, 30) | **Yes** | 소규모 연동용 smoke 테스트 지표 기록으로 사용 |
-| `gpu_benchmark_dump/benchmark/results/lstm_sequence30_motion_features/summary.json` | 51D Baseline 기준 평가 결과 | yolo26n, yolo11n, yolov8s | **Yes** | 모션 피처 추가를 위한 51D Baseline (17 x 3) 1차 기준 지표로 사용 |
-| `gpu_benchmark_dump/benchmark/lstm_sequence30_error_analysis.md` | 클래스 불균형 완화 실험 분석 로그 | yolo26n | **Yes** | CE vs Weighted CE vs Oversample 기법 성능 비교 근거로 사용 |
+| `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json` | 최종 대규모 Stratified Split 평가 결과 | yolo26n | **Yes (Authoritative)** | 최종 대규모 데이터셋(Normal 1,392 / Faint 1,392) 기반 최종 평가 및 threshold 감사 결과로 사용 |
+| `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv` | 8/16/30 sequence length full_v2 결과 | yolo26n (8, 16, 30) | **Yes** | 14만 시퀀스 대규모 sequence length 비교 지표로 활용. (8 프레임은 OOM 실패) |
+| `gpu_results_import/sequence_length_smoke.log` | 8/16/30 sequence length smoke 결과 | yolo26n (8, 16, 30) | **Yes** | 소규모 연동용 smoke 테스트 지표 기록으로 사용 |
+| `gpu_results_import/benchmark/results/lstm_sequence30_motion_features/summary.json` | 51D Baseline 기준 평가 결과 | yolo26n, yolo11n, yolov8s | **Yes** | 모션 피처 추가를 위한 51D Baseline (17 x 3) 1차 기준 지표로 사용 |
+| `gpu_results_import/benchmark/lstm_sequence30_error_analysis.md` | 클래스 불균형 완화 실험 분석 로그 | yolo26n | **Yes** | CE vs Weighted CE vs Oversample 기법 성능 비교 근거로 사용 |
 | `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv` | GPU PC에서 수행한 6개 모델 fast 비교 결과 | yolo26s, yolo26n, yolo11s, yolo11n, yolov8s, yolov8n | Yes | six-model downstream LSTM comparison. `metrics_status=OK` |
-| `pose_model_summary.csv` 및 `gpu_benchmark_dump/pose_model_summary.csv` | local & dump 파일 | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |
+| `pose_model_summary.csv` 및 `gpu_results_import/pose_model_summary.csv` | local & dump 파일 | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |
 | `benchmark/results/model_benchmark.csv` | local file | same six models | No | 모든 row가 `SKIPPED: sample_videos folder is empty...` 상태 |
 | `benchmark/results/lstm_sequence_length_8_16_30/summary.csv` | local file | YOLO26n only | No | `missing_metadata` 상태라 성능값으로 사용 불가 |
 | `strange_ai/ai/action/motion_features.py` | local code | feature extraction | Yes | 51D keypoint feature에 `center_drop`, `velocity`, `torso_angle` 3개를 붙여 54D를 만드는 구조 확인 |
@@ -39,8 +39,8 @@ updatedAt: 2026-06-26
 
 ## 출력
 
-- Authoritative 최종 split 결과: `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
-- Sequence Length 비교 결과: `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
+- Authoritative 최종 split 결과: `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- Sequence Length 비교 결과: `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
 - 제외 파일과 사유 목록
 
 ## 동작 흐름
@@ -55,8 +55,8 @@ PowerShell local file search
 
 ## 관련 파일
 
-- `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
-- `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
+- `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
 - `pose_model_summary.csv`
 - `strange_ai/ai/action/motion_features.py`
@@ -76,5 +76,5 @@ PowerShell local file search
 
 ## 후속 작업
 
-- 로컬 `gpu_benchmark_dump` 내에 복사된 신규 지표 파일들이 훼손되거나 유실되지 않도록 git 버전 관리에 백업 여부를 검증한다.
+- 로컬 `gpu_results_import` 내에 복사된 신규 지표 파일들이 훼손되거나 유실되지 않도록 git 버전 관리에 백업 여부를 검증한다.
 - 차기 54D 모션 피처 학습 결과 획득 시 신규 파일 경로를 이 이력 테이블에 추가 등록한다.
