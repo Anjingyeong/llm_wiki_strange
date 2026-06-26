@@ -1,9 +1,9 @@
 ---
 title: Benchmark History
 category: Experiments
-tags: [benchmark-history, evidence, searched-paths, yolo]
+tags: [benchmark-history, evidence, searched-paths, yolo, gpu-benchmark]
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
-relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, benchmark/results/model_benchmark.csv, pose_model_summary.csv]
+relatedFiles: [gpu_benchmark_dump/PROJECT_SUMMARY.md, gpu_benchmark_dump/lstm_eval_digest.txt, gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv]
 updatedAt: 2026-06-26
 ---
 
@@ -11,7 +11,7 @@ updatedAt: 2026-06-26
 
 ## 목적
 
-모델 선택 문서에 사용한 benchmark/result 파일의 출처, 사용 여부, 제외 사유를 기록한다.
+모델 선택 및 성능 비교 문서에 사용한 benchmark/result 파일의 출처, 사용 여부, 제외 사유를 기록한다.
 
 ## 배경
 
@@ -21,15 +21,15 @@ updatedAt: 2026-06-26
 
 | File | Evidence | Models | Used | Reason |
 | --- | --- | --- | --- | --- |
-| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv` | local copy from GPU PC, original remote path under `/home/welabs/yolo_training` | yolo26s, yolo26n, yolo11s, yolo11n, yolov8s, yolov8n | Yes | six-model downstream LSTM comparison. `metrics_status=OK` |
-| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/<model>/summary.json` | local copy from GPU PC | same six models | Yes | confusion matrix, FP/FN, threshold audit 확인 |
-| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/<model>/eval_predictions.csv` | local copy from GPU PC | same six models | Reference | row-level prediction 검증용. 이번 문서에는 집계값만 사용 |
-| `pose_model_summary.csv` | local file | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |
-| `strange_ai/pose_model_summary.csv` | duplicate local file | same six models | Reference | root `pose_model_summary.csv`와 같은 계열의 pose-only summary |
+| `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json` | 최종 대규모 Stratified Split 평가 결과 | yolo26n | **Yes (Authoritative)** | 최종 대규모 데이터셋(Normal 1,392 / Faint 1,392) 기반 최종 평가 및 threshold 감사 결과로 사용 |
+| `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv` | 8/16/30 sequence length full_v2 결과 | yolo26n (8, 16, 30) | **Yes** | 14만 시퀀스 대규모 sequence length 비교 지표로 활용. (8 프레임은 OOM 실패) |
+| `gpu_benchmark_dump/sequence_length_smoke.log` | 8/16/30 sequence length smoke 결과 | yolo26n (8, 16, 30) | **Yes** | 소규모 연동용 smoke 테스트 지표 기록으로 사용 |
+| `gpu_benchmark_dump/benchmark/results/lstm_sequence30_motion_features/summary.json` | 51D Baseline 기준 평가 결과 | yolo26n, yolo11n, yolov8s | **Yes** | 모션 피처 추가를 위한 51D Baseline (17 x 3) 1차 기준 지표로 사용 |
+| `gpu_benchmark_dump/benchmark/lstm_sequence30_error_analysis.md` | 클래스 불균형 완화 실험 분석 로그 | yolo26n | **Yes** | CE vs Weighted CE vs Oversample 기법 성능 비교 근거로 사용 |
+| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv` | GPU PC에서 수행한 6개 모델 fast 비교 결과 | yolo26s, yolo26n, yolo11s, yolo11n, yolov8s, yolov8n | Yes | six-model downstream LSTM comparison. `metrics_status=OK` |
+| `pose_model_summary.csv` 및 `gpu_benchmark_dump/pose_model_summary.csv` | local & dump 파일 | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |
 | `benchmark/results/model_benchmark.csv` | local file | same six models | No | 모든 row가 `SKIPPED: sample_videos folder is empty...` 상태 |
-| `benchmark/results/model_benchmark.md` | local file | same six models | No | CSV와 동일하게 성공 row 없음 |
 | `benchmark/results/lstm_sequence_length_8_16_30/summary.csv` | local file | YOLO26n only | No | `missing_metadata` 상태라 성능값으로 사용 불가 |
-| `benchmark/results/lstm_sequence_length_8_16_30/*/raw_result.json` | local file | YOLO26n only | No | metadata 누락으로 dry-run 실패 기록 |
 | `strange_ai/ai/action/motion_features.py` | local code | feature extraction | Yes | 51D keypoint feature에 `center_drop`, `velocity`, `torso_angle` 3개를 붙여 54D를 만드는 구조 확인 |
 | `strange_ai/benchmark/compare_lstm_extractors.py` | local code | LSTM benchmark | Yes | `sequence_to_features`에서 motion feature를 붙이고 benchmark output을 생성하는 경로 확인 |
 
@@ -39,8 +39,8 @@ updatedAt: 2026-06-26
 
 ## 출력
 
-- authoritative result: `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
-- per-model detail: `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/<model>/summary.json`
+- Authoritative 최종 split 결과: `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- Sequence Length 비교 결과: `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
 - 제외 파일과 사유 목록
 
 ## 동작 흐름
@@ -55,11 +55,10 @@ PowerShell local file search
 
 ## 관련 파일
 
+- `gpu_benchmark_dump/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json`
+- `gpu_benchmark_dump/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
 - `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`
-- `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/<model>/summary.json`
 - `pose_model_summary.csv`
-- `benchmark/results/model_benchmark.csv`
-- `benchmark/results/lstm_sequence_length_8_16_30/summary.csv`
 - `strange_ai/ai/action/motion_features.py`
 - `strange_ai/benchmark/compare_lstm_extractors.py`
 
@@ -73,9 +72,9 @@ PowerShell local file search
 
 ## 주의사항
 
-`pose_model_summary.csv`의 FPS가 좋아도 downstream LSTM Faint Recall이 낮으면 관제 이벤트 판단 모델로는 우선순위가 내려간다. 이번 선택의 authoritative 기준은 GPU LSTM comparison 결과다.
+`pose_model_summary.csv`의 FPS가 좋아도 downstream LSTM Faint Recall이 낮으면 관제 이벤트 판단 모델로는 우선순위가 내려간다. 이번 선택의 authoritative 기준은 GPU LSTM comparison 결과 및 최종 Split Test Audit 지표이다.
 
 ## 후속 작업
 
-- `.tmp`에 받은 원본을 장기 보존할지, 별도 `docs/wiki/evidence` 또는 외부 artifact 저장소에 복사할지 결정한다.
-- 다음 benchmark부터는 commit 대상 문서와 raw artifact 보관 위치를 분리하고, 문서에는 raw file hash를 기록한다.
+- 로컬 `gpu_benchmark_dump` 내에 복사된 신규 지표 파일들이 훼손되거나 유실되지 않도록 git 버전 관리에 백업 여부를 검증한다.
+- 차기 54D 모션 피처 학습 결과 획득 시 신규 파일 경로를 이 이력 테이블에 추가 등록한다.
