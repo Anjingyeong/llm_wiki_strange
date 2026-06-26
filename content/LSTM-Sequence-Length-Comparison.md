@@ -1,9 +1,9 @@
 ---
 title: LSTM Sequence Length Comparison
 category: Experiments
-tags: [lstm, sequence-length, benchmark, yolo26n, smoke-test, full-evaluation]
+tags: [lstm, sequence-length, benchmark, yolo26n, primary-evaluation, full-evaluation]
 relatedDocs: [LSTM, LSTM-Experiment-Results, Benchmark-History]
-relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
+relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
 updatedAt: 2026-06-26
 ---
 
@@ -20,33 +20,33 @@ sequence length는 판단 지연과 행동 문맥 사이의 trade-off다. 짧은
 ## 핵심 내용
 
 로컬 `gpu_results_import` 폴더의 8/16/30 sequence length 비교 실험 결과를 정리한다.
-평가는 크게 **Smoke Test**와 **전체 데이터셋 평가 (Full Dataset Evaluation v2)**로 나뉜다.
+평가는 크게 **주요 시퀀스 길이 평가 (Primary Evaluation)**와 **참조용 전체 데이터셋 평가 v2 (Full Dataset Evaluation v2)**로 구성된다.
 
-### 1. Full Dataset Evaluation (v2)
-실제 대규모 데이터셋(총 14만 개 이상의 생성 시퀀스)을 기반으로 한 최종 평가 결과이다.
-*주의: Sequence Length 8 실험은 메모리 초과(OOM)/시간 초과로 인해 실패(failed)하였다.*
+### 1. Primary Sequence Length Evaluation (lstm_sequence_length_8_16_30)
+`benchmark/results/lstm_sequence_length_8_16_30/summary.csv`에서 추출한 핵심 실험 결과이다. 세 가지 윈도우 크기 모두 성공적으로 완료되었다.
+
+| sequence_length | status | Accuracy | Precision | Faint Recall | F1-score | FP | FN | generated_sequences | zero_sequence_clips | estimated_delay_frames | result path |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 8 | OK | 0.900648 | 0.168476 | 0.550594 | 0.258005 | 16,006 | 2,647 | 187,746 | 4,391 | 8 | `.../lstm_sequence_length_8_16_30/sequence_length_8/` |
+| 16 | OK | 0.905982 | 0.169060 | 0.517659 | 0.254879 | 10,302 | 1,953 | 130,347 | 5,296 | 16 | `.../lstm_sequence_length_8_16_30/sequence_length_16/` |
+| 30 | OK | 0.875030 | 0.175649 | 0.822222 | 0.289462 | 2,952 | 136 | 24,710 | 8,051 | 30 | `.../lstm_sequence_length_8_16_30/sequence_length_30/` |
+
+**실험 분석 및 규칙:**
+- **Faint Recall & FN 최소화 (Sequence 30 권장)**: Sequence Length 30은 **Faint Recall이 0.822222**로 압도적으로 우수하며, 미탐(FN)을 단 136개로 억제한다. 오탐(FP) 역시 2,952개로 짧은 윈도우 대비 현격히 적어(8프레임의 약 1/5, 16프레임의 약 1/3 수준), 실전 관제 신뢰성을 극대화하기 위해 **Sequence Length 30을 표준으로 권장**한다.
+- **지연 시간 감수**: Sequence Length 30은 약 1초(30프레임) 분량의 시퀀스를 누적해야 하므로, 지연 속도가 8프레임 및 16프레임 대비 각각 약 0.7초, 0.5초 길어진다.
+- **짧은 윈도우의 한계**: 8프레임과 16프레임은 지연은 짧지만 과도한 오탐(FP 10,000건 이상)을 유발하고 Recall이 50%대에 머물러 단독 활용이 부적합하다.
+
+---
+
+### 2. Reference Full Dataset Evaluation (v2)
+대규모 시퀀스 생성 중 자원 제약 상황을 반영한 추가 v2 실험 결과이다.
+*주의: 이 v2 실험에서는 Sequence Length 8 세팅이 자원 초과로 실패(failed)하였다.*
 
 | sequence_length | status | Accuracy | Precision | Faint Recall | F1-score | FP | FN | generated_sequences | zero_sequence_clips | estimated_delay_frames | result path |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | 8 | failed | - | - | - | - | 0 | 0 | - | - | 8 | `.../lstm_sequence_length_8_16_30_full_v2/sequence_length_8/` |
-| 16 | OK | 0.969224 | 0.747801 | 0.05673 | 0.105459 | 86 | 4240 | 140,565 | 3,550 | 16 | `.../lstm_sequence_length_8_16_30_full_v2/sequence_length_16/` |
-| 30 | OK | 0.971874 | 0.816327 | 0.09697 | 0.173348 | 18 | 745 | 27,128 | 5,633 | 30 | `.../lstm_sequence_length_8_16_30_full_v2/sequence_length_30/` |
-
-**권장 규칙:**
-- **Sequence Length 16**: Faint recall/F1 점수가 서로 인접한 상황에서 지연 속도와 컨텍스트(행동 흐름) 사이의 가장 합리적인 균형을 제공하므로 권장한다.
-- **Sequence Length 8**: 가장 짧은 윈도우로 빠른 탐지가 가능하나 학습 중 OOM/실패 요인이 있어 대규모 학습이 불안정하다.
-- **Sequence Length 30**: Faint recall(0.09697) 및 F1-score(0.173348) 측면에서 16 프레임 대비 오탐(FP=18 vs 86)을 대폭 줄이면서 Faint 검출력을 상대적으로 향상시키므로, 지연(30프레임)을 극복하고 오탐을 극한으로 억제해야 하는 특수 관제 환경에 유용하다.
-
----
-
-### 2. Smoke Test Run
-초기 검증을 위해 소규모 샘플로 수행된 연동 성능 테스트 결과이다.
-
-| sequence_length | status | Accuracy | Precision | Faint Recall | F1-score | FP | FN | generated_sequences | zero_sequence_clips | estimated_delay_frames | result path |
-| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| 8 | OK | 0.547945 | 1.000000 | 0.066038 | 0.123894 | 0 | 99 | 219 | 6 | 8 | `.../lstm_sequence_length_8_16_30/sequence_length_8/` |
-| 16 | OK | 0.526316 | 0.000000 | 0.000000 | 0.000000 | 0 | 72 | 152 | 7 | 16 | `.../lstm_sequence_length_8_16_30/sequence_length_16/` |
-| 30 | OK | 0.571429 | 0.000000 | 0.000000 | 0.000000 | 0 | 12 | 28 | 12 | 30 | `.../lstm_sequence_length_8_16_30/sequence_length_30/` |
+| 16 | OK | 0.969224 | 0.747801 | 0.056730 | 0.105459 | 86 | 4,240 | 140,565 | 3,550 | 16 | `.../lstm_sequence_length_8_16_30_full_v2/sequence_length_16/` |
+| 30 | OK | 0.971874 | 0.816327 | 0.096970 | 0.173348 | 18 | 745 | 27,128 | 5,633 | 30 | `.../lstm_sequence_length_8_16_30_full_v2/sequence_length_30/` |
 
 ## 입력
 
@@ -77,8 +77,8 @@ flowchart LR
 
 ## 관련 파일
 
+- `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30/summary.csv`
 - `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv`
-- `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.md`
 - `strange_ai/scripts/run_lstm_sequence_length_comparison.py`
 
 ## 관련 문서
@@ -89,8 +89,8 @@ flowchart LR
 
 ## 주의사항
 
-Sequence Length 30은 오탐율을 줄이는 데 크게 유리하나(FP=18 vs 86), 30프레임(약 1초 지연)을 축적해야 하므로 실시간 이벤트 생성 지연이 16프레임 대비 약 0.5초 길어진다.
+Sequence Length 30은 FP를 극적으로 상쇄하여 오보율을 낮추나, 1초 분량의 키포인트 축적 시간이 필요한 점을 파이프라인 설계 및 알림 발송 시 고려해야 한다.
 
 ## 후속 작업
 
-클래스 불균형에 대한 추가적인 완화(Oversample 등) 기법을 16/30 프레임 각각에 적용하여 윈도우 길이와 손실함수의 최적 조합을 연구한다.
+가중치 CE(Weighted CE)나 Focal Loss 및 Oversampling 기법을 30프레임 설정에 결합하여 Recall 85% 이상, Precision 30% 이상을 확보할 수 있는 파라미터 조합을 탐색한다.
