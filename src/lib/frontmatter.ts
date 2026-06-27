@@ -92,12 +92,21 @@ function collectHeadings(body: string): readonly Heading[] {
 }
 
 function makeExcerpt(body: string): string {
-  return body
+  const EXCERPT_MAX = 180;
+  const plain = body
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/^#+\s+/gm, '')
     .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 180);
+    .trim();
+
+  if (plain.length <= EXCERPT_MAX) {
+    return plain;
+  }
+
+  // Cut at the last whitespace before EXCERPT_MAX to avoid mid-word truncation
+  const cut = plain.lastIndexOf(' ', EXCERPT_MAX);
+  const end = cut > 0 ? cut : EXCERPT_MAX;
+  return plain.slice(0, end) + '…';
 }
 
 export function parseWikiDocument(filePath: string, raw: string): WikiDocument {
