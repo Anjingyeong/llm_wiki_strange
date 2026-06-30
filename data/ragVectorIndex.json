@@ -4,7 +4,7 @@
     "provider": "local-hash-tfidf",
     "dimensions": 256
   },
-  "generatedAt": "2026-06-30T12:33:23.768Z",
+  "generatedAt": "2026-06-30T12:36:38.794Z",
   "chunks": [
     {
       "id": "2026-06-30-Overlay-Tracking-Evidence-Log#bf1d00e2",
