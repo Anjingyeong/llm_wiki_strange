@@ -1,3 +1,4 @@
+import { ExpandableText } from './ExpandableText';
 import { searchDocuments } from '../lib/search';
 
 type SearchPanelProps = {
@@ -38,7 +39,9 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
               >
                 <span>{result.category}</span>
                 <strong>{result.title}</strong>
-                {result.excerpt ? <p>{result.excerpt}</p> : null}
+                {result.excerpt ? (
+                  <ExpandableText text={result.excerpt} maxLength={120} />
+                ) : null}
                 {result.tags.length > 0 ? (
                   <small>{result.tags.join(' · ')}</small>
                 ) : null}
