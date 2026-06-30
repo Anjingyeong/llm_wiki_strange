@@ -1,5 +1,6 @@
 export type WikiCategory =
   | 'Project'
+  | '면접·이력서 정리'
   | 'Architecture'
   | 'AI Pipeline'
   | 'Backend'

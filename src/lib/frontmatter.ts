@@ -2,6 +2,7 @@ import type { Frontmatter, Heading, WikiCategory, WikiDocument } from './types';
 
 const categories = [
   'Project',
+  '면접·이력서 정리',
   'Architecture',
   'AI Pipeline',
   'Backend',

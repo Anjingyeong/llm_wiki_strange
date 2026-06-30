@@ -9,6 +9,7 @@ const rawModules = import.meta.glob<string>('../../content/*.md', {
 
 const categoryOrder: readonly WikiCategory[] = [
   'Project',
+  '면접·이력서 정리',
   'Architecture',
   'AI Pipeline',
   'Backend',
