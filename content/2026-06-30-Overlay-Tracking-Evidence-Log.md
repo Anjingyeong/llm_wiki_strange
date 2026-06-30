@@ -1,6 +1,7 @@
-﻿---
+---
 title: "2026-06-30 작업 로그: Overlay Sync, Tracking, Evidence & Data Pipeline"
-date: 2026-06-30
+category: Project
+updatedAt: "2026-06-30"
 tags: ["AI", "Overlay", "Sync", "Tracking", "Hard Negative", "Synthetic Data"]
 ---
 
