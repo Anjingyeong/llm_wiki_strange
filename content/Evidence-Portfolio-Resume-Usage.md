@@ -5,6 +5,10 @@ tags: [portfolio, resume, interview, evidence-map, bullets, qa]
 relatedDocs: [Evidence-Smart-Safety-System, Evidence-LLM-Wiki-RAG, Interview-Resume-Notes]
 relatedFiles: [portfolio/project-evidence-map.md, portfolio/resume-bullets.md, portfolio/interview-answers.md]
 updatedAt: 2026-06-30
+project: portfolio
+type: evidence
+portfolio_use: true
+evidence_type: resume
 ---
 
 # 포트폴리오/이력서 활용 문장 Evidence Wiki

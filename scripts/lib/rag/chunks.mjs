@@ -158,6 +158,11 @@ function makeChunk(document, section, text) {
     section,
     text,
     updatedAt: document.updatedAt,
+    project: document.project,
+    type: document.type,
+    tags: document.tags,
+    portfolio_use: document.portfolio_use,
+    evidence_type: document.evidence_type,
     embedding: embedText(`${document.title} ${section} ${text}`),
   };
 }

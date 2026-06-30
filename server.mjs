@@ -1,5 +1,5 @@
 import { createReadStream } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -63,13 +63,25 @@ async function serveStatic(request, response) {
   const safePath = normalize(decodeURIComponent(requested)).replace(/^(\.\.[/\\])+/, '');
   const filePath = join(distDir, safePath);
   const contentType = contentTypes.get(extname(filePath)) ?? 'application/octet-stream';
-  const stream = createReadStream(filePath);
-  stream.on('error', () => {
-    createReadStream(join(distDir, 'index.html'))
-      .on('error', () => sendJson(response, 404, { error: 'not_found' }))
-      .pipe(response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }));
-  });
-  stream.pipe(response.writeHead(200, { 'content-type': contentType }));
+
+  try {
+    const fileStat = await stat(filePath);
+    if (!fileStat.isFile()) {
+      throw new Error('Not a file');
+    }
+    const stream = createReadStream(filePath);
+    response.writeHead(200, { 'content-type': contentType });
+    stream.pipe(response);
+  } catch (error) {
+    try {
+      const indexHtmlPath = join(distDir, 'index.html');
+      const stream = createReadStream(indexHtmlPath);
+      response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      stream.pipe(response);
+    } catch (e) {
+      sendJson(response, 404, { error: 'not_found' });
+    }
+  }
 }
 
 const server = createServer((request, response) => {

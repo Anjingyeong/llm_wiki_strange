@@ -5,6 +5,10 @@ tags: [portfolio, evidence, rag, markdown, embedding, grounded-answer]
 relatedDocs: [Overview, Glossary]
 relatedFiles: [docs/rag-portfolio.md, scripts/generate-rag-index.mjs, scripts/lib/rag/chunks.mjs, scripts/lib/rag/embedding.mjs, scripts/lib/rag/search.mjs, scripts/lib/rag/answer.mjs, server.mjs, portfolio/project-evidence-map.md, portfolio/resume-bullets.md, portfolio/interview-answers.md]
 updatedAt: 2026-06-30
+project: llm-wiki
+type: evidence
+portfolio_use: true
+evidence_type: RAG
 ---
 
 # LLM Wiki RAG Evidence Wiki

@@ -5,6 +5,9 @@ tags: [project, users, data-flow, llm-context]
 relatedDocs: [Architecture, AI-Pipeline, MQTT-Event-Schema]
 relatedFiles: [README.md, PROJECT_CONTRACT.md, MULTI_AGENT_PLAN.md]
 updatedAt: 2026-06-26
+project: smart-safety-ai
+type: overview
+portfolio_use: true
 ---
 
 # Overview

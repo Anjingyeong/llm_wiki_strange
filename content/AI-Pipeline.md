@@ -5,6 +5,9 @@ tags: [ai, yolo26n, bytetrack, keypoint, lstm, threshold]
 relatedDocs: [LSTM, Model-Decision-YOLO26n, MQTT-Event-Schema, AI-Output-JSON]
 relatedFiles: [docs/AI_GUIDE.md, docs/ai_training_preprocessing_summary.md, strange_ai/.env.example]
 updatedAt: 2026-06-26
+project: smart-safety-ai
+type: pipeline
+portfolio_use: true
 ---
 
 # AI Pipeline

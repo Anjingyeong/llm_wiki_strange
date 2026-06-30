@@ -38,6 +38,11 @@ for (const file of files) {
     title: parsed.data.title,
     category: parsed.data.category,
     updatedAt: parsed.data.updatedAt,
+    project: parsed.data.project,
+    type: parsed.data.type,
+    tags: parsed.data.tags,
+    portfolio_use: parsed.data.portfolio_use,
+    evidence_type: parsed.data.evidence_type,
     body: parsed.body,
   });
 }

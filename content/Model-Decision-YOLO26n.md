@@ -5,6 +5,9 @@ tags: [model-decision, yolo, benchmark, faint-recall, evidence]
 relatedDocs: [AI-Pipeline, LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [docs/MODEL_BENCHMARK_REPORT.md, docs/AI_TRAINING_DIRECTION.md, docs/wiki/data/modelMetrics.json]
 updatedAt: 2026-06-26
+project: smart-safety-ai
+type: model-decision
+portfolio_use: true
 ---
 
 # Model Decision YOLO26n

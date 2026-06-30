@@ -5,6 +5,10 @@ tags: [portfolio, evidence, smart-safety, yolo26n, bytetrack, lstm, webrtc, mqtt
 relatedDocs: [Overview, Architecture, AI-Pipeline, Model-Decision-YOLO26n, Model-Comparison, LSTM-Experiment-Results, WebRTC-vs-HLS, MQTT-Event-Schema, 2026-06-30-Overlay-Tracking-Evidence-Log]
 relatedFiles: [portfolio/project-evidence-map.md, portfolio/resume-bullets.md, portfolio/interview-answers.md]
 updatedAt: 2026-06-30
+project: smart-safety-ai
+type: evidence
+portfolio_use: true
+evidence_type: STAR
 ---
 
 # 스마트 안전 관제 시스템 Evidence Wiki
