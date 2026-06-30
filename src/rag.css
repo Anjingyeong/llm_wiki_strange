@@ -1,95 +1,496 @@
+/* ================================================================
+   LLM Wiki – RAG Portfolio Assistant Styles
+   ================================================================ */
+
+/* ── Panel Container ─────────────────────────────────────────── */
 .ragPanel {
-  max-width: 920px;
-  margin: 0 auto 20px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  max-width: var(--content-max, 900px);
+  margin: 0 auto 28px;
   background: var(--panel);
-  padding: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-xl, 20px);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
+/* ── Panel Header ────────────────────────────────────────────── */
 .ragPanelHeader {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg,
+    rgba(5,150,105,0.04) 0%,
+    rgba(37,99,235,0.04) 100%
+  );
+}
+
+.ragPanelHeader strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.ragPanelHeader strong::before {
+  content: '⚡';
+  font-size: 16px;
 }
 
 .ragPanelHeader p {
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 12.5px;
+  line-height: 1.5;
 }
 
+/* ── Panel Body ──────────────────────────────────────────────── */
+.ragPanelBody {
+  padding: 18px 22px 22px;
+}
+
+/* ── Quick Question Pill Buttons ─────────────────────────────── */
+.ragQuickButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.ragQuickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-strong, #F1F5F9);
+  color: var(--text-sub, #334155);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.ragQuickBtn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-text);
+  transform: translateY(-1px);
+}
+
+.ragQuickBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Input Area ──────────────────────────────────────────────── */
 .ragPanel label {
   display: block;
   margin-bottom: 8px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.ragInputWrap {
+  position: relative;
 }
 
 .ragPanel textarea {
   width: 100%;
-  min-height: 86px;
+  min-height: 90px;
   resize: vertical;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg, 14px);
   background: var(--bg);
   color: var(--text);
-  padding: 12px;
-  font: inherit;
+  padding: 13px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.ragPanel button {
-  margin-top: 10px;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  background: var(--accent);
+.ragPanel textarea::placeholder {
+  color: var(--muted-light, #94A3B8);
+}
+
+.ragPanel textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
+}
+
+/* ── Submit Button ───────────────────────────────────────────── */
+.ragSubmitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 12px;
+  border: none;
+  border-radius: var(--radius-md, 10px);
+  background: linear-gradient(135deg, var(--accent) 0%, #0ea5e9 100%);
   color: white;
   cursor: pointer;
-  font-weight: 800;
-  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(5,150,105,0.25);
+  transition: all 0.15s;
 }
 
-.ragPanel button:disabled {
-  cursor: wait;
-  opacity: 0.7;
+.ragSubmitBtn:hover:not(:disabled) {
+  box-shadow: 0 4px 16px rgba(5,150,105,0.35);
+  transform: translateY(-1px);
 }
 
+.ragSubmitBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ragSubmitBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Loading Skeleton ────────────────────────────────────────── */
+.ragLoadingCard {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg, 14px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ragSkeleton {
+  background: linear-gradient(90deg,
+    var(--panel-strong) 0%,
+    var(--bg) 50%,
+    var(--panel-strong) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm, 6px);
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ragSkeleton.h-4 { height: 16px; }
+.ragSkeleton.h-3 { height: 12px; }
+.ragSkeleton.w-3\/4 { width: 75%; }
+.ragSkeleton.w-1\/2 { width: 50%; }
+.ragSkeleton.w-full { width: 100%; }
+
+/* ── Answer Card ─────────────────────────────────────────────── */
 .ragAnswer {
-  margin-top: 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-strong);
-  padding: 12px;
-}
-
-.ragAnswer.insufficient {
-  border-color: var(--accent);
-}
-
-.ragAnswer p {
-  margin: 0;
-  line-height: 1.65;
-}
-
-.ragSources {
-  display: grid;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.ragSources a {
-  display: grid;
-  gap: 2px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  margin-top: 18px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg, 14px);
   background: var(--panel);
-  color: var(--text);
-  padding: 10px;
-  text-decoration: none;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-.ragSources small {
+.ragAnswerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+
+.ragAnswerLabel {
+  font-size: 12px;
+  font-weight: 700;
   color: var(--muted);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* answerMode badge */
+.ragAnswerMode {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 10px;
+  letter-spacing: 0.2px;
+}
+
+.ragAnswerMode[data-mode="flow_mode"] {
+  background: var(--blue-light);
+  color: var(--blue-text);
+  border: 1px solid rgba(37,99,235,0.15);
+}
+
+.ragAnswerMode[data-mode="evidence_template"] {
+  background: #FFF7ED;
+  color: #9A3412;
+  border: 1px solid rgba(234,88,12,0.2);
+}
+
+.ragAnswerMode[data-mode="portfolio_mode"] {
+  background: #F5F3FF;
+  color: #5B21B6;
+  border: 1px solid rgba(109,40,217,0.2);
+}
+
+.ragAnswerMode[data-mode="troubleshooting_mode"] {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid rgba(220,38,38,0.2);
+}
+
+.ragAnswerMode[data-mode="general"] {
+  background: var(--accent-light);
+  color: var(--accent-text);
+  border: 1px solid rgba(5,150,105,0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .ragAnswerMode[data-mode="flow_mode"] {
+    background: rgba(96,165,250,0.12);
+    color: var(--blue-text);
+  }
+  .ragAnswerMode[data-mode="evidence_template"] {
+    background: rgba(251,146,60,0.12);
+    color: #FB923C;
+  }
+  .ragAnswerMode[data-mode="portfolio_mode"] {
+    background: rgba(167,139,250,0.12);
+    color: #A78BFA;
+  }
+}
+
+/* ── Answer Body ─────────────────────────────────────────────── */
+.ragAnswerBody {
+  padding: 18px 20px;
+}
+
+/* Reset line-height for markdown inside answer */
+.ragAnswerBody .markdown {
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.ragAnswerBody .markdown h3 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-sub);
+  margin: 20px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed var(--line);
+}
+
+/* Highlight first h3 (핵심 요약) */
+.ragAnswerBody .markdown h3:first-of-type {
+  font-size: 14px;
+  color: var(--accent-text);
+}
+
+/* Table inside answer */
+.ragAnswerBody .tableWrap {
+  margin: 12px 0;
+}
+
+.ragAnswerBody table th {
+  background: var(--panel-strong);
+  font-size: 11.5px;
+}
+
+.ragAnswerBody table td {
+  font-size: 13px;
+}
+
+/* Insufficient context */
+.ragAnswer.insufficient {
+  border-color: var(--warning);
+  background: var(--panel);
+}
+
+.ragAnswer.insufficient .ragAnswerHeader {
+  background: var(--warning-bg);
+  border-color: rgba(217,119,6,0.2);
+}
+
+/* Error state */
+.ragAnswer.error {
+  border-color: var(--danger);
+}
+
+.ragAnswer.error .ragAnswerHeader {
+  background: var(--danger-bg);
+  border-color: rgba(220,38,38,0.15);
+}
+
+/* ── Sources Section ─────────────────────────────────────────── */
+.ragSources {
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+
+.ragSourcesLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.ragSourceList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Source badge chips */
+.ragSourceChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text-sub);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.12s;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ragSourceChip:hover {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue-text);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.ragSourceChip .chipSection {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── Debug Details ───────────────────────────────────────────── */
+.ragDebugDetails {
+  border-top: 1px dashed var(--line);
+}
+
+.ragDebugDetails summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: color 0.12s;
+}
+
+.ragDebugDetails summary:hover {
+  color: var(--text);
+}
+
+.ragDebugDetails summary::before {
+  content: '›';
+  font-size: 14px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.ragDebugDetails[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.ragDebugPre {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: 'SFMono-Regular', Consolas, ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-x: auto;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ── Empty state (before first question) ─────────────────────── */
+.ragEmptyHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.ragEmptyHint .ragEmptyIcon {
+  font-size: 28px;
+  opacity: 0.5;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .ragPanel {
+    border-radius: var(--radius-lg, 14px);
+  }
+
+  .ragPanelBody {
+    padding: 14px 14px 18px;
+  }
+
+  .ragQuickButtons {
+    gap: 5px;
+  }
+
+  .ragQuickBtn {
+    font-size: 11px;
+    padding: 5px 11px;
+  }
+
+  .ragSourceList {
+    gap: 5px;
+  }
+
+  .ragSourceChip {
+    max-width: 200px;
+    font-size: 11px;
+  }
 }

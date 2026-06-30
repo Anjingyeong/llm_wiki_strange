@@ -14,30 +14,40 @@ type SidebarProps = {
 export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
   return (
     <aside className="sidebar" aria-label="Wiki navigation">
+      {/* Brand / Logo */}
       <div className="brand">
-        <span className="brandMark">SS</span>
-        <div>
+        <span className="brandMark" aria-hidden="true">SS</span>
+        <div className="brandText">
           <strong>LLM Wiki</strong>
-          <small>Smart Safety Monitoring</small>
+          <small>Evidence&nbsp;·&nbsp;Portfolio&nbsp;·&nbsp;AI</small>
+          <span className="brandStatus">
+            <span className="brandStatusDot" />
+            Live
+          </span>
         </div>
       </div>
-      <nav>
-        {groups.map((group) => (
-          <section className="navGroup" key={group.category}>
-            <h2>{group.category}</h2>
-            {group.documents.map((document) => (
-              <button
-                className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
-                key={document.slug}
-                onClick={() => onSelect(document.slug)}
-                type="button"
-              >
-                {document.title}
-              </button>
-            ))}
-          </section>
-        ))}
-      </nav>
+
+      {/* Navigation */}
+      <div className="sidebarNav">
+        <nav aria-label="Document categories">
+          {groups.map((group) => (
+            <section className="navGroup" key={group.category}>
+              <h2>{group.category}</h2>
+              {group.documents.map((document) => (
+                <button
+                  className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
+                  key={document.slug}
+                  onClick={() => onSelect(document.slug)}
+                  type="button"
+                  aria-current={document.slug === activeSlug ? 'page' : undefined}
+                >
+                  {document.title}
+                </button>
+              ))}
+            </section>
+          ))}
+        </nav>
+      </div>
     </aside>
   );
 }

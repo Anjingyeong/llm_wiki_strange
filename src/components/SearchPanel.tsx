@@ -11,24 +11,37 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
 
   return (
     <section className="searchPanel" aria-label="Wiki search">
-      <label htmlFor="wiki-search">검색</label>
-      <input
-        autoComplete="off"
-        id="wiki-search"
-        onChange={(event) => onQueryChange(event.currentTarget.value)}
-        placeholder="문서 제목, 카테고리, 태그, 본문 검색"
-        type="search"
-        value={query}
-      />
+      <label htmlFor="wiki-search">문서 검색</label>
+      <div className="searchInputWrap">
+        <span className="searchIcon" aria-hidden="true">🔍</span>
+        <input
+          autoComplete="off"
+          id="wiki-search"
+          onChange={(event) => onQueryChange(event.currentTarget.value)}
+          placeholder="문서 제목, 카테고리, 태그, 본문 검색…"
+          type="search"
+          value={query}
+        />
+      </div>
+
       {query ? (
-        <div className="searchResults">
+        <div className="searchResults" role="listbox" aria-label="검색 결과">
           {results.length ? (
             results.map((result) => (
-              <button className="searchResult" key={result.slug} onClick={() => onSelect(result.slug)} type="button">
+              <button
+                className="searchResult"
+                key={result.slug}
+                onClick={() => onSelect(result.slug)}
+                type="button"
+                role="option"
+                aria-selected={false}
+              >
                 <span>{result.category}</span>
                 <strong>{result.title}</strong>
-                <p>{result.excerpt}</p>
-                <small>{result.tags.join(' · ')}</small>
+                {result.excerpt ? <p>{result.excerpt}</p> : null}
+                {result.tags.length > 0 ? (
+                  <small>{result.tags.join(' · ')}</small>
+                ) : null}
               </button>
             ))
           ) : (

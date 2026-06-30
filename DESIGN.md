@@ -1,5 +1,66 @@
 # LLM Wiki Design System
 
+## 0. Modern AI Dashboard Design Concept
+
+LLM Wiki uses a **Modern AI Dashboard** visual language. The goal is to elevate the wiki from a raw developer tool into a polished portfolio artifact that demonstrates both technical depth and product craftsmanship.
+
+### Design Principles
+
+| Principle | Intent |
+|---|---|
+| Card-based information hierarchy | Each section (document, RAG answer, search results) lives in a clearly bounded card with shadow + border |
+| Muted slate-50 background | `#F8FAFC` base prevents full-white glare, makes white cards pop naturally |
+| Emerald + Blue dual accent | Emerald for primary actions / evidence; blue for navigation / links / search |
+| Pretendard-first font stack | Korean-optimised variable font; falls back to Inter → system-ui |
+| Dense but breathable spacing | Comfortable reading with 1.8 line-height; generous section gaps |
+| Progressive disclosure | Debug info, raw scores, and chunk IDs hidden behind `<details>` toggles |
+
+### Color Token Overhaul (v2)
+
+```
+--bg            #F8FAFC          Slate-50 page canvas
+--panel         #FFFFFF          White card surface
+--panel-strong  #F1F5F9          Elevated/selected surface
+--text          #0F172A          Slate-900 primary text
+--text-sub      #334155          Slate-700 secondary text
+--muted         #64748B          Slate-500 meta text
+--line          #E2E8F0          Slate-200 borders
+--accent        #059669          Emerald-600
+--blue          #2563EB          Blue-600
+--shadow-sm/md  0 1px 3px…       Layered elevation system
+```
+
+Dark mode uses a deep navy (`#0B1120`) canvas with adjusted contrast ratios.
+
+### Card Architecture
+
+Every major UI region is a **card**:
+- Sidebar: white panel with gradient brand mark
+- Document viewer: white card with xl border-radius, padding 36px 44px
+- Search results: floating card with drop shadow
+- RAG panel: gradient-header card with overflow: hidden
+- Answer card: nested card with status-coloured header strip
+
+### RAG Portfolio Assistant UI Patterns
+
+- **Quick buttons**: pill group for one-click evidence queries
+- **answerMode badge**: coloured chip showing detected query mode (flow / evidence / portfolio / troubleshooting / general)
+- **Loading skeleton**: shimmer animation while waiting for response
+- **Source chips**: compact rounded badges linking back to wiki documents
+- **Debug details**: collapsed `<details>` with raw JSON scores and query expansion — invisible to reviewers by default
+
+### Portfolio UX Rationale
+
+This wiki doubles as a **live portfolio demonstration** tool. The UI design choices serve this dual purpose:
+1. The gradient brand mark and status dot signal that this is an active, maintained project
+2. answerMode badges show that the system has intent-classification logic
+3. Source chips provide **grounded evidence** visible to interviewers
+4. The card-based layout screenshots well in portfolio decks and README previews
+
+---
+
+
+
 ## 1. Product Character
 
 LLM Wiki is a dense project knowledge base for engineers and operators. The interface should feel quiet, readable, and operational: fast scanning, clear provenance, and no marketing-style decoration.
