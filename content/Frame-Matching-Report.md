@@ -1,6 +1,6 @@
 ---
 title: "Edge AI & Frontend 프레임 동기화 및 버퍼 매커니즘 보고서"
-category: "Architecture"
+category: Architecture
 updatedAt: "2026-06-27"
 tags: ["Edge AI", "frontend", "frame-matching", "buffer-mechanism", "synchronization"]
 ---

@@ -1,6 +1,6 @@
 ---
 title: "다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서"
-category: "Architecture"
+category: Architecture
 updatedAt: "2026-06-27"
 tags: ["RTSP", "latency", "frame-sync", "multi-camera"]
 ---

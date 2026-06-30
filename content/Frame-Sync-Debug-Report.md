@@ -1,6 +1,6 @@
 ---
 title: "Frame Sync Debug & MQTT Payload 검증 최종 보고서"
-category: "AI Pipeline"
+category: AI Pipeline
 updatedAt: "2026-06-27"
 tags: ["frame-sync", "MQTT", "payload", "debug", "validation"]
 ---
