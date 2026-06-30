@@ -203,7 +203,7 @@
   border: 1.5px solid var(--line);
   border-radius: var(--radius-lg, 14px);
   background: var(--panel);
-  overflow: hidden;
+  /* overflow:hidden removed — was clipping markdown tables and long answers */
   box-shadow: var(--shadow-sm);
 }
 

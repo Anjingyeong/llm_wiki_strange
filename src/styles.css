@@ -576,7 +576,9 @@ a:hover {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-md);
   background: var(--code-bg);
-  overflow: hidden;
+  /* overflow:hidden clipped tall code blocks — removed.
+     Use overflow-x:hidden to maintain border-radius clipping on sides only. */
+  overflow-x: hidden;
   box-shadow: var(--shadow-sm);
 }
 
@@ -630,7 +632,9 @@ a:hover {
 
 .mermaidDiagram {
   max-width: 100%;
-  overflow: hidden;
+  /* overflow:hidden removed — was clipping tall diagrams.
+     Horizontal clipping is handled by .mermaidDiagramViewport overflow-x:auto. */
+  overflow-x: hidden;
   margin: 24px 0;
   border: 1.5px solid var(--line);
   border-radius: var(--radius-lg);
