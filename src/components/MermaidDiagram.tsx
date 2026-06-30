@@ -1,4 +1,25 @@
 import { useEffect, useMemo, useState } from 'react';
+import mermaidScriptUrl from 'mermaid/dist/mermaid.min.js?url';
+
+type MermaidRenderResult = {
+  readonly svg: string;
+};
+
+type MermaidRuntime = {
+  readonly initialize: (options: {
+    readonly startOnLoad: boolean;
+    readonly securityLevel: 'strict';
+    readonly theme: 'dark' | 'default';
+  }) => void;
+  readonly render: (id: string, chart: string) => Promise<MermaidRenderResult>;
+};
+
+declare global {
+  interface Window {
+    mermaid?: MermaidRuntime;
+    wikiMermaidLoader?: Promise<MermaidRuntime>;
+  }
+}
 
 type MermaidDiagramProps = {
   readonly chart: string;
@@ -24,6 +45,32 @@ function currentColorScheme(): 'dark' | 'light' {
   return 'light';
 }
 
+function loadMermaidRuntime(): Promise<MermaidRuntime> {
+  if (window.mermaid) {
+    return Promise.resolve(window.mermaid);
+  }
+  if (window.wikiMermaidLoader) {
+    return window.wikiMermaidLoader;
+  }
+
+  window.wikiMermaidLoader = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = mermaidScriptUrl;
+    script.onload = () => {
+      if (window.mermaid) {
+        resolve(window.mermaid);
+        return;
+      }
+      reject(new Error('Mermaid runtime did not register on window.'));
+    };
+    script.onerror = () => reject(new Error('Failed to load Mermaid runtime asset.'));
+    document.head.append(script);
+  });
+
+  return window.wikiMermaidLoader;
+}
+
 export function MermaidDiagram({ chart, diagramId }: MermaidDiagramProps) {
   const [colorScheme, setColorScheme] = useState(currentColorScheme);
   const [state, setState] = useState<RenderState>({ kind: 'pending' });
@@ -42,7 +89,7 @@ export function MermaidDiagram({ chart, diagramId }: MermaidDiagramProps) {
     async function renderDiagram() {
       setState({ kind: 'pending' });
       try {
-        const mermaid = (await import('mermaid')).default;
+        const mermaid = await loadMermaidRuntime();
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: 'strict',

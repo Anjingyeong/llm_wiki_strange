@@ -1,13 +1,13 @@
 ---
-title: "Edge AI & Frontend 프레임 동기화 및 버퍼 매커니즘 보고서"
+title: "Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서"
 category: Architecture
 updatedAt: "2026-06-27"
 tags: ["Edge AI", "frontend", "frame-matching", "buffer-mechanism", "synchronization"]
 ---
 
-# Edge AI & Frontend 프레임 동기화 및 버퍼 매커니즘 보고서
+# Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서
 
-> 本 보고서는 Edge AI 패킷의 지연 시간 계산 방식, 버퍼의 메모리 관리(Pruning/Drop) 방식, 그리고 웹 프론트엔드에서 수신한 메타데이터와 WebRTC 비디오 프레임을 정밀하게 싱크하는 매칭 알고리즘을 상세히 설명합니다.
+> 본 보고서는 Edge AI 패킷의 지연 시간 계산 방식, 버퍼의 메모리 관리(Pruning/Drop) 방식, 그리고 웹 프론트엔드에서 수신한 메타데이터와 WebRTC 비디오 프레임을 정밀하게 싱크하는 매칭 알고리즘을 상세히 설명합니다.
 
 ---
 
@@ -24,14 +24,14 @@ sequenceDiagram
     participant FE as Web Frontend (react)
 
     Camera->>AI: 1. RTSP Video Frame
-    Note over AI: Record capturedAtMs & frameId<br/>Store in FrameMetadataBuffer (maxlen=60)
+    Note over AI: "Record capturedAtMs & frameId<br/>Store in FrameMetadataBuffer (maxlen=60)"
     AI->>AI: 2. YOLO Pose & LSTM Inference
-    Note over AI: Record processedAtMs & publishedAtMs
+    Note over AI: "Record processedAtMs & publishedAtMs"
     AI->>Broker: 3. MQTT Overlay Payload (events)
     Broker->>FE: 4. WebSocket JSON Payload
-    Note over FE: Record receivedAtMs<br/>Store in OverlaySyncBuffer (maxAge=5s, maxSize=300)
+    Note over FE: "Record receivedAtMs<br/>Store in OverlaySyncBuffer (maxAge=5s, maxSize=300)"
     Camera->>FE: 5. WebRTC Stream (Rendered)
-    Note over FE: Extract frameId (if available) / targetTimeMs<br/>Match with Buffer Payloads
+    Note over FE: "Extract frameId (if available) / targetTimeMs<br/>Match with Buffer Payloads"
 ```
 
 ---
@@ -39,7 +39,7 @@ sequenceDiagram
 ## 2. Edge AI (strange_ai) 버퍼 및 매칭 구조
 
 ### 2.1 버퍼 저장 위치 및 드랍 방식
-- **저장소**: [frame_sync.py](file:///c:/Users/user/Documents/최종%20쉴더스/strange_ai/ai/frame_sync.py)의 `FrameMetadataBuffer` 클래스 내 `_frames_by_camera` 속성에 저장됩니다.
+- **저장소**: `strange_ai/ai/frame_sync.py`의 `FrameMetadataBuffer` 클래스 내 `_frames_by_camera` 속성에 저장됩니다.
   - 자료구조: `defaultdict(lambda: deque(maxlen=self.maxlen))`
   - 로컬 기본 크기: `maxlen = 60` (약 2초 분량의 프레임 정보)
 - **드랍 (버리기) 방식**: 
@@ -57,7 +57,7 @@ sequenceDiagram
 ## 3. Web Frontend (strange_front) 버퍼 및 매칭 구조
 
 ### 3.1 버퍼 저장 위치 및 드랍 방식
-- **저장소**: [overlaySync.ts](file:///c:/Users/user/Documents/최종%20쉴더스/strange_front/src/shared/utils/overlaySync.ts)의 `OverlaySyncBuffer` 클래스 내 `buffers` 속성에 저장됩니다.
+- **저장소**: `strange_front/src/shared/utils/overlaySync.ts`의 `OverlaySyncBuffer` 클래스 내 `buffers` 속성에 저장됩니다.
   - 자료구조: `Map<string, T[]>` (카메라 로그인 ID별로 페이로드의 자바스크립트 배열 관리)
 - **드랍 (버리기) 방식**:
   - 버퍼 관리는 이벤트를 버퍼에 넣는 `push()` 또는 조회하는 `select()` 동작이 일어날 때 **실시간으로 2중 필터링**을 거칩니다:

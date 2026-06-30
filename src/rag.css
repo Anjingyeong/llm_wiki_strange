@@ -1,0 +1,95 @@
+.ragPanel {
+  max-width: 920px;
+  margin: 0 auto 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 16px;
+}
+
+.ragPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ragPanelHeader p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.ragPanel label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ragPanel textarea {
+  width: 100%;
+  min-height: 86px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  padding: 12px;
+  font: inherit;
+}
+
+.ragPanel button {
+  margin-top: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 10px 14px;
+}
+
+.ragPanel button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.ragAnswer {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  padding: 12px;
+}
+
+.ragAnswer.insufficient {
+  border-color: var(--accent);
+}
+
+.ragAnswer p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.ragSources {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ragSources a {
+  display: grid;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  padding: 10px;
+  text-decoration: none;
+}
+
+.ragSources small {
+  color: var(--muted);
+}

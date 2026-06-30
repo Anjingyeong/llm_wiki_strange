@@ -64,14 +64,14 @@ AI worker는 frame 단위 YOLO 결과를 곧바로 이벤트로 만들지 않는
 
 ```mermaid
 flowchart TD
-  Sequence[Per-track keypoint sequence]
-  Base[51D normalized keypoint feature]
-  Motion[3D motion feature<br/>center_drop / velocity / torso_angle]
-  Feature[54D LSTM input]
-  Model[LSTM + Linear head]
-  Prob[Normal/Faint probabilities]
-  Threshold[Faint threshold]
-  Event[Faint candidate event]
+  Sequence["Per-track keypoint sequence"]
+  Base["51D normalized keypoint feature"]
+  Motion["3D motion feature<br/>center_drop / velocity / torso_angle"]
+  Feature["54D LSTM input"]
+  Model["LSTM + Linear head"]
+  Prob["Normal/Faint probabilities"]
+  Threshold["Faint threshold"]
+  Event["Faint candidate event"]
 
   Sequence --> Base
   Base --> Motion

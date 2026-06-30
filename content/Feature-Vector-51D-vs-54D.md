@@ -61,7 +61,7 @@ updatedAt: 2026-06-26
 | **Accuracy** | 0.954373 | 0.926236 | 0.906119 |
 | **Precision** | 0.000000 | 0.153846 | 0.125000 |
 | **Faint Recall** | 0.000000 | 0.057143 | 0.100000 |
-| **F1 score** | 0.000000 | 0.083333 | 0.111111 |
+| **F1-score** | 0.000000 | 0.083333 | 0.111111 |
 | **False Positives** | 0 | 22 | 49 |
 | **False Negatives** | 36 | 66 | 63 |
 
@@ -85,14 +85,14 @@ final_features: (sequence_length, 54)
 
 ```mermaid
 flowchart TD
-  KP[17 keypoints]
-  Base[51D<br/>x,y,confidence]
-  Hip[Hip midpoint]
-  Shoulder[Shoulder midpoint]
-  Drop[center_drop]
-  Velocity[velocity]
-  Angle[torso_angle]
-  Final[54D feature vector]
+  KP["17 keypoints"]
+  Base["51D<br/>x, y, confidence"]
+  Hip["Hip midpoint"]
+  Shoulder["Shoulder midpoint"]
+  Drop["center_drop"]
+  Velocity["velocity"]
+  Angle["torso_angle"]
+  Final["54D feature vector"]
 
   KP --> Base
   Base --> Hip

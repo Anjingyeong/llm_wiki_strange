@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
+import { RagPanel } from './components/RagPanel';
 import { SearchPanel } from './components/SearchPanel';
 import { Sidebar } from './components/Sidebar';
 import { TableOfContents } from './components/TableOfContents';
@@ -45,6 +46,7 @@ export function App() {
       <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
       <main className="content">
         <SearchPanel onQueryChange={setQuery} onSelect={selectDocument} query={query} />
+        <RagPanel />
         <article className="docCard">
           <header className="docHeader">
             <span>{activeDocument.category}</span>

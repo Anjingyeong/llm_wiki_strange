@@ -59,12 +59,12 @@ sequence length는 판단 지연과 행동 문맥 사이의 trade-off다. 짧은
 
 ```mermaid
 flowchart LR
-  Script[run_lstm_sequence_length_comparison.py]
-  L8[sequence_length=8]
-  L16[sequence_length=16]
-  L30[sequence_length=30]
-  Compare[compare_lstm_extractors.py]
-  Summary[summary.csv / summary.md]
+  Script["run_lstm_sequence_length_comparison.py"]
+  L8["sequence_length=8"]
+  L16["sequence_length=16"]
+  L30["sequence_length=30"]
+  Compare["compare_lstm_extractors.py"]
+  Summary["summary.csv / summary.md"]
 
   Script --> L8
   Script --> L16

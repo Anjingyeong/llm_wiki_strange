@@ -32,7 +32,7 @@ AI 파이프라인은 다음 요소로 구성된다.
 | LSTM | `Normal/Faint` 확률 산출 | class probability |
 | Event decision | threshold, 연속 감지, cooldown 적용 | MQTT event |
 
-최신 benchmark 기준 `yolo26n-pose`는 threshold 0.5에서 Faint Recall `0.750877`, F1 `0.612303`, FN `142`다. 출처는 `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`다.
+최신 benchmark 기준 YOLO26n-pose는 threshold 0.5에서 Faint Recall `0.750877`, F1 `0.612303`, FN `142`다. 출처는 `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`다.
 
 ## 입력
 
@@ -52,14 +52,14 @@ AI 파이프라인은 다음 요소로 구성된다.
 
 ```mermaid
 flowchart TD
-  RTSP[RTSP frame read]
-  YOLO[YOLO26n-pose<br/>person/keypoint detection]
-  Track[ByteTrack<br/>trackId assignment]
-  Buffer[Keypoint sequence buffer]
-  Feature[Feature vector<br/>51D keypoints + 3D motion = 54D]
-  LSTM[LSTM action classification<br/>Normal/Faint]
-  Policy[threshold + cooldown<br/>continuous-frame policy]
-  MQTT[MQTT publish<br/>safety/events]
+  RTSP["RTSP frame read"]
+  YOLO["YOLO26n-pose<br/>person/keypoint detection"]
+  Track["ByteTrack<br/>trackId assignment"]
+  Buffer["Keypoint sequence buffer"]
+  Feature["Feature vector<br/>51D keypoints + 3D motion = 54D"]
+  LSTM["LSTM action classification<br/>Normal/Faint"]
+  Policy["threshold + cooldown<br/>continuous-frame policy"]
+  MQTT["MQTT publish<br/>safety/events"]
 
   RTSP --> YOLO
   YOLO --> Track

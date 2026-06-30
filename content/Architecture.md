@@ -23,23 +23,23 @@ Camera → MediaMTX → AI → MQTT → Backend → DB/WebSocket → Frontend �
 
 ```mermaid
 flowchart LR
-  Camera[Camera or sample video]
-  MediaMTX[MediaMTX RTSP/HLS/WebRTC]
-  AI[AI Worker<br/>YOLO26n + ByteTrack + LSTM]
-  MQTT[MQTT Broker<br/>safety/events]
-  Backend[Spring Boot Backend]
+  Camera["Camera or sample video"]
+  MediaMTX["MediaMTX RTSP/HLS/WebRTC"]
+  AI["AI Worker<br/>YOLO26n + ByteTrack + LSTM"]
+  MQTT["MQTT Broker<br/>safety/events"]
+  Backend["Spring Boot Backend"]
   DB[(DB)]
-  WS[WebSocket/STOMP]
-  Frontend[React Dashboard]
+  WS["WebSocket/STOMP"]
+  Frontend["React Dashboard"]
 
-  Camera -->|RTSP publish| MediaMTX
-  MediaMTX -->|RTSP read| AI
-  AI -->|MQTT JSON| MQTT
-  MQTT -->|subscribe| Backend
+  Camera -->|"RTSP publish"| MediaMTX
+  MediaMTX -->|"RTSP read"| AI
+  AI -->|"MQTT JSON"| MQTT
+  MQTT -->|"subscribe"| Backend
   Backend --> DB
   Backend --> WS
   WS --> Frontend
-  MediaMTX -->|WHEP/HLS playback| Frontend
+  MediaMTX -->|"WHEP/HLS playback"| Frontend
 ```
 
 | Layer | Standard |

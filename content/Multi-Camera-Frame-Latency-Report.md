@@ -33,10 +33,10 @@ tags: ["RTSP", "latency", "frame-sync", "multi-camera"]
 graph TD
     subgraph AI["AI Engine - Python"]
         RTSP["RTSP Stream Reader Thread"] -->|"Capture and timestamp"| Q["Bounded CameraFrameQueue - maxsize 3"]
-        Q -->|Drop Old Frames| Q
+        Q -->|"Drop Old Frames"| Q
         Inference["Inference Thread"] -->|"Pop latest frame"| Model["YOLO and LSTM Inference"]
-        Model -->|Publish overlay| MQTT[MQTT Broker]
-        Model -->|Publish frame_sync| MQTT
+        Model -->|"Publish overlay"| MQTT["MQTT Broker"]
+        Model -->|"Publish frame_sync"| MQTT
     end
     subgraph Backend["Backend - Spring Boot"]
         MQTT -->|"JSON serialization"| Sub["MqttSafetyEventSubscriber"]
@@ -46,8 +46,8 @@ graph TD
     end
     subgraph Frontend["Frontend - React and Zustand"]
         STOMP -->|"Subscribe camera overlays"| Hook["useCameraOverlays"]
-        Hook -->|Route frame_sync| FSB[FrameSyncBuffer]
-        Hook -->|Route overlay| OSB[OverlaySyncBuffer]
+        Hook -->|"Route frame_sync"| FSB["FrameSyncBuffer"]
+        Hook -->|"Route overlay"| OSB["OverlaySyncBuffer"]
         FSB -->|"Align playback clock"| Player["WebRtcCameraPlayer"]
         OSB -->|"Closest match BBox"| Player
     end
@@ -84,4 +84,4 @@ graph TD
    - Backend: Gradle Java 및 Test Java 컴파일 성공 (`BUILD SUCCESSFUL`).
    - Frontend: TypeScript 타입 체크 및 Production 빌드 성공.
 2. **동기화 계약 및 작동 테스트**:
-   - `npm run test:overlay-sync` 실행 결과, 44개의 contract 검증 및 behavior 시뮬레이션 테스트가 **모두 통과(PASS)**하여사양에 완벽 부합함을 확인하였습니다.
+   - `npm run test:overlay-sync` 실행 결과, 44개의 contract 검증 및 behavior 시뮬레이션 테스트가 **모두 통과(PASS)하여 사양에 완벽 부합함을 확인하였습니다.**

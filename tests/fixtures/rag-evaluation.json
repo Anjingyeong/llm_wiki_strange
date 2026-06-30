@@ -1,0 +1,82 @@
+[
+  {
+    "id": "yolo26n-selection-rationale",
+    "topic": "YOLO26n-pose choice rationale",
+    "question": "Why was yolo26n-pose selected as the default pose extractor? Faint Recall FP FN benchmark",
+    "expectedAnswer": "YOLO26n-pose is selected because the project prioritizes Faint Recall and low FN over pure precision or accuracy.",
+    "expectedDocumentIds": ["Model-Comparison", "ADR-003-YOLO26n-Selection", "Model-Decision-YOLO26n"],
+    "topK": 5
+  },
+  {
+    "id": "webrtc-vs-hls-latency",
+    "topic": "WebRTC vs HLS comparison",
+    "question": "Compare WebRTC and HLS latency WHEP fallback for real-time streaming",
+    "expectedAnswer": "WebRTC is the primary live-view path for low latency, while HLS remains a fallback path when WebRTC fails.",
+    "expectedDocumentIds": ["ADR-001-WebRTC", "WebRTC-vs-HLS"],
+    "topK": 5
+  },
+  {
+    "id": "mqtt-event-metadata",
+    "topic": "MQTT metadata structure",
+    "question": "What metadata fields are in MQTT safety events camera_login_id streamId eventId?",
+    "expectedAnswer": "MQTT safety events carry structured identifiers and metadata such as camera login, stream, event, and evidence fields without sensitive tokens.",
+    "expectedDocumentIds": ["MQTT-Event-Schema", "ADR-002-MQTT-Metadata-Separation", "AI-Output-JSON"],
+    "topK": 5
+  },
+  {
+    "id": "vlm-extension-structure",
+    "topic": "VLM extension structure",
+    "question": "How is the VLM extension connected to Self-Improving AI and Synthetic Data?",
+    "expectedAnswer": "VLM and self-improving extensions are treated as later steps after frame evidence chain correctness is secured.",
+    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log", "Interview-Resume-Notes"],
+    "topK": 5
+  },
+  {
+    "id": "self-improving-ai-first-stage",
+    "topic": "Self-Improving AI structure",
+    "question": "What is the Self-Improving AI first stage training_manifest_v2 hard negative plan?",
+    "expectedAnswer": "The first stage is a reviewed training_manifest_v2 pipeline built from hard negatives, missed faint cases, and approved metadata.",
+    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log"],
+    "topK": 5
+  },
+  {
+    "id": "synthetic-data-usage",
+    "topic": "Synthetic Data usage",
+    "question": "How should Synthetic Data Augmentation use max_synthetic_ratio parent_clip_id leakage?",
+    "expectedAnswer": "Synthetic augmentation should track parent_clip_id, split by parent clip to avoid leakage, and cap synthetic ratio at max_synthetic_ratio.",
+    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log"],
+    "topK": 5
+  },
+  {
+    "id": "deployment-components",
+    "topic": "Deployment and environment components",
+    "question": "What deployment environment components use RTSP MediaMTX Spring Boot MQTT Broker WebSocket?",
+    "expectedAnswer": "The deployment path connects RTSP/MediaMTX input, AI inference, MQTT broker events, Spring Boot backend, and WebSocket delivery.",
+    "expectedDocumentIds": ["AI-Pipeline", "MQTT-Event-Schema", "Frame-Sync-Debug-Report", "Interview-Resume-Notes"],
+    "topK": 5
+  },
+  {
+    "id": "mermaid-flowchart-writing",
+    "topic": "Mermaid writing rules",
+    "question": "Which document shows Mermaid flowchart diagram rules for AI Pipeline RTSP YOLO LSTM?",
+    "expectedAnswer": "Mermaid-style flow documentation should be grounded in pipeline documents that describe RTSP, YOLO/LSTM, MQTT, backend, and frontend flow.",
+    "expectedDocumentIds": ["AI-Pipeline", "Multi-Camera-Frame-Latency-Report", "LSTM"],
+    "topK": 5
+  },
+  {
+    "id": "lstm-51d-54d-expansion",
+    "topic": "Feature vector 51D vs 54D",
+    "question": "Why expand LSTM feature vector from 51D to 54D center_drop velocity torso_angle?",
+    "expectedAnswer": "The 54D feature vector adds movement and posture signals such as center drop, velocity, and torso angle to improve faint classification.",
+    "expectedDocumentIds": ["Feature-Vector-51D-vs-54D", "ADR-004-LSTM-Feature-Expansion", "LSTM"],
+    "topK": 5
+  },
+  {
+    "id": "frame-sync-overlay-matching",
+    "topic": "Frame sync and overlay matching",
+    "question": "How does frame_sync overlay buffer capturedAtMs frameId synchronization work?",
+    "expectedAnswer": "Frame sync and overlay matching use frameId, capturedAtMs, evidence IDs, and per-camera buffers to align AI output with playback timing.",
+    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log", "Interview-Resume-Notes"],
+    "topK": 5
+  }
+]
