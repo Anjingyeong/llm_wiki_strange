@@ -18,6 +18,7 @@ export type Frontmatter = {
   readonly relatedDocs: readonly string[];
   readonly relatedFiles: readonly string[];
   readonly updatedAt: string;
+  readonly description?: string;
 };
 
 export type WikiDocument = Frontmatter & {

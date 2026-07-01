@@ -5,6 +5,7 @@ import { SearchPanel } from './components/SearchPanel';
 import { Sidebar } from './components/Sidebar';
 import { TableOfContents } from './components/TableOfContents';
 import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
+import { isExcerptDuplicate } from './lib/frontmatter';
 
 function slugFromHash(): string {
   return window.location.hash.replace(/^#\/?/, '').split('#')[0] ?? '';
@@ -51,7 +52,9 @@ export function App() {
           <header className="docHeader">
             <span>{activeDocument.category}</span>
             <h1>{activeDocument.title}</h1>
-            <p>{activeDocument.excerpt}</p>
+            {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
+              <p>{activeDocument.excerpt}</p>
+            )}
             <div className="tagRow">
               {activeDocument.tags.map((tag) => (
                 <small key={tag}>{tag}</small>

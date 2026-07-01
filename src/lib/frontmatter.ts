@@ -58,6 +58,8 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
     throw new FrontmatterError(filePath, 'title, category, and updatedAt are required');
   }
 
+  const desc = values.get('description') ?? values.get('summary') ?? values.get('intro');
+
   return {
     title,
     category: parseCategory(category, filePath),
@@ -65,6 +67,7 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
     relatedDocs: parseList(values.get('relatedDocs') ?? ''),
     relatedFiles: parseList(values.get('relatedFiles') ?? ''),
     updatedAt,
+    ...(desc ? { description: desc } : {}),
   };
 }
 
@@ -110,6 +113,25 @@ function makeExcerpt(body: string): string {
   return plain.slice(0, end) + '…';
 }
 
+export function isExcerptDuplicate(body: string, excerpt: string): boolean {
+  if (!excerpt) return false;
+  
+  const plainBody = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/^#+\s+/gm, '')
+    .replace(/\s+/g, '')
+    .trim();
+  
+  const cleanExcerpt = excerpt.replace(/…$/, '').replace(/\s+/g, '').trim();
+  if (cleanExcerpt.length === 0) return false;
+  
+  const matchLen = Math.min(30, cleanExcerpt.length, plainBody.length);
+  if (matchLen > 0 && plainBody.slice(0, matchLen) === cleanExcerpt.slice(0, matchLen)) {
+    return true;
+  }
+  return false;
+}
+
 export function parseWikiDocument(filePath: string, raw: string): WikiDocument {
   const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/.exec(raw);
   const frontmatter = match?.[1];
@@ -118,12 +140,13 @@ export function parseWikiDocument(filePath: string, raw: string): WikiDocument {
     throw new FrontmatterError(filePath, 'document must start with YAML frontmatter');
   }
 
+  const frontmatterData = parseFrontmatterBlock(frontmatter, filePath);
   const slug = filePath.split('/').pop()?.replace(/\.md$/, '') ?? filePath;
   return {
-    ...parseFrontmatterBlock(frontmatter, filePath),
+    ...frontmatterData,
     slug,
     body,
-    excerpt: makeExcerpt(body),
+    excerpt: frontmatterData.description ?? makeExcerpt(body),
     headings: collectHeadings(body),
   };
 }
