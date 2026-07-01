@@ -1,13 +1,10 @@
 ---
 title: Feature Vector 51D vs 54D
 category: AI Pipeline
-tags: [feature-vector, keypoint, 51d, 54d, motion-feature, lstm]
 relatedDocs: [LSTM, AI-Pipeline, ADR-004-LSTM-Feature-Expansion]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]
 updatedAt: 2026-06-26
 ---
-
-# Feature Vector 51D vs 54D
 
 ## 목적
 
@@ -128,3 +125,6 @@ flowchart TD
 
 1. 54D 모션 피처 활성화 스위치를 적용한 상태에서 `compare_lstm_extractors.py`를 실행하여 51D Baseline과 1대1 비교 지표를 획득한다.
 2. `velocity`, `center_drop` 등의 모션 피처가 오탐(False Positive)을 어느 정도로 상쇄해 주는지 Confusion Matrix 분석을 동반하여 검증한다.
+
+---
+#feature-vector #keypoint #51d #54d #motion-feature #lstm

@@ -1,13 +1,10 @@
 ---
 title: Bug Codeblock Visibility
 category: Bugs
-tags: [bug, codeblock, css, json, dark-mode]
 relatedDocs: [AI-Output-JSON, MQTT-Event-Schema]
 relatedFiles: [docs/wiki/src/styles.css, docs/wiki/src/components/MarkdownRenderer.tsx]
 updatedAt: 2026-06-26
 ---
-
-# Bug Codeblock Visibility
 
 ## 목적
 
@@ -74,3 +71,6 @@ Markdown fenced code
 ## 후속 작업
 
 브라우저에서 `AI Output JSON`과 `MQTT Event Schema`를 라이트/다크 환경 모두에서 캡처해 회귀 확인한다.
+
+---
+#bug #codeblock #css #json #dark-mode

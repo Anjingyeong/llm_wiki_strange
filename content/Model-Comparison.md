@@ -1,13 +1,10 @@
 ---
 title: Model Comparison
 category: Experiments
-tags: [model-comparison, benchmark, yolo, faint-recall, evidence]
 relatedDocs: [Model-Decision-YOLO26n, Benchmark-History, LSTM-Experiment-Results]
 relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]
 updatedAt: 2026-06-26
 ---
-
-# Model Comparison
 
 ## 목적
 
@@ -76,3 +73,6 @@ load summary.csv
 
 - 운영 영상 smoke test에서 `yolo26n-pose` threshold 0.5와 0.6을 비교한다.
 - 기업/개인 카메라 알림 scope 버그 재현 케이스와 연결해 false alarm이 알림으로 전파되는 경로를 점검한다.
+
+---
+#model-comparison #benchmark #yolo #faint-recall #evidence

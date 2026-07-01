@@ -1,13 +1,10 @@
 ---
 title: MQTT Event Schema
 category: Backend
-tags: [mqtt, schema, event, backend-contract, json]
 relatedDocs: [Architecture, AI-Pipeline, AI-Output-JSON, ADR-002-MQTT-Metadata-Separation]
 relatedFiles: [PROJECT_CONTRACT.md, docs/MQTT_TOPIC_SPEC.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
 updatedAt: 2026-06-26
 ---
-
-# MQTT Event Schema
 
 ## 목적
 
@@ -98,3 +95,6 @@ AI payload는 사용자/기관 권한을 직접 결정하지 않는다. Backend�
 ## 후속 작업
 
 Backend DTO와 AI publisher의 실제 필드 목록을 통합 브랜치에서 스냅샷 테스트로 고정한다.
+
+---
+#mqtt #schema #event #backend-contract #json

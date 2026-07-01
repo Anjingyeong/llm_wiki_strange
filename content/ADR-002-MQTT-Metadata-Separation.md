@@ -1,13 +1,10 @@
 ---
 title: ADR-002 MQTT Metadata Separation
 category: ADR
-tags: [adr, mqtt, metadata, privacy, backend-contract]
 relatedDocs: [MQTT-Event-Schema, AI-Output-JSON, Bug-Notification-Scope]
 relatedFiles: [PROJECT_CONTRACT.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
 updatedAt: 2026-06-26
 ---
-
-# ADR-002 MQTT Metadata Separation
 
 ## 목적
 
@@ -66,3 +63,6 @@ AI가 `streamId`를 잘못 보내면 Backend scope resolve도 잘못될 수 있�
 ## 후속 작업
 
 Backend에 개인/기관 camera resolve 테스트와 WebSocket topic scope 테스트를 추가한다.
+
+---
+#adr #mqtt #metadata #privacy #backend-contract

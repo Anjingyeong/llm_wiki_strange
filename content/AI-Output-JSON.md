@@ -1,13 +1,10 @@
 ---
 title: AI Output JSON
 category: AI Pipeline
-tags: [ai-output, json, mqtt, event-schema, inference]
 relatedDocs: [AI-Pipeline, MQTT-Event-Schema, Architecture]
 relatedFiles: [strange_ai/.env.example, PROJECT_CONTRACT.md, docs/wiki/data/modelMetrics.json]
 updatedAt: 2026-06-26
 ---
-
-# AI Output JSON
 
 ## 목적
 
@@ -86,3 +83,6 @@ RTSP frame
 ## 후속 작업
 
 Backend DTO alias와 AI publisher 출력 필드를 같은 sample payload로 스냅샷 테스트한다.
+
+---
+#ai-output #json #mqtt #event-schema #inference

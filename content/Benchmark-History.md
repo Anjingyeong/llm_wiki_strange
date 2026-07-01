@@ -1,13 +1,10 @@
 ---
 title: Benchmark History
 category: Experiments
-tags: [benchmark-history, evidence, searched-paths, yolo, gpu-benchmark]
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
 relatedFiles: [gpu_results_import/PROJECT_SUMMARY.md, gpu_results_import/lstm_eval_digest.txt, gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv]
 updatedAt: 2026-06-26
 ---
-
-# Benchmark History
 
 ## 목적
 
@@ -78,3 +75,6 @@ PowerShell local file search
 
 - 로컬 `gpu_results_import` 내에 복사된 신규 지표 파일들이 훼손되거나 유실되지 않도록 git 버전 관리에 백업 여부를 검증한다.
 - 차기 54D 모션 피처 학습 결과 획득 시 신규 파일 경로를 이 이력 테이블에 추가 등록한다.
+
+---
+#benchmark-history #evidence #searched-paths #yolo #gpu-benchmark

@@ -1,7 +1,6 @@
 ---
 title: AI Pipeline
 category: AI Pipeline
-tags: [ai, yolo26n, bytetrack, keypoint, lstm, threshold]
 relatedDocs: [LSTM, Model-Decision-YOLO26n, MQTT-Event-Schema, AI-Output-JSON]
 relatedFiles: [docs/AI_GUIDE.md, docs/ai_training_preprocessing_summary.md, strange_ai/.env.example]
 updatedAt: 2026-06-26
@@ -9,8 +8,6 @@ project: smart-safety-ai
 type: pipeline
 portfolio_use: true
 ---
-
-# AI Pipeline
 
 ## 목적
 
@@ -94,3 +91,6 @@ FP/FN clip은 단순 실패 로그가 아니라 다음 hard-negative와 missed F
 ## 후속 작업
 
 운영 RTSP smoke test에서 threshold 0.5와 0.6의 알림 품질을 비교하고, false positive clip을 hard-negative dataset으로 분류한다.
+
+---
+#ai #yolo26n #bytetrack #keypoint #lstm #threshold

@@ -1,13 +1,10 @@
 ---
 title: ADR-001 WebRTC
 category: ADR
-tags: [adr, webrtc, hls, streaming-decision]
 relatedDocs: [WebRTC-vs-HLS, Architecture, Bug-RTSP-Stream-404]
 relatedFiles: [docs/webrtc_smoke.md, docker-compose.webrtc-smoke.yml]
 updatedAt: 2026-06-26
 ---
-
-# ADR-001 WebRTC
 
 ## 목적
 
@@ -73,3 +70,6 @@ WebRTC path가 404라면 player 문제가 아니라 MediaMTX path와 `cameraLogi
 ## 후속 작업
 
 WebRTC 장애 유형별 retry 정책과 HLS fallback 종료 조건을 후속 ADR로 분리한다.
+
+---
+#adr #webrtc #hls #streaming-decision

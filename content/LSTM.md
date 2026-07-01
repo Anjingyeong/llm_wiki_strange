@@ -1,13 +1,10 @@
 ---
 title: LSTM
 category: AI Pipeline
-tags: [lstm, sequence, threshold, normal, faint, feature-vector]
 relatedDocs: [AI-Pipeline, Model-Decision-YOLO26n, Feature-Vector-51D-vs-54D, LSTM-Sequence-Length-Comparison]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]
 updatedAt: 2026-06-26
 ---
-
-# LSTM
 
 ## 목적
 
@@ -102,3 +99,6 @@ flowchart TD
 ## 후속 작업
 
 RTSP 운영 config, benchmark script, checkpoint metadata의 `input_size`와 `sequence_length`를 같은 inventory로 정리한다.
+
+---
+#lstm #sequence #threshold #normal #faint #feature-vector

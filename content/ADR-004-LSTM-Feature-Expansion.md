@@ -1,13 +1,10 @@
 ---
 title: ADR-004 LSTM Feature Expansion
 category: ADR
-tags: [adr, lstm, feature-expansion, 54d, motion-feature]
 relatedDocs: [Feature-Vector-51D-vs-54D, LSTM, AI-Pipeline]
 relatedFiles: [strange_ai/ai/action/motion_features.py, strange_ai/ai/action/classifier.py]
 updatedAt: 2026-06-26
 ---
-
-# ADR-004 LSTM Feature Expansion
 
 ## 목적
 
@@ -63,3 +60,6 @@ feature 확장이 항상 성능 개선을 보장하지는 않는다. 54D 구조�
 ## 후속 작업
 
 51D/54D ablation benchmark를 추가하고 `Feature-Vector-51D-vs-54D.md`에 수치와 선택 이유를 갱신한다.
+
+---
+#adr #lstm #feature-expansion #54d #motion-feature

@@ -1,13 +1,10 @@
 ---
 title: ADR-003 YOLO26n Selection
 category: ADR
-tags: [adr, yolo26n, model-selection, benchmark, faint-recall]
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
 relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]
 updatedAt: 2026-06-26
 ---
-
-# ADR-003 YOLO26n Selection
 
 ## 목적
 
@@ -81,3 +78,6 @@ six pose models
 ## 후속 작업
 
 운영 영상에서 threshold 0.6의 F1 개선이 알림 품질을 실제로 높이는지 확인한다.
+
+---
+#adr #yolo26n #model-selection #benchmark #faint-recall

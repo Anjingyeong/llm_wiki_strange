@@ -1,13 +1,10 @@
 ---
 title: WebRTC vs HLS
 category: Frontend
-tags: [webrtc, hls, streaming, latency, mediamtx]
 relatedDocs: [ADR-001-WebRTC, Architecture, Bug-RTSP-Stream-404]
 relatedFiles: [docs/webrtc_smoke.md, strange_front/src/features/dashboard/components/WebRtcCameraPlayer.tsx]
 updatedAt: 2026-06-26
 ---
-
-# WebRTC vs HLS
 
 ## 목적
 
@@ -68,3 +65,6 @@ WebRTC 도입은 AI → MQTT → Backend 이벤트 경로를 대체하지 않는
 ## 후속 작업
 
 카메라별 WebRTC health metric을 UI 또는 diagnostic log로 노출해, 단순 "화면 안 나옴"이 아니라 실패 reason을 구분한다.
+
+---
+#webrtc #hls #streaming #latency #mediamtx

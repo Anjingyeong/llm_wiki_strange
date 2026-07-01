@@ -1,13 +1,10 @@
 ---
 title: LSTM Experiment Results
 category: AI Pipeline
-tags: [lstm, experiment-results, threshold, model-comparison, yolo26n, split-test-audit]
 relatedDocs: [LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, docs/wiki/data/modelMetrics.json, gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json]
 updatedAt: 2026-06-26
 ---
-
-# LSTM Experiment Results
 
 ## 목적
 
@@ -112,3 +109,6 @@ video clip
 
 - 운영 후보 threshold인 0.4와 0.5를 기준으로 RTSP/WebRTC 통합 시뮬레이션을 실행하여 실시간 알림 오발송 빈도를 측정한다.
 - consecutive-Faint 판단 횟수 파라미터가 관제 피로도와 검출 지연 시간에 미치는 다차원 영향을 추가 평가한다.
+
+---
+#lstm #experiment-results #threshold #model-comparison #yolo26n #split-test-audit

@@ -1,13 +1,10 @@
 ---
 title: LSTM Sequence Length Comparison
 category: Experiments
-tags: [lstm, sequence-length, benchmark, yolo26n, primary-evaluation, full-evaluation]
 relatedDocs: [LSTM, LSTM-Experiment-Results, Benchmark-History]
 relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
 updatedAt: 2026-06-26
 ---
-
-# LSTM Sequence Length Comparison
 
 ## 목적
 
@@ -94,3 +91,6 @@ Sequence Length 30은 FP를 극적으로 상쇄하여 오보율을 낮추나, 1�
 ## 후속 작업
 
 가중치 CE(Weighted CE)나 Focal Loss 및 Oversampling 기법을 30프레임 설정에 결합하여 Recall 85% 이상, Precision 30% 이상을 확보할 수 있는 파라미터 조합을 탐색한다.
+
+---
+#lstm #sequence-length #benchmark #yolo26n #primary-evaluation #full-evaluation

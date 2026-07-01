@@ -2,10 +2,7 @@
 title: "다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서"
 category: Architecture
 updatedAt: "2026-06-27"
-tags: ["RTSP", "latency", "frame-sync", "multi-camera"]
 ---
-
-# 다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서
 
 본 보고서는 다중 카메라 환경에서 실시간 RTSP 입력 프레임 지연을 해소하고, `cameraLoginId`와 `frameId` 기반의 지연 방지 및 overlay 동기화 구조를 안정화한 구현 내역을 요약합니다.
 
@@ -85,3 +82,6 @@ graph TD
    - Frontend: TypeScript 타입 체크 및 Production 빌드 성공.
 2. **동기화 계약 및 작동 테스트**:
    - `npm run test:overlay-sync` 실행 결과, 44개의 contract 검증 및 behavior 시뮬레이션 테스트가 **모두 통과(PASS)하여 사양에 완벽 부합함을 확인하였습니다.**
+
+---
+#RTSP #latency #frame-sync #multi-camera

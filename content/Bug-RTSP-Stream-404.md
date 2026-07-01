@@ -1,13 +1,10 @@
 ---
 title: Bug RTSP Stream 404
 category: Bugs
-tags: [bug, rtsp, mediamtx, camera-login-id, stream-404]
 relatedDocs: [Architecture, WebRTC-vs-HLS, AI-Output-JSON]
 relatedFiles: [PROJECT_CONTRACT.md, strange_ai/.env.example, strange_front/src/features/dashboard/data/cameras.ts]
 updatedAt: 2026-06-26
 ---
-
-# Bug RTSP Stream 404
 
 ## 목적
 
@@ -76,3 +73,6 @@ register cameraLoginId
 ## 후속 작업
 
 통합 smoke test에서 `cameraLoginId`, RTSP path, WHEP path, MQTT `streamId`를 같은 값으로 검증한다.
+
+---
+#bug #rtsp #mediamtx #camera-login-id #stream-404

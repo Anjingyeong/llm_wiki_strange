@@ -2,10 +2,7 @@
 title: "Frame Sync Debug & MQTT Payload 검증 최종 보고서"
 category: AI Pipeline
 updatedAt: "2026-06-27"
-tags: ["frame-sync", "MQTT", "payload", "debug", "validation"]
 ---
-
-# Frame Sync Debug & MQTT Payload 검증 최종 보고서
 
 > **최종 갱신**: 2026-06-27 (세션 3 변경 내역 반영)
 
@@ -250,3 +247,6 @@ Frame Sync Debug 기능이 성공적으로 구축 및 실가동 환경에 통합
 4. 운영 모드 디버그 비활성화 — --frame-sync-debug, --mjpeg-debug 운영 시 기본 off 유지
 5. 프론트엔드 type별 bbox 색상 처리 — "tracking"/"faint"/eventTriggered 값으로 색상 코딩
 6. keypoint 54차원 확장 — 향후 모션 피처(center_drop, velocity, torso_angle) 추가 예정
+
+---
+#"frame-sync" #"MQTT" #"payload" #"debug" #"validation"

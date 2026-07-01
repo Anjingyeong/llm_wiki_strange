@@ -1,7 +1,6 @@
 ---
 title: Architecture
 category: Architecture
-tags: [architecture, data-flow, mediamtx, mqtt, websocket]
 relatedDocs: [Overview, AI-Pipeline, MQTT-Event-Schema, WebRTC-vs-HLS]
 relatedFiles: [PROJECT_CONTRACT.md, strange_infra/docker-compose.yml, strange_front/src/features/dashboard/data/cameras.ts]
 updatedAt: 2026-06-26
@@ -9,8 +8,6 @@ project: smart-safety-ai
 type: architecture
 portfolio_use: true
 ---
-
-# Architecture
 
 ## 목적
 
@@ -100,3 +97,6 @@ AI가 관제자를 대체하는 것이 아니라 판단 공백을 줄이는 보�
 ## 후속 작업
 
 통합 브랜치에서 RTSP path, MQTT `streamId`, Backend camera id, Frontend stream URL을 한 번에 검증하는 smoke test를 추가한다.
+
+---
+#architecture #data-flow #mediamtx #mqtt #websocket

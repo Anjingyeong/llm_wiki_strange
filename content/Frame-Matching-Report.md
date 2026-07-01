@@ -2,10 +2,7 @@
 title: "Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서"
 category: Architecture
 updatedAt: "2026-06-27"
-tags: ["Edge AI", "frontend", "frame-matching", "buffer-mechanism", "synchronization"]
 ---
-
-# Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서
 
 > 본 보고서는 Edge AI 패킷의 지연 시간 계산 방식, 버퍼의 메모리 관리(Pruning/Drop) 방식, 그리고 웹 프론트엔드에서 수신한 메타데이터와 WebRTC 비디오 프레임을 정밀하게 싱크하는 매칭 알고리즘을 상세히 설명합니다.
 
@@ -133,3 +130,6 @@ function nearestByTime<T extends OverlaySyncPayload>(buffer: readonly T[], targe
 > **싱크 오차 경고 시스템 (Warning Flag)**
 > 매칭이 완료되면 화면 렌더링 타깃 시간과 선택된 페이로드 시점 간의 절댓값 오차(`overlayTimestampDeltaMs`)를 계산합니다.
 > 이 오차가 `matchThresholdMs` (기본 200ms)를 초과하면 화면 오버레이에 노란색 테두리 등 싱크 밀림 시각적 경고(Warning Flag)를 발생시킵니다.
+
+---
+#"Edge AI" #"frontend" #"frame-matching" #"buffer-mechanism" #"synchronization"

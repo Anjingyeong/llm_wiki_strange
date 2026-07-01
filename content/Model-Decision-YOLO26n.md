@@ -1,7 +1,6 @@
 ---
 title: Model Decision YOLO26n
 category: Experiments
-tags: [model-decision, yolo, benchmark, faint-recall, evidence]
 relatedDocs: [AI-Pipeline, LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [docs/MODEL_BENCHMARK_REPORT.md, docs/AI_TRAINING_DIRECTION.md, docs/wiki/data/modelMetrics.json]
 updatedAt: 2026-06-26
@@ -9,8 +8,6 @@ project: smart-safety-ai
 type: model-decision
 portfolio_use: true
 ---
-
-# Model Decision YOLO26n
 
 ## 목적
 
@@ -81,3 +78,6 @@ pose model candidates
 
 - `yolo26n-pose` threshold 0.6에서 F1 0.660786, Recall 0.722807로 균형이 개선되는지 운영 영상에서 확인한다.
 - `yolo11n-pose`를 fallback 후보로 남기고, false alarm 비용이 더 커지는 환경에서 재평가한다.
+
+---
+#model-decision #yolo #benchmark #faint-recall #evidence

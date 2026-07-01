@@ -2,12 +2,9 @@
 title: 면접·이력서 정리
 category: 면접·이력서 정리
 updatedAt: 2026-06-30
-tags: [resume, interview, STAR, evidence, trend-2026]
 relatedDocs: [2026-06-30-Overlay-Tracking-Evidence-Log, AI-Pipeline, Architecture, Frame-Matching-Report]
 relatedFiles: [docs/tracking_validation_report.md, docs/overlay_bbox_diagnosis_report.md, docs/event_clip_hls_s3_mqtt_plan.md, docs/self_improving_ai_synthetic_vlm_architecture.md]
 ---
-
-# 면접·이력서 정리
 
 이 문서는 LLM Wiki의 기술 문서를 그대로 복사하는 공간이 아니라, AI 안전 관제 프로젝트의 작업 로그를 취업용 표현으로 변환하는 공간이다. 아직 실제 운영 환경에서 끝까지 검증하지 못한 내용은 `진행 중`, `검증 필요`, `팀원 위임`으로 표시한다.
 
@@ -177,3 +174,6 @@ CCTV/RTSP 스트림을 실시간으로 분석해 실신·쓰러짐 위험 이벤
 - Hard negative mining exporter와 synthetic augmentation manifest가 실제 어떤 파일을 생성하는지 예시 추가. (`진행 중`)
 - 이력서 bullet을 AI Engineer, Backend/AI Pipeline, Frontend Realtime UI 직무별로 3종 분리.
 - STAR 답변에 실제 수치가 확보되면 Result 항목만 업데이트.
+
+---
+#resume #interview #STAR #evidence #trend-2026

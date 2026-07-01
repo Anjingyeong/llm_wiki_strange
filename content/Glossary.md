@@ -1,13 +1,10 @@
 ---
 title: Glossary
 category: Glossary
-tags: [glossary, terms, llm-context]
 relatedDocs: [Overview, Architecture, AI-Pipeline]
 relatedFiles: [PROJECT_CONTRACT.md]
 updatedAt: 2026-06-26
 ---
-
-# Glossary
 
 ## 목적
 
@@ -71,3 +68,6 @@ new document or bug note
 ## 후속 작업
 
 Backend DTO, Frontend props, AI payload에서 같은 개념의 이름 차이를 alias 표로 확장한다.
+
+---
+#glossary #terms #llm-context
