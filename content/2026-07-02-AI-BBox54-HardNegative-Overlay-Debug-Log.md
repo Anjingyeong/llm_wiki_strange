@@ -241,12 +241,26 @@ timeout 10s mosquitto_sub -h localhost -p 1883 -t camera -v | grep -E "cam_04|ca
 
 ## 10. 다음 작업
 
-1. `TRACKING_DEBUG=true` 상태로 cam_04/cam_05 tracker 상세 로그 확보
-2. `build_frame_sync_payload()`에 `streamId` 추가
+1. `TRACKING_DEBUG=true` 상태로 cam_04/cam_05 tracker 상세 로그 확보 (완료 - 튜닝 모드 기동)
+2. `build_frame_sync_payload()`에 `streamId` 추가 (완료 - streamId/cameraLoginId 누락 해소)
 3. cam_05 tracker threshold 실험을 production 기본값 변경 없이 별도 실험으로 수행
 4. HN candidate export에서 `candidate_type=hard_negative`가 올바르게 들어가는지 검증
 5. 충분한 approved HN 후보 확보 후 `hn_0.05`, `hn_0.10`, `hn_0.20` 비교 재실행
 
+## 11. 추가 디버깅: frame_sync streamId 누락 및 추적 튜닝 결과
+
+### 11.1. frame_sync streamId 누락으로 인한 싱크 불일치 해결
+- **증상**: 프론트엔드 모니터 대시보드에서 비디오 플레이어와 오버레이 바운딩 박스의 싱크가 수 초 이상 크게 어긋나거나 무시되는 현상이 관찰됨.
+- **원인**: `runs/registered_cameras/cam_03-overlay.log` 로그 수집 결과, `messageType=frame_sync` 메시지의 `streamId` 필드가 `"unknown"` 으로 채워져 전송되고 있었음. 이로 인해 프론트엔드가 해당 싱크 패킷의 소스를 식별하지 못해 프레임 동기화 대기 로직이 통째로 씹히고 있었음.
+- **조치**: `build_frame_sync_payload()` 내에 누락되어 있던 `"streamId": camera_login_id` 매핑 코드를 복구 및 GPU 서버에 강제 반영 완료. 재시작 후 `streamId=cam_03` 등 본래의 식별자가 실시간으로 전송되는 것을 로그로 교차 검증 완료.
+
+### 11.2. 추적 성능 튜닝 파라미터 효과 분석
+감도를 높이기 위해 기동 시 주입한 세 파라미터의 역할은 다음과 같다:
+- **`TRACK_THRESH=0.05`**: YOLO Pose 검출 점수가 `5%` 수준인 극도로 희미한 웅크린/누워있는 객체도 누락하지 않고 끝까지 추적을 활성화함.
+- **`TRACK_IOU_THRESHOLD=0.12`**: 객체의 프레임 간 겹침(IoU)이 최소 `12%` 이상이면 동일 객체로 트래킹하여 빠른 모션이나 순간 프레임 드롭 시에도 ID 분열(ID Switch)을 방지함.
+- **`TRACK_BUFFER=150`**: 가림(Occlusion)이나 미검출 발생 시 최대 `150프레임` (약 10초) 동안 메모리 상에 ID 정보를 대기시켜, 재진입 시 동일한 ID가 연속 매핑되도록 보장함.
+- **결과**: 추적 성능이 이전 대비 유의미하게 끈질겨졌으며, 프레임 씽크 패킷 복구와 맞물려 정상적으로 오버레이가 일치 렌더링되기 시작함.
+
 ---
 
-#ai #bbox54 #hard-negative #bytetrack #mqtt #overlay #cam05 #tracking-debug
+#ai #bbox54 #hard-negative #bytetrack #mqtt #overlay #cam05 #tracking-debug #frame-sync #resolved
