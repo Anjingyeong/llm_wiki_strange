@@ -1,6 +1,6 @@
 ---
 title: Bug - AI Tracker Frame Rate Mismatch and Notification Failure
-category: Troubleshooting
+category: Bugs
 relatedDocs: [AI-Pipeline, WebRTC-vs-HLS, 2026-07-03-AI-Worker-Flow-Improvements-Log]
 relatedFiles: [strange_ai/ai/postprocess/supervision_postprocessor.py, scripts/serve_ai_overlay.py, strange_ai/ai/registered_cameras.py]
 updatedAt: 2026-07-03
