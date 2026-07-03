@@ -5,9 +5,11 @@ export async function onRequestPost(context) {
   try {
     const body = await context.request.json();
     const question = typeof body.question === 'string' ? body.question : '';
+    const debug = body.debug === true || context.env?.RAG_DEBUG === 'true';
 
     const result = await answerQuestionFromIndex(index, question, {
       env: context.env,
+      debug,
     });
 
     return new Response(JSON.stringify(result), {

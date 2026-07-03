@@ -7,6 +7,39 @@ const contentDir = join(wikiRoot, 'content');
 const outputPath = join(wikiRoot, 'src', 'generated', 'searchIndex.ts');
 
 const requiredKeys = ['title', 'category', 'updatedAt'];
+const categoryOrder = new Map([
+  ['Project', 100],
+  ['Architecture', 200],
+  ['AI Pipeline', 300],
+  ['Frontend', 400],
+  ['Infra', 400],
+  ['Experiments', 600],
+  ['Bugs', 700],
+  ['Backend', 800],
+  ['ADR', 850],
+  ['면접·이력서 정리', 900],
+  ['Glossary', 950],
+]);
+const slugOrder = new Map([
+  ['Overview', 100],
+  ['Architecture', 200],
+  ['AI-Pipeline', 300],
+  ['WebRTC-vs-HLS', 400],
+  ['MQTT-Event-Schema', 430],
+  ['Frame-Matching-Report', 500],
+  ['Frame-Sync-Debug-Report', 510],
+  ['Multi-Camera-Frame-Latency-Report', 520],
+  ['LSTM', 600],
+  ['LSTM-Experiment-Results', 610],
+  ['LSTM-Sequence-Length-Comparison', 620],
+  ['Feature-Vector-51D-vs-54D', 630],
+  ['Bug-RTSP-Stream-404', 700],
+  ['Bug-Notification-Scope', 710],
+  ['Bug-Codeblock-Visibility', 720],
+  ['Realtime-Camera-Runtime-Stabilization', 730],
+  ['Bug-AI-Tracker-FrameRate-Mismatch', 740],
+  ['Interview-Resume-Notes', 900],
+]);
 
 function parseFrontmatter(raw, fileName) {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -60,6 +93,13 @@ function excerptFrom(body) {
   return plain.slice(0, end) + '…';
 }
 
+function inferOrder(slug, data) {
+  if (data.order) {
+    return Number.parseInt(data.order, 10);
+  }
+  return slugOrder.get(slug) ?? categoryOrder.get(data.category) ?? 999;
+}
+
 function searchableText(body) {
   return body
     .replace(/```(\w+)?\r?\n([\s\S]*?)```/g, ' $1 $2 ')
@@ -83,10 +123,15 @@ for (const file of files) {
     relatedDocs: parsed.data.relatedDocs ?? [],
     relatedFiles: parsed.data.relatedFiles ?? [],
     updatedAt: parsed.data.updatedAt,
+    summary: parsed.data.summary ?? parsed.data.description ?? excerptFrom(parsed.body),
+    order: inferOrder(slug, parsed.data),
+    sourcePath: `content/${file}`,
     excerpt: excerptFrom(parsed.body),
     text: searchableText(parsed.body),
   });
 }
+
+entries.sort((left, right) => left.order - right.order || left.title.localeCompare(right.title));
 
 const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
 

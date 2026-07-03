@@ -1,5 +1,28 @@
 import { embedText, stableHash, VECTOR_SIZE } from './embedding.mjs';
 
+const DEFAULT_SECTION_TITLE = '문서 개요';
+
+function asStringList(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item)).filter(Boolean);
+  }
+  if (typeof value !== 'string') {
+    return [];
+  }
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return [];
+  }
+  if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+    return trimmed
+      .slice(1, -1)
+      .split(',')
+      .map((item) => item.trim().replace(/^["']|["']$/g, ''))
+      .filter(Boolean);
+  }
+  return [trimmed];
+}
+
 function summarizeCodeFence(code, lang) {
   const trimmed = code.trim();
   if (lang === 'json') {
@@ -130,14 +153,14 @@ function chunkSection(section, maxChars) {
 
 function splitSections(body) {
   const sections = [];
-  let current = { section: '문서 개요', body: '' };
+  let current = { section: DEFAULT_SECTION_TITLE, body: '' };
   for (const line of body.split(/\r?\n/)) {
     const heading = /^(#{1,3})\s+(.+)$/.exec(line);
     if (heading) {
       if (current.body.trim()) {
         sections.push(current);
       }
-      current = { section: heading[2] ?? '문서 개요', body: '' };
+      current = { section: heading[2] ?? DEFAULT_SECTION_TITLE, body: '' };
     } else {
       current = { ...current, body: `${current.body}\n${line}` };
     }
@@ -149,6 +172,21 @@ function splitSections(body) {
 }
 
 function makeChunk(document, section, text) {
+  const tags = asStringList(document.tags);
+  const relatedSlugs = asStringList(document.relatedDocs ?? document.relatedSlugs);
+  const entities = asStringList(document.entities);
+  const sourcePath = document.sourcePath ?? `content/${document.slug}.md`;
+  const metadata = {
+    category: document.category,
+    tags,
+    updatedAt: document.updatedAt,
+    slug: document.slug,
+    sourcePath,
+    sectionTitle: section,
+    order: document.order ?? 999,
+    relatedSlugs,
+    entities,
+  };
   return {
     id: `${document.slug}#${stableHash(`${section}:${text}`).toString(16)}`,
     documentId: document.slug,
@@ -156,13 +194,20 @@ function makeChunk(document, section, text) {
     title: document.title,
     category: document.category,
     section,
+    sectionTitle: section,
     text,
     updatedAt: document.updatedAt,
+    sourcePath,
+    summary: document.summary ?? document.description ?? '',
+    order: document.order ?? 999,
     project: document.project,
     type: document.type,
-    tags: document.tags,
+    tags,
+    relatedSlugs,
+    entities,
     portfolio_use: document.portfolio_use,
     evidence_type: document.evidence_type,
+    metadata,
     embedding: embedText(`${document.title} ${section} ${text}`),
   };
 }
@@ -170,7 +215,11 @@ function makeChunk(document, section, text) {
 export function buildRagIndex(documents, options = {}) {
   const chunkSize = options.chunkSize ?? 1100;
   const chunks = [];
-  for (const document of documents) {
+  const orderedDocuments = [...documents].sort((left, right) => {
+    const orderDiff = (left.order ?? 999) - (right.order ?? 999);
+    return orderDiff === 0 ? String(left.title).localeCompare(String(right.title)) : orderDiff;
+  });
+  for (const document of orderedDocuments) {
     for (const section of splitSections(document.body)) {
       for (const chunk of chunkSection(section, chunkSize)) {
         chunks.push(makeChunk(document, chunk.section, chunk.text));

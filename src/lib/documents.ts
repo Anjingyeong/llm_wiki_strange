@@ -9,15 +9,15 @@ const rawModules = import.meta.glob<string>('../../content/*.md', {
 
 const categoryOrder: readonly WikiCategory[] = [
   'Project',
-  '면접·이력서 정리',
   'Architecture',
   'AI Pipeline',
-  'Backend',
   'Frontend',
   'Infra',
   'Experiments',
   'Bugs',
+  'Backend',
   'ADR',
+  '면접·이력서 정리',
   'Glossary',
 ] as const;
 
@@ -25,7 +25,11 @@ export const documents = Object.entries(rawModules)
   .map(([filePath, raw]) => parseWikiDocument(filePath, raw))
   .sort((left, right) => {
     const categoryDiff = categoryOrder.indexOf(left.category) - categoryOrder.indexOf(right.category);
-    return categoryDiff === 0 ? left.title.localeCompare(right.title) : categoryDiff;
+    if (categoryDiff !== 0) {
+      return categoryDiff;
+    }
+    const orderDiff = (left.order ?? 999) - (right.order ?? 999);
+    return orderDiff === 0 ? left.title.localeCompare(right.title) : orderDiff;
   });
 
 export const documentsBySlug = new Map(documents.map((document) => [document.slug, document]));

@@ -58,7 +58,9 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
     throw new FrontmatterError(filePath, 'title, category, and updatedAt are required');
   }
 
-  const desc = values.get('description') ?? values.get('summary') ?? values.get('intro');
+  const summary = values.get('summary');
+  const desc = values.get('description') ?? summary ?? values.get('intro');
+  const order = values.get('order');
 
   return {
     title,
@@ -67,6 +69,10 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
     relatedDocs: parseList(values.get('relatedDocs') ?? ''),
     relatedFiles: parseList(values.get('relatedFiles') ?? ''),
     updatedAt,
+    ...(summary ? { summary } : {}),
+    ...(order ? { order: Number.parseInt(order, 10) } : {}),
+    relatedSlugs: parseList(values.get('relatedSlugs') ?? ''),
+    entities: parseList(values.get('entities') ?? ''),
     ...(desc ? { description: desc } : {}),
   };
 }
@@ -142,9 +148,11 @@ export function parseWikiDocument(filePath: string, raw: string): WikiDocument {
 
   const frontmatterData = parseFrontmatterBlock(frontmatter, filePath);
   const slug = filePath.split('/').pop()?.replace(/\.md$/, '') ?? filePath;
+  const sourcePath = `content/${slug}.md`;
   return {
     ...frontmatterData,
     slug,
+    sourcePath,
     body,
     excerpt: frontmatterData.description ?? makeExcerpt(body),
     headings: collectHeadings(body),
