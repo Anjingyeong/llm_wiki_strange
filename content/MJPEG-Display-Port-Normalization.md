@@ -208,3 +208,46 @@ Verification of live running processes on the GPU server and local port forwardi
   - Previously, the old workers were running on stale next-free ports (e.g. `cam_03` was on port `8010`) while the frontend expected the normalized formula ports (`cam_03` on `8012`), causing a port mismatch.
   - Restarting the GPU server processes with the normalized port allocation code successfully resolved this issue.
 
+
+## MJPEG Stream & Frontend Normalization (2026-07-07 Verification Phase 2)
+
+### 1. Problem Symptom
+- Although the backend was streaming frames and health checks were operational, the browser-side React dashboard only loaded the very first frame of the MJPEG stream and remained frozen on a single static image.
+
+### 2. Root Cause
+- **HTTP/1.0 Protocol Defaults**: The HTTP server in `overlay_http.py` used the default Python `HTTP/1.0` protocol without an explicit `Connection: keep-alive` header. This led the browser parser to handle the response as a single static image resource or close/interrupt the reading loop prematurely.
+- **Browser Aggressive Caching**: Browsers cache static image assets eagerly. Without a unique cache-busting query parameter during mount/initial connection, the browser would resolve the stream from cache, stopping continuous frame updates.
+
+### 3. Resolution Details
+- **Backend persistent upgrade**:
+  - Configured `OverlayHandler` to use `protocol_version = "HTTP/1.1"`.
+  - Added explicit `Connection: keep-alive` to response headers in the `stream()` handler.
+  - Implemented `last_mjpeg_sent_at` in the `OverlayState` status summary.
+- **Worker Heartbeat Logs**:
+  - Enhanced `[heartbeat-inference]` logs to output `mjpeg_frame_count`, `last_mjpeg_sent_at`, `last_frame_age_ms`, `stream_clients`, and `overlay_enabled`.
+- **Frontend cache-busting & diagnostics**:
+  - Enhanced `CameraStreamFrame.tsx` (`MjpegStream` component) to append a mount-scoped timestamp parameter `?t={cacheBuster}` to break browser cache while preventing URL changes on every frame render.
+  - Added a 5-second interval console logging routine that monitors `img.complete` status and sizes (`naturalWidth`, `naturalHeight`).
+  - Strengthened `onError` UI callback to output the camera ID, stream URL, expected port, and error timestamp.
+
+### 4. Verification Results
+- **Unit Tests**:
+  - Running `python -m unittest tests/test_mjpeg_overlay_http.py` passes successfully, validating that the connection returns `HTTP/1.1`, contains `Connection: keep-alive`, and streams multiple `--frame` boundaries.
+  - Running `npm.cmd run test:mjpeg-routing` in `strange_front` passes successfully.
+  - Frontend typecheck and production build pass without errors.
+- **Curl Boundary Smoke Capture**:
+  - Capturing 3 seconds of the stream: `curl.exe -i --max-time 3 http://localhost:8014/mjpeg/cam_05 > mjpeg_smoke_new.txt`
+  - Headers:
+    ```text
+    HTTP/1.1 200 OK
+    Server: BaseHTTP/0.6 Python/3.12.3
+    Date: Tue, 07 Jul 2026 02:18:59 GMT
+    Content-Type: multipart/x-mixed-replace; boundary=frame
+    Connection: keep-alive
+    Cache-Control: no-cache, no-store, must-revalidate
+    Pragma: no-cache
+    Access-Control-Allow-Origin: *
+    ```
+  - Boundary counts: 24 boundaries parsed in 3 seconds, confirming persistent streaming of images.
+
+
