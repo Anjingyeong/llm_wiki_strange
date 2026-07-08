@@ -67,13 +67,24 @@ npm run rag:index
 ## Environment Variables
 
 외부 LLM은 선택 사항이다. 무료/저비용 운영을 위해 기본값은 로컬 embedding과 로컬 추출 답변이다.
+또한 위키 페이지 접근 및 RAG 호출을 위한 Access Key를 환경변수로 지정할 수 있다.
 
 ```bash
 PORT=4173
+WIKI_ACCESS_KEY=smart-safety-2026 # 위키 및 RAG API 접근 제한용 키 (기본값: smart-safety-2026)
 RAG_LLM_API_KEY=
 RAG_LLM_ENDPOINT=https://api.openai.com/v1/chat/completions
 RAG_LLM_MODEL=gpt-4o-mini
 ```
+
+### 보안 범위 및 목적 안내 (Access Restriction Scope)
+
+> [!WARNING]
+> 본 프로젝트의 위키 접근 키(Access Key) 인증 기능은 **포트폴리오 데모 공개 및 팀원 간의 캐주얼한 접근 제한**을 위해 도입된 기능입니다.
+> - Vite 빌드 프로세스는 마크다운 문서 내용을 정적 JSON 데이터(searchIndex.ts 등)로 변환하여 프론트엔드 자바스크립트 에셋에 정적으로 포함(번들링)시킵니다.
+> - 따라서 네트워크나 프론트엔드 코드를 깊게 분석할 수 있는 고급 사용자라면 클라이언트 번들 파일에서 원문 텍스트를 추출할 수 있으므로, 이 보안 기능은 **데이터의 완전한 기밀성(Confidentiality) 보장이나 고성능 침입 방지 장치가 아닙니다.**
+> - "민감한 기밀 정보 보호"가 아닌 **"데모 목적의 일반인 접근 제한 및 불필요한 크롤링/봇 트래픽 방지"** 수준임을 숙지하고 활용해 주세요.
+
 
 OpenAI 호환 chat-completions API를 쓰는 저비용 provider를 사용할 경우 `RAG_LLM_ENDPOINT`와 `RAG_LLM_MODEL`만 바꾸면 된다.
 

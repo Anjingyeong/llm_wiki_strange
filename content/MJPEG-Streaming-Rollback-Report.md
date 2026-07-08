@@ -1,21 +1,9 @@
 ---
 title: MJPEG Streaming Rollback Report
-category: Streaming
-tags:
-  - mjpeg
-  - streaming
-  - cameraLoginId
-  - rollback
+category: Infra
+tags: [mjpeg, streaming, cameraLoginId, rollback]
 updatedAt: 2026-07-07
-relatedFiles:
-  - strange_front/src/features/dashboard/data/cameras.ts
-  - strange_front/src/features/dashboard/components/CameraStreamFrame.tsx
-  - strange_ai/scripts/run_registered_cameras.py
-  - strange_ai/ai/overlay_ports.py
-  - strange_ai/ai/registered_camera_workers.py
-  - strange_ai/scripts/serve_ai_overlay.py
-  - strange_back/src/main/java/com/strange/safety/camera/controller/CameraController.java
-  - strange_back/src/main/java/com/strange/safety/camera/overlay/AiOverlayController.java
+relatedFiles: [strange_front/src/features/dashboard/data/cameras.ts, strange_front/src/features/dashboard/components/CameraStreamFrame.tsx, strange_ai/scripts/run_registered_cameras.py, strange_ai/ai/overlay_ports.py, strange_ai/ai/registered_camera_workers.py, strange_ai/scripts/serve_ai_overlay.py, strange_back/src/main/java/com/strange/safety/camera/controller/CameraController.java, strange_back/src/main/java/com/strange/safety/camera/overlay/AiOverlayController.java]
 ---
 
 # MJPEG Streaming Rollback Report

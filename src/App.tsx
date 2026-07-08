@@ -12,6 +12,14 @@ function slugFromHash(): string {
 }
 
 export function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!sessionStorage.getItem('wiki_access_key');
+  });
+  const [keyInput, setKeyInput] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [shake, setShake] = useState(false);
+
   const initial = getInitialDocument();
   const [activeSlug, setActiveSlug] = useState(() => slugFromHash() || initial.slug);
   const [query, setQuery] = useState('');
@@ -26,6 +34,77 @@ export function App() {
     window.location.hash = slug;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const handleAuthSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!keyInput.trim()) {
+      setAuthError('접근 키를 입력해 주세요.');
+      triggerShake();
+      return;
+    }
+    setIsSubmitting(true);
+    setAuthError('');
+    try {
+      const response = await fetch('/api/auth/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ key: keyInput }),
+      });
+      const data = await response.json();
+      if (response.ok && data.ok) {
+        sessionStorage.setItem('wiki_access_key', keyInput);
+        setIsAuthenticated(true);
+      } else {
+        setAuthError(data.message || '인증에 실패했습니다.');
+        triggerShake();
+      }
+    } catch (err) {
+      setAuthError('서버 통신 중 오류가 발생했습니다.');
+      triggerShake();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const triggerShake = () => {
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="lockScreenContainer">
+        <div className={`lockCard ${shake ? 'shake' : ''}`}>
+          <div className="lockIcon">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h2>Smart Safety LLM Wiki</h2>
+          <p className="lockSubtitle">시스템 내부 문서 조회 및 RAG 서비스를 이용하시려면 접근 키를 입력해 주세요.</p>
+          <form onSubmit={handleAuthSubmit}>
+            <div className="inputGroup">
+              <input
+                type="password"
+                placeholder="Access Key 입력"
+                value={keyInput}
+                onChange={(e) => setKeyInput(e.target.value)}
+                disabled={isSubmitting}
+                autoFocus
+              />
+            </div>
+            {authError && <p className="errorMessage">{authError}</p>}
+            <button type="submit" className="submitBtn" disabled={isSubmitting}>
+              {isSubmitting ? '인증 중...' : '접근하기'}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   if (!activeDocument) {
     return (

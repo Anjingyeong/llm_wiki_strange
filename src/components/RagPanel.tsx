@@ -114,11 +114,20 @@ export function RagPanel() {
     setLoading(true);
     setResponse(null);
     try {
+      const key = sessionStorage.getItem('wiki_access_key') ?? '';
       const res = await fetch('/api/rag/ask', {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {
+          'content-type': 'application/json',
+          'x-wiki-key': key,
+        },
         body: JSON.stringify({ question: trimmed }),
       });
+      if (res.status === 401) {
+        sessionStorage.removeItem('wiki_access_key');
+        window.location.reload();
+        return;
+      }
       const payload: unknown = await res.json();
       setResponse(parseRagResponse(payload));
     } catch {

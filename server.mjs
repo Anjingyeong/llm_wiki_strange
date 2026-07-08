@@ -10,6 +10,7 @@ const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');
 const indexPath = join(root, 'data', 'ragVectorIndex.json');
 const port = Number.parseInt(process.env.PORT ?? '4173', 10);
+const wikiAccessKey = process.env.WIKI_ACCESS_KEY ?? 'smart-safety-2026';
 
 const contentTypes = new Map([
   ['.html', 'text/html; charset=utf-8'],
@@ -41,8 +42,31 @@ async function loadRagIndex() {
   return JSON.parse(raw);
 }
 
+async function handleVerify(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const key = typeof body.key === 'string' ? body.key : '';
+    if (key === wikiAccessKey) {
+      sendJson(response, 200, { ok: true });
+    } else {
+      sendJson(response, 400, { ok: false, message: '잘못된 접근 키입니다.' });
+    }
+  } catch (error) {
+    sendJson(response, 500, { ok: false, message: '서버 내부 오류가 발생했습니다.' });
+  }
+}
+
 async function handleAsk(request, response) {
   try {
+    const keyHeader = request.headers['x-wiki-key'];
+    if (keyHeader !== wikiAccessKey) {
+      sendJson(response, 401, {
+        status: 'error',
+        answer: '유효하지 않은 접근 키입니다. 로그인 후 다시 시도해 주세요.',
+        sources: [],
+      });
+      return;
+    }
     const body = await readJsonBody(request);
     const question = typeof body.question === 'string' ? body.question : '';
     const debug = body.debug === true || process.env.RAG_DEBUG === 'true';
@@ -88,6 +112,10 @@ async function serveStatic(request, response) {
 const server = createServer((request, response) => {
   if (request.method === 'GET' && request.url === '/api/rag/health') {
     sendJson(response, 200, { ok: true });
+    return;
+  }
+  if (request.method === 'POST' && request.url === '/api/auth/verify') {
+    void handleVerify(request, response);
     return;
   }
   if (request.method === 'POST' && request.url === '/api/rag/ask') {

@@ -1,22 +1,9 @@
 ---
 title: MJPEG Display Port Normalization
-category: Streaming
-tags:
-  - mjpeg
-  - streaming
-  - cameraLoginId
-  - overlay
+category: Infra
+tags: [mjpeg, streaming, cameraLoginId, overlay]
 updatedAt: 2026-07-07
-relatedFiles:
-  - AI_실행_딸깍.bat
-  - strange_front/src/features/dashboard/data/cameras.ts
-  - strange_front/src/features/dashboard/components/CameraStreamFrame.tsx
-  - strange_front/.env.example
-  - strange_front/Dockerfile
-  - strange_infra/docker-compose.yml
-  - strange_ai/ai/registered_cameras.py
-  - strange_ai/scripts/run_registered_cameras.py
-  - strange_ai/scripts/serve_ai_overlay.py
+relatedFiles: [AI_실행_딸깍.bat, strange_front/src/features/dashboard/data/cameras.ts, strange_front/src/features/dashboard/components/CameraStreamFrame.tsx, strange_front/.env.example, strange_front/Dockerfile, strange_infra/docker-compose.yml, strange_ai/ai/registered_cameras.py, strange_ai/scripts/run_registered_cameras.py, strange_ai/scripts/serve_ai_overlay.py]
 ---
 
 # MJPEG Display Port Normalization
