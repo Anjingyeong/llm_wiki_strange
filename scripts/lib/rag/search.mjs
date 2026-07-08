@@ -23,16 +23,20 @@ function chunkSearchText(chunk) {
     .join(' ');
 }
 
-function rankVector(chunks, query, filters, retrieveLimit) {
+function rankVector(chunks, query, filters, retrieveLimit, options = {}) {
   const queryVector = embedText(query);
+  const pureVector = options.pureVector ?? false;
   return chunks
     .map((chunk) => {
       const vectorScore = cosineSimilarity(queryVector, chunk.embedding);
-      const lexicalScore = keywordOverlapScore(query, chunkSearchText(chunk));
-      const score = (vectorScore * 0.75 + lexicalScore * 0.25) * metadataBoost(chunk, filters);
+      const lexicalScore = pureVector ? 0 : keywordOverlapScore(query, chunkSearchText(chunk));
+      const score = pureVector ? vectorScore * metadataBoost(chunk, filters) : (vectorScore * 0.75 + lexicalScore * 0.25) * metadataBoost(chunk, filters);
       return { chunk, lexicalScore, score, vectorScore };
     })
     .filter((result) => {
+      if (pureVector) {
+        return result.score >= MIN_SCORE;
+      }
       if (result.lexicalScore > 0) {
         return result.score >= MIN_SCORE;
       }
@@ -77,6 +81,22 @@ export function searchRelevantChunks(index, question, options = {}) {
   const limit = options.limit ?? DEFAULT_CONTEXT_LIMIT;
   const filters = inferMetadataFilters(question, options.filters ?? {});
   const candidates = filterCandidateChunks(index.chunks, filters);
+
+  if (options.mode === 'baseline') {
+    const vectorResults = rankVector(candidates, question, filters, retrieveLimit, { pureVector: true });
+    const finalResults = vectorResults.slice(0, limit).map((result) => ({
+      ...result.chunk,
+      score: Number(result.score.toFixed(4)),
+      matchedBy: ['vector'],
+      reason: 'vector',
+    }));
+    return attachDebug(
+      finalResults,
+      makeDebug({ query: question, filters, bm25Results: [], vectorResults, rrfResults: [], finalResults }),
+      options,
+    );
+  }
+
   const bm25Results = rankBm25(candidates, question, filters, retrieveLimit, metadataBoost, chunkSearchText);
   const vectorResults = rankVector(candidates, question, filters, retrieveLimit);
   const rrfResults = fuseWithRrf({

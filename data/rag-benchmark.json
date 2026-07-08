@@ -1,0 +1,162 @@
+[
+  {
+    "id": "q001",
+    "question": "RTSP overlay 밀림 원인은?",
+    "gold_sources": ["Frame-Sync-Debug-Report", "Frame-Matching-Report", "Multi-Camera-Frame-Latency-Report"],
+    "expected_keywords": ["timestamp", "frameId", "OverlaySyncBuffer", "latency", "밀림"],
+    "category": "Frame Sync",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q002",
+    "question": "cameraLoginId 동적 할당은 왜 필요했어?",
+    "gold_sources": ["Realtime-Camera-Runtime-Stabilization", "Architecture"],
+    "expected_keywords": ["cameraLoginId", "동적", "할당", "runner"],
+    "category": "Architecture",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q003",
+    "question": "YOLO26n을 최종 선택한 이유는?",
+    "gold_sources": ["Model-Decision-YOLO26n", "ADR-003-YOLO26n-Selection", "Evidence-Smart-Safety-System"],
+    "expected_keywords": ["yolo26n-pose", "Recall", "Faint", "미탐"],
+    "category": "AI Pipeline",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q004",
+    "question": "MQTT 이벤트 payload 구조 설명해줘",
+    "gold_sources": ["MQTT-Event-Schema", "Frame-Sync-Debug-Report", "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log"],
+    "expected_keywords": ["payload", "trackingId", "severity", "boundingBox", "capturedAtMs"],
+    "category": "Backend",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q005",
+    "question": "프레임 동기화에서 frameId와 timestamp가 왜 중요해?",
+    "gold_sources": ["Frame-Matching-Report", "Frame-Sync-Debug-Report", "Multi-Camera-Frame-Latency-Report"],
+    "expected_keywords": ["frameId", "timestamp", "동기화", "버퍼", "매칭"],
+    "category": "Frame Sync",
+    "difficulty": "hard"
+  },
+  {
+    "id": "q006",
+    "question": "MJPEG stream not ready 문제는 왜 발생했어?",
+    "gold_sources": ["MJPEG-Display-Port-Normalization", "MJPEG-Streaming-Rollback-Report"],
+    "expected_keywords": ["not ready", "port", "mjpeg", "지연", "프록시"],
+    "category": "Infra",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q007",
+    "question": "Cloudflare Functions에서 405 오류는 왜 났어?",
+    "gold_sources": ["Evidence-LLM-Wiki-RAG"],
+    "expected_keywords": ["405", "Cloudflare", "Functions", "verify", "ask"],
+    "category": "Bugs",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q008",
+    "question": "LLM Wiki에서 Hybrid RAG를 적용한 이유는?",
+    "gold_sources": ["Evidence-LLM-Wiki-RAG"],
+    "expected_keywords": ["Hybrid", "RAG", "BM25", "Vector", "RRF", "검색"],
+    "category": "Hybrid RAG",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q009",
+    "question": "GraphRAG는 왜 지금 바로 도입하지 않았어?",
+    "gold_sources": ["Evidence-LLM-Wiki-RAG", "Glossary"],
+    "expected_keywords": ["GraphRAG", "도입", "규모", "관계", "지연"],
+    "category": "Hybrid RAG",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q010",
+    "question": "Langfuse는 이 구조에서 어디에 붙이면 좋아?",
+    "gold_sources": ["Evidence-LLM-Wiki-RAG"],
+    "expected_keywords": ["Langfuse", "trace", "pipeline", "검증"],
+    "category": "Hybrid RAG",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q011",
+    "question": "LSTM 시퀀스 길이 비교 결과는?",
+    "gold_sources": ["LSTM-Sequence-Length-Comparison", "LSTM-Experiment-Results"],
+    "expected_keywords": ["LSTM", "sequence", "길이", "정확도"],
+    "category": "Experiments",
+    "difficulty": "hard"
+  },
+  {
+    "id": "q012",
+    "question": "WebRTC와 HLS 성능 비교해줘",
+    "gold_sources": ["WebRTC-vs-HLS", "Plan-WebRTC-DataChannel-Sync"],
+    "expected_keywords": ["WebRTC", "HLS", "지연", "WHEP"],
+    "category": "Infra",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q013",
+    "question": "피처 벡터 51차원과 54차원 차이는?",
+    "gold_sources": ["Feature-Vector-51D-vs-54D", "ADR-004-LSTM-Feature-Expansion"],
+    "expected_keywords": ["51D", "54D", "keypoint", "LSTM"],
+    "category": "AI Pipeline",
+    "difficulty": "hard"
+  },
+  {
+    "id": "q014",
+    "question": "ByteTrack 트래커의 프레임 레이트 미스매치 문제 해결 방법은?",
+    "gold_sources": ["Bug-AI-Tracker-FrameRate-Mismatch"],
+    "expected_keywords": ["ByteTrack", "fps", "mismatch", "지연"],
+    "category": "Bugs",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q015",
+    "question": "알림 범위(Notification Scope) 버그 수정 내용이 뭐야?",
+    "gold_sources": ["Bug-Notification-Scope"],
+    "expected_keywords": ["Notification", "알림", "범위", "수정"],
+    "category": "Bugs",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q016",
+    "question": "코드블록이 화면에서 안 보였던 버그는?",
+    "gold_sources": ["Bug-Codeblock-Visibility"],
+    "expected_keywords": ["코드블록", "CSS", "markdown", "렌더링"],
+    "category": "Bugs",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q017",
+    "question": "RTSP 스트림 404 에러의 주된 원인은?",
+    "gold_sources": ["Bug-RTSP-Stream-404"],
+    "expected_keywords": ["404", "RTSP", "MediaMTX", "path"],
+    "category": "Bugs",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q018",
+    "question": "모니터링 대시보드의 mjpeg 포트 할당 공식은?",
+    "gold_sources": ["MJPEG-Display-Port-Normalization"],
+    "expected_keywords": ["mjpeg", "port", "suffix", "8010"],
+    "category": "Frontend",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q019",
+    "question": "ADR-002에서 설계한 메타데이터 분리 장점은?",
+    "gold_sources": ["ADR-002-MQTT-Metadata-Separation"],
+    "expected_keywords": ["ADR-002", "메타데이터", "분리", "대역폭"],
+    "category": "ADR",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q020",
+    "question": "이 위키의 구현 목표와 포트폴리오 활용법 알려줘",
+    "gold_sources": ["Evidence-Portfolio-Resume-Usage"],
+    "expected_keywords": ["포트폴리오", "이력서", "키워드", "구현"],
+    "category": "면접·이력서 정리",
+    "difficulty": "easy"
+  }
+]
