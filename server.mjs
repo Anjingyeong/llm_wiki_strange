@@ -70,8 +70,7 @@ async function handleAsk(request, response) {
     const body = await readJsonBody(request);
     const question = typeof body.question === 'string' ? body.question : '';
     const debug = body.debug === true || process.env.RAG_DEBUG === 'true';
-    const index = await loadRagIndex();
-    const result = await answerQuestionFromIndex(index, question, { debug });
+    const result = await answerQuestionFromIndex(index, question, { debug, env: process.env });
     sendJson(response, 200, result);
   } catch (error) {
     sendJson(response, 500, {

@@ -14,6 +14,8 @@ type RagResponse = {
   readonly answer: string;
   readonly sources: readonly RagSource[];
   readonly answerMode?: string | undefined;
+  readonly fallback?: boolean | undefined;
+  readonly fallbackReason?: string | undefined;
   readonly debugInfo?: unknown | undefined;
 };
 
@@ -43,7 +45,7 @@ function parseRagResponse(value: unknown): RagResponse {
   if (!isRecord(value)) {
     return { status: 'error', answer: 'RAG API 응답을 읽을 수 없습니다.', sources: [] };
   }
-  const { status, answer, sources: rawSources, answerMode, debugInfo } = value;
+  const { status, answer, sources: rawSources, answerMode, fallback, fallbackReason, debugInfo } = value;
   const sources = Array.isArray(rawSources)
     ? rawSources.map(parseSource).filter((s): s is RagSource => s !== null)
     : [];
@@ -55,6 +57,8 @@ function parseRagResponse(value: unknown): RagResponse {
     answer,
     sources,
     answerMode: typeof answerMode === 'string' ? answerMode : undefined,
+    fallback: typeof fallback === 'boolean' ? fallback : undefined,
+    fallbackReason: typeof fallbackReason === 'string' ? fallbackReason : undefined,
     debugInfo,
   };
 }
@@ -214,11 +218,13 @@ export function RagPanel() {
             {/* Answer card header */}
             <div className="ragAnswerHeader">
               <span className="ragAnswerLabel">
-                {response.status === 'answered'
-                  ? '📋 답변 결과'
-                  : response.status === 'insufficient_context'
-                    ? '⚠️ 근거 부족'
-                    : '❌ 오류'}
+                {response.status === 'insufficient_context'
+                  ? '⚠️ 근거 부족'
+                  : response.status === 'error'
+                    ? '❌ 오류'
+                    : response.fallback
+                      ? '📋 검색 결과 (RAG-only)'
+                      : '🤖 AI 답변'}
               </span>
               {response.answerMode ? (
                 <AnswerModeBadge mode={response.answerMode} />

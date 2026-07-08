@@ -12,10 +12,12 @@ async function main() {
 
   const verbose = process.argv.includes('--verbose') || process.env.DEBUG_RAG_BENCHMARK === 'true';
   const enableLlmJudge = process.env.ENABLE_LLM_JUDGE === 'true';
+  const enableLlmAnswerBenchmark = process.env.ENABLE_LLM_ANSWER_BENCHMARK === 'true';
 
   const results = [];
 
-  console.log(`=== Starting RAG Quantitative Benchmark (${benchmarkData.length} Questions) ===\n`);
+  console.log(`=== Starting RAG Quantitative Benchmark (${benchmarkData.length} Questions) ===`);
+  console.log(`LLM Answer Benchmark is: ${enableLlmAnswerBenchmark ? 'ENABLED' : 'DISABLED (RAG-only)'}\n`);
 
   for (const item of benchmarkData) {
     const { id, question, gold_sources, expected_keywords, category, difficulty } = item;
@@ -27,12 +29,19 @@ async function main() {
       console.log(`[Gold Sources]: ${gold_sources.join(', ')}`);
     }
 
+    const benchmarkEnv = {
+      ...process.env,
+      ENABLE_LLM_ANSWER: enableLlmAnswerBenchmark ? (process.env.ENABLE_LLM_ANSWER || 'true') : 'false',
+      LLM_PROVIDER: enableLlmAnswerBenchmark ? (process.env.LLM_PROVIDER || 'mock') : 'none',
+    };
+
     // A. baseline (Vector-only)
     const startBase = performance.now();
     const baseAnswer = await answerQuestionFromIndex(index, question, {
       allowExternalLlm: false,
       mode: 'baseline',
-      debug: true
+      debug: true,
+      env: benchmarkEnv,
     });
     const endBase = performance.now();
     const baseLatency = endBase - startBase;
@@ -42,7 +51,8 @@ async function main() {
     const hybridAnswer = await answerQuestionFromIndex(index, question, {
       allowExternalLlm: false,
       mode: 'hybrid',
-      debug: true
+      debug: true,
+      env: benchmarkEnv,
     });
     const endHybrid = performance.now();
     const hybridLatency = endHybrid - startHybrid;
@@ -71,14 +81,17 @@ async function main() {
       const goldInTop5 = top5.filter((src) => gold_sources.includes(src)).length;
       const contextPrecision5 = top5.length > 0 ? goldInTop5 / top5.length : 0;
 
-      const contextChunksText = answerObj.debug?.finalContextChunks?.map((c) => c.text).join(' ') || '';
+      const contextChunksText = answerObj.debugInfo?.finalContextChunks?.map((c) => c.text).join(' ') || '';
       const fullText = `${answerObj.answer || ''} ${contextChunksText}`;
       const matchedKeywords = expected_keywords.filter((kw) =>
         fullText.toLowerCase().includes(kw.toLowerCase())
       );
       const keywordCoverage = expected_keywords.length > 0 ? matchedKeywords.length / expected_keywords.length : 0;
 
-      const debugData = answerObj.debug || {};
+      const debugData = answerObj.debugInfo || {};
+      const fallback = answerObj.fallback ?? false;
+      const fallbackReason = answerObj.fallbackReason ?? null;
+      const llmLatency = debugData.llmLatency ?? null;
 
       return {
         retrievedSources,
@@ -88,13 +101,14 @@ async function main() {
         mrr5,
         contextPrecision5,
         keywordCoverage,
+        mode: enableLlmAnswerBenchmark ? 'llm-answer' : 'rag-only',
+        fallback,
+        fallbackReason,
         latency: {
           totalSearchMs: Number(latencyVal.toFixed(2)),
-          lexicalSearchMs: modeName === 'hybrid' ? Number((latencyVal * 0.15).toFixed(2)) : null,
-          vectorSearchMs: Number((latencyVal * 0.6).toFixed(2)),
-          rrfMergeMs: modeName === 'hybrid' ? Number((latencyVal * 0.05).toFixed(2)) : null,
-          rerankMs: modeName === 'hybrid' ? Number((latencyVal * 0.1).toFixed(2)) : null,
-          contextBuildMs: Number((latencyVal * 0.1).toFixed(2)),
+          searchLatencyMs: Number((latencyVal - (llmLatency || 0)).toFixed(2)),
+          llmLatencyMs: llmLatency,
+          totalLatencyMs: Number(latencyVal.toFixed(2)),
         },
         retrievedCount: retrievedSources.length,
         finalContextCount: debugData.finalContextChunks?.length || 0,

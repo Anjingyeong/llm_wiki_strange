@@ -2,6 +2,7 @@ import { tokenize } from './embedding.mjs';
 import { searchRelevantChunks } from './search.mjs';
 import { buildContext, buildContextChunks } from './context.mjs';
 import { buildLocalTemplateAnswer } from './templates.mjs';
+import { generateAnswer } from './providers/index.mjs';
 
 const DEFAULT_LLM_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
 const DEFAULT_LLM_MODEL = 'gpt-4o-mini';
@@ -232,6 +233,10 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
     };
   }
 
+  const env = options.env ?? process.env ?? {};
+  const enableLlmAnswer = String(env.ENABLE_LLM_ANSWER) === 'true';
+  const llmProvider = env.LLM_PROVIDER || 'none';
+
   const expandedQuery = expandQuery(normalizedQuestion);
   const chunks = searchRelevantChunks(index, expandedQuery, options);
   
@@ -244,13 +249,53 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
   }
 
   const answerMode = detectAnswerMode(normalizedQuestion);
+  const sources = chunks.map(makeSource);
+  
+  const maxContextChunks = Number(env.LLM_MAX_CONTEXT_CHUNKS || 8);
+  const contextChunks = buildContextChunks(chunks, maxContextChunks);
 
-  const externalAnswer =
-    options.allowExternalLlm === false 
-      ? null 
-      : await callExternalLlm(normalizedQuestion, chunks, options.env ?? process.env, answerMode);
+  let finalAnswer = '';
+  let fallback = false;
+  let fallbackReason = null;
+  let llmLatency = null;
+  let llmAnswer = null;
 
-  let finalAnswer = externalAnswer ?? buildLocalTemplateAnswer(chunks, answerMode);
+  if (enableLlmAnswer && llmProvider !== 'none') {
+    const startLlm = performance.now();
+    try {
+      llmAnswer = await generateAnswer({
+        query: normalizedQuestion,
+        contexts: contextChunks,
+        provider: llmProvider,
+        model: env.LLM_MODEL,
+        maxOutputTokens: Number(env.LLM_MAX_OUTPUT_TOKENS || 800),
+        timeoutMs: Number(env.LLM_TIMEOUT_MS || 10000),
+        credentials: {
+          geminiApiKey: env.GEMINI_API_KEY,
+          cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
+          cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
+          openaiApiKey: env.OPENAI_API_KEY || env.RAG_LLM_API_KEY
+        }
+      });
+      llmLatency = Number((performance.now() - startLlm).toFixed(2));
+      
+      if (!llmAnswer || !llmAnswer.trim()) {
+        throw new Error('LLM returned an empty response');
+      }
+      finalAnswer = llmAnswer;
+    } catch (err) {
+      llmLatency = Number((performance.now() - startLlm).toFixed(2));
+      fallback = true;
+      fallbackReason = err.message || String(err);
+      
+      const localAnswer = buildLocalTemplateAnswer(chunks, answerMode);
+      finalAnswer = `[LLM 답변 생성 중 오류가 발생하여, RAG 기반 검색 결과를 먼저 제공해 드립니다.]\n\n${localAnswer}`;
+    }
+  } else {
+    const localAnswer = buildLocalTemplateAnswer(chunks, answerMode);
+    finalAnswer = `[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n${localAnswer}`;
+    fallbackReason = 'LLM Answer mode disabled';
+  }
 
   finalAnswer = finalAnswer
     .replace(/\[JSON Payload Keys:[^\]]*\]/gi, '')
@@ -260,11 +305,12 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
     .replace(/\n\s*\n/g, '\n\n')
     .trim();
 
-  const sources = chunks.map(makeSource);
-  const contextChunks = buildContextChunks(chunks, chunks.length);
   const debugInfo = {
     expandedQuery,
     answerMode,
+    fallback,
+    fallbackReason,
+    llmLatency,
     search: chunks.debug ?? null,
     finalContextChunks: contextChunks.map((chunk) => ({
       id: chunk.id,
@@ -296,6 +342,8 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
     sources,
     contextChunks,
     answerMode,
+    fallback,
+    fallbackReason,
     debugInfo
   };
 }
