@@ -2,6 +2,7 @@ import { cosineSimilarity, embedText, keywordOverlapScore } from './embedding.mj
 import { rankBm25 } from './bm25.mjs';
 import { filterCandidateChunks, inferMetadataFilters, metadataBoost, normalizeList } from './filters.mjs';
 import { applyReranker, diversifyResults, fuseWithRrf, preview } from './fusion.mjs';
+import { readBooleanEnv } from './env.mjs';
 
 const MIN_SCORE = 0.03;
 const DEFAULT_RRF_K = 60;
@@ -67,7 +68,8 @@ function makeDebug({ query, filters, bm25Results, vectorResults, rrfResults, fin
 }
 
 function attachDebug(results, debug, options) {
-  if (options.debug || process.env.RAG_DEBUG === 'true') {
+  const env = options.env ?? (typeof process !== 'undefined' ? process.env : undefined) ?? {};
+  if (options.debug || readBooleanEnv(env, 'RAG_DEBUG', false)) {
     Object.defineProperty(results, 'debug', {
       enumerable: true,
       value: debug,

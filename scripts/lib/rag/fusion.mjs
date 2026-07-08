@@ -1,3 +1,5 @@
+import { readEnv } from './env.mjs';
+
 export function preview(result, matchedBy) {
   return {
     id: result.chunk.id,
@@ -41,7 +43,8 @@ export function fuseWithRrf({ bm25Results, vectorResults, rrfK }) {
 }
 
 export function applyReranker(results, query, options) {
-  const mode = options.rerank ?? process.env.RAG_RERANK_MODE ?? 'off';
+  const env = options.env ?? (typeof process !== 'undefined' ? process.env : undefined) ?? {};
+  const mode = options.rerank ?? readEnv(env, 'RAG_RERANK_MODE', 'off');
   if (mode === 'off' || mode === false) {
     return results;
   }

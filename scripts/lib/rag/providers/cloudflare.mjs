@@ -1,6 +1,8 @@
-export async function generateCloudflareAnswer({ query, contexts, model, maxOutputTokens, accountId, apiToken }) {
-  const finalAccountId = accountId || process.env.CLOUDFLARE_ACCOUNT_ID;
-  const finalApiToken = apiToken || process.env.CLOUDFLARE_API_TOKEN;
+import { readEnv } from '../env.mjs';
+
+export async function generateCloudflareAnswer({ query, contexts, model, maxOutputTokens, accountId, apiToken, env = {} }) {
+  const finalAccountId = accountId || readEnv(env, 'CLOUDFLARE_ACCOUNT_ID', '');
+  const finalApiToken = apiToken || readEnv(env, 'CLOUDFLARE_API_TOKEN', '');
   if (!finalAccountId || !finalApiToken) {
     throw new Error('Missing Cloudflare accountId or apiToken credentials');
   }

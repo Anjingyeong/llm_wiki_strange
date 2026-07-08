@@ -37,10 +37,14 @@ export async function onRequestPost(context) {
       },
     });
   } catch (error) {
+    const isDebug = context.env?.RAG_DEBUG === 'true';
+    const displayMessage = isDebug
+      ? 'RAG API 처리 중 오류가 발생했습니다: ' + error.message
+      : 'RAG API 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
     return new Response(
       JSON.stringify({
         status: 'error',
-        answer: 'RAG API 처리 중 오류가 발생했습니다: ' + error.message,
+        answer: displayMessage,
         sources: [],
       }),
       {

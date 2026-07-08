@@ -2,6 +2,7 @@ import { generateMockAnswer } from './mock.mjs';
 import { generateGeminiAnswer } from './gemini.mjs';
 import { generateCloudflareAnswer } from './cloudflare.mjs';
 import { generateOpenaiAnswer } from './openai.mjs';
+import { readEnv } from '../env.mjs';
 
 export async function generateAnswer({
   query,
@@ -11,6 +12,7 @@ export async function generateAnswer({
   maxOutputTokens,
   timeoutMs = 10000,
   credentials = {},
+  env = {},
 }) {
   const selectedProvider = (provider || 'none').toLowerCase();
   if (selectedProvider === 'none') {
@@ -33,7 +35,8 @@ export async function generateAnswer({
           contexts,
           model,
           maxOutputTokens,
-          apiKey: credentials.geminiApiKey || process.env.GEMINI_API_KEY,
+          apiKey: credentials.geminiApiKey || readEnv(env, 'GEMINI_API_KEY', ''),
+          env,
         });
       case 'cloudflare':
         return generateCloudflareAnswer({
@@ -41,8 +44,9 @@ export async function generateAnswer({
           contexts,
           model,
           maxOutputTokens,
-          accountId: credentials.cloudflareAccountId || process.env.CLOUDFLARE_ACCOUNT_ID,
-          apiToken: credentials.cloudflareApiToken || process.env.CLOUDFLARE_API_TOKEN,
+          accountId: credentials.cloudflareAccountId || readEnv(env, 'CLOUDFLARE_ACCOUNT_ID', ''),
+          apiToken: credentials.cloudflareApiToken || readEnv(env, 'CLOUDFLARE_API_TOKEN', ''),
+          env,
         });
       case 'openai':
         return generateOpenaiAnswer({
@@ -50,7 +54,8 @@ export async function generateAnswer({
           contexts,
           model,
           maxOutputTokens,
-          apiKey: credentials.openaiApiKey || process.env.OPENAI_API_KEY,
+          apiKey: credentials.openaiApiKey || readEnv(env, 'OPENAI_API_KEY', ''),
+          env,
         });
       default:
         throw new Error(`Unsupported LLM Provider: ${provider}`);

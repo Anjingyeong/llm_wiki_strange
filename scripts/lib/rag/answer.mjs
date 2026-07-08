@@ -3,6 +3,7 @@ import { searchRelevantChunks } from './search.mjs';
 import { buildContext, buildContextChunks } from './context.mjs';
 import { buildLocalTemplateAnswer } from './templates.mjs';
 import { generateAnswer } from './providers/index.mjs';
+import { readEnv, readBooleanEnv, readNumberEnv } from './env.mjs';
 
 const DEFAULT_LLM_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
 const DEFAULT_LLM_MODEL = 'gpt-4o-mini';
@@ -233,9 +234,9 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
     };
   }
 
-  const env = options.env ?? process.env ?? {};
-  const enableLlmAnswer = String(env.ENABLE_LLM_ANSWER) === 'true';
-  const llmProvider = env.LLM_PROVIDER || 'none';
+  const env = options.env ?? (typeof process !== 'undefined' ? process.env : undefined) ?? {};
+  const enableLlmAnswer = readBooleanEnv(env, 'ENABLE_LLM_ANSWER', false);
+  const llmProvider = readEnv(env, 'LLM_PROVIDER', 'none');
 
   const expandedQuery = expandQuery(normalizedQuestion);
   const chunks = searchRelevantChunks(index, expandedQuery, options);
@@ -251,7 +252,7 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
   const answerMode = detectAnswerMode(normalizedQuestion);
   const sources = chunks.map(makeSource);
   
-  const maxContextChunks = Number(env.LLM_MAX_CONTEXT_CHUNKS || 8);
+  const maxContextChunks = readNumberEnv(env, 'LLM_MAX_CONTEXT_CHUNKS', 8);
   const contextChunks = buildContextChunks(chunks, maxContextChunks);
 
   let finalAnswer = '';
@@ -270,15 +271,16 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
         query: normalizedQuestion,
         contexts: contextChunks,
         provider: llmProvider,
-        model: env.LLM_MODEL,
-        maxOutputTokens: Number(env.LLM_MAX_OUTPUT_TOKENS || 800),
-        timeoutMs: Number(env.LLM_TIMEOUT_MS || 10000),
+        model: readEnv(env, 'LLM_MODEL', ''),
+        maxOutputTokens: readNumberEnv(env, 'LLM_MAX_OUTPUT_TOKENS', 800),
+        timeoutMs: readNumberEnv(env, 'LLM_TIMEOUT_MS', 10000),
         credentials: {
-          geminiApiKey: env.GEMINI_API_KEY,
-          cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
-          cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
-          openaiApiKey: env.OPENAI_API_KEY || env.RAG_LLM_API_KEY
-        }
+          geminiApiKey: readEnv(env, 'GEMINI_API_KEY', ''),
+          cloudflareAccountId: readEnv(env, 'CLOUDFLARE_ACCOUNT_ID', ''),
+          cloudflareApiToken: readEnv(env, 'CLOUDFLARE_API_TOKEN', ''),
+          openaiApiKey: readEnv(env, 'OPENAI_API_KEY', '') || readEnv(env, 'RAG_LLM_API_KEY', '')
+        },
+        env
       });
       llmLatency = Number((now() - startLlm).toFixed(2));
       

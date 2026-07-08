@@ -11,8 +11,8 @@ This report compares the performance of the Baseline (Vector-only) retrieval ver
 | **Hit@5** | 0.500 | 0.650 | **+0.150** |
 | **MRR@5** | 0.388 | 0.485 | **+0.097** |
 | **Context Precision@5** | 0.230 | 0.240 | **+0.010** |
-| **Keyword Coverage** | 0.537 | 0.575 | **+0.037** |
-| **Avg Search Latency** | 1.52ms | 26.17ms | **+24.647**ms |
+| **Keyword Coverage** | 0.337 | 0.503 | **+0.166** |
+| **Avg Search Latency** | 1.40ms | 25.17ms | **+23.774**ms |
 
 > [!NOTE]
 > Dataset Size: 20 evaluation questions. due to the small scale, results show indicative progress but statistical margins apply.

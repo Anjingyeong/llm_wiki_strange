@@ -1,5 +1,7 @@
-export async function generateGeminiAnswer({ query, contexts, model, maxOutputTokens, apiKey }) {
-  const finalApiKey = apiKey || process.env.GEMINI_API_KEY;
+import { readEnv } from '../env.mjs';
+
+export async function generateGeminiAnswer({ query, contexts, model, maxOutputTokens, apiKey, env = {} }) {
+  const finalApiKey = apiKey || readEnv(env, 'GEMINI_API_KEY', '');
   if (!finalApiKey) {
     throw new Error('Missing Gemini API Key');
   }

@@ -1,5 +1,7 @@
-export async function generateOpenaiAnswer({ query, contexts, model, maxOutputTokens, apiKey }) {
-  const finalApiKey = apiKey || process.env.OPENAI_API_KEY;
+import { readEnv } from '../env.mjs';
+
+export async function generateOpenaiAnswer({ query, contexts, model, maxOutputTokens, apiKey, env = {} }) {
+  const finalApiKey = apiKey || readEnv(env, 'OPENAI_API_KEY', '');
   if (!finalApiKey) {
     throw new Error('Missing OpenAI API Key');
   }
