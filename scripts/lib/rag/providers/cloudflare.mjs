@@ -17,7 +17,7 @@ export async function generateCloudflareAnswer({ query, contexts, model, maxOutp
     '3. Incorporate source titles and section paths as references/citations where applicable.',
     '',
     'Contexts:',
-    contexts.map((c, i) => `[Context #${i+1}] Title: ${c.title} | Section: ${c.sectionTitle} | Path: ${c.sourcePath}\n${c.text}`).join('\n\n---\n\n'),
+    contexts.map((c, i) => `[Context #${i+1}] DisplayTitle: ${c.displayTitle ?? c.title} | Title: ${c.title} | Section: ${c.sectionTitle} | Path: ${c.sourcePath}\n${c.text}`).join('\n\n---\n\n'),
     '',
     `Question: ${query}`,
   ].join('\n');

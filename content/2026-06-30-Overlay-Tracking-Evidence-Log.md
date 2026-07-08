@@ -1,5 +1,7 @@
 ---
 title: "2026-06-30 작업 로그: Overlay Sync, Tracking, Evidence & Data Pipeline"
+navTitle: "Overlay 추적"
+shortTitle: "Overlay 추적"
 category: Project
 updatedAt: "2026-06-30"
 ---

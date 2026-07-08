@@ -1,5 +1,7 @@
 ---
 title: "Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서"
+navTitle: "프레임 매칭"
+shortTitle: "프레임 매칭"
 category: Architecture
 updatedAt: "2026-06-27"
 ---

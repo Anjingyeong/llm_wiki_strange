@@ -1,5 +1,7 @@
 ---
 title: Evidence Wiki - Portfolio Resume Usage
+navTitle: "포트폴리오 활용"
+shortTitle: "포트폴리오 활용"
 category: Project
 tags: [portfolio, resume, interview, evidence-map, bullets, qa]
 relatedDocs: [Evidence-Smart-Safety-System, Evidence-LLM-Wiki-RAG, Interview-Resume-Notes]

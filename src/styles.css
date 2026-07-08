@@ -495,6 +495,13 @@ a:hover {
   margin-bottom: 14px;
 }
 
+.docHeader .formalTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: -4px;
+}
+
 .tagRow {
   display: flex;
   flex-wrap: wrap;

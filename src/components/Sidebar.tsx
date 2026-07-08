@@ -1,4 +1,5 @@
 import type { WikiDocument } from '../lib/types';
+import { getDisplayTitle } from '../lib/types';
 
 type CategoryGroup = {
   readonly category: string;
@@ -41,7 +42,7 @@ export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
                   type="button"
                   aria-current={document.slug === activeSlug ? 'page' : undefined}
                 >
-                  {document.title}
+                  {getDisplayTitle(document)}
                 </button>
               ))}
             </section>

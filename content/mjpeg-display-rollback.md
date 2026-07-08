@@ -1,11 +1,13 @@
 ---
 title: "MJPEG Display Rollback Decision"
+navTitle: "MJPEG 원복"
+shortTitle: "MJPEG 원복"
 slug: "mjpeg-display-rollback"
-category: "Infra"
+category: Infra
 tags: [MJPEG, WebRTC, HLS, MediaMTX, RTSP, ffmpeg, cameraLoginId, overlay, stale-stream, network-latency, engineering-tradeoff, VLM, RAG]
 updatedAt: "2026-07-08"
 order: 470
-relatedDocs: [webrtc-vs-hls, mjpeg-port-normalization, frame-matching-report, realtime-camera-runtime-stabilization]
+relatedSlugs: [WebRTC-vs-HLS, MJPEG-Display-Port-Normalization, Frame-Matching-Report, Realtime-Camera-Runtime-Stabilization]
 ---
 
 # MJPEG Display Rollback Decision

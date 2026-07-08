@@ -176,11 +176,16 @@ function makeChunk(document, section, text, chunkOrder = 0) {
   const relatedSlugs = asStringList(document.relatedDocs ?? document.relatedSlugs);
   const entities = asStringList(document.entities);
   const sourcePath = document.sourcePath ?? `content/${document.slug}.md`;
+  const displayTitle = document.displayTitle ?? document.navTitle ?? document.shortTitle ?? document.title;
   const metadata = {
     category: document.category,
     tags,
     updatedAt: document.updatedAt,
     slug: document.slug,
+    title: document.title,
+    displayTitle,
+    navTitle: document.navTitle,
+    shortTitle: document.shortTitle,
     sourcePath,
     sectionTitle: section,
     order: document.order ?? 999,
@@ -193,6 +198,9 @@ function makeChunk(document, section, text, chunkOrder = 0) {
     documentId: document.slug,
     slug: document.slug,
     title: document.title,
+    navTitle: document.navTitle,
+    shortTitle: document.shortTitle,
+    displayTitle,
     category: document.category,
     section,
     sectionTitle: section,
@@ -210,7 +218,7 @@ function makeChunk(document, section, text, chunkOrder = 0) {
     portfolio_use: document.portfolio_use,
     evidence_type: document.evidence_type,
     metadata,
-    embedding: embedText(`${document.title} ${section} ${text}`),
+    embedding: embedText(`${displayTitle} ${document.title} ${document.navTitle ?? ''} ${document.shortTitle ?? ''} ${document.slug} ${section} ${text}`),
   };
 }
 
@@ -219,7 +227,9 @@ export function buildRagIndex(documents, options = {}) {
   const chunks = [];
   const orderedDocuments = [...documents].sort((left, right) => {
     const orderDiff = (left.order ?? 999) - (right.order ?? 999);
-    return orderDiff === 0 ? String(left.title).localeCompare(String(right.title)) : orderDiff;
+    const leftTitle = left.displayTitle ?? left.navTitle ?? left.shortTitle ?? left.title;
+    const rightTitle = right.displayTitle ?? right.navTitle ?? right.shortTitle ?? right.title;
+    return orderDiff === 0 ? String(leftTitle).localeCompare(String(rightTitle)) : orderDiff;
   });
   for (const document of orderedDocuments) {
     let chunkOrder = 0;

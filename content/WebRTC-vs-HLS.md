@@ -1,5 +1,7 @@
 ---
 title: WebRTC vs HLS
+navTitle: WebRTC/HLS
+shortTitle: WebRTC/HLS
 category: Frontend
 relatedDocs: [ADR-001-WebRTC, Architecture, Bug-RTSP-Stream-404, mjpeg-display-rollback]
 relatedFiles: [docs/webrtc_smoke.md, strange_front/src/features/dashboard/components/WebRtcCameraPlayer.tsx]

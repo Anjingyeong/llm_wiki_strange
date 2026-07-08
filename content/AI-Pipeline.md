@@ -1,5 +1,7 @@
 ---
 title: AI Pipeline
+navTitle: "AI 파이프라인"
+shortTitle: "AI 파이프라인"
 category: AI Pipeline
 relatedDocs: [LSTM, Model-Decision-YOLO26n, MQTT-Event-Schema, AI-Output-JSON]
 relatedFiles: [docs/AI_GUIDE.md, docs/ai_training_preprocessing_summary.md, strange_ai/.env.example]

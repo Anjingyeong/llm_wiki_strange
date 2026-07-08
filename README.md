@@ -42,6 +42,10 @@ RAG API까지 확인하려면 `npm run build && npm start`로 Node 서버를 실
 
 현재 저장 구조는 기존 DB를 바꾸지 않는 파일 기반 vector store다.
 
+## 문서 제목 정책
+
+Wiki 문서는 정식 `title`과 UI 표시용 `navTitle`을 분리한다. 정식 `title`은 문서 의미를 보존하고, `navTitle`은 탭/카드에서 빠르게 이해할 수 있는 짧은 제목으로 사용한다. 작은 출처 badge나 검색 결과에서는 `shortTitle`을 사용할 수 있으며, 표시 우선순위는 `navTitle || shortTitle || title || slug`다.
+
 - 원문 문서: `content/*.md`
 - 검색 인덱스: `src/generated/searchIndex.ts`
 - RAG vector store: `data/ragVectorIndex.json`

@@ -1,6 +1,6 @@
 export async function generateMockAnswer({ query, contexts }) {
-  const titles = [...new Set(contexts.map((c) => c.title))];
-  const citations = contexts.slice(0, 3).map((c) => `- [${c.title} › ${c.sectionTitle}](file:///${c.sourcePath})`).join('\n');
+  const titles = [...new Set(contexts.map((c) => c.displayTitle ?? c.title))];
+  const citations = contexts.slice(0, 3).map((c) => `- [${c.displayTitle ?? c.title} › ${c.sectionTitle}](file:///${c.sourcePath})`).join('\n');
   
   return `[Mock LLM Answer to "${query}"]
 

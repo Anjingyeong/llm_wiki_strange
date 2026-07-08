@@ -1,5 +1,6 @@
 import { ExpandableText } from './ExpandableText';
 import { searchDocuments } from '../lib/search';
+import { getDisplayTitle } from '../lib/types';
 
 type SearchPanelProps = {
   readonly query: string;
@@ -38,7 +39,7 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
                 aria-selected={false}
               >
                 <span>{result.category}</span>
-                <strong>{result.title}</strong>
+                <strong>{getDisplayTitle(result)}</strong>
                 {result.excerpt ? (
                   <ExpandableText text={result.excerpt} maxLength={120} />
                 ) : null}

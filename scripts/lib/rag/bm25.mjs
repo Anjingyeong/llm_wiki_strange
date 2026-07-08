@@ -42,6 +42,6 @@ export function rankBm25(chunks, query, filters, retrieveLimit, metadataBoost, c
       return { chunk: doc.chunk, score: score * metadataBoost(doc.chunk, filters) };
     })
     .filter((result) => result.score > 0)
-    .sort((left, right) => right.score - left.score || left.chunk.title.localeCompare(right.chunk.title))
+    .sort((left, right) => right.score - left.score || String(left.chunk.displayTitle ?? left.chunk.title).localeCompare(String(right.chunk.displayTitle ?? right.chunk.title)))
     .slice(0, retrieveLimit);
 }

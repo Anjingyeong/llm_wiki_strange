@@ -1,5 +1,7 @@
 ---
 title: 실시간 카메라 송출 안정화 및 카메라 수 제한 판단 기록
+navTitle: "카메라 안정화"
+shortTitle: "카메라 안정화"
 category: Bugs
 relatedDocs: [Architecture, WebRTC-vs-HLS, Bug-RTSP-Stream-404, AI-Pipeline]
 relatedFiles: [strange_ai/scripts/start_simulated_rtsp_from_folder.py, strange_ai/scripts/run_registered_cameras.py, strange_ai/scripts/start_ai_stable.sh, AI_실행_딸깍.bat]

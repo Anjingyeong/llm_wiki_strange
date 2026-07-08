@@ -1,5 +1,7 @@
 ---
 title: Feature Vector 51D vs 54D
+navTitle: 51D vs 54D
+shortTitle: 51D vs 54D
 category: AI Pipeline
 relatedDocs: [LSTM, AI-Pipeline, ADR-004-LSTM-Feature-Expansion]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]

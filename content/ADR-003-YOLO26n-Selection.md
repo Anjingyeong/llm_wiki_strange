@@ -1,5 +1,7 @@
 ---
 title: ADR-003 YOLO26n Selection
+navTitle: ADR-003
+shortTitle: ADR-003
 category: ADR
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
 relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]

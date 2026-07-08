@@ -1,5 +1,7 @@
 ---
 title: Bug Notification Scope
+navTitle: "알림 범위"
+shortTitle: "알림 범위"
 category: Bugs
 relatedDocs: [MQTT-Event-Schema, Architecture, ADR-002-MQTT-Metadata-Separation]
 relatedFiles: [strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java, strange_front/src/features/dashboard]

@@ -1,5 +1,7 @@
 ---
 title: Bug Codeblock Visibility
+navTitle: "코드블록 표시"
+shortTitle: "코드블록 표시"
 category: Bugs
 relatedDocs: [AI-Output-JSON, MQTT-Event-Schema]
 relatedFiles: [docs/wiki/src/styles.css, docs/wiki/src/components/MarkdownRenderer.tsx]

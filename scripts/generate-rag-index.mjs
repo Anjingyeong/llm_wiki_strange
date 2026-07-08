@@ -89,10 +89,26 @@ function parseList(value) {
     return trimmed
       .slice(1, -1)
       .split(',')
-      .map((item) => item.trim().replace(/^["']|["']$/g, ''))
+      .map((item) => stripOuterQuotes(item))
       .filter(Boolean);
   }
-  return trimmed ? [trimmed] : [];
+  return trimmed ? [stripOuterQuotes(trimmed)] : [];
+}
+
+function stripOuterQuotes(value) {
+  let normalized = String(value).trim();
+  while (
+    normalized.length >= 2 &&
+    ((normalized.startsWith('"') && normalized.endsWith('"')) ||
+      (normalized.startsWith("'") && normalized.endsWith("'")))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+  return normalized;
+}
+
+function displayTitle(data, slug) {
+  return data.navTitle || data.shortTitle || data.title || slug;
 }
 
 function stripMarkdownText(value) {
@@ -133,7 +149,7 @@ function parseFrontmatter(raw, fileName) {
     }
     const key = line.slice(0, separator).trim();
     const value = line.slice(separator + 1).trim();
-    data[key] = value.replace(/^["']|["']$/g, '');
+    data[key] = stripOuterQuotes(value);
   }
 
   return { data, body: match[2] };
@@ -148,6 +164,9 @@ for (const file of files) {
   documents.push({
     slug,
     title: parsed.data.title,
+    navTitle: parsed.data.navTitle,
+    shortTitle: parsed.data.shortTitle,
+    displayTitle: displayTitle(parsed.data, slug),
     category: parsed.data.category,
     updatedAt: parsed.data.updatedAt,
     summary: makeSummary(parsed.body, parsed.data.summary ?? parsed.data.description),

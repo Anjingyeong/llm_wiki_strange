@@ -1,5 +1,7 @@
 ---
 title: ADR-001 WebRTC
+navTitle: ADR-001
+shortTitle: ADR-001
 category: ADR
 relatedDocs: [WebRTC-vs-HLS, Architecture, Bug-RTSP-Stream-404]
 relatedFiles: [docs/webrtc_smoke.md, docker-compose.webrtc-smoke.yml]

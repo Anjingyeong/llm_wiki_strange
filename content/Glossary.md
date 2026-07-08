@@ -1,5 +1,7 @@
 ---
 title: Glossary
+navTitle: "용어집"
+shortTitle: "용어집"
 category: Glossary
 relatedDocs: [Overview, Architecture, AI-Pipeline]
 relatedFiles: [PROJECT_CONTRACT.md]

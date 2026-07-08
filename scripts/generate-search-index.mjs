@@ -93,10 +93,10 @@ function parseFrontmatter(raw, fileName) {
       data[key] = value
         .slice(1, -1)
         .split(',')
-        .map((item) => item.trim().replace(/^["']|["']$/g, ''))
+        .map((item) => stripOuterQuotes(item))
         .filter(Boolean);
     } else {
-      data[key] = value.replace(/^["']|["']$/g, '');
+      data[key] = stripOuterQuotes(value);
     }
   }
 
@@ -107,6 +107,22 @@ function parseFrontmatter(raw, fileName) {
   }
 
   return { data, body: match[2] };
+}
+
+function stripOuterQuotes(value) {
+  let normalized = String(value).trim();
+  while (
+    normalized.length >= 2 &&
+    ((normalized.startsWith('"') && normalized.endsWith('"')) ||
+      (normalized.startsWith("'") && normalized.endsWith("'")))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+  return normalized;
+}
+
+function displayTitle(data, slug) {
+  return data.navTitle || data.shortTitle || data.title || slug;
 }
 
 function excerptFrom(body) {
@@ -152,6 +168,9 @@ for (const file of files) {
   entries.push({
     slug,
     title: parsed.data.title,
+    navTitle: parsed.data.navTitle,
+    shortTitle: parsed.data.shortTitle,
+    displayTitle: displayTitle(parsed.data, slug),
     category: parsed.data.category,
     tags: parsed.data.tags ?? [],
     relatedDocs: parsed.data.relatedDocs ?? [],
@@ -161,11 +180,11 @@ for (const file of files) {
     order: inferOrder(slug, parsed.data),
     sourcePath: `content/${file}`,
     excerpt: excerptFrom(parsed.body),
-    text: searchableText(parsed.body),
+    text: searchableText(`${parsed.data.title} ${parsed.data.navTitle ?? ''} ${parsed.data.shortTitle ?? ''} ${slug}\n${parsed.body}`),
   });
 }
 
-entries.sort((left, right) => left.order - right.order || left.title.localeCompare(right.title));
+entries.sort((left, right) => left.order - right.order || left.displayTitle.localeCompare(right.displayTitle));
 
 const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
 

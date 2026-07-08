@@ -22,22 +22,35 @@ class FrontmatterError extends Error {
 }
 
 function parseCategory(value: string, filePath: string): WikiCategory {
+  const normalized = stripOuterQuotes(value);
   for (const category of categories) {
-    if (category === value) {
+    if (category === normalized) {
       return category;
     }
   }
-  throw new FrontmatterError(filePath, `unknown category "${value}"`);
+  throw new FrontmatterError(filePath, `unknown category "${normalized}"`);
+}
+
+function stripOuterQuotes(value: string): string {
+  let normalized = value.trim();
+  while (
+    normalized.length >= 2 &&
+    ((normalized.startsWith('"') && normalized.endsWith('"')) ||
+      (normalized.startsWith("'") && normalized.endsWith("'")))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+  return normalized;
 }
 
 function parseList(value: string): readonly string[] {
   if (!value.startsWith('[') || !value.endsWith(']')) {
-    return value ? [value] : [];
+    return value ? [stripOuterQuotes(value)] : [];
   }
   return value
     .slice(1, -1)
     .split(',')
-    .map((item) => item.trim().replace(/^["']|["']$/g, ''))
+    .map((item) => stripOuterQuotes(item))
     .filter(Boolean);
 }
 
@@ -61,19 +74,23 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
   const summary = values.get('summary');
   const desc = values.get('description') ?? summary ?? values.get('intro');
   const order = values.get('order');
+  const navTitle = values.get('navTitle');
+  const shortTitle = values.get('shortTitle');
 
   return {
-    title,
+    title: stripOuterQuotes(title),
+    ...(navTitle ? { navTitle: stripOuterQuotes(navTitle) } : {}),
+    ...(shortTitle ? { shortTitle: stripOuterQuotes(shortTitle) } : {}),
     category: parseCategory(category, filePath),
     tags: parseList(values.get('tags') ?? ''),
     relatedDocs: parseList(values.get('relatedDocs') ?? ''),
     relatedFiles: parseList(values.get('relatedFiles') ?? ''),
-    updatedAt,
-    ...(summary ? { summary } : {}),
+    updatedAt: stripOuterQuotes(updatedAt),
+    ...(summary ? { summary: stripOuterQuotes(summary) } : {}),
     ...(order ? { order: Number.parseInt(order, 10) } : {}),
     relatedSlugs: parseList(values.get('relatedSlugs') ?? ''),
     entities: parseList(values.get('entities') ?? ''),
-    ...(desc ? { description: desc } : {}),
+    ...(desc ? { description: stripOuterQuotes(desc) } : {}),
   };
 }
 

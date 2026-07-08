@@ -1,5 +1,7 @@
 ---
 title: ADR-002 MQTT Metadata Separation
+navTitle: ADR-002
+shortTitle: ADR-002
 category: ADR
 relatedDocs: [MQTT-Event-Schema, AI-Output-JSON, Bug-Notification-Scope]
 relatedFiles: [PROJECT_CONTRACT.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]

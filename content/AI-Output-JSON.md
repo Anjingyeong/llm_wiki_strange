@@ -1,5 +1,7 @@
 ---
 title: AI Output JSON
+navTitle: AI JSON
+shortTitle: AI JSON
 category: AI Pipeline
 relatedDocs: [AI-Pipeline, MQTT-Event-Schema, Architecture]
 relatedFiles: [strange_ai/.env.example, PROJECT_CONTRACT.md, docs/wiki/data/modelMetrics.json]

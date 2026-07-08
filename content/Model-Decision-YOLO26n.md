@@ -1,5 +1,7 @@
 ---
 title: Model Decision YOLO26n
+navTitle: YOLO26n 결정
+shortTitle: YOLO26n 결정
 category: Experiments
 relatedDocs: [AI-Pipeline, LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [docs/MODEL_BENCHMARK_REPORT.md, docs/AI_TRAINING_DIRECTION.md, docs/wiki/data/modelMetrics.json]

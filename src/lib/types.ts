@@ -13,6 +13,8 @@ export type WikiCategory =
 
 export type Frontmatter = {
   readonly title: string;
+  readonly navTitle?: string;
+  readonly shortTitle?: string;
   readonly category: WikiCategory;
   readonly tags: readonly string[];
   readonly relatedDocs: readonly string[];
@@ -41,6 +43,7 @@ export type Heading = {
 
 export type SearchDocument = Frontmatter & {
   readonly slug: string;
+  readonly displayTitle: string;
   readonly excerpt: string;
   readonly text: string;
 };
@@ -48,3 +51,12 @@ export type SearchDocument = Frontmatter & {
 export type SearchResult = SearchDocument & {
   readonly score: number;
 };
+
+export function getDisplayTitle(document: {
+  readonly navTitle?: string;
+  readonly shortTitle?: string;
+  readonly title?: string;
+  readonly slug?: string;
+}): string {
+  return document.navTitle ?? document.shortTitle ?? document.title ?? document.slug ?? '';
+}

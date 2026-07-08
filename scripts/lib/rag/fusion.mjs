@@ -5,6 +5,7 @@ export function preview(result, matchedBy) {
     id: result.chunk.id,
     documentId: result.chunk.documentId,
     title: result.chunk.title,
+    displayTitle: result.chunk.displayTitle ?? result.chunk.title,
     sectionTitle: result.chunk.sectionTitle ?? result.chunk.section,
     category: result.chunk.category,
     score: Number(result.score.toFixed(4)),
@@ -39,7 +40,7 @@ export function fuseWithRrf({ bm25Results, vectorResults, rrfK }) {
       matchedBy: [...result.matchedBy, 'rrf'],
       reason: result.reason.join('; '),
     }))
-    .sort((left, right) => right.score - left.score || left.chunk.title.localeCompare(right.chunk.title));
+    .sort((left, right) => right.score - left.score || String(left.chunk.displayTitle ?? left.chunk.title).localeCompare(String(right.chunk.displayTitle ?? right.chunk.title)));
 }
 
 export function applyReranker(results, query, options) {
@@ -52,8 +53,10 @@ export function applyReranker(results, query, options) {
     return options.reranker(results, { query });
   }
   return [...results].sort((left, right) => {
-    const leftTitleHit = left.chunk.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
-    const rightTitleHit = right.chunk.title.toLowerCase().includes(query.toLowerCase()) ? 1 : 0;
+    const leftTitles = `${left.chunk.title} ${left.chunk.displayTitle ?? ''} ${left.chunk.navTitle ?? ''} ${left.chunk.shortTitle ?? ''}`.toLowerCase();
+    const rightTitles = `${right.chunk.title} ${right.chunk.displayTitle ?? ''} ${right.chunk.navTitle ?? ''} ${right.chunk.shortTitle ?? ''}`.toLowerCase();
+    const leftTitleHit = leftTitles.includes(query.toLowerCase()) ? 1 : 0;
+    const rightTitleHit = rightTitles.includes(query.toLowerCase()) ? 1 : 0;
     return rightTitleHit - leftTitleHit || right.score - left.score;
   });
 }

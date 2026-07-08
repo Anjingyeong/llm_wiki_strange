@@ -1,5 +1,7 @@
 ---
 title: Plan - WebRTC DataChannel based Video-Overlay Synchronization
+navTitle: DataChannel Sync
+shortTitle: DataChannel Sync
 category: Architecture
 relatedDocs: [ADR-001-WebRTC, WebRTC-vs-HLS, Bug-AI-Tracker-FrameRate-Mismatch]
 relatedFiles: [strange_ai/scripts/serve_ai_overlay.py, strange_front/src/features/dashboard/pages/UserDashboard.tsx]

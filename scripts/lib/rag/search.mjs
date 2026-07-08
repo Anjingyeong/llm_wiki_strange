@@ -12,6 +12,10 @@ const DEFAULT_CONTEXT_LIMIT = 6;
 function chunkSearchText(chunk) {
   return [
     chunk.title,
+    chunk.displayTitle,
+    chunk.navTitle,
+    chunk.shortTitle,
+    chunk.slug,
     chunk.summary,
     chunk.category,
     chunk.sectionTitle ?? chunk.section,
@@ -43,7 +47,7 @@ function rankVector(chunks, query, filters, retrieveLimit, options = {}) {
       }
       return result.vectorScore >= 0.55 && result.score >= MIN_SCORE;
     })
-    .sort((left, right) => right.score - left.score || left.chunk.title.localeCompare(right.chunk.title))
+    .sort((left, right) => right.score - left.score || String(left.chunk.displayTitle ?? left.chunk.title).localeCompare(String(right.chunk.displayTitle ?? right.chunk.title)))
     .slice(0, retrieveLimit);
 }
 
@@ -58,6 +62,7 @@ function makeDebug({ query, filters, bm25Results, vectorResults, rrfResults, fin
       id: chunk.id,
       documentId: chunk.documentId,
       title: chunk.title,
+      displayTitle: chunk.displayTitle ?? chunk.title,
       category: chunk.category,
       sectionTitle: chunk.sectionTitle ?? chunk.section,
       sourcePath: chunk.sourcePath,

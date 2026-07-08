@@ -1,5 +1,7 @@
 ---
 title: LSTM Experiment Results
+navTitle: "LSTM 결과"
+shortTitle: "LSTM 결과"
 category: AI Pipeline
 relatedDocs: [LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, docs/wiki/data/modelMetrics.json, gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json]

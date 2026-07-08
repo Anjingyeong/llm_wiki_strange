@@ -12,7 +12,7 @@ export function buildLocalTemplateAnswer(chunks, answerMode) {
 
   const rawContent = textLines.join(' ');
   const cleanSummary = rawContent ? `${rawContent.slice(0, 500).trim()}...` : '관련 내용 요약이 본문에 수록되어 있습니다.';
-  const references = [...new Set(chunks.map((chunk) => `- [${chunk.title}](file:///c:/llm_wiki_strange/content/${chunk.slug}.md)`))].join('\n');
+  const references = [...new Set(chunks.map((chunk) => `- [${chunk.displayTitle ?? chunk.title}] ${chunk.title !== (chunk.displayTitle ?? chunk.title) ? `(정식 제목: ${chunk.title}) ` : ''}(file:///c:/llm_wiki_strange/content/${chunk.slug}.md)`))].join('\n');
 
   if (answerMode === 'flow_mode') {
     return `### 핵심 요약

@@ -1,5 +1,7 @@
 ---
 title: 2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log
+navTitle: "BBox54 디버그"
+shortTitle: "BBox54 디버그"
 category: AI Pipeline
 relatedDocs: [AI-Pipeline, Feature-Vector-51D-vs-54D, LSTM-Experiment-Results, MQTT-Event-Schema, Frame-Sync-Debug-Report]
 relatedFiles: [strange_ai/docs/self_improving_error_mining_synthetic_data_plan.md, strange_ai/docs/hard_negative_retraining_comparison_guidebook.md, strange_ai/ai/publishers/mqtt_payloads.py, strange_ai/scripts/serve_ai_overlay.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_front/src/features/dashboard/overlays/DetectionOverlayCanvas.tsx, strange_back/src/main/java/com/strange/safety/camera/overlay/OverlayEvent.java]

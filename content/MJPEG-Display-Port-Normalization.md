@@ -1,5 +1,7 @@
 ---
 title: MJPEG Display Port Normalization
+navTitle: "MJPEG 포트"
+shortTitle: "MJPEG 포트"
 category: Infra
 tags: [mjpeg, streaming, cameraLoginId, overlay]
 updatedAt: 2026-07-07

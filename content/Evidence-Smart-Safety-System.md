@@ -1,5 +1,7 @@
 ---
 title: Evidence Wiki - Smart Safety Monitoring
+navTitle: "시스템 근거"
+shortTitle: "시스템 근거"
 category: Project
 tags: [portfolio, evidence, smart-safety, yolo26n, bytetrack, lstm, webrtc, mqtt]
 relatedDocs: [Overview, Architecture, AI-Pipeline, Model-Decision-YOLO26n, Model-Comparison, LSTM-Experiment-Results, WebRTC-vs-HLS, MQTT-Event-Schema, 2026-06-30-Overlay-Tracking-Evidence-Log]

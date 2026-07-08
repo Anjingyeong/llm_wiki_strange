@@ -1,5 +1,7 @@
 ---
 title: 면접·이력서 정리
+navTitle: "면접 노트"
+shortTitle: "면접 노트"
 category: 면접·이력서 정리
 updatedAt: 2026-06-30
 relatedDocs: [2026-06-30-Overlay-Tracking-Evidence-Log, AI-Pipeline, Architecture, Frame-Matching-Report]

@@ -1,24 +1,24 @@
 {
   "metadata": {
-    "timestamp": "2026-07-08T01:25:50.545Z",
+    "timestamp": "2026-07-08T01:50:41.238Z",
     "questionCount": 22,
     "baselineSummary": {
-      "hit1": 0.18181818181818182,
-      "hit3": 0.4090909090909091,
-      "hit5": 0.5,
-      "mrr5": 0.3106060606060606,
-      "contextPrecision5": 0.19090909090909092,
-      "keywordCoverage": 0.34469696969696967,
-      "latency": 1.2827272727272727
+      "hit1": 0.45454545454545453,
+      "hit3": 0.45454545454545453,
+      "hit5": 0.45454545454545453,
+      "mrr5": 0.45454545454545453,
+      "contextPrecision5": 0.35454545454545455,
+      "keywordCoverage": 0.3893939393939394,
+      "latency": 2.2249999999999996
     },
     "hybridSummary": {
-      "hit1": 0.2727272727272727,
-      "hit3": 0.5,
-      "hit5": 0.6363636363636364,
-      "mrr5": 0.40075757575757576,
-      "contextPrecision5": 0.22727272727272732,
-      "keywordCoverage": 0.5147727272727273,
-      "latency": 25.777727272727272
+      "hit1": 0.4090909090909091,
+      "hit3": 0.5909090909090909,
+      "hit5": 0.6818181818181818,
+      "mrr5": 0.5204545454545454,
+      "contextPrecision5": 0.2727272727272728,
+      "keywordCoverage": 0.49318181818181817,
+      "latency": 44.153181818181814
     }
   },
   "questions": [
@@ -34,60 +34,62 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
-          "MJPEG-Streaming-Rollback-Report",
-          "Multi-Camera-Frame-Latency-Report",
-          "MJPEG-Streaming-Rollback-Report",
-          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
           "2026-06-30-Overlay-Tracking-Evidence-Log",
-          "AI-Pipeline"
+          "Bug-RTSP-Stream-404",
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
+          "2026-06-30-Overlay-Tracking-Evidence-Log"
         ],
         "hit1": 0,
-        "hit3": 1,
-        "hit5": 1,
-        "mrr5": 0.5,
-        "contextPrecision5": 0.2,
-        "keywordCoverage": 0,
+        "hit3": 0,
+        "hit5": 0,
+        "mrr5": 0,
+        "contextPrecision5": 0,
+        "keywordCoverage": 0.2,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 11.91,
-          "searchLatencyMs": 11.91,
+          "totalSearchMs": 23.79,
+          "searchLatencyMs": 23.79,
           "llmLatencyMs": null,
-          "totalLatencyMs": 11.91
+          "totalLatencyMs": 23.79
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 cameraLoginId 별 worker를 실행한다. - RTSP 입력은 유지된다. REAL_RTSP 는 backend의 rtspUrl , SIMULATED_RTSP 는 rtsp://<host :8554/{cameraLoginId} 로 MediaMTX에 publish한다. - MediaMTX는 RTSP 8554 , HLS 8888 , WebRTC/WHEP 8889 경로를 제공한다. - Frontend Docker build args가 VITE_STREAM_MODE=webrtc 를 기본값으로 강제하고 있었다. - Frontend 코드의 기본...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
-        "matchedKeywords": []
+        "finalContextCount": 3,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n문서화 포인트 : 큐가 프레임을 Drop함에 따라 payload의 frameId 가 중간중간 건너뛰는 현상 ex: 1, 3, 7... 은 지극히 정상적인 동작이며 오류가 아닙니다. --- - PROJECT_CONTRACT.md - strange_ai/.env.example - strange_front/src/features/dashboard/data/cameras.ts RTSP latest-frame queue는 실시간 추론용으로, 오래된 프레임을 drop하고 최신 프레임을 AI에 넘기는 구조가 올바릅니다. queue drop이 발생해도 데이터 정합성이 유지되는지 점검했습니다. 오탐 False Positive 활용 : 허리 굽힘, 앉기, 물건 줍기, 소파에 눕기, 가림, 정상 기댐 등 쓰러짐으로 오인된 데이터를 Normal 레이블 후보로 Export합니다. 워크플로우 : 곧바로 학습 데이터에 넣지 않고 review_status=pending 상태로 저장한 뒤, 사람이 검수한 Appr...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "matchedKeywords": [
+          "frameId"
+        ]
       },
       "hybrid": {
         "retrievedSources": [
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
           "MJPEG-Streaming-Rollback-Report",
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
           "Frame-Sync-Debug-Report",
-          "MJPEG-Display-Port-Normalization",
           "MJPEG-Streaming-Rollback-Report",
-          "MJPEG-Display-Port-Normalization",
           "Multi-Camera-Frame-Latency-Report"
         ],
         "hit1": 0,
-        "hit3": 1,
+        "hit3": 0,
         "hit5": 1,
-        "mrr5": 0.5,
+        "mrr5": 0.25,
         "contextPrecision5": 0.2,
         "keywordCoverage": 0,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 32.09,
-          "searchLatencyMs": 32.09,
+          "totalSearchMs": 55.21,
+          "searchLatencyMs": 55.21,
           "llmLatencyMs": null,
-          "totalLatencyMs": 32.09
+          "totalLatencyMs": 55.21
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 cameraLoginId 별 worker를 실행한다. - RTSP 입력은 유지된다. REAL_RTSP 는 backend의 rtspUrl , SIMULATED_RTSP 는 rtsp://<host :8554/{cameraLoginId} 로 MediaMTX에 publish한다. - MediaMTX는 RTSP 8554 , HLS 8888 , WebRTC/WHEP 8889 경로를 제공한다. - Frontend Docker build args가 VITE_STREAM_MODE=webrtc 를 기본값으로 강제하고 있었다. - Frontend 코드의 기본...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\nRTSP latest-frame queue는 실시간 추론용으로, 오래된 프레임을 drop하고 최신 프레임을 AI에 넘기는 구조가 올바릅니다. queue drop이 발생해도 데이터 정합성이 유지되는지 점검했습니다. - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 cameraLoginId 별 worker를 실행한다. - RTSP 입력은 유지된다. REAL_RTSP 는 backend의 rtspUrl , SIMULATED_RTSP 는 rtsp://<host :8554/{cameraLoginId} 로 MediaMTX에 publish한다. - MediaMTX는 RTSP 8554 , HLS 8888...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": []
       },
       "judge": {
@@ -110,10 +112,10 @@
         "retrievedSources": [
           "mjpeg-display-rollback",
           "MJPEG-Streaming-Rollback-Report",
-          "MJPEG-Display-Port-Normalization",
           "MJPEG-Streaming-Rollback-Report",
           "MJPEG-Display-Port-Normalization",
-          "MJPEG-Display-Port-Normalization"
+          "MJPEG-Display-Port-Normalization",
+          "mjpeg-display-rollback"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -125,14 +127,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.65,
-          "searchLatencyMs": 0.65,
+          "totalSearchMs": 0.94,
+          "searchLatencyMs": 0.94,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.65
+          "totalLatencyMs": 0.94
         },
         "retrievedCount": 6,
-        "finalContextCount": 5,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 동적 파이프라인 관리 : cameraLoginId 기반 동적 할당을 통해 등록된 active camera의 추가/삭제/수정 주기에 맞춰 적합한 포트로 자동 분기 및 Worker 구동 생명주기가 매핑된다. - 프론트엔드 연동 : 프론트엔드는 URL 파싱 시 위 suffix 규칙에 의해 http://localhost:<computedPort /mjpeg/{cameraLoginId} 로 접근하여 렌더링을 처리한다. --- - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 cameraLoginId 별 worker를 실행한다. - RTSP 입력은 유지된다. REAL_RTSP 는 backend의...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
+        "finalContextCount": 6,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 동적 파이프라인 관리 : cameraLoginId 기반 동적 할당을 통해 등록된 active camera의 추가/삭제/수정 주기에 맞춰 적합한 포트로 자동 분기 및 Worker 구동 생명주기가 매핑된다. - 프론트엔드 연동 : 프론트엔드는 URL 파싱 시 위 suffix 규칙에 의해 http://localhost:<computedPort /mjpeg/{cameraLoginId} 로 접근하여 렌더링을 처리한다. --- 기본 base port는 8010 이다. 규칙은 MJPEG_PORT + numericSuffix cameraLoginId - 1 이다. - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/activ...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG 롤백] (정식 제목: MJPEG Streaming Rollback Report) (file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
         "matchedKeywords": [
           "cameraLoginId",
           "동적",
@@ -159,14 +161,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 12.1,
-          "searchLatencyMs": 12.1,
+          "totalSearchMs": 21.44,
+          "searchLatencyMs": 21.44,
           "llmLatencyMs": null,
-          "totalLatencyMs": 12.1
+          "totalLatencyMs": 21.44
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 동적 파이프라인 관리 : cameraLoginId 기반 동적 할당을 통해 등록된 active camera의 추가/삭제/수정 주기에 맞춰 적합한 포트로 자동 분기 및 Worker 구동 생명주기가 매핑된다. - 프론트엔드 연동 : 프론트엔드는 URL 파싱 시 위 suffix 규칙에 의해 http://localhost:<computedPort /mjpeg/{cameraLoginId} 로 접근하여 렌더링을 처리한다. --- 동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 cameraLoginId 숫자 suffix를 추출하여 Deterministic 포트를 계산한다. - 포트 계산 공식 : port = 8010 + numericSuffix cameraLoginId - 1 - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLog...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 동적 파이프라인 관리 : cameraLoginId 기반 동적 할당을 통해 등록된 active camera의 추가/삭제/수정 주기에 맞춰 적합한 포트로 자동 분기 및 Worker 구동 생명주기가 매핑된다. - 프론트엔드 연동 : 프론트엔드는 URL 파싱 시 위 suffix 규칙에 의해 http://localhost:<computedPort /mjpeg/{cameraLoginId} 로 접근하여 렌더링을 처리한다. --- 동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 cameraLoginId 숫자 suffix를 추출하여 Deterministic 포트를 계산한다. - 포트 계산 공식 : port = 8010 + numericSuffix cameraLoginId - 1 - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLog...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG 롤백] (정식 제목: MJPEG Streaming Rollback Report) (file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
         "matchedKeywords": [
           "cameraLoginId",
           "동적",
@@ -194,10 +196,10 @@
         "retrievedSources": [
           "Frame-Sync-Debug-Report",
           "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
-          "ADR-001-WebRTC",
-          "Feature-Vector-51D-vs-54D",
           "Bug-AI-Tracker-FrameRate-Mismatch",
-          "ADR-001-WebRTC"
+          "MJPEG-Display-Port-Normalization",
+          "Feature-Vector-51D-vs-54D",
+          "MJPEG-Display-Port-Normalization"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -209,43 +211,43 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.86,
-          "searchLatencyMs": 0.86,
+          "totalSearchMs": 2.7,
+          "searchLatencyMs": 2.7,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.86
+          "totalLatencyMs": 2.7
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n다음 11개 핵심 파일 모두 문법 검증 통과 ALL_SYNTAX_OK : - scripts/serve_ai_overlay.py - ai/publishers/event_publisher.py - ai/publishers/mqtt_payloads.py - ai/inference/rtsp_runtime.py - ai/action/classifier.py - ai/action/keypoint_sequence_buffer.py - ai/action/per_track_sequence_buffer.py - ai/action/lstm_contract.py - ai/frame_sync.py - ai/postprocess/supervision_postprocessor.py - ai/visualization/action_overlay.py --- keypoint_bbox54 는 17개 COCO keypoint의 x, y, confidence 51차원에 bbox 관련 3개 feature를 더한 54차원...\n\n### 참고 문서\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [ADR-001 WebRTC](file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)\n- [Bug - AI Tracker Frame Rate Mismatch and Notification Failure](file:///c:/llm_wiki_strange/content/Bug-AI-Tracker-FrameRate-Mismatch.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| Command | Result |\n| --- | --- |\n| `npm.cmd run test:mjpeg-routing` in `strange_front` | PASS |\n| `npx tsc --noEmit` in `strange_front` | PASS |\n| `npm.cmd run build` in `strange_front` | PASS, existing Vite large chunk warning only |\n| `python -m unittest tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_registered_camera_runner_defaults_to_mjpeg_overlay_enabled tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_overlay_command_passes_bounded_mjpeg_demo_settings tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_overlay_command_can_disable_mjpeg_overlay_explicitly` in `strange_ai` | PASS |\n| `python -m py_compile ai/registered_cameras.py scripts/run_registered_cameras.py scripts/serve_ai_overlay.py tests/test_registered_camera_runner.py` in `strange_ai` | PASS |\n| `git diff --check` across changed repos/files | PASS |\n\n다음 11개 핵심 파일 모두 문법 검증 통과 ALL_SYNTAX_OK : - scripts/serve_ai_overlay.py - ai/publishers/event_publisher.py - ai/publishers/mqtt_payloads.py - ai/inference/rtsp_runtime.py - ai/action/classifier.py - ai/action/keypoint_sequence_buffer.py - ai/action/per_track_sequence_buffer.py - ai/action/lstm_contract.py - ai/frame_sync.py - ai/postprocess/supervision_postprocessor.py - ai/visualization/action_overlay.py --- keypoint_bbox54 는 17개 COCO keypoint의 x, y, confidence 51차원에 bbox 관련 3개 feature를 더한 54차원...\n\n### 참고 문서\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [BBox54 디버그] (정식 제목: 2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log) (file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [Tracker FPS] (정식 제목: Bug - AI Tracker Frame Rate Mismatch and Notification Failure) (file:///c:/llm_wiki_strange/content/Bug-AI-Tracker-FrameRate-Mismatch.md)\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [51D vs 54D] (정식 제목: Feature Vector 51D vs 54D) (file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)",
         "matchedKeywords": []
       },
       "hybrid": {
         "retrievedSources": [
           "Interview-Resume-Notes",
-          "ADR-001-WebRTC",
           "Evidence-Smart-Safety-System",
           "ADR-001-WebRTC",
           "Frame-Sync-Debug-Report",
+          "ADR-001-WebRTC",
           "Frame-Sync-Debug-Report"
         ],
         "hit1": 0,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.3333333333333333,
+        "mrr5": 0.5,
         "contextPrecision5": 0.2,
         "keywordCoverage": 0.25,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 34.59,
-          "searchLatencyMs": 34.59,
+          "totalSearchMs": 59.85,
+          "searchLatencyMs": 59.85,
           "llmLatencyMs": null,
-          "totalLatencyMs": 34.59
+          "totalLatencyMs": 59.85
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- RTSP latest-frame buffer에서 frame drop은 왜 정상 동작일 수 있나요? - latest-frame queue와 event clip ring buffer는 왜 분리해야 하나요? - evidenceId 를 어떤 필드로 구성했고, eventId와 어떤 차이가 있나요? - overlay가 실제 사람 위치보다 늦게 따라가는 현상을 어떤 단계로 나눠 디버깅했나요? - React maximum update depth 오류는 어떤 상황에서 발생하고 어떻게 재발을 막을 수 있나요? - confidence 값이 12 , 12% , 0.12 처럼 섞여 들어오면 어떤 장애가 생기나요? - FAINT 렌더링과 일반 ID 렌더링을 분리한 기준은 무엇인가요? - object-fit: contain 이 bbox 좌표 변환에 어떤 영향을 주나요? - ByteTrack track ID가 흔들리면 LSTM 행동 분류에 어떤 문제가 생기나요? - fallbackIdRate 가 높다면 AI...\n\n### 참고 문서\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [ADR-001 WebRTC](file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [Evidence Wiki - Smart Safety Monitoring](file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- RTSP latest-frame buffer에서 frame drop은 왜 정상 동작일 수 있나요? - latest-frame queue와 event clip ring buffer는 왜 분리해야 하나요? - evidenceId 를 어떤 필드로 구성했고, eventId와 어떤 차이가 있나요? - overlay가 실제 사람 위치보다 늦게 따라가는 현상을 어떤 단계로 나눠 디버깅했나요? - React maximum update depth 오류는 어떤 상황에서 발생하고 어떻게 재발을 막을 수 있나요? - confidence 값이 12 , 12% , 0.12 처럼 섞여 들어오면 어떤 장애가 생기나요? - FAINT 렌더링과 일반 ID 렌더링을 분리한 기준은 무엇인가요? - object-fit: contain 이 bbox 좌표 변환에 어떤 영향을 주나요? - ByteTrack track ID가 흔들리면 LSTM 행동 분류에 어떤 문제가 생기나요? - fallbackIdRate 가 높다면 AI...\n\n### 참고 문서\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [ADR-001] (정식 제목: ADR-001 WebRTC) (file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)",
         "matchedKeywords": [
           "Faint"
         ]
@@ -269,63 +271,65 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
-          "mjpeg-display-rollback",
-          "Evidence-Smart-Safety-System",
-          "Frame-Sync-Debug-Report",
-          "LSTM-Experiment-Results",
-          "Architecture",
-          "Plan-WebRTC-DataChannel-Sync"
-        ],
-        "hit1": 0,
-        "hit3": 1,
-        "hit5": 1,
-        "mrr5": 0.3333333333333333,
-        "contextPrecision5": 0.2,
-        "keywordCoverage": 0.2,
-        "mode": "rag-only",
-        "fallback": false,
-        "fallbackReason": "LLM Answer mode disabled",
-        "latency": {
-          "totalSearchMs": 1.34,
-          "searchLatencyMs": 1.34,
-          "llmLatencyMs": null,
-          "totalLatencyMs": 1.34
-        },
-        "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이 높은 MJPEG multipart stream으로 단순화 및 원복한다. WebRTC/HLS 프로토콜은 완전히 폐기한 것이 아니라 fallback 또는 장기 재검토 대상으로 분리한다. - AI 분석 정합성 유지 : 이번 변경은 AI 추론 구조나 백엔드 파이프라인의 변경이 아니다. 브라우저에 표시되는 전송 구간 Browser display transport 에만 해당된다. - 유지되는 AI 파이프라인 : - RTSP input 스트림 획득 - YOLO Pose를 활용한 실시간 키포인트 추출 - ByteTrack 기반의 멀티 객체 추적 - LSTM action classifi...\n\n### 단계별 흐름 표\n| 항목 | 값 |\n| :--- | :--- |\n| **작업 디렉터리 (원격 GPU PC)** | /home/welabs/yolo_training/strange_ai_lstm |\n| **Python/Venv 경로** | /home/welabs/yolo_training/strange_ai_lstm/.venv/bin/python (Python 3.12.3) |\n| **RTSP 입력 URL** | rtsp://127.0.0.1:8554/cam_04 |\n| **MQTT 브로커** | AWS EC2 (15.165.248.37:1883) |\n| **테스트 카메라 ID** | cam_04 |\n| **실행 대상 스크립트** | scripts/serve_ai_overlay.py |\n| **메타데이터 스키마 버전** | \"1.1\" |\n| **LSTM 설정** | sequence_length=30, sequence_stride=15, input_size=51 |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Evidence Wiki - Smart Safety Monitoring](file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [LSTM Experiment Results](file:///c:/llm_wiki_strange/content/LSTM-Experiment-Results.md)\n- [Architecture](file:///c:/llm_wiki_strange/content/Architecture.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)",
-        "matchedKeywords": [
-          "payload"
-        ]
-      },
-      "hybrid": {
-        "retrievedSources": [
-          "mjpeg-display-rollback",
-          "Evidence-Smart-Safety-System",
-          "mjpeg-display-rollback",
-          "AI-Output-JSON",
-          "Architecture",
-          "Frame-Matching-Report"
+          "LSTM",
+          "LSTM",
+          "LSTM",
+          "LSTM",
+          "LSTM",
+          "Architecture"
         ],
         "hit1": 0,
         "hit3": 0,
         "hit5": 0,
         "mrr5": 0,
         "contextPrecision5": 0,
-        "keywordCoverage": 0,
+        "keywordCoverage": 0.2,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 31.86,
-          "searchLatencyMs": 31.86,
+          "totalSearchMs": 2.36,
+          "searchLatencyMs": 2.36,
           "llmLatencyMs": null,
-          "totalLatencyMs": 31.86
+          "totalLatencyMs": 2.36
+        },
+        "retrievedCount": 6,
+        "finalContextCount": 3,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\nJSON Payload Keys: label, score, probabilities RTSP 운영 config, benchmark script, checkpoint metadata의 input_size 와 sequence_length 를 같은 inventory로 정리한다. --- lstm sequence threshold normal faint feature-vector Code Keywords: flowchart, Sequence, Per-track, keypoint, sequence, Base, normalized, feature, Motion, motion, center_drop, velocity, torso_angle, Feature, LSTM - AI-Pipeline - Feature-Vector-51D-vs-54D - LSTM-Sequence-Length-Comparison sequence_length 는 FPS sampling이 아니라 한 번의 LSTM 판단에 들어가는...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [LSTM] (file:///c:/llm_wiki_strange/content/LSTM.md)\n- [아키텍처] (정식 제목: Architecture) (file:///c:/llm_wiki_strange/content/Architecture.md)",
+        "matchedKeywords": [
+          "payload"
+        ]
+      },
+      "hybrid": {
+        "retrievedSources": [
+          "Architecture",
+          "mjpeg-display-rollback",
+          "Evidence-Smart-Safety-System",
+          "Architecture",
+          "LSTM-Experiment-Results",
+          "Frame-Sync-Debug-Report"
+        ],
+        "hit1": 0,
+        "hit3": 0,
+        "hit5": 0,
+        "mrr5": 0,
+        "contextPrecision5": 0,
+        "keywordCoverage": 0.2,
+        "mode": "rag-only",
+        "fallback": false,
+        "fallbackReason": "LLM Answer mode disabled",
+        "latency": {
+          "totalSearchMs": 64.4,
+          "searchLatencyMs": 64.4,
+          "llmLatencyMs": null,
+          "totalLatencyMs": 64.4
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이 높은 MJPEG multipart stream으로 단순화 및 원복한다. WebRTC/HLS 프로토콜은 완전히 폐기한 것이 아니라 fallback 또는 장기 재검토 대상으로 분리한다. - AI 분석 정합성 유지 : 이번 변경은 AI 추론 구조나 백엔드 파이프라인의 변경이 아니다. 브라우저에 표시되는 전송 구간 Browser display transport 에만 해당된다. - 유지되는 AI 파이프라인 : - RTSP input 스트림 획득 - YOLO Pose를 활용한 실시간 키포인트 추출 - ByteTrack 기반의 멀티 객체 추적 - LSTM action classifi...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Evidence Wiki - Smart Safety Monitoring](file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [AI Output JSON](file:///c:/llm_wiki_strange/content/AI-Output-JSON.md)\n- [Architecture](file:///c:/llm_wiki_strange/content/Architecture.md)\n- [Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서](file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)",
-        "matchedKeywords": []
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n아키텍처의 기준 식별자는 cameraLoginId 다. 같은 카메라는 RTSP path, WebRTC/HLS path, MQTT streamId , Backend camera registry에서 같은 값으로 연결되어야 한다. Code Keywords: flowchart, Camera, sample, video, MediaMTX, RTSP, WebRTC, Worker, YOLO26n, ByteTrack, LSTM, MQTT, Broker, safety, events 본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이 높은 MJPEG multipart stream으로 단순화 및 원복한다. WebRTC/HLS 프로토콜은 완전히...\n\n### 단계별 흐름 표\n| 항목 | 값 |\n| :--- | :--- |\n| **작업 디렉터리 (원격 GPU PC)** | /home/welabs/yolo_training/strange_ai_lstm |\n| **Python/Venv 경로** | /home/welabs/yolo_training/strange_ai_lstm/.venv/bin/python (Python 3.12.3) |\n| **RTSP 입력 URL** | rtsp://127.0.0.1:8554/cam_04 |\n| **MQTT 브로커** | AWS EC2 (15.165.248.37:1883) |\n| **테스트 카메라 ID** | cam_04 |\n| **실행 대상 스크립트** | scripts/serve_ai_overlay.py |\n| **메타데이터 스키마 버전** | \"1.1\" |\n| **LSTM 설정** | sequence_length=30, sequence_stride=15, input_size=51 |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [아키텍처] (정식 제목: Architecture) (file:///c:/llm_wiki_strange/content/Architecture.md)\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [LSTM 결과] (정식 제목: LSTM Experiment Results) (file:///c:/llm_wiki_strange/content/LSTM-Experiment-Results.md)\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)",
+        "matchedKeywords": [
+          "payload"
+        ]
       },
       "judge": {
         "answer_correctness": null,
@@ -346,33 +350,32 @@
       "difficulty": "hard",
       "baseline": {
         "retrievedSources": [
-          "AI-Output-JSON",
-          "Architecture",
-          "Plan-WebRTC-DataChannel-Sync",
           "Frame-Matching-Report",
           "AI-Pipeline",
-          "AI-Output-JSON"
+          "AI-Output-JSON",
+          "AI-Pipeline",
+          "AI-Pipeline",
+          "AI-Pipeline"
         ],
-        "hit1": 0,
-        "hit3": 0,
+        "hit1": 1,
+        "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.25,
+        "mrr5": 1,
         "contextPrecision5": 0.2,
-        "keywordCoverage": 0.8,
+        "keywordCoverage": 0.6,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.71,
-          "searchLatencyMs": 0.71,
+          "totalSearchMs": 1.22,
+          "searchLatencyMs": 1.22,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.71
+          "totalLatencyMs": 1.22
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- strange_ai/.env.example - PROJECT_CONTRACT.md - docs/wiki/data/modelMetrics.json - Overview - AI-Pipeline - MQTT-Event-Schema - WebRTC-vs-HLS 스트림 모드 확장 : Code Keywords: type, StreamMode, origin-webrtc, origin-hls, ai-sync-webrtc 프레임 렌더 동기화 매칭 링 버퍼 Ring Buffer : DataChannel을 통해 들어오는 실시간 JSON 메타데이터 패킷을 카메라 단위 로컬 Ring Buffer에 보관함. requestVideoFrameCallback API를 사용하여 HTML5 Video 태그의 디스플레이 프레임 업데이트 주기와 일치시켜 렌더 루프를 트리거함. 화면에 디스플레이될 비디오 프레임 정보와 메타데이터의 frameId 가 일치하면 즉시 캔버스에 드로잉을 갱신함. frameId 불일치 시, c...\n\n### 참고 문서\n- [AI Output JSON](file:///c:/llm_wiki_strange/content/AI-Output-JSON.md)\n- [Architecture](file:///c:/llm_wiki_strange/content/Architecture.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)\n- [Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서](file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [AI Pipeline](file:///c:/llm_wiki_strange/content/AI-Pipeline.md)",
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n비디오 스트림 경로 WebRTC 와 메타데이터 경로 MQTT/WebSocket 의 물리적 속도 차이로 인해 발생하는 오버레이 밀림 문제를 방지하기 위해 다음과 같은 2단계 버퍼 구조를 사용합니다. Code Keywords: sequenceDiagram, autonumber, participant, Camera, RTSP, Edge, python, Broker, MQTT, Frontend, react, Camera-, Video, Frame, Note --- - docs/AI_GUIDE.md - docs/ai_training_preprocessing_summary.md - strange_ai/.env.example - .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv - strange_ai/.env.example - PROJECT_CONTRACT.md - docs/wiki/data/modelMetrics.json FP/FN...\n\n### 참고 문서\n- [프레임 매칭] (정식 제목: Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서) (file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [AI 파이프라인] (정식 제목: AI Pipeline) (file:///c:/llm_wiki_strange/content/AI-Pipeline.md)\n- [AI JSON] (정식 제목: AI Output JSON) (file:///c:/llm_wiki_strange/content/AI-Output-JSON.md)",
         "matchedKeywords": [
-          "frameId",
           "동기화",
           "버퍼",
           "매칭"
@@ -392,23 +395,24 @@
         "hit5": 1,
         "mrr5": 1,
         "contextPrecision5": 0.6,
-        "keywordCoverage": 0.6,
+        "keywordCoverage": 0.8,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 20.05,
-          "searchLatencyMs": 20.05,
+          "totalSearchMs": 40.51,
+          "searchLatencyMs": 40.51,
           "llmLatencyMs": null,
-          "totalLatencyMs": 20.05
+          "totalLatencyMs": 40.51
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 저장소 : strange_ai/ai/frame_sync.py 의 FrameMetadataBuffer 클래스 내 _frames_by_camera 속성에 저장됩니다. - 자료구조: defaultdict lambda: deque maxlen=self.maxlen - 로컬 기본 크기: maxlen = 60 약 2초 분량의 프레임 정보 - 드랍 버리기 방식 : - Python의 collections.deque 는 고정 크기 FIFO 링 버퍼 입니다. - 버퍼에 새로운 프레임 정보가 추가될 때 크기가 maxlen 을 초과하면, 별도의 작업 없이 가장 오래된 가장 앞에 있는 프레임 데이터가 메모리에서 즉시 자동 누락 Drop 됩니다. 비디오 스트림 경로 WebRTC 와 메타데이터 경로 MQTT/WebSocket 의 물리적 속도 차이로 인해 발생하는 오버레이 밀림 문제를 방지하기 위해 다음과 같은 2단계 버퍼 구조를 사용합니다. Code Keywords: sequenceDiagram, auto...\n\n### 참고 문서\n- [Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서](file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)\n- [다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서](file:///c:/llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 저장소 : strange_ai/ai/frame_sync.py 의 FrameMetadataBuffer 클래스 내 _frames_by_camera 속성에 저장됩니다. - 자료구조: defaultdict lambda: deque maxlen=self.maxlen - 로컬 기본 크기: maxlen = 60 약 2초 분량의 프레임 정보 - 드랍 버리기 방식 : - Python의 collections.deque 는 고정 크기 FIFO 링 버퍼 입니다. - 버퍼에 새로운 프레임 정보가 추가될 때 크기가 maxlen 을 초과하면, 별도의 작업 없이 가장 오래된 가장 앞에 있는 프레임 데이터가 메모리에서 즉시 자동 누락 Drop 됩니다. 비디오 스트림 경로 WebRTC 와 메타데이터 경로 MQTT/WebSocket 의 물리적 속도 차이로 인해 발생하는 오버레이 밀림 문제를 방지하기 위해 다음과 같은 2단계 버퍼 구조를 사용합니다. Code Keywords: sequenceDiagram, auto...\n\n### 참고 문서\n- [프레임 매칭] (정식 제목: Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서) (file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [DataChannel Sync] (정식 제목: Plan - WebRTC DataChannel based Video-Overlay Synchronization) (file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)\n- [카메라 지연] (정식 제목: 다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서) (file:///c:/llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md)",
         "matchedKeywords": [
           "frameId",
           "동기화",
-          "버퍼"
+          "버퍼",
+          "매칭"
         ]
       },
       "judge": {
@@ -430,9 +434,9 @@
       "baseline": {
         "retrievedSources": [
           "MJPEG-Display-Port-Normalization",
+          "MJPEG-Display-Port-Normalization",
+          "MJPEG-Display-Port-Normalization",
           "MJPEG-Streaming-Rollback-Report",
-          "MJPEG-Display-Port-Normalization",
-          "MJPEG-Display-Port-Normalization",
           "MJPEG-Display-Port-Normalization",
           "MJPEG-Display-Port-Normalization"
         ],
@@ -441,21 +445,20 @@
         "hit5": 1,
         "mrr5": 1,
         "contextPrecision5": 1,
-        "keywordCoverage": 0.4,
+        "keywordCoverage": 0.2,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.57,
-          "searchLatencyMs": 0.57,
+          "totalSearchMs": 2.03,
+          "searchLatencyMs": 2.03,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.57
+          "totalLatencyMs": 2.03
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\nMain launcher: Code Keywords: AI runner: Code Keywords: strange_ai, python, scripts, run_registered_cameras, --backend-base-url, http, localhost, 18080, --rtsp-base-url, rtsp, 8554 Standalone MJPEG worker smoke: Commands: serve_ai_overlay.py --camera-id Important runtime flags: Code Keywords: MJPEG_ENABLED, true, MJPEG_ENABLE_OVERLAY, MJPEG_PORT, 8010, MJPEG_PORT_END, 8020, TRACKING_DEBUG, POSE_DEBUG, POSE_TRACKING_DIAG_JSONL - PROJECT_CONTRACT.md still documents HLS as the frontend view URL con...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\nTo display WebRTC again: Code Keywords: VITE_STREAM_MODE, webrtc, VITE_WEBRTC_BASE_URL, http, localhost, 8889 To display HLS/raw again: Code Keywords: VITE_STREAM_MODE, VITE_HLS_BASE_URL, http, localhost, 8888 To disable baked MJPEG overlay while keeping MJPEG image streaming: Code Keywords: MJPEG_ENABLE_OVERLAY, false or pass --no-mjpeg-enable-overlay explicitly. Main launcher: Code Keywords: AI runner: Code Keywords: strange_ai, python, scripts, run_registered_cameras, --backend-base-url, http...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": [
-          "port",
           "mjpeg"
         ]
       },
@@ -464,8 +467,8 @@
           "MJPEG-Streaming-Rollback-Report",
           "MJPEG-Streaming-Rollback-Report",
           "MJPEG-Display-Port-Normalization",
-          "mjpeg-display-rollback",
           "MJPEG-Display-Port-Normalization",
+          "mjpeg-display-rollback",
           "mjpeg-display-rollback"
         ],
         "hit1": 1,
@@ -478,10 +481,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 13.22,
-          "searchLatencyMs": 13.22,
+          "totalSearchMs": 20.46,
+          "searchLatencyMs": 20.46,
           "llmLatencyMs": null,
-          "totalLatencyMs": 13.22
+          "totalLatencyMs": 20.46
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -509,11 +512,11 @@
       "baseline": {
         "retrievedSources": [
           "AI-Pipeline",
-          "ADR-002-MQTT-Metadata-Separation",
-          "Model-Comparison",
-          "Architecture",
-          "Frame-Sync-Debug-Report",
-          "ADR-003-YOLO26n-Selection"
+          "mjpeg-display-rollback",
+          "mjpeg-display-rollback",
+          "mjpeg-display-rollback",
+          "mjpeg-display-rollback",
+          "Interview-Resume-Notes"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -525,14 +528,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.66,
-          "searchLatencyMs": 0.66,
+          "totalSearchMs": 1.01,
+          "searchLatencyMs": 1.01,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.66
+          "totalLatencyMs": 1.01
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- rtsp://<host :8554/{cameraLoginId} - YOLO26n-pose checkpoint - LSTM checkpoint - sequenceLength , stride , threshold - Backend camera registry와 일치하는 cameraLoginId - AI output JSON - Backend camera registry - 개인/기관 카메라 테이블 - WebSocket notification policy 이 서비스의 실패 비용은 실신 이벤트를 놓치는 쪽이 더 크다. 오탐은 cooldown, scope, 후처리 정책으로 일부 완화할 수 있지만, 미탐은 관제 공백으로 직결된다. FPS와 pose-only latency는 운영 가능성 판단에는 쓰지만, 최종 순위의 1차 기준으로 쓰지 않는다. - 개인 사용자 또는 기관 사용자가 등록한 카메라 - RTSP sample video publish - AI worker 모델/threshold 설정...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- rtsp://<host :8554/{cameraLoginId} - YOLO26n-pose checkpoint - LSTM checkpoint - sequenceLength , stride , threshold - Backend camera registry와 일치하는 cameraLoginId 초기 설계 단계에서 초저지연을 위해 도입했던 WebRTC WHEP 및 HLS 프로토콜 구동 시 실제 시연 및 개발 과정에서 다음과 같은 고비용의 실시간성 안정화 한계들이 관측되었다. 1. WebRTC WHEP 404 및 HLS index.m3u8 404 : 미디어서버인 MediaMTX가 구동 중이더라도, 특정 cameraLoginId 에 바인딩된 RTSP publisher 세션이 비정상 종료되거나 지연 연결될 때 브라우저 클라이언트가 WHEP / HLS 재생을 시도하면 즉각 404 응답을 반환하여 화면이 검게 멈추는 상황이 빈발했다. 2. ffmpeg publisher 라이프사이클 불안정 :...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": []
       },
       "hybrid": {
@@ -550,10 +553,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 31.98,
-          "searchLatencyMs": 31.98,
+          "totalSearchMs": 55.23,
+          "searchLatencyMs": 55.23,
           "llmLatencyMs": null,
-          "totalLatencyMs": 31.98
+          "totalLatencyMs": 55.23
         },
         "retrievedCount": 2,
         "finalContextCount": 2,
@@ -577,63 +580,62 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
-          "Bug-Notification-Scope",
           "mjpeg-display-rollback",
-          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+          "mjpeg-display-rollback",
           "Interview-Resume-Notes",
-          "Feature-Vector-51D-vs-54D",
-          "MJPEG-Display-Port-Normalization"
+          "MJPEG-Display-Port-Normalization",
+          "Plan-WebRTC-DataChannel-Sync",
+          "mjpeg-display-rollback"
         ],
         "hit1": 0,
         "hit3": 0,
         "hit5": 0,
         "mrr5": 0,
         "contextPrecision5": 0,
-        "keywordCoverage": 0.3333333333333333,
+        "keywordCoverage": 0.16666666666666666,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.61,
-          "searchLatencyMs": 0.61,
+          "totalSearchMs": 0.98,
+          "searchLatencyMs": 0.98,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.61
+          "totalLatencyMs": 0.98
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| Field | 용도 |\n| --- | --- |\n| `trackingId` | AI 내부 추적 ID, LSTM sequence, MQTT event, DB correlation 기준 |\n| `trackId`, `track_id` | `trackingId` 호환 alias |\n| `displayId`, `display_id` | 관제 화면 표시용 ID |\n| `displayLabel` | 화면 표시용 label |\n\n- 잘못된 기업용 알림 - 사용자 범위를 벗어난 incident 노출 WebRTC/HLS 대비 MJPEG Multipart HTTP Stream 방식이 가지는 장점은 다음과 같다. 1. 지도로 증명되는 단순한 표시 경로 : 별도의 WebRTC 시그널링, WHEP 프로토콜 핸들러, HLS 재생기 라이브러리 hls.js 등이 불필요하다. HTML 기본 태그인 <img src=\"...\" 또는 단순 HTTP stream 수신부만으로 실시간 비디오를 간결하게 표시할 수 있다. 2. Deterministic 포트 매핑 및 디버깅 편의 : 카메라별 AI Worker 구동 포트가 URL에 즉각 매핑되므로, 장애 발생 시 복잡한 중간 미디어서버 분석 없이 http://localhost:8014/mjpeg/cam_05 등의 개별 포트에 curl 또는 브라우저로 직접 접속하여 비디오 상태를 1초 만에 격리 판정할 수 있다. 3. AI 추론 및 화면 전송의 일원화 : 분석용 프레임을 추론하는 프로세스 W...\n\n### 참고 문서\n- [Bug Notification Scope](file:///c:/llm_wiki_strange/content/Bug-Notification-Scope.md)\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
+        "finalContextCount": 5,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nWebRTC/HLS 대비 MJPEG Multipart HTTP Stream 방식이 가지는 장점은 다음과 같다. 1. 지도로 증명되는 단순한 표시 경로 : 별도의 WebRTC 시그널링, WHEP 프로토콜 핸들러, HLS 재생기 라이브러리 hls.js 등이 불필요하다. HTML 기본 태그인 <img src=\"...\" 또는 단순 HTTP stream 수신부만으로 실시간 비디오를 간결하게 표시할 수 있다. 2. Deterministic 포트 매핑 및 디버깅 편의 : 카메라별 AI Worker 구동 포트가 URL에 즉각 매핑되므로, 장애 발생 시 복잡한 중간 미디어서버 분석 없이 http://localhost:8014/mjpeg/cam_05 등의 개별 포트에 curl 또는 브라우저로 직접 접속하여 비디오 상태를 1초 만에 격리 판정할 수 있다. 3. AI 추론 및 화면 전송의 일원화 : 분석용 프레임을 추론하는 프로세스 Worker 자체에서 화면도 함께 Multipart JPEG 스트림으로...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [DataChannel Sync] (정식 제목: Plan - WebRTC DataChannel based Video-Overlay Synchronization) (file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)",
         "matchedKeywords": [
-          "Vector",
           "검색"
         ]
       },
       "hybrid": {
         "retrievedSources": [
-          "Bug-Codeblock-Visibility",
           "Interview-Resume-Notes",
           "Evidence-LLM-Wiki-RAG",
           "Bug-Codeblock-Visibility",
-          "Feature-Vector-51D-vs-54D",
-          "Interview-Resume-Notes"
+          "Bug-Codeblock-Visibility",
+          "Evidence-LLM-Wiki-RAG",
+          "Feature-Vector-51D-vs-54D"
         ],
         "hit1": 0,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.3333333333333333,
-        "contextPrecision5": 0.2,
+        "mrr5": 0.5,
+        "contextPrecision5": 0.4,
         "keywordCoverage": 0.5,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 28.78,
-          "searchLatencyMs": 28.78,
+          "totalSearchMs": 59.54,
+          "searchLatencyMs": 59.54,
           "llmLatencyMs": null,
-          "totalLatencyMs": 28.78
+          "totalLatencyMs": 59.54
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nLLM Wiki는 JSON payload와 실행 흐름을 많이 보여준다. 코드블록이 읽히지 않으면 MQTT schema, AI output, benchmark evidence를 사람이 확인하기 어렵고 LLM용 지식베이스 역할도 약해진다. - RTSP latest-frame buffer에서 frame drop은 왜 정상 동작일 수 있나요? - latest-frame queue와 event clip ring buffer는 왜 분리해야 하나요? - evidenceId 를 어떤 필드로 구성했고, eventId와 어떤 차이가 있나요? - overlay가 실제 사람 위치보다 늦게 따라가는 현상을 어떤 단계로 나눠 디버깅했나요? - React maximum update depth 오류는 어떤 상황에서 발생하고 어떻게 재발을 막을 수 있나요? - confidence 값이 12 , 12% , 0.12 처럼 섞여 들어오면 어떤 장애가 생기나요? - FAINT 렌더링과 일반 ID 렌더링을 분리한 기준은...\n\n### 참고 문서\n- [Bug Codeblock Visibility](file:///c:/llm_wiki_strange/content/Bug-Codeblock-Visibility.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [Evidence Wiki - LLM Wiki RAG](file:///c:/llm_wiki_strange/content/Evidence-LLM-Wiki-RAG.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- RTSP latest-frame buffer에서 frame drop은 왜 정상 동작일 수 있나요? - latest-frame queue와 event clip ring buffer는 왜 분리해야 하나요? - evidenceId 를 어떤 필드로 구성했고, eventId와 어떤 차이가 있나요? - overlay가 실제 사람 위치보다 늦게 따라가는 현상을 어떤 단계로 나눠 디버깅했나요? - React maximum update depth 오류는 어떤 상황에서 발생하고 어떻게 재발을 막을 수 있나요? - confidence 값이 12 , 12% , 0.12 처럼 섞여 들어오면 어떤 장애가 생기나요? - FAINT 렌더링과 일반 ID 렌더링을 분리한 기준은 무엇인가요? - object-fit: contain 이 bbox 좌표 변환에 어떤 영향을 주나요? - ByteTrack track ID가 흔들리면 LSTM 행동 분류에 어떤 문제가 생기나요? - fallbackIdRate 가 높다면 AI...\n\n### 참고 문서\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [Wiki RAG] (정식 제목: Evidence Wiki - LLM Wiki RAG) (file:///c:/llm_wiki_strange/content/Evidence-LLM-Wiki-RAG.md)\n- [코드블록 표시] (정식 제목: Bug Codeblock Visibility) (file:///c:/llm_wiki_strange/content/Bug-Codeblock-Visibility.md)\n- [51D vs 54D] (정식 제목: Feature Vector 51D vs 54D) (file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)",
         "matchedKeywords": [
           "RAG",
           "Vector",
@@ -658,12 +660,12 @@
       "difficulty": "easy",
       "baseline": {
         "retrievedSources": [
+          "Benchmark-History",
           "AI-Pipeline",
+          "Bug-Codeblock-Visibility",
           "LSTM",
-          "Feature-Vector-51D-vs-54D",
-          "LSTM-Sequence-Length-Comparison",
-          "LSTM",
-          "Bug-Codeblock-Visibility"
+          "Benchmark-History",
+          "Benchmark-History"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -675,21 +677,21 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.59,
-          "searchLatencyMs": 0.59,
+          "totalSearchMs": 0.95,
+          "searchLatencyMs": 0.95,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.59
+          "totalLatencyMs": 0.95
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| Feature | Dimension | Source | 설명 |\n| --- | ---: | --- | --- |\n| keypoint x/y/conf | 51 | `keypoints_to_feature` | 17 COCO keypoints x 3 |\n| center_drop | 1 | `append_motion_features` | hip midpoint y 변화량 |\n| velocity | 1 | `append_motion_features` | hip midpoint frame-to-frame 이동 거리 |\n| torso_angle | 1 | `append_motion_features` | shoulder midpoint와 hip midpoint로 계산한 torso angle |\n| total | 54 | `sequence_to_features` | 51D + 3D |\n\n현재 AI 방향은 YOLO를 직접 재학습하는 것이 아니라 YOLO26n-pose 로 사람의 bbox와 17개 COCO keypoint를 추출한 뒤, ByteTrack으로 track별 연속성을 유지하고, track별 keypoint sequence를 LSTM에 넣어 Normal/Faint 를 판단하는 구조다. 이 접근은 frame 단위 단순 포즈 판단이 아니라 시간 맥락을 활용해 실신 이벤트를 구분한다는 점에서, 관제 서비스의 오탐·미탐 균형을 threshold 조정으로 유연하게 다룰 수 있다는 장점이 있다. 실험 분석 및 규칙: - Faint Recall & FN 최소화 Sequence 30 권장 : Sequence Length 30은 Faint Recall이 0.822222 로 압도적으로 우수하며, 미탐 FN 을 단 136개로 억제한다. 오탐 FP 역시 2,952개로 짧은 윈도우 대비 현격히 적어 8프레임의 약 1/5, 16프레임의 약 1/3 수준 , 실전 관제 신뢰성을 극대화하기...\n\n### 참고 문서\n- [AI Pipeline](file:///c:/llm_wiki_strange/content/AI-Pipeline.md)\n- [LSTM](file:///c:/llm_wiki_strange/content/LSTM.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)\n- [LSTM Sequence Length Comparison](file:///c:/llm_wiki_strange/content/LSTM-Sequence-Length-Comparison.md)\n- [Bug Codeblock Visibility](file:///c:/llm_wiki_strange/content/Bug-Codeblock-Visibility.md)",
+        "finalContextCount": 5,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| 항목 | 값 | 근거 |\n| --- | --- | --- |\n| base keypoint feature | 51D | 17 keypoints x `(x, y, confidence)` |\n| motion feature | 3D | `center_drop`, `velocity`, `torso_angle` |\n| final keypoint feature | 54D | `append_motion_features(base_features)` |\n| default sequence length | 30 / 15 통일 완료 | 모든 학습/실험/실가동 스크립트 및 버퍼 클래스 기본값을 30/15로 일치시킴 |\n| class | `Normal`, `Faint` | classifier/default benchmark |\n| threshold audit | 0.3, 0.4, 0.5, 0.6, 0.7 | benchmark output |\n\npose_model_summary.csv 의 FPS가 좋아도 downstream LSTM Faint Recall이 낮으면 관제 이벤트 판단 모델로는 우선순위가 내려간다. 이번 선택의 authoritative 기준은 GPU LSTM comparison 결과 및 최종 Split Test Audit 지표이다. 현재 AI 방향은 YOLO를 직접 재학습하는 것이 아니라 YOLO26n-pose 로 사람의 bbox와 17개 COCO keypoint를 추출한 뒤, ByteTrack으로 track별 연속성을 유지하고, track별 keypoint sequence를 LSTM에 넣어 Normal/Faint 를 판단하는 구조다. 이 접근은 frame 단위 단순 포즈 판단이 아니라 시간 맥락을 활용해 실신 이벤트를 구분한다는 점에서, 관제 서비스의 오탐·미탐 균형을 threshold 조정으로 유연하게 다룰 수 있다는 장점이 있다. 브라우저에서 AI Output JSON 과 MQTT Event Schema...\n\n### 참고 문서\n- [벤치마크] (정식 제목: Benchmark History) (file:///c:/llm_wiki_strange/content/Benchmark-History.md)\n- [AI 파이프라인] (정식 제목: AI Pipeline) (file:///c:/llm_wiki_strange/content/AI-Pipeline.md)\n- [코드블록 표시] (정식 제목: Bug Codeblock Visibility) (file:///c:/llm_wiki_strange/content/Bug-Codeblock-Visibility.md)\n- [LSTM] (file:///c:/llm_wiki_strange/content/LSTM.md)",
         "matchedKeywords": []
       },
       "hybrid": {
         "retrievedSources": [
           "LSTM",
-          "2026-06-30-Overlay-Tracking-Evidence-Log",
           "LSTM",
+          "2026-06-30-Overlay-Tracking-Evidence-Log",
           "Evidence-Portfolio-Resume-Usage",
           "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
           "2026-06-30-Overlay-Tracking-Evidence-Log"
@@ -704,14 +706,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 30.34,
-          "searchLatencyMs": 30.34,
+          "totalSearchMs": 47.38,
+          "searchLatencyMs": 47.38,
           "llmLatencyMs": null,
-          "totalLatencyMs": 30.34
+          "totalLatencyMs": 47.38
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| 항목 | 내용 |\n| :--- | :--- |\n| **현재 구조** | `CameraFrameQueue`가 일정 큐 사이즈 초과 시 프레임을 Drop하고 최신 프레임만 유지 |\n| **정상 여부** | **정상 (문제 없음)** |\n| **근거** | 추론 지연에 따른 메모리 폭발을 막고 '실시간성'을 유지하기 위한 올바른 설계임 |\n| **정합성 유지 방식** | AI 추론 결과 페이로드는 `processedAtMs` 시점의 실제 처리된 `FramePacket` 내부의 `frameId`, `capturedAtMs`, `cameraLoginId`, `evidenceId`, `traceId`, `droppedFrameCount`를 기반으로 빌드됨 |\n| **남은 위험 요소** | RTSP 재연결 시 `frameId`가 0으로 초기화되거나 `droppedFrameCount`가 비정상 누적 증분될 위험 (추후 스트림 재시작 시점의 로직 확인 필요) |\n\nYOLO26n-pose가 프레임 단위로 추출한 사람 keypoint 결과를 바로 이벤트로 판단하지 않고, track별 시간 흐름을 sequence로 묶어 Normal/Faint 를 분류하는 LSTM 모듈의 구조와 설정을 한 곳에 정리한다. 구체적으로는 LSTM 입력 shape, sequence length, stride, class, threshold, feature dimension 개념과 51D·54D 구분을 다룬다. 이 문서는 발표자료나 포트폴리오에서 AI 판단 흐름을 설명할 때 참조 지점으로도 활용할 수 있다. 미탐 False Negative 활용 : 야간, 원거리, 가림, 천천히 쓰러짐, 작은 사람 등 놓친 진짜 쓰러짐 데이터를 Faint 후보로 Export합니다. - portfolio/project-evidence-map.md 에 프로젝트별 주장, 근거, 검증, 포트폴리오 문장 구조를 추가했다. - portfolio/resume-bullets.md 에 바로 사용할 수 있는...\n\n### 참고 문서\n- [LSTM](file:///c:/llm_wiki_strange/content/LSTM.md)\n- [2026-06-30 작업 로그: Overlay Sync, Tracking, Evidence & Data Pipeline](file:///c:/llm_wiki_strange/content/2026-06-30-Overlay-Tracking-Evidence-Log.md)\n- [Evidence Wiki - Portfolio Resume Usage](file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| 항목 | 내용 |\n| :--- | :--- |\n| **현재 구조** | `CameraFrameQueue`가 일정 큐 사이즈 초과 시 프레임을 Drop하고 최신 프레임만 유지 |\n| **정상 여부** | **정상 (문제 없음)** |\n| **근거** | 추론 지연에 따른 메모리 폭발을 막고 '실시간성'을 유지하기 위한 올바른 설계임 |\n| **정합성 유지 방식** | AI 추론 결과 페이로드는 `processedAtMs` 시점의 실제 처리된 `FramePacket` 내부의 `frameId`, `capturedAtMs`, `cameraLoginId`, `evidenceId`, `traceId`, `droppedFrameCount`를 기반으로 빌드됨 |\n| **남은 위험 요소** | RTSP 재연결 시 `frameId`가 0으로 초기화되거나 `droppedFrameCount`가 비정상 누적 증분될 위험 (추후 스트림 재시작 시점의 로직 확인 필요) |\n\nYOLO26n-pose가 프레임 단위로 추출한 사람 keypoint 결과를 바로 이벤트로 판단하지 않고, track별 시간 흐름을 sequence로 묶어 Normal/Faint 를 분류하는 LSTM 모듈의 구조와 설정을 한 곳에 정리한다. 구체적으로는 LSTM 입력 shape, sequence length, stride, class, threshold, feature dimension 개념과 51D·54D 구분을 다룬다. 이 문서는 발표자료나 포트폴리오에서 AI 판단 흐름을 설명할 때 참조 지점으로도 활용할 수 있다. 미탐 False Negative 활용 : 야간, 원거리, 가림, 천천히 쓰러짐, 작은 사람 등 놓친 진짜 쓰러짐 데이터를 Faint 후보로 Export합니다. - portfolio/project-evidence-map.md 에 프로젝트별 주장, 근거, 검증, 포트폴리오 문장 구조를 추가했다. - portfolio/resume-bullets.md 에 바로 사용할 수 있는...\n\n### 참고 문서\n- [LSTM] (file:///c:/llm_wiki_strange/content/LSTM.md)\n- [Overlay 추적] (정식 제목: 2026-06-30 작업 로그: Overlay Sync, Tracking, Evidence & Data Pipeline) (file:///c:/llm_wiki_strange/content/2026-06-30-Overlay-Tracking-Evidence-Log.md)\n- [포트폴리오 활용] (정식 제목: Evidence Wiki - Portfolio Resume Usage) (file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [BBox54 디버그] (정식 제목: 2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log) (file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)",
         "matchedKeywords": [
           "지연"
         ]
@@ -733,12 +735,12 @@
       "difficulty": "easy",
       "baseline": {
         "retrievedSources": [
-          "Frame-Matching-Report",
-          "mjpeg-display-rollback",
-          "Plan-WebRTC-DataChannel-Sync",
-          "Architecture",
-          "Architecture",
-          "ADR-001-WebRTC"
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "Architecture"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -750,26 +752,26 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.94,
-          "searchLatencyMs": 0.94,
+          "totalSearchMs": 2.38,
+          "searchLatencyMs": 2.38,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.94
+          "totalLatencyMs": 2.38
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n비디오 스트림 경로 WebRTC 와 메타데이터 경로 MQTT/WebSocket 의 물리적 속도 차이로 인해 발생하는 오버레이 밀림 문제를 방지하기 위해 다음과 같은 2단계 버퍼 구조를 사용합니다. Code Keywords: sequenceDiagram, autonumber, participant, Camera, RTSP, Edge, python, Broker, MQTT, Frontend, react, Camera-, Video, Frame, Note --- 본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이 높은 MJPEG multipart stream으로 단순화 및 원복한다. WebRTC/HLS 프로토콜은 완전히 폐기한...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서](file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)\n- [Architecture](file:///c:/llm_wiki_strange/content/Architecture.md)\n- [ADR-001 WebRTC](file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)",
+        "finalContextCount": 3,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n- MJPEG Display Rollback Decision - ADR-001-WebRTC - Architecture - Bug-RTSP-Stream-404 카메라별 WebRTC health metric 및 MJPEG stream의 생존 상태 stale check 를 모니터링하여 실패 reason을 정확히 구분한다. --- webrtc hls streaming latency mediamtx WebRTC 및 MJPEG 도입은 AI → MQTT → Backend 이벤트 경로를 대체하지 않는다. 영상 전달 경로만 안정화된 display transport로 바꾸며, 안전 이벤트 계약은 그대로 유지한다. HLS 지연 문제와 WebRTC 도입 이유를 비교 지표 중심으로 정리한다. Code Keywords: Frontend, selected, cameraLoginId, MJPEG, rendering, http, localhost, computedPort, mjpeg, fallback, WebRT...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [아키텍처] (정식 제목: Architecture) (file:///c:/llm_wiki_strange/content/Architecture.md)",
         "matchedKeywords": [
           "pipeline"
         ]
       },
       "hybrid": {
         "retrievedSources": [
+          "Architecture",
+          "Architecture",
           "mjpeg-display-rollback",
+          "WebRTC-vs-HLS",
           "Evidence-Smart-Safety-System",
-          "Frame-Matching-Report",
-          "Architecture",
-          "Architecture",
-          "mjpeg-display-rollback"
+          "WebRTC-vs-HLS"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -781,14 +783,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 31.45,
-          "searchLatencyMs": 31.45,
+          "totalSearchMs": 57.75,
+          "searchLatencyMs": 57.75,
           "llmLatencyMs": null,
-          "totalLatencyMs": 31.45
+          "totalLatencyMs": 57.75
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이 높은 MJPEG multipart stream으로 단순화 및 원복한다. WebRTC/HLS 프로토콜은 완전히 폐기한 것이 아니라 fallback 또는 장기 재검토 대상으로 분리한다. - AI 분석 정합성 유지 : 이번 변경은 AI 추론 구조나 백엔드 파이프라인의 변경이 아니다. 브라우저에 표시되는 전송 구간 Browser display transport 에만 해당된다. - 유지되는 AI 파이프라인 : - RTSP input 스트림 획득 - YOLO Pose를 활용한 실시간 키포인트 추출 - ByteTrack 기반의 멀티 객체 추적 - LSTM action classifi...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Evidence Wiki - Smart Safety Monitoring](file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서](file:///c:/llm_wiki_strange/content/Frame-Matching-Report.md)\n- [Architecture](file:///c:/llm_wiki_strange/content/Architecture.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 시스템 동작 흐름 및 설계 분석입니다.\n\n### 상세 흐름 및 아키텍처\n아키텍처의 기준 식별자는 cameraLoginId 다. 같은 카메라는 RTSP path, WebRTC/HLS path, MQTT streamId , Backend camera registry에서 같은 값으로 연결되어야 한다. Code Keywords: flowchart, Camera, sample, video, MediaMTX, RTSP, WebRTC, Worker, YOLO26n, ByteTrack, LSTM, MQTT, Broker, safety, events - Overview - AI-Pipeline - MQTT-Event-Schema - WebRTC-vs-HLS 본 문서에서는 스마트 안전 관제 시스템의 기본 브라우저 영상 표시 경로를 WebRTC/HLS 중심에서 MJPEG 중심으로 원복 하기로 한 기술적 의사결정을 정의한다. - 변경 요약 : 브라우저 실시간 영상 표시 Browser Display Transport 를 기존 HLS/WebRTC 중심에서 디버깅과 시연 안정성이...\n\n### 단계별 흐름 표\n| 단계 | 역할 | 출력 | 비고 |\n| --- | --- | --- | --- |\n| AI Pipeline | RTSP 프레임 수신 및 YOLO/ByteTrack/LSTM 분석 | MQTT event | standard pipeline |\n\n### 포트폴리오 활용 문장\n- 실시간 영상 프레임 수신(RTSP)부터 객체 탐지(YOLO), 다중 객체 추적(ByteTrack), 행동 분류(LSTM)로 이어지는 AI 파이프라인의 연계 동작 흐름을 설계 및 검토했습니다.\n\n### 참고 문서\n- [아키텍처] (정식 제목: Architecture) (file:///c:/llm_wiki_strange/content/Architecture.md)\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)",
         "matchedKeywords": [
           "pipeline"
         ]
@@ -811,65 +813,67 @@
       "difficulty": "hard",
       "baseline": {
         "retrievedSources": [
+          "LSTM-Experiment-Results",
+          "LSTM-Experiment-Results",
+          "LSTM-Experiment-Results",
+          "LSTM-Experiment-Results",
           "Frame-Sync-Debug-Report",
-          "Frame-Sync-Debug-Report",
-          "Plan-WebRTC-DataChannel-Sync",
-          "Frame-Sync-Debug-Report",
-          "Frame-Sync-Debug-Report",
-          "Frame-Sync-Debug-Report"
+          "LSTM-Experiment-Results"
         ],
-        "hit1": 0,
-        "hit3": 0,
-        "hit5": 0,
-        "mrr5": 0,
-        "contextPrecision5": 0,
-        "keywordCoverage": 0.25,
-        "mode": "rag-only",
-        "fallback": false,
-        "fallbackReason": "LLM Answer mode disabled",
-        "latency": {
-          "totalSearchMs": 1.11,
-          "searchLatencyMs": 1.11,
-          "llmLatencyMs": null,
-          "totalLatencyMs": 1.11
-        },
-        "retrievedCount": 6,
-        "finalContextCount": 3,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 핵심 검증 로그 및 PASS/FAIL 결과입니다.\n\n### 상세 검증 내용\n--- 현재 시스템은 영상 스트림과 AI 분석 메타데이터 Bounding Box 오버레이 등 가 서로 물리적으로 분리된 전송 경로를 사용하여 클라이언트로 유입됨. 영상 경로 : RTSP 카메라 $\\rightarrow$ MediaMTX $\\rightarrow$ WebRTC/HLS $\\rightarrow$ 프론트엔드 비디오 렌더링 오버레이 경로 : RTSP 카메라 $\\rightarrow$ AI Worker $\\rightarrow$ MQTT $\\rightarrow$ 백엔드 $\\rightarrow$ STOMP/WebSocket $\\rightarrow$ 프론트엔드 Canvas 오버레이 렌더링 이 구조로 인해 데이터 큐 적체, MQTT 브로커 전송 지연, 웹소켓 릴레이 속도 차이가 합산되며 화면에 그려지는 영상의 프레임과 오버레이 박스의 시간축 불일치가 최대 5~6초 수준 발생함. ---...\n\n### 검증 근거 표\n| 제약 조건 | 파일 | 상태 |\n| :--- | :--- | :---: |\n| LSTM 51차원 독립성 | lstm_contract.py: DEFAULT_KEYPOINT_INPUT_SIZE = 51 상수 고정 | PASS |\n| classifier.py에 supervision 미접촉 | classifier.py에 supervision import 0건 | PASS |\n| MQTT payload supervision 무의존 | mqtt_payloads.py에 supervision import 0건 | PASS |\n| Overlay 텍스트 cv2.putText 사용 | action_overlay.py L183-186 cv2.putText 직접 렌더링 | PASS |\n| YOLO Keypoint 소실 방지 | supervision_postprocessor.py match_keypoints_by_iou + IoU 기반 track_id 매핑 | PASS |\n\n### 포트폴리오 활용 의미\n- 검증 명령어 결과 및 로그 데이터(PASS/FAIL)를 상세 검토하여 포트폴리오와 이력서의 이력 신뢰성을 엄밀하게 확보했습니다.\n\n### 참고 문서\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)",
-        "matchedKeywords": [
-          "LSTM"
-        ]
-      },
-      "hybrid": {
-        "retrievedSources": [
-          "Frame-Sync-Debug-Report",
-          "Frame-Sync-Debug-Report",
-          "Multi-Camera-Frame-Latency-Report",
-          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
-          "MJPEG-Display-Port-Normalization",
-          "Model-Decision-YOLO26n"
-        ],
-        "hit1": 0,
-        "hit3": 0,
-        "hit5": 0,
-        "mrr5": 0,
-        "contextPrecision5": 0,
+        "hit1": 1,
+        "hit3": 1,
+        "hit5": 1,
+        "mrr5": 1,
+        "contextPrecision5": 0.8,
         "keywordCoverage": 0.5,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 39.91,
-          "searchLatencyMs": 39.91,
+          "totalSearchMs": 0.97,
+          "searchLatencyMs": 0.97,
           "llmLatencyMs": null,
-          "totalLatencyMs": 39.91
+          "totalLatencyMs": 0.97
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 핵심 검증 로그 및 PASS/FAIL 결과입니다.\n\n### 상세 검증 내용\n--- 1. 빌드 및 컴파일 안정성 : - Backend: Gradle Java 및 Test Java 컴파일 성공 BUILD SUCCESSFUL . - Frontend: TypeScript 타입 체크 및 Production 빌드 성공. 2. 동기화 계약 및 작동 테스트 : - npm run test:overlay-sync 실행 결과, 44개의 contract 검증 및 behavior 시뮬레이션 테스트가 모두 통과 PASS 하여 사양에 완벽 부합함을 확인하였습니다. --- RTSP latency frame-sync multi-camera - 동일 데이터 split에서 생성된 pose keypoint sequence - LSTM Normal/Faint 평가 결과 - threshold sweep 결과 - .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv...\n\n### 검증 근거 표\n| Command | Result |\n| --- | --- |\n| `npm.cmd run test:mjpeg-routing` in `strange_front` | PASS |\n| `npx tsc --noEmit` in `strange_front` | PASS |\n| `npm.cmd run build` in `strange_front` | PASS, existing Vite large chunk warning only |\n| `python -m unittest tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_registered_camera_runner_defaults_to_mjpeg_overlay_enabled tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_overlay_command_passes_bounded_mjpeg_demo_settings tests.test_registered_camera_runner.RegisteredCameraRunnerTest.test_overlay_command_can_disable_mjpeg_overlay_explicitly` in `strange_ai` | PASS |\n| `python -m py_compile ai/registered_cameras.py scripts/run_registered_cameras.py scripts/serve_ai_overlay.py tests/test_registered_camera_runner.py` in `strange_ai` | PASS |\n| `git diff --check` across changed repos/files | PASS |\n\n### 포트폴리오 활용 의미\n- 검증 명령어 결과 및 로그 데이터(PASS/FAIL)를 상세 검토하여 포트폴리오와 이력서의 이력 신뢰성을 엄밀하게 확보했습니다.\n\n### 참고 문서\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서](file:///c:/llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [Model Decision YOLO26n](file:///c:/llm_wiki_strange/content/Model-Decision-YOLO26n.md)",
+        "finalContextCount": 3,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 핵심 검증 로그 및 PASS/FAIL 결과입니다.\n\n### 상세 검증 내용\n비교 대상 6개 YOLO pose extractor 모델에 대하여 소규모 검증 split에서 downstream LSTM 판정을 테스트한 Reference 데이터 지표이다. 기본 임계값 threshold=0.5 최종 감사 Split Test Audit 결과 threshold 0.3 이나 0.4는 Recall 방어 최대 0.846 에는 우수하나, Faint 예측으로 떨어지는 횟수가 다소 많다 예: 0.3일 때 3,752회 . 실제 현장 배포 시에는 consecutive-Faint 판정 및 카메라 단위 cooldown 설정 등 2차 필터 post-processing 설정을 반드시 동반하여 오알림을 차단해야 한다. Code Keywords: video, clip, pose, extractor, keypoint, sequence, LSTM, Normal, Faint, probability, threshold, event, decision --- ---...\n\n### 검증 근거 표\n| 점검 항목 | 검증 방법 및 명령 | 결과 | 비고 |\n| :--- | :--- | :---: | :--- |\n| **venv 환경 확인** | which python && python --version | **PASS** | 가상환경 정상 활성화 및 Python 3.12 구동 확인 |\n| **RTSP 스트림 검증** | ffprobe -v error rtsp://127.0.0.1:8554/cam_04 | **PASS** | 비디오 스트림 정상 수신 확인 |\n| **MediaMTX 포트 확인** | ss -ltnp | grep -E \"8554|8888|8889\" | **PASS** | 8554, 8888, 8889 포트 활성 상태 확인 |\n| **MQTT 원격 접속** | nc -vz 15.165.248.37 1883 | **PASS** | AWS MQTT 서버 포트 접속 확인 성공 |\n| **CLI 옵션 검증** | serve_ai_overlay.py --help | **PASS** | --dry-run, --frame-sync-debug, --mqtt-host/port 모두 정상 |\n| **Dry-run 로그 검증** | serve_ai_overlay.py ... --dry-run | **PASS** | [frame-sync] 로그 정상 출력 확인 |\n| **MQTT Payload 검증** | AWS 브로커 구독 후 수신 덤프 확인 | **PASS** | schemaVersion 1.1 메타데이터 실시간 전송 확인 |\n| **MJPEG 디버그 Overlay** | --frame-sync-debug --mjpeg-debug 활성화 후 visual 확인 | **PASS** | Frame ID, Latency 수치 실시간 표출 성공 |\n| **LSTM 30/15/51 검증** | 기동 로그 및 sequence 체크 | **PASS** | length=30, stride=15, input_size=51 표준 스펙 적용 확인 |\n| **기존 오류 재발 여부** | AttributeError: dry_run, 51/54 dim mismatch | **PASS** | 모두 원천 해소 (아래 §7 상세 기록) |\n| **모든 bbox overlay 전송** | overlay payload events[] 내용 확인 | **PASS** | 이번 세션 수정으로 모든 감지 객체가 항상 포함됨 |\n| **IoU 기반 track_id 할당** | supervision_postprocessor.py update() 로직 | **PASS** | 인덱스 기반 오매핑 버그 수정 완료 |\n| **py_compile 문법 검증** | 11개 핵심 모듈 전수 검사 | **PASS** | ALL_SYNTAX_OK |\n\n### 포트폴리오 활용 의미\n- 검증 명령어 결과 및 로그 데이터(PASS/FAIL)를 상세 검토하여 포트폴리오와 이력서의 이력 신뢰성을 엄밀하게 확보했습니다.\n\n### 참고 문서\n- [LSTM 결과] (정식 제목: LSTM Experiment Results) (file:///c:/llm_wiki_strange/content/LSTM-Experiment-Results.md)\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)",
         "matchedKeywords": [
           "LSTM",
           "sequence"
+        ]
+      },
+      "hybrid": {
+        "retrievedSources": [
+          "Frame-Sync-Debug-Report",
+          "LSTM-Experiment-Results",
+          "Frame-Sync-Debug-Report",
+          "LSTM-Experiment-Results",
+          "LSTM-Sequence-Length-Comparison",
+          "LSTM-Sequence-Length-Comparison"
+        ],
+        "hit1": 0,
+        "hit3": 1,
+        "hit5": 1,
+        "mrr5": 0.5,
+        "contextPrecision5": 0.6,
+        "keywordCoverage": 0.75,
+        "mode": "rag-only",
+        "fallback": false,
+        "fallbackReason": "LLM Answer mode disabled",
+        "latency": {
+          "totalSearchMs": 63.25,
+          "searchLatencyMs": 63.25,
+          "llmLatencyMs": null,
+          "totalLatencyMs": 63.25
+        },
+        "retrievedCount": 6,
+        "finalContextCount": 6,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 요약\n검색된 문서 기반의 핵심 검증 로그 및 PASS/FAIL 결과입니다.\n\n### 상세 검증 내용\n비교 대상 6개 YOLO pose extractor 모델에 대하여 소규모 검증 split에서 downstream LSTM 판정을 테스트한 Reference 데이터 지표이다. 기본 임계값 threshold=0.5 다음 11개 핵심 파일 모두 문법 검증 통과 ALL_SYNTAX_OK : - scripts/serve_ai_overlay.py - ai/publishers/event_publisher.py - ai/publishers/mqtt_payloads.py - ai/inference/rtsp_runtime.py - ai/action/classifier.py - ai/action/keypoint_sequence_buffer.py - ai/action/per_track_sequence_buffer.py - ai/action/lstm_contract.py - ai/frame_sync.py - ai/postprocess/supervision_postprocessor.py - ai/visual...\n\n### 검증 근거 표\n| 점검 항목 | 검증 방법 및 명령 | 결과 | 비고 |\n| :--- | :--- | :---: | :--- |\n| **venv 환경 확인** | which python && python --version | **PASS** | 가상환경 정상 활성화 및 Python 3.12 구동 확인 |\n| **RTSP 스트림 검증** | ffprobe -v error rtsp://127.0.0.1:8554/cam_04 | **PASS** | 비디오 스트림 정상 수신 확인 |\n| **MediaMTX 포트 확인** | ss -ltnp | grep -E \"8554|8888|8889\" | **PASS** | 8554, 8888, 8889 포트 활성 상태 확인 |\n| **MQTT 원격 접속** | nc -vz 15.165.248.37 1883 | **PASS** | AWS MQTT 서버 포트 접속 확인 성공 |\n| **CLI 옵션 검증** | serve_ai_overlay.py --help | **PASS** | --dry-run, --frame-sync-debug, --mqtt-host/port 모두 정상 |\n| **Dry-run 로그 검증** | serve_ai_overlay.py ... --dry-run | **PASS** | [frame-sync] 로그 정상 출력 확인 |\n| **MQTT Payload 검증** | AWS 브로커 구독 후 수신 덤프 확인 | **PASS** | schemaVersion 1.1 메타데이터 실시간 전송 확인 |\n| **MJPEG 디버그 Overlay** | --frame-sync-debug --mjpeg-debug 활성화 후 visual 확인 | **PASS** | Frame ID, Latency 수치 실시간 표출 성공 |\n| **LSTM 30/15/51 검증** | 기동 로그 및 sequence 체크 | **PASS** | length=30, stride=15, input_size=51 표준 스펙 적용 확인 |\n| **기존 오류 재발 여부** | AttributeError: dry_run, 51/54 dim mismatch | **PASS** | 모두 원천 해소 (아래 §7 상세 기록) |\n| **모든 bbox overlay 전송** | overlay payload events[] 내용 확인 | **PASS** | 이번 세션 수정으로 모든 감지 객체가 항상 포함됨 |\n| **IoU 기반 track_id 할당** | supervision_postprocessor.py update() 로직 | **PASS** | 인덱스 기반 오매핑 버그 수정 완료 |\n| **py_compile 문법 검증** | 11개 핵심 모듈 전수 검사 | **PASS** | ALL_SYNTAX_OK |\n\n### 포트폴리오 활용 의미\n- 검증 명령어 결과 및 로그 데이터(PASS/FAIL)를 상세 검토하여 포트폴리오와 이력서의 이력 신뢰성을 엄밀하게 확보했습니다.\n\n### 참고 문서\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [LSTM 결과] (정식 제목: LSTM Experiment Results) (file:///c:/llm_wiki_strange/content/LSTM-Experiment-Results.md)\n- [LSTM 길이] (정식 제목: LSTM Sequence Length Comparison) (file:///c:/llm_wiki_strange/content/LSTM-Sequence-Length-Comparison.md)",
+        "matchedKeywords": [
+          "LSTM",
+          "sequence",
+          "길이"
         ]
       },
       "judge": {
@@ -890,12 +894,45 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "Realtime-Camera-Runtime-Stabilization",
+          "WebRTC-vs-HLS",
+          "WebRTC-vs-HLS",
+          "Realtime-Camera-Runtime-Stabilization"
+        ],
+        "hit1": 1,
+        "hit3": 1,
+        "hit5": 1,
+        "mrr5": 1,
+        "contextPrecision5": 0.8,
+        "keywordCoverage": 0.75,
+        "mode": "rag-only",
+        "fallback": false,
+        "fallbackReason": "LLM Answer mode disabled",
+        "latency": {
+          "totalSearchMs": 0.93,
+          "searchLatencyMs": 0.93,
+          "llmLatencyMs": null,
+          "totalLatencyMs": 0.93
+        },
+        "retrievedCount": 6,
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nHLS 지연 문제와 WebRTC 도입 이유를 비교 지표 중심으로 정리한다. Code Keywords: Frontend, selected, cameraLoginId, MJPEG, rendering, http, localhost, computedPort, mjpeg, fallback, WebRTC, only, explicit, mode, change - MJPEG 우선 재생 - WebRTC / HLS fallback 재생 - fallback reason - docs/webrtc_smoke.md - strange_front/src/features/dashboard/components/WebRtcCameraPlayer.tsx - strange_front/src/features/dashboard/data/cameras.ts 이번 문제는 단순한 WebRTC fallback 문제가 아니라, 전체 ACTIVE camera가 한 번에 실...\n\n### 참고 문서\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [카메라 안정화] (정식 제목: 실시간 카메라 송출 안정화 및 카메라 수 제한 판단 기록) (file:///c:/llm_wiki_strange/content/Realtime-Camera-Runtime-Stabilization.md)",
+        "matchedKeywords": [
+          "WebRTC",
+          "HLS",
+          "지연"
+        ]
+      },
+      "hybrid": {
+        "retrievedSources": [
           "mjpeg-display-rollback",
           "WebRTC-vs-HLS",
           "mjpeg-display-rollback",
           "WebRTC-vs-HLS",
-          "mjpeg-display-rollback",
-          "Multi-Camera-Frame-Latency-Report"
+          "Evidence-Smart-Safety-System",
+          "MJPEG-Streaming-Rollback-Report"
         ],
         "hit1": 0,
         "hit3": 1,
@@ -907,47 +944,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.76,
-          "searchLatencyMs": 0.76,
+          "totalSearchMs": 20.39,
+          "searchLatencyMs": 20.39,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.76
-        },
-        "retrievedCount": 6,
-        "finalContextCount": 5,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한 네트워크 지연, MediaMTX publisher lifecycle의 가용성 보장 한계, ffmpeg 자동 재시작 로직 및 브라우저 자체 비디오 재생 제약 조건이 복합되어 실시간성 디버깅 비용이 기하급수적으로 증가하였다. - Scope Control을 통한 가치 극대화 : 제한된 프로젝트 개발 일정 안에서 불안정한 실시간 스트리밍 재생 경로를 붙잡고 있는 것보다, 시연 시 확실하게 정상 작동을 보증하는 \"끊김 없는 카메라 영상의 안정적 렌더링\" 을 MJPEG를 통해 선제 확보하기로 결정했다. - 리소스 재배정 : 브라우저 표시 transport는 검증된 MJPEG 규격으로 단순화하고, 절약된 개발 리소스를 스마트 관제 시스템의 핵심 가치 영역인 다음 고도화 과제에 전면 재배치한다: - 쓰러짐 및 위험 이상행동 탐지 모델의 정밀 성능 개선 - 수집된 이상 징후 분석...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서](file:///c:/llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md)",
-        "matchedKeywords": [
-          "WebRTC",
-          "HLS",
-          "지연"
-        ]
-      },
-      "hybrid": {
-        "retrievedSources": [
-          "mjpeg-display-rollback",
-          "mjpeg-display-rollback",
-          "Evidence-Smart-Safety-System",
-          "WebRTC-vs-HLS",
-          "WebRTC-vs-HLS",
-          "MJPEG-Streaming-Rollback-Report"
-        ],
-        "hit1": 0,
-        "hit3": 0,
-        "hit5": 1,
-        "mrr5": 0.25,
-        "contextPrecision5": 0.4,
-        "keywordCoverage": 0.75,
-        "mode": "rag-only",
-        "fallback": false,
-        "fallbackReason": "LLM Answer mode disabled",
-        "latency": {
-          "totalSearchMs": 14.83,
-          "searchLatencyMs": 14.83,
-          "llmLatencyMs": null,
-          "totalLatencyMs": 14.83
+          "totalLatencyMs": 20.39
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한 네트워크 지연, MediaMTX publisher lifecycle의 가용성 보장 한계, ffmpeg 자동 재시작 로직 및 브라우저 자체 비디오 재생 제약 조건이 복합되어 실시간성 디버깅 비용이 기하급수적으로 증가하였다. - Scope Control을 통한 가치 극대화 : 제한된 프로젝트 개발 일정 안에서 불안정한 실시간 스트리밍 재생 경로를 붙잡고 있는 것보다, 시연 시 확실하게 정상 작동을 보증하는 \"끊김 없는 카메라 영상의 안정적 렌더링\" 을 MJPEG를 통해 선제 확보하기로 결정했다. - 리소스 재배정 : 브라우저 표시 transport는 검증된 MJPEG 규격으로 단순화하고, 절약된 개발 리소스를 스마트 관제 시스템의 핵심 가치 영역인 다음 고도화 과제에 전면 재배치한다: - 쓰러짐 및 위험 이상행동 탐지 모델의 정밀 성능 개선 - 수집된 이상 징후 분석...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Evidence Wiki - Smart Safety Monitoring](file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한 네트워크 지연, MediaMTX publisher lifecycle의 가용성 보장 한계, ffmpeg 자동 재시작 로직 및 브라우저 자체 비디오 재생 제약 조건이 복합되어 실시간성 디버깅 비용이 기하급수적으로 증가하였다. - Scope Control을 통한 가치 극대화 : 제한된 프로젝트 개발 일정 안에서 불안정한 실시간 스트리밍 재생 경로를 붙잡고 있는 것보다, 시연 시 확실하게 정상 작동을 보증하는 \"끊김 없는 카메라 영상의 안정적 렌더링\" 을 MJPEG를 통해 선제 확보하기로 결정했다. - 리소스 재배정 : 브라우저 표시 transport는 검증된 MJPEG 규격으로 단순화하고, 절약된 개발 리소스를 스마트 관제 시스템의 핵심 가치 영역인 다음 고도화 과제에 전면 재배치한다: - 쓰러짐 및 위험 이상행동 탐지 모델의 정밀 성능 개선 - 수집된 이상 징후 분석...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [MJPEG 롤백] (정식 제목: MJPEG Streaming Rollback Report) (file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)",
         "matchedKeywords": [
           "WebRTC",
           "HLS",
@@ -973,11 +977,11 @@
       "baseline": {
         "retrievedSources": [
           "mjpeg-display-rollback",
-          "MQTT-Event-Schema",
-          "mjpeg-display-rollback",
-          "Multi-Camera-Frame-Latency-Report",
-          "Frame-Sync-Debug-Report",
-          "Plan-WebRTC-DataChannel-Sync"
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-002-MQTT-Metadata-Separation"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -989,21 +993,21 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.71,
-          "searchLatencyMs": 0.71,
+          "totalSearchMs": 0.99,
+          "searchLatencyMs": 0.99,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.71
+          "totalLatencyMs": 0.99
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| cameraLoginId | 계산식 | 포트 |\n| :--- | :---: | :---: |\n| `cam_01` | 8010 + 1 - 1 | `8010` |\n| `cam_02` | 8010 + 2 - 1 | `8011` |\n| `cam_03` | 8010 + 3 - 1 | `8012` |\n| `cam_04` | 8010 + 4 - 1 | `8013` |\n| `cam_05` | 8010 + 5 - 1 | `8014` |\n\n- AI inference 결과 - track id와 bbox - cameraLoginId 와 일치하는 streamId - timestamp와 frame size 동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 cameraLoginId 숫자 suffix를 추출하여 Deterministic 포트를 계산한다. - 포트 계산 공식 : port = 8010 + numericSuffix cameraLoginId - 1 - 스레드 분리 : serve_ai_overlay.py 및 run_rtsp_inference.py 에서 RTSP 프레임 캡처 스레드와 AI 추론 스레드를 분리했습니다. - Reader 스레드 : 프레임을 읽어오는 즉시 캡처 시각 capturedAtMs 을 기록하고 CameraFrameQueue 에 삽입합니다. - Inference 스레드 : 큐에서 항상 가장 최신의 프레임을 가져와...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MQTT Event Schema](file:///c:/llm_wiki_strange/content/MQTT-Event-Schema.md)\n- [다중 카메라 RTSP 지연 방지 및 frameId 기반 동기화 구조 보고서](file:///c:/llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md)\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)",
+        "finalContextCount": 3,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| cameraLoginId | 계산식 | 포트 |\n| :--- | :---: | :---: |\n| `cam_01` | 8010 + 1 - 1 | `8010` |\n| `cam_02` | 8010 + 2 - 1 | `8011` |\n| `cam_03` | 8010 + 3 - 1 | `8012` |\n| `cam_04` | 8010 + 4 - 1 | `8013` |\n| `cam_05` | 8010 + 5 - 1 | `8014` |\n\nAI가 streamId 를 잘못 보내면 Backend scope resolve도 잘못될 수 있다. metadata separation은 path 일치 검증과 함께 적용해야 한다. MQTT payload에는 AI 판단에 필요한 event metadata만 담고, 사용자/기관 권한과 알림 scope는 Backend에서 resolve하도록 결정한다. - 저장 가능한 안전 이벤트 - scope가 분리된 사용자 알림 - 민감정보 없는 event payload - AI output JSON - Backend camera registry - 개인/기관 카메라 테이블 - WebSocket notification policy - MQTT-Event-Schema - AI-Output-JSON - Bug-Notification-Scope...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [ADR-002] (정식 제목: ADR-002 MQTT Metadata Separation) (file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)",
         "matchedKeywords": []
       },
       "hybrid": {
         "retrievedSources": [
           "mjpeg-display-rollback",
-          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
           "Frame-Sync-Debug-Report",
+          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
           "Benchmark-History",
           "Benchmark-History",
           "Feature-Vector-51D-vs-54D"
@@ -1018,14 +1022,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 33.12,
-          "searchLatencyMs": 33.12,
+          "totalSearchMs": 58.78,
+          "searchLatencyMs": 58.78,
           "llmLatencyMs": null,
-          "totalLatencyMs": 33.12
+          "totalLatencyMs": 58.78
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| File | Evidence | Models | Used | Reason |\n| --- | --- | --- | --- | --- |\n| `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json` | 최종 대규모 Stratified Split 평가 결과 | yolo26n | **Yes (Authoritative)** | 최종 대규모 데이터셋(Normal 1,392 / Faint 1,392) 기반 최종 평가 및 threshold 감사 결과로 사용 |\n| `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv` | 8/16/30 sequence length full_v2 결과 | yolo26n (8, 16, 30) | **Yes** | 14만 시퀀스 대규모 sequence length 비교 지표로 활용. (8 프레임은 OOM 실패) |\n| `gpu_results_import/sequence_length_smoke.log` | 8/16/30 sequence length smoke 결과 | yolo26n (8, 16, 30) | **Yes** | 소규모 연동용 smoke 테스트 지표 기록으로 사용 |\n| `gpu_results_import/benchmark/results/lstm_sequence30_motion_features/summary.json` | 51D Baseline 기준 평가 결과 | yolo26n, yolo11n, yolov8s | **Yes** | 모션 피처 추가를 위한 51D Baseline (17 x 3) 1차 기준 지표로 사용 |\n| `gpu_results_import/benchmark/lstm_sequence30_error_analysis.md` | 클래스 불균형 완화 실험 분석 로그 | yolo26n | **Yes** | CE vs Weighted CE vs Oversample 기법 성능 비교 근거로 사용 |\n| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv` | GPU PC에서 수행한 6개 모델 fast 비교 결과 | yolo26s, yolo26n, yolo11s, yolo11n, yolov8s, yolov8n | Yes | six-model downstream LSTM comparison. `metrics_status=OK` |\n| `pose_model_summary.csv` 및 `gpu_results_import/pose_model_summary.csv` | local & dump 파일 | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |\n| `benchmark/results/model_benchmark.csv` | local file | same six models | No | 모든 row가 `SKIPPED: sample_videos folder is empty...` 상태 |\n| `benchmark/results/lstm_sequence_length_8_16_30/summary.csv` | local file | YOLO26n only | No | `missing_metadata` 상태라 성능값으로 사용 불가 |\n| `strange_ai/ai/action/motion_features.py` | local code | feature extraction | Yes | 51D keypoint feature에 `center_drop`, `velocity`, `torso_angle` 3개를 붙여 54D를 만드는 구조 확인 |\n| `strange_ai/benchmark/compare_lstm_extractors.py` | local code | LSTM benchmark | Yes | `sequence_to_features`에서 motion feature를 붙이고 benchmark output을 생성하는 경로 확인 |\n\nMJPEG 단순화를 통해 절약된 엔지니어링 에너지는 포트폴리오 관점에서 완성도 지향의 전략적 스케줄링 으로 환산되며, 다음 태스크들의 고도화에 전폭적으로 투자된다. 1. 이상행동 모델 오탐 개선 : 실환경에서 수집된 False Positive 낙상으로 잘못 진단된 일시적 허리 굽힘 등 케이스를 분석하여 YOLO Pose 피처 엔지니어링과 LSTM 활성화 파라미터를 미세 튜닝한다. 2. VLM 기반 시나리오 캡션 생성 : 탐지된 위급 이벤트 프레임을 로컬 VLM에 인입하여 \"작업장 3구역에서 인부가 미끄러져 쓰러짐 발생\"과 같이 상황을 자연어로 요약하고, RAG 데이터베이스의 메타 태깅 수준을 고도화한다. 3. RAG/Wiki 이벤트 다차원 검색 구현 : LLM Wiki 및 RAG 시스템을 연계하여 관제 담당자가 \"최근 쓰러짐 사고의 발생 시각과 복구 조치는?\"과 같이 질문했을 때, 최신 위키 문서와 RAG 벡터 저장소를 결합해 정확한 증거 파일과 해결 내용을 대화형으로 빠르게 검색할...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [Benchmark History](file:///c:/llm_wiki_strange/content/Benchmark-History.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| File | Evidence | Models | Used | Reason |\n| --- | --- | --- | --- | --- |\n| `gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json` | 최종 대규모 Stratified Split 평가 결과 | yolo26n | **Yes (Authoritative)** | 최종 대규모 데이터셋(Normal 1,392 / Faint 1,392) 기반 최종 평가 및 threshold 감사 결과로 사용 |\n| `gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv` | 8/16/30 sequence length full_v2 결과 | yolo26n (8, 16, 30) | **Yes** | 14만 시퀀스 대규모 sequence length 비교 지표로 활용. (8 프레임은 OOM 실패) |\n| `gpu_results_import/sequence_length_smoke.log` | 8/16/30 sequence length smoke 결과 | yolo26n (8, 16, 30) | **Yes** | 소규모 연동용 smoke 테스트 지표 기록으로 사용 |\n| `gpu_results_import/benchmark/results/lstm_sequence30_motion_features/summary.json` | 51D Baseline 기준 평가 결과 | yolo26n, yolo11n, yolov8s | **Yes** | 모션 피처 추가를 위한 51D Baseline (17 x 3) 1차 기준 지표로 사용 |\n| `gpu_results_import/benchmark/lstm_sequence30_error_analysis.md` | 클래스 불균형 완화 실험 분석 로그 | yolo26n | **Yes** | CE vs Weighted CE vs Oversample 기법 성능 비교 근거로 사용 |\n| `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv` | GPU PC에서 수행한 6개 모델 fast 비교 결과 | yolo26s, yolo26n, yolo11s, yolo11n, yolov8s, yolov8n | Yes | six-model downstream LSTM comparison. `metrics_status=OK` |\n| `pose_model_summary.csv` 및 `gpu_results_import/pose_model_summary.csv` | local & dump 파일 | same six models | Auxiliary | FPS와 inference latency만 포함. downstream Faint metric 없음 |\n| `benchmark/results/model_benchmark.csv` | local file | same six models | No | 모든 row가 `SKIPPED: sample_videos folder is empty...` 상태 |\n| `benchmark/results/lstm_sequence_length_8_16_30/summary.csv` | local file | YOLO26n only | No | `missing_metadata` 상태라 성능값으로 사용 불가 |\n| `strange_ai/ai/action/motion_features.py` | local code | feature extraction | Yes | 51D keypoint feature에 `center_drop`, `velocity`, `torso_angle` 3개를 붙여 54D를 만드는 구조 확인 |\n| `strange_ai/benchmark/compare_lstm_extractors.py` | local code | LSTM benchmark | Yes | `sequence_to_features`에서 motion feature를 붙이고 benchmark output을 생성하는 경로 확인 |\n\nMJPEG 단순화를 통해 절약된 엔지니어링 에너지는 포트폴리오 관점에서 완성도 지향의 전략적 스케줄링 으로 환산되며, 다음 태스크들의 고도화에 전폭적으로 투자된다. 1. 이상행동 모델 오탐 개선 : 실환경에서 수집된 False Positive 낙상으로 잘못 진단된 일시적 허리 굽힘 등 케이스를 분석하여 YOLO Pose 피처 엔지니어링과 LSTM 활성화 파라미터를 미세 튜닝한다. 2. VLM 기반 시나리오 캡션 생성 : 탐지된 위급 이벤트 프레임을 로컬 VLM에 인입하여 \"작업장 3구역에서 인부가 미끄러져 쓰러짐 발생\"과 같이 상황을 자연어로 요약하고, RAG 데이터베이스의 메타 태깅 수준을 고도화한다. 3. RAG/Wiki 이벤트 다차원 검색 구현 : LLM Wiki 및 RAG 시스템을 연계하여 관제 담당자가 \"최근 쓰러짐 사고의 발생 시각과 복구 조치는?\"과 같이 질문했을 때, 최신 위키 문서와 RAG 벡터 저장소를 결합해 정확한 증거 파일과 해결 내용을 대화형으로 빠르게 검색할...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [BBox54 디버그] (정식 제목: 2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log) (file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)\n- [벤치마크] (정식 제목: Benchmark History) (file:///c:/llm_wiki_strange/content/Benchmark-History.md)\n- [51D vs 54D] (정식 제목: Feature Vector 51D vs 54D) (file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)",
         "matchedKeywords": [
           "51D",
           "54D",
@@ -1050,11 +1054,11 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
-          "AI-Output-JSON",
-          "Overview",
-          "Evidence-Smart-Safety-System",
           "AI-Pipeline",
-          "Realtime-Camera-Runtime-Stabilization",
+          "AI-Pipeline",
+          "AI-Pipeline",
+          "AI-Output-JSON",
+          "Evidence-Smart-Safety-System",
           "AI-Pipeline"
         ],
         "hit1": 0,
@@ -1062,29 +1066,31 @@
         "hit5": 0,
         "mrr5": 0,
         "contextPrecision5": 0,
-        "keywordCoverage": 0,
+        "keywordCoverage": 0.25,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.65,
-          "searchLatencyMs": 0.65,
+          "totalSearchMs": 1.16,
+          "searchLatencyMs": 1.16,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.65
+          "totalLatencyMs": 1.16
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- AI-Pipeline - MQTT-Event-Schema - Architecture - Architecture - AI-Pipeline - MQTT-Event-Schema 첫 번째 문제는 RTSP latest-frame queue에서 오래된 프레임을 drop하는 구조가 실시간성에는 맞지만, payload가 reader의 최신 프레임 기준으로 만들어지면 AI가 실제 처리한 프레임과 event metadata가 어긋날 수 있다는 점이었다. 해결 방향은 processedAtMs 시점의 실제 처리 FramePacket 내부 frameId, capturedAtMs, cameraLoginId, evidenceId, traceId, droppedFrameCount를 기준으로 payload를 만드는 것이다. 두 번째 문제는 overlay-sync 로그에서 frameId=n/a, capturedAtMs=n/a, publishedAtMs=n/a가 관측된 것이다. 이 문제는 AI raw payloa...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
-        "matchedKeywords": []
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n현재 AI 방향은 YOLO를 직접 재학습하는 것이 아니라 YOLO26n-pose 로 사람의 bbox와 17개 COCO keypoint를 추출한 뒤, ByteTrack으로 track별 연속성을 유지하고, track별 keypoint sequence를 LSTM에 넣어 Normal/Faint 를 판단하는 구조다. 이 접근은 frame 단위 단순 포즈 판단이 아니라 시간 맥락을 활용해 실신 이벤트를 구분한다는 점에서, 관제 서비스의 오탐·미탐 균형을 threshold 조정으로 유연하게 다룰 수 있다는 장점이 있다. 운영 RTSP smoke test에서 threshold 0.5와 0.6의 알림 품질을 비교하고, false positive clip을 hard-negative dataset으로 분류한다. --- ai yolo26n bytetrack keypoint lstm threshold - LSTM - Model-Decision-YOLO26n - AI-Output-JSON - MQTT-Eve...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "matchedKeywords": [
+          "ByteTrack"
+        ]
       },
       "hybrid": {
         "retrievedSources": [
           "Evidence-Smart-Safety-System",
           "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
           "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
-          "Plan-WebRTC-DataChannel-Sync",
           "Multi-Camera-Frame-Latency-Report",
-          "Multi-Camera-Frame-Latency-Report"
+          "Multi-Camera-Frame-Latency-Report",
+          "Frame-Matching-Report"
         ],
         "hit1": 0,
         "hit3": 0,
@@ -1096,10 +1102,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 20.96,
-          "searchLatencyMs": 20.96,
+          "totalSearchMs": 37.77,
+          "searchLatencyMs": 37.77,
           "llmLatencyMs": null,
-          "totalLatencyMs": 20.96
+          "totalLatencyMs": 37.77
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1123,31 +1129,31 @@
       "difficulty": "easy",
       "baseline": {
         "retrievedSources": [
-          "Bug-AI-Tracker-FrameRate-Mismatch",
           "Bug-Notification-Scope",
-          "Bug-AI-Tracker-FrameRate-Mismatch",
-          "mjpeg-display-rollback",
+          "Bug-Notification-Scope",
+          "Bug-Notification-Scope",
+          "Bug-Notification-Scope",
           "Bug-Notification-Scope",
           "Bug-Notification-Scope"
         ],
-        "hit1": 0,
+        "hit1": 1,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.5,
-        "contextPrecision5": 0.4,
+        "mrr5": 1,
+        "contextPrecision5": 1,
         "keywordCoverage": 0.5,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.04,
-          "searchLatencyMs": 1.04,
+          "totalSearchMs": 0.9,
+          "searchLatencyMs": 0.9,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.04
+          "totalLatencyMs": 0.9
         },
         "retrievedCount": 6,
-        "finalContextCount": 5,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n이상 징후 : 시스템 전반 ROI 설정 여부 불관 에서 AI 이상행동 감지 알림이 전혀 수신되지 않는 현상 발생. 진단 확인 : YOLO pose 단계에서는 검출 신뢰도 0.6~0.9 수준으로 객체 탐지 및 17개 키포인트 추출이 정상 작동 중이나, safety/events MQTT 토픽으로 어떠한 이벤트도 발행되지 않고 있었음. --- - 잘못된 기업용 알림 - 사용자 범위를 벗어난 incident 노출 트랙 ID가 계속 소실됨에 따라, LSTM 분류기의 활성화 및 이벤트 추론 최소 요건인 '동일 트랙 ID로 연속 30프레임 이상 버퍼링 --sequence-length 30 ' 조건을 단 한 번도 도달하지 못함. 진단 로그에 sequencesGenerated: 0 이 유지되며, 분류 모델 추론 단계로 진입하지 못해 이벤트가 발행되지 않음. --- - 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한 네트워크 지연,...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "finalContextCount": 2,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n가능한 원인 가설: Code Keywords: MQTT, event, streamId, Backend, resolves, cameraLoginId, determine, personal, corporate, scope, persist, scoped, broadcast, only, allowed - 잘못된 기업용 알림 - 사용자 범위를 벗어난 incident 노출 - MQTT-Event-Schema - ADR-002-MQTT-Metadata-Separation - Architecture 이 문제는 AI 모델이 Faint 를 잘못 판단했는지와 별개다. 모델이 이벤트를 발행하더라도 Backend와 Frontend가 사용자 scope를 올바르게 분리해야 개인용/기관용 알림이 섞이지 않는다. AI payload에 사용자 식별자를 직접 넣는 방식은 피한다. 권한과 소유권은 Backend DB의 camera registry를 기준으로 resolve하는 편이 안전하다....\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": [
           "알림",
           "범위"
@@ -1158,30 +1164,29 @@
           "Bug-Notification-Scope",
           "Bug-Notification-Scope",
           "Frame-Sync-Debug-Report",
-          "ADR-002-MQTT-Metadata-Separation",
           "Overview",
-          "Model-Comparison"
+          "Model-Comparison",
+          "Overview"
         ],
         "hit1": 1,
         "hit3": 1,
         "hit5": 1,
         "mrr5": 1,
         "contextPrecision5": 0.4,
-        "keywordCoverage": 1,
+        "keywordCoverage": 0.75,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 28.7,
-          "searchLatencyMs": 28.7,
+          "totalSearchMs": 40.91,
+          "searchLatencyMs": 40.91,
           "llmLatencyMs": null,
-          "totalLatencyMs": 28.7
+          "totalLatencyMs": 40.91
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- 잘못된 기업용 알림 - 사용자 범위를 벗어난 incident 노출 개인 카메라 이벤트가 기관 WebSocket 구독자에게 전달되지 않는 테스트와, 기관 이벤트가 개인 사용자 알림에 섞이지 않는 테스트를 추가한다. --- bug notification personal-camera enterprise-alert scope 수정 1 overlay payload가 LSTM 평가된 객체만 포함하던 버그 CRITICAL 파일: ai/publishers/mqtt_payloads.py 원인: build_overlay_payload 의 events 컴프리헨션에 _has_overlay_signal 필터가 적용되어, LSTM 예측이 준비되지 않은 객체 첫 30프레임 이내 신규 트랙 가 overlay payload에서 완전히 누락. 수정: bbox가 유효한 모든 객체를 포함하도록 변경. type=\"tracking\" vs type=\"faint\" 구분 및 eventTriggered 필드 추가. 수정 2...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n가능한 원인 가설: - 잘못된 기업용 알림 - 사용자 범위를 벗어난 incident 노출 수정 1 overlay payload가 LSTM 평가된 객체만 포함하던 버그 CRITICAL 파일: ai/publishers/mqtt_payloads.py 원인: build_overlay_payload 의 events 컴프리헨션에 _has_overlay_signal 필터가 적용되어, LSTM 예측이 준비되지 않은 객체 첫 30프레임 이내 신규 트랙 가 overlay payload에서 완전히 누락. 수정: bbox가 유효한 모든 객체를 포함하도록 변경. type=\"tracking\" vs type=\"faint\" 구분 및 eventTriggered 필드 추가. 수정 2 supervision postprocessor에서 인덱스 기반 track_id 오매핑 버그 CRITICAL 파일: ai/postprocess/supervision_postprocessor.py 원인: track_ids i → detec...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": [
-          "Notification",
           "알림",
           "범위",
           "수정"
@@ -1204,40 +1209,44 @@
       "difficulty": "easy",
       "baseline": {
         "retrievedSources": [
-          "mjpeg-display-rollback",
-          "Feature-Vector-51D-vs-54D",
-          "LSTM",
-          "ADR-004-LSTM-Feature-Expansion",
-          "LSTM-Sequence-Length-Comparison",
-          "MQTT-Event-Schema"
+          "Bug-Codeblock-Visibility",
+          "Bug-Codeblock-Visibility",
+          "Bug-Codeblock-Visibility",
+          "Bug-Codeblock-Visibility",
+          "Bug-Codeblock-Visibility",
+          "Bug-Codeblock-Visibility"
         ],
-        "hit1": 0,
-        "hit3": 0,
-        "hit5": 0,
-        "mrr5": 0,
-        "contextPrecision5": 0,
-        "keywordCoverage": 0,
+        "hit1": 1,
+        "hit3": 1,
+        "hit5": 1,
+        "mrr5": 1,
+        "contextPrecision5": 1,
+        "keywordCoverage": 0.75,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.49,
-          "searchLatencyMs": 0.49,
+          "totalSearchMs": 0.64,
+          "searchLatencyMs": 0.64,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.49
+          "totalLatencyMs": 0.64
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\nMJPEG 단순화를 통해 절약된 엔지니어링 에너지는 포트폴리오 관점에서 완성도 지향의 전략적 스케줄링 으로 환산되며, 다음 태스크들의 고도화에 전폭적으로 투자된다. 1. 이상행동 모델 오탐 개선 : 실환경에서 수집된 False Positive 낙상으로 잘못 진단된 일시적 허리 굽힘 등 케이스를 분석하여 YOLO Pose 피처 엔지니어링과 LSTM 활성화 파라미터를 미세 튜닝한다. 2. VLM 기반 시나리오 캡션 생성 : 탐지된 위급 이벤트 프레임을 로컬 VLM에 인입하여 \"작업장 3구역에서 인부가 미끄러져 쓰러짐 발생\"과 같이 상황을 자연어로 요약하고, RAG 데이터베이스의 메타 태깅 수준을 고도화한다. 3. RAG/Wiki 이벤트 다차원 검색 구현 : LLM Wiki 및 RAG 시스템을 연계하여 관제 담당자가 \"최근 쓰러짐 사고의 발생 시각과 복구 조치는?\"과 같이 질문했을 때, 최신 위키 문서와 RAG 벡터 저장소를 결합해 정확한 증거 파일과 해결 내용을 대화형으로 빠르게 검색할...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
-        "matchedKeywords": []
+        "finalContextCount": 2,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- docs/wiki/src/styles.css - docs/wiki/src/components/MarkdownRenderer.tsx Wiki에서 text , json , code 코드블록이 선택하기 전에는 거의 보이지 않던 문제의 원인과 수정 방향을 기록한다. LLM Wiki는 JSON payload와 실행 흐름을 많이 보여준다. 코드블록이 읽히지 않으면 MQTT schema, AI output, benchmark evidence를 사람이 확인하기 어렵고 LLM용 지식베이스 역할도 약해진다. JSON Payload Keys: eventId, streamId, events - AI-Output-JSON - MQTT-Event-Schema 선택이나 드래그 없이도 라이트모드와 다크모드에서 JSON 텍스트가 보여야 한다....\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "matchedKeywords": [
+          "코드블록",
+          "CSS",
+          "markdown"
+        ]
       },
       "hybrid": {
         "retrievedSources": [
           "Bug-Codeblock-Visibility",
           "Bug-Codeblock-Visibility",
           "Interview-Resume-Notes",
-          "Interview-Resume-Notes",
-          "Bug-Notification-Scope"
+          "Bug-Notification-Scope",
+          "Interview-Resume-Notes"
         ],
         "hit1": 1,
         "hit3": 1,
@@ -1249,10 +1258,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 27.28,
-          "searchLatencyMs": 27.28,
+          "totalSearchMs": 35.9,
+          "searchLatencyMs": 35.9,
           "llmLatencyMs": null,
-          "totalLatencyMs": 27.28
+          "totalLatencyMs": 35.9
         },
         "retrievedCount": 5,
         "finalContextCount": 5,
@@ -1282,28 +1291,28 @@
           "Bug-RTSP-Stream-404",
           "Bug-RTSP-Stream-404",
           "Bug-RTSP-Stream-404",
-          "Multi-Camera-Frame-Latency-Report",
-          "mjpeg-display-rollback",
-          "mjpeg-display-rollback"
+          "Bug-RTSP-Stream-404",
+          "Bug-RTSP-Stream-404",
+          "Bug-RTSP-Stream-404"
         ],
         "hit1": 1,
         "hit3": 1,
         "hit5": 1,
         "mrr5": 1,
-        "contextPrecision5": 0.6,
+        "contextPrecision5": 1,
         "keywordCoverage": 1,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.59,
-          "searchLatencyMs": 0.59,
+          "totalSearchMs": 0.98,
+          "searchLatencyMs": 0.98,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.59
+          "totalLatencyMs": 0.98
         },
         "retrievedCount": 6,
-        "finalContextCount": 5,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n통합 smoke test에서 cameraLoginId , RTSP path, WHEP path, MQTT streamId 를 같은 값으로 검증한다. --- bug rtsp mediamtx camera-login-id stream-404 - 404 없는 WebRTC/HLS 재생 - MQTT 이벤트와 화면 카메라의 동일한 식별자 매핑 - Architecture - WebRTC-vs-HLS 1. 빌드 및 컴파일 안정성 : - Backend: Gradle Java 및 Test Java 컴파일 성공 BUILD SUCCESSFUL . - Frontend: TypeScript 타입 체크 및 Production 빌드 성공. 2. 동기화 계약 및 작동 테스트 : - npm run test:overlay-sync 실행 결과, 44개의 contract 검증 및 behavior 시뮬레이션 테스트가 모두 통과 PASS 하여 사양에 완벽 부합함을 확인하였습니다. --- RTSP latency frame-sy...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "finalContextCount": 2,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- Architecture - WebRTC-vs-HLS - 404 없는 WebRTC/HLS 재생 - MQTT 이벤트와 화면 카메라의 동일한 식별자 매핑 통합 smoke test에서 cameraLoginId , RTSP path, WHEP path, MQTT streamId 를 같은 값으로 검증한다. --- bug rtsp mediamtx camera-login-id stream-404 404를 player fallback만으로 숨기면 이벤트와 영상의 camera mapping 오류가 남는다. path 불일치를 먼저 고쳐야 한다. - Backend camera registry의 cameraLoginId - AI worker RTSP publish path - Frontend stream URL 생성 함수 - MediaMTX active path - PROJECT_CONTRACT.md - strange_ai/.env.example - strange_front/src/features/da...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": [
           "404",
           "RTSP",
@@ -1313,31 +1322,31 @@
       },
       "hybrid": {
         "retrievedSources": [
-          "mjpeg-display-rollback",
           "Bug-RTSP-Stream-404",
           "Bug-RTSP-Stream-404",
           "mjpeg-display-rollback",
-          "WebRTC-vs-HLS",
+          "mjpeg-display-rollback",
+          "Plan-WebRTC-DataChannel-Sync",
           "Frame-Matching-Report"
         ],
-        "hit1": 0,
+        "hit1": 1,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.5,
+        "mrr5": 1,
         "contextPrecision5": 0.4,
         "keywordCoverage": 0.75,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 11.56,
-          "searchLatencyMs": 11.56,
+          "totalSearchMs": 16.8,
+          "searchLatencyMs": 16.8,
           "llmLatencyMs": null,
-          "totalLatencyMs": 11.56
+          "totalLatencyMs": 16.8
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n초기 설계 단계에서 초저지연을 위해 도입했던 WebRTC WHEP 및 HLS 프로토콜 구동 시 실제 시연 및 개발 과정에서 다음과 같은 고비용의 실시간성 안정화 한계들이 관측되었다. 1. WebRTC WHEP 404 및 HLS index.m3u8 404 : 미디어서버인 MediaMTX가 구동 중이더라도, 특정 cameraLoginId 에 바인딩된 RTSP publisher 세션이 비정상 종료되거나 지연 연결될 때 브라우저 클라이언트가 WHEP / HLS 재생을 시도하면 즉각 404 응답을 반환하여 화면이 검게 멈추는 상황이 빈발했다. 2. ffmpeg publisher 라이프사이클 불안정 : 하드웨어 가속 인코더 NVENC 나 copy 스트리밍 모드 상에서 ffmpeg publisher 프로세스가 exit code 224 또는 255 등을 뱉으며 주기적으로 예외 종료되거나, 동일한 스트림 경로의 중복 퍼블리셔 인스턴스가 엉키는 현상이 반복되었다. 3. 영상 전송 상태와 AI 분석 상...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 문제 현상\n구동 및 빌드 단계에서 발생한 오류/실패 원인 및 로그 분석입니다.\n\n### 상세 분석\n- 404 없는 WebRTC/HLS 재생 - MQTT 이벤트와 화면 카메라의 동일한 식별자 매핑 - Architecture - WebRTC-vs-HLS 초기 설계 단계에서 초저지연을 위해 도입했던 WebRTC WHEP 및 HLS 프로토콜 구동 시 실제 시연 및 개발 과정에서 다음과 같은 고비용의 실시간성 안정화 한계들이 관측되었다. 1. WebRTC WHEP 404 및 HLS index.m3u8 404 : 미디어서버인 MediaMTX가 구동 중이더라도, 특정 cameraLoginId 에 바인딩된 RTSP publisher 세션이 비정상 종료되거나 지연 연결될 때 브라우저 클라이언트가 WHEP / HLS 재생을 시도하면 즉각 404 응답을 반환하여 화면이 검게 멈추는 상황이 빈발했다. 2. ffmpeg publisher 라이프사이클 불안정 : 하드웨어 가속 인코더 NVENC 나 copy 스트리밍 모드 상에서 ffmpeg publisher 프로세스가 exit code 224 또는 255...\n\n### 해결 과정\n문서 내 해결 가이드라인 및 커밋 이력을 바탕으로 소스 코드를 디버깅하여 오류를 해소했습니다.\n\n### 검증 결과\n빌드 빌드 성공 및 단위 테스트 100% 통과(PASS)를 통해 재발 방지를 마쳤습니다.\n\n### 재발 방지\n포트와 라이브러리 의존성 정합성 체크 과정을 추가하여 향후 동일 오류를 예방했습니다.",
         "matchedKeywords": [
           "404",
           "RTSP",
@@ -1361,31 +1370,31 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
+          "MJPEG-Display-Port-Normalization",
           "mjpeg-display-rollback",
           "MJPEG-Display-Port-Normalization",
           "MJPEG-Display-Port-Normalization",
-          "Feature-Vector-51D-vs-54D",
-          "LSTM",
-          "WebRTC-vs-HLS"
+          "MJPEG-Display-Port-Normalization",
+          "Bug-Codeblock-Visibility"
         ],
-        "hit1": 0,
+        "hit1": 1,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.5,
-        "contextPrecision5": 0.4,
+        "mrr5": 1,
+        "contextPrecision5": 0.8,
         "keywordCoverage": 0.5,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.56,
-          "searchLatencyMs": 0.56,
+          "totalSearchMs": 0.92,
+          "searchLatencyMs": 0.92,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.56
+          "totalLatencyMs": 0.92
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nMJPEG 단순화를 통해 절약된 엔지니어링 에너지는 포트폴리오 관점에서 완성도 지향의 전략적 스케줄링 으로 환산되며, 다음 태스크들의 고도화에 전폭적으로 투자된다. 1. 이상행동 모델 오탐 개선 : 실환경에서 수집된 False Positive 낙상으로 잘못 진단된 일시적 허리 굽힘 등 케이스를 분석하여 YOLO Pose 피처 엔지니어링과 LSTM 활성화 파라미터를 미세 튜닝한다. 2. VLM 기반 시나리오 캡션 생성 : 탐지된 위급 이벤트 프레임을 로컬 VLM에 인입하여 \"작업장 3구역에서 인부가 미끄러져 쓰러짐 발생\"과 같이 상황을 자연어로 요약하고, RAG 데이터베이스의 메타 태깅 수준을 고도화한다. 3. RAG/Wiki 이벤트 다차원 검색 구현 : LLM Wiki 및 RAG 시스템을 연계하여 관제 담당자가 \"최근 쓰러짐 사고의 발생 시각과 복구 조치는?\"과 같이 질문했을 때, 최신 위키 문서와 RAG 벡터 저장소를 결합해 정확한 증거 파일과 해결 내용을 대화형으로 빠르게 검색할...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [Feature Vector 51D vs 54D](file:///c:/llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md)\n- [LSTM](file:///c:/llm_wiki_strange/content/LSTM.md)\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)",
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nTo display WebRTC again: Code Keywords: VITE_STREAM_MODE, webrtc, VITE_WEBRTC_BASE_URL, http, localhost, 8889 To display HLS/raw again: Code Keywords: VITE_STREAM_MODE, VITE_HLS_BASE_URL, http, localhost, 8888 To disable baked MJPEG overlay while keeping MJPEG image streaming: Code Keywords: MJPEG_ENABLE_OVERLAY, false or pass --no-mjpeg-enable-overlay explicitly. MJPEG 단순화를 통해 절약된 엔지니어링 에너지는 포트폴리오 관점에서 완성도 지향의 전략적 스케줄링 으로 환산되며, 다음 태스크들의 고도화에 전폭적으로 투자된다. 1. 이상행동 모델 오탐 개선 : 실환경에서 수집된 False Positi...\n\n### 참고 문서\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [코드블록 표시] (정식 제목: Bug Codeblock Visibility) (file:///c:/llm_wiki_strange/content/Bug-Codeblock-Visibility.md)",
         "matchedKeywords": [
           "mjpeg",
           "port"
@@ -1393,31 +1402,31 @@
       },
       "hybrid": {
         "retrievedSources": [
-          "mjpeg-display-rollback",
-          "Frame-Sync-Debug-Report",
-          "MJPEG-Streaming-Rollback-Report",
-          "mjpeg-display-rollback",
           "MJPEG-Display-Port-Normalization",
-          "MJPEG-Display-Port-Normalization"
+          "MJPEG-Display-Port-Normalization",
+          "mjpeg-display-rollback",
+          "MJPEG-Streaming-Rollback-Report",
+          "Frame-Sync-Debug-Report",
+          "mjpeg-display-rollback"
         ],
-        "hit1": 0,
-        "hit3": 0,
+        "hit1": 1,
+        "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.2,
-        "contextPrecision5": 0.2,
+        "mrr5": 1,
+        "contextPrecision5": 0.4,
         "keywordCoverage": 1,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 28.04,
-          "searchLatencyMs": 28.04,
+          "totalSearchMs": 46.25,
+          "searchLatencyMs": 46.25,
           "llmLatencyMs": null,
-          "totalLatencyMs": 28.04
+          "totalLatencyMs": 46.25
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| 점검 항목 | 검증 방법 및 명령 | 결과 | 비고 |\n| :--- | :--- | :---: | :--- |\n| **venv 환경 확인** | which python && python --version | **PASS** | 가상환경 정상 활성화 및 Python 3.12 구동 확인 |\n| **RTSP 스트림 검증** | ffprobe -v error rtsp://127.0.0.1:8554/cam_04 | **PASS** | 비디오 스트림 정상 수신 확인 |\n| **MediaMTX 포트 확인** | ss -ltnp | grep -E \"8554|8888|8889\" | **PASS** | 8554, 8888, 8889 포트 활성 상태 확인 |\n| **MQTT 원격 접속** | nc -vz 15.165.248.37 1883 | **PASS** | AWS MQTT 서버 포트 접속 확인 성공 |\n| **CLI 옵션 검증** | serve_ai_overlay.py --help | **PASS** | --dry-run, --frame-sync-debug, --mqtt-host/port 모두 정상 |\n| **Dry-run 로그 검증** | serve_ai_overlay.py ... --dry-run | **PASS** | [frame-sync] 로그 정상 출력 확인 |\n| **MQTT Payload 검증** | AWS 브로커 구독 후 수신 덤프 확인 | **PASS** | schemaVersion 1.1 메타데이터 실시간 전송 확인 |\n| **MJPEG 디버그 Overlay** | --frame-sync-debug --mjpeg-debug 활성화 후 visual 확인 | **PASS** | Frame ID, Latency 수치 실시간 표출 성공 |\n| **LSTM 30/15/51 검증** | 기동 로그 및 sequence 체크 | **PASS** | length=30, stride=15, input_size=51 표준 스펙 적용 확인 |\n| **기존 오류 재발 여부** | AttributeError: dry_run, 51/54 dim mismatch | **PASS** | 모두 원천 해소 (아래 §7 상세 기록) |\n| **모든 bbox overlay 전송** | overlay payload events[] 내용 확인 | **PASS** | 이번 세션 수정으로 모든 감지 객체가 항상 포함됨 |\n| **IoU 기반 track_id 할당** | supervision_postprocessor.py update() 로직 | **PASS** | 인덱스 기반 오매핑 버그 수정 완료 |\n| **py_compile 문법 검증** | 11개 핵심 모듈 전수 검사 | **PASS** | ALL_SYNTAX_OK |\n\n동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 cameraLoginId 숫자 suffix를 추출하여 Deterministic 포트를 계산한다. - 포트 계산 공식 : port = 8010 + numericSuffix cameraLoginId - 1 - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 cameraLoginId 별 worker를 실행한다. - RTSP 입력은 유지된다. REAL_RTSP 는 backend의 rtspUrl , SIMULATED_RTSP 는 rtsp://<host :8...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [Frame Sync Debug & MQTT Payload 검증 최종 보고서](file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG Display Port Normalization](file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n| cameraLoginId | 계산식 | 포트 |\n| :--- | :---: | :---: |\n| `cam_01` | 8010 + 1 - 1 | `8010` |\n| `cam_02` | 8010 + 2 - 1 | `8011` |\n| `cam_03` | 8010 + 3 - 1 | `8012` |\n| `cam_04` | 8010 + 4 - 1 | `8013` |\n| `cam_05` | 8010 + 5 - 1 | `8014` |\n\nCommands executed: Manual HTTP QA artifact: Code Keywords: ulw-loop, evidence, mjpeg-display-http-smoke 동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 cameraLoginId 숫자 suffix를 추출하여 Deterministic 포트를 계산한다. - 포트 계산 공식 : port = 8010 + numericSuffix cameraLoginId - 1 - Backend camera API는 /api/cameras , /api/cameras/active 에서 cameraLoginId , rtspUrl , aiEnabled , sourceType , assignedVideoPath , ROI 설정을 내려준다. - AI registered runner는 /api/cameras/active 를 조회하고 camera...\n\n### 참고 문서\n- [MJPEG 포트] (정식 제목: MJPEG Display Port Normalization) (file:///c:/llm_wiki_strange/content/MJPEG-Display-Port-Normalization.md)\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [MJPEG 롤백] (정식 제목: MJPEG Streaming Rollback Report) (file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [Frame Sync] (정식 제목: Frame Sync Debug & MQTT Payload 검증 최종 보고서) (file:///c:/llm_wiki_strange/content/Frame-Sync-Debug-Report.md)",
         "matchedKeywords": [
           "mjpeg",
           "port",
@@ -1443,64 +1452,63 @@
       "baseline": {
         "retrievedSources": [
           "ADR-002-MQTT-Metadata-Separation",
-          "WebRTC-vs-HLS",
-          "Bug-Notification-Scope",
           "ADR-001-WebRTC",
+          "ADR-002-MQTT-Metadata-Separation",
           "ADR-004-LSTM-Feature-Expansion",
-          "MJPEG-Streaming-Rollback-Report"
+          "ADR-001-WebRTC",
+          "ADR-003-YOLO26n-Selection"
         ],
         "hit1": 1,
         "hit3": 1,
         "hit5": 1,
         "mrr5": 1,
-        "contextPrecision5": 0.2,
+        "contextPrecision5": 0.4,
         "keywordCoverage": 0.25,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.01,
-          "searchLatencyMs": 1.01,
+          "totalSearchMs": 0.53,
+          "searchLatencyMs": 0.53,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.01
+          "totalLatencyMs": 0.53
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nBackend에 개인/기관 camera resolve 테스트와 WebSocket topic scope 테스트를 추가한다. --- adr mqtt metadata privacy backend-contract - MediaMTX RTSP stream - HLS URL - WebRTC WHEP URL - MJPEG Stream URL VITE_MJPEG_BASE_URL - Browser playback stats 개인 카메라 이벤트가 기관 WebSocket 구독자에게 전달되지 않는 테스트와, 기관 이벤트가 개인 사용자 알림에 섞이지 않는 테스트를 추가한다. --- bug notification personal-camera enterprise-alert scope HLS 대신 WebRTC를 관제 화면의 기본 실시간 재생 경로로 선택한 이유를 기록한다. LSTM keypoint input을 순수 51D에서 54D로 확장한 구조를 의사결정 기록으로 남긴다. Frontend는 VITE_MJPEG...\n\n### 참고 문서\n- [ADR-002 MQTT Metadata Separation](file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [Bug Notification Scope](file:///c:/llm_wiki_strange/content/Bug-Notification-Scope.md)\n- [ADR-001 WebRTC](file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [ADR-004 LSTM Feature Expansion](file:///c:/llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nBackend에 개인/기관 camera resolve 테스트와 WebSocket topic scope 테스트를 추가한다. --- adr mqtt metadata privacy backend-contract HLS 대신 WebRTC를 관제 화면의 기본 실시간 재생 경로로 선택한 이유를 기록한다. - AI output JSON - Backend camera registry - 개인/기관 카메라 테이블 - WebSocket notification policy LSTM keypoint input을 순수 51D에서 54D로 확장한 구조를 의사결정 기록으로 남긴다. - MediaMTX WebRTC WHEP endpoint - Browser WebRTC stats - HLS fallback URL 실신 감지는 precision만 높은 모델보다 Faint Recall이 높은 모델이 운영상 유리하다. 놓친 실신은 관제 공백으로 이어지지만, 오탐은 cooldown, scope, 후처리 정책으로 일부...\n\n### 참고 문서\n- [ADR-002] (정식 제목: ADR-002 MQTT Metadata Separation) (file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [ADR-001] (정식 제목: ADR-001 WebRTC) (file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [ADR-004] (정식 제목: ADR-004 LSTM Feature Expansion) (file:///c:/llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md)\n- [ADR-003] (정식 제목: ADR-003 YOLO26n Selection) (file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)",
         "matchedKeywords": [
           "ADR-002"
         ]
       },
       "hybrid": {
         "retrievedSources": [
-          "mjpeg-display-rollback",
           "ADR-002-MQTT-Metadata-Separation",
-          "mjpeg-display-rollback",
-          "Interview-Resume-Notes",
+          "ADR-001-WebRTC",
           "ADR-003-YOLO26n-Selection",
-          "Evidence-LLM-Wiki-RAG"
+          "ADR-003-YOLO26n-Selection",
+          "ADR-001-WebRTC",
+          "ADR-002-MQTT-Metadata-Separation"
         ],
-        "hit1": 0,
+        "hit1": 1,
         "hit3": 1,
         "hit5": 1,
-        "mrr5": 0.5,
+        "mrr5": 1,
         "contextPrecision5": 0.2,
-        "keywordCoverage": 0.75,
+        "keywordCoverage": 0.5,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 27.93,
-          "searchLatencyMs": 27.93,
+          "totalSearchMs": 52.46,
+          "searchLatencyMs": 52.46,
           "llmLatencyMs": null,
-          "totalLatencyMs": 27.93
+          "totalLatencyMs": 52.46
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nMJPEG 원복은 화면을 그리기 위한 비디오 전송 포맷만을 바꾼 것이며, 카메라 분석 및 위험 보고의 AI 코어 구조는 기존과 같이 동일하게 유지된다. Code Keywords: RTSP, Worker, YOLO, Pose, ByteTrack, LSTM, MQTT, Spring, Boot, WebSocket - 메타데이터 전송 계약 분리 : capturedAtMs, frameId, LSTM 시퀀스 검증 및 캡처 스냅샷 등 AI 데이터 정합성은 그대로 보존되며, local receive time 한계 등 원본 카메라 촬영 시간과의 정합성은 프레임 일관성 체인을 통해 정교하게 제어된다. --- Backend에 개인/기관 camera resolve 테스트와 WebSocket topic scope 테스트를 추가한다. --- adr mqtt metadata privacy backend-contract WebRTC/HLS 대비 MJPEG Multipart HTTP Stream 방식이 가지는 장...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [ADR-002 MQTT Metadata Separation](file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [ADR-003 YOLO26n Selection](file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)\n- [Evidence Wiki - LLM Wiki RAG](file:///c:/llm_wiki_strange/content/Evidence-LLM-Wiki-RAG.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nBackend에 개인/기관 camera resolve 테스트와 WebSocket topic scope 테스트를 추가한다. --- adr mqtt metadata privacy backend-contract WebRTC 장애 유형별 retry 정책과 HLS fallback 종료 조건을 후속 ADR로 분리한다. --- adr webrtc hls streaming-decision 운영 영상에서 threshold 0.6의 F1 개선이 알림 품질을 실제로 높이는지 확인한다. --- adr yolo26n model-selection benchmark faint-recall Pose extractor 기본 후보를 yolo26n-pose 로 유지하는 결정을 기록한다. - MediaMTX WebRTC WHEP endpoint - Browser WebRTC stats - HLS fallback URL - AI output JSON - Backend camera registry - 개인/기관 카메라 테...\n\n### 참고 문서\n- [ADR-002] (정식 제목: ADR-002 MQTT Metadata Separation) (file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [ADR-001] (정식 제목: ADR-001 WebRTC) (file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)\n- [ADR-003] (정식 제목: ADR-003 YOLO26n Selection) (file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)",
         "matchedKeywords": [
           "ADR-002",
-          "메타데이터",
           "분리"
         ]
       },
@@ -1522,30 +1530,30 @@
       "baseline": {
         "retrievedSources": [
           "Evidence-Portfolio-Resume-Usage",
-          "Benchmark-History",
-          "Interview-Resume-Notes",
-          "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+          "Model-Comparison",
           "Evidence-Portfolio-Resume-Usage",
-          "Evidence-Portfolio-Resume-Usage"
+          "Evidence-Portfolio-Resume-Usage",
+          "Evidence-Portfolio-Resume-Usage",
+          "Interview-Resume-Notes"
         ],
         "hit1": 1,
         "hit3": 1,
         "hit5": 1,
         "mrr5": 1,
-        "contextPrecision5": 0.4,
+        "contextPrecision5": 0.8,
         "keywordCoverage": 0.75,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.61,
-          "searchLatencyMs": 0.61,
+          "totalSearchMs": 0.97,
+          "searchLatencyMs": 0.97,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.61
+          "totalLatencyMs": 0.97
         },
         "retrievedCount": 6,
-        "finalContextCount": 5,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 기여\n문서 기반 RAG 색인 시스템 및 실시간 AI 관제 파이프라인의 핵심 설계와 검토를 수행했습니다.\n\n### 근거 상세\nQ. 포트폴리오 문장과 실제 구현 범위를 어떻게 구분했나요? A. 완료된 것은 구현, 수치가 있는 것은 실험 또는 검증, 아직 코드가 없는 것은 설계/검토/계획으로 표현했습니다. 특히 VLM, Synthetic Data, Self-Improving AI 항목은 완료처럼 쓰지 않도록 구분했습니다. Q. Evidence Wiki가 왜 필요한가요? A. 이력서 bullet만 있으면 근거가 약합니다. Evidence Wiki는 주장, 근거 문서, 검증 명령, 포트폴리오 문장을 연결해 면접 답변에서 바로 근거를 꺼낼 수 있게 합니다. Q. RAG 검색에는 어떤 도움이 되나요? A. RAG는 content/ .md 만 인덱싱하므로, portfolio 폴더의 요약을 찾게 하려면 핵심 근거를 content Evidence 문서에도 넣어야 합니다. 이 문서는 포트폴리오/이력서 문장을 RAG 검색 대상으로 연결하는 역할을 합니다. 모델 선택 및 성능 비교 문서에 사용한 benchmark/result...\n\n### 이력서 bullet\n- RAG 질의응답 및 로컬 tf-idf/cosine similarity 기반 문서 검색 모듈을 구현했습니다.\n- VLM 및 Self-Improving AI 등은 구현 완료가 아닌 확장 설계 및 실험 계획 단계로 구분하여 정리했습니다.\n\n### 면접 답변 초안\n- Q. RAG의 할루시네이션을 어떻게 막았나요?\n- A. 검색 결과가 부재하거나 임계값을 넘지 못할 경우 'insufficient_context'를 반환하도록 설계해 안전성을 높였습니다.\n\n### 참고 문서\n- [Evidence Wiki - Portfolio Resume Usage](file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [Benchmark History](file:///c:/llm_wiki_strange/content/Benchmark-History.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [2026-07-02 AI BBox54, Hard Negative, Overlay Tracking Debug Log](file:///c:/llm_wiki_strange/content/2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log.md)",
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 기여\n문서 기반 RAG 색인 시스템 및 실시간 AI 관제 파이프라인의 핵심 설계와 검토를 수행했습니다.\n\n### 근거 상세\nQ. 포트폴리오 문장과 실제 구현 범위를 어떻게 구분했나요? A. 완료된 것은 구현, 수치가 있는 것은 실험 또는 검증, 아직 코드가 없는 것은 설계/검토/계획으로 표현했습니다. 특히 VLM, Synthetic Data, Self-Improving AI 항목은 완료처럼 쓰지 않도록 구분했습니다. Q. Evidence Wiki가 왜 필요한가요? A. 이력서 bullet만 있으면 근거가 약합니다. Evidence Wiki는 주장, 근거 문서, 검증 명령, 포트폴리오 문장을 연결해 면접 답변에서 바로 근거를 꺼낼 수 있게 합니다. Q. RAG 검색에는 어떤 도움이 되나요? A. RAG는 content/ .md 만 인덱싱하므로, portfolio 폴더의 요약을 찾게 하려면 핵심 근거를 content Evidence 문서에도 넣어야 합니다. 이 문서는 포트폴리오/이력서 문장을 RAG 검색 대상으로 연결하는 역할을 합니다. 결론은 yolo26n-pose 유지다. 기본 threshold에서 Fa...\n\n### 이력서 bullet\n- RAG 질의응답 및 로컬 tf-idf/cosine similarity 기반 문서 검색 모듈을 구현했습니다.\n- VLM 및 Self-Improving AI 등은 구현 완료가 아닌 확장 설계 및 실험 계획 단계로 구분하여 정리했습니다.\n\n### 면접 답변 초안\n- Q. RAG의 할루시네이션을 어떻게 막았나요?\n- A. 검색 결과가 부재하거나 임계값을 넘지 못할 경우 'insufficient_context'를 반환하도록 설계해 안전성을 높였습니다.\n\n### 참고 문서\n- [포트폴리오 활용] (정식 제목: Evidence Wiki - Portfolio Resume Usage) (file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [모델 비교] (정식 제목: Model Comparison) (file:///c:/llm_wiki_strange/content/Model-Comparison.md)\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)",
         "matchedKeywords": [
           "포트폴리오",
           "이력서",
@@ -1557,8 +1565,8 @@
           "Evidence-Portfolio-Resume-Usage",
           "Evidence-Portfolio-Resume-Usage",
           "Interview-Resume-Notes",
-          "Evidence-LLM-Wiki-RAG",
           "Interview-Resume-Notes",
+          "Evidence-Smart-Safety-System",
           "Evidence-LLM-Wiki-RAG"
         ],
         "hit1": 1,
@@ -1571,14 +1579,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 29.22,
-          "searchLatencyMs": 29.22,
+          "totalSearchMs": 47.6,
+          "searchLatencyMs": 47.6,
           "llmLatencyMs": null,
-          "totalLatencyMs": 29.22
+          "totalLatencyMs": 47.6
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 기여\n문서 기반 RAG 색인 시스템 및 실시간 AI 관제 파이프라인의 핵심 설계와 검토를 수행했습니다.\n\n### 근거 상세\nQ. 포트폴리오 문장과 실제 구현 범위를 어떻게 구분했나요? A. 완료된 것은 구현, 수치가 있는 것은 실험 또는 검증, 아직 코드가 없는 것은 설계/검토/계획으로 표현했습니다. 특히 VLM, Synthetic Data, Self-Improving AI 항목은 완료처럼 쓰지 않도록 구분했습니다. Q. Evidence Wiki가 왜 필요한가요? A. 이력서 bullet만 있으면 근거가 약합니다. Evidence Wiki는 주장, 근거 문서, 검증 명령, 포트폴리오 문장을 연결해 면접 답변에서 바로 근거를 꺼낼 수 있게 합니다. Q. RAG 검색에는 어떤 도움이 되나요? A. RAG는 content/ .md 만 인덱싱하므로, portfolio 폴더의 요약을 찾게 하려면 핵심 근거를 content Evidence 문서에도 넣어야 합니다. 이 문서는 포트폴리오/이력서 문장을 RAG 검색 대상으로 연결하는 역할을 합니다. - portfolio/project-evidence-map.md 에 프...\n\n### 이력서 bullet\n- RAG 질의응답 및 로컬 tf-idf/cosine similarity 기반 문서 검색 모듈을 구현했습니다.\n- VLM 및 Self-Improving AI 등은 구현 완료가 아닌 확장 설계 및 실험 계획 단계로 구분하여 정리했습니다.\n\n### 면접 답변 초안\n- Q. RAG의 할루시네이션을 어떻게 막았나요?\n- A. 검색 결과가 부재하거나 임계값을 넘지 못할 경우 'insufficient_context'를 반환하도록 설계해 안전성을 높였습니다.\n\n### 참고 문서\n- [Evidence Wiki - Portfolio Resume Usage](file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [Evidence Wiki - LLM Wiki RAG](file:///c:/llm_wiki_strange/content/Evidence-LLM-Wiki-RAG.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n### 핵심 기여\n문서 기반 RAG 색인 시스템 및 실시간 AI 관제 파이프라인의 핵심 설계와 검토를 수행했습니다.\n\n### 근거 상세\nQ. 포트폴리오 문장과 실제 구현 범위를 어떻게 구분했나요? A. 완료된 것은 구현, 수치가 있는 것은 실험 또는 검증, 아직 코드가 없는 것은 설계/검토/계획으로 표현했습니다. 특히 VLM, Synthetic Data, Self-Improving AI 항목은 완료처럼 쓰지 않도록 구분했습니다. Q. Evidence Wiki가 왜 필요한가요? A. 이력서 bullet만 있으면 근거가 약합니다. Evidence Wiki는 주장, 근거 문서, 검증 명령, 포트폴리오 문장을 연결해 면접 답변에서 바로 근거를 꺼낼 수 있게 합니다. Q. RAG 검색에는 어떤 도움이 되나요? A. RAG는 content/ .md 만 인덱싱하므로, portfolio 폴더의 요약을 찾게 하려면 핵심 근거를 content Evidence 문서에도 넣어야 합니다. 이 문서는 포트폴리오/이력서 문장을 RAG 검색 대상으로 연결하는 역할을 합니다. - portfolio/project-evidence-map.md 에 프...\n\n### 이력서 bullet\n- RAG 질의응답 및 로컬 tf-idf/cosine similarity 기반 문서 검색 모듈을 구현했습니다.\n- VLM 및 Self-Improving AI 등은 구현 완료가 아닌 확장 설계 및 실험 계획 단계로 구분하여 정리했습니다.\n\n### 면접 답변 초안\n- Q. RAG의 할루시네이션을 어떻게 막았나요?\n- A. 검색 결과가 부재하거나 임계값을 넘지 못할 경우 'insufficient_context'를 반환하도록 설계해 안전성을 높였습니다.\n\n### 참고 문서\n- [포트폴리오 활용] (정식 제목: Evidence Wiki - Portfolio Resume Usage) (file:///c:/llm_wiki_strange/content/Evidence-Portfolio-Resume-Usage.md)\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)\n- [Wiki RAG] (정식 제목: Evidence Wiki - LLM Wiki RAG) (file:///c:/llm_wiki_strange/content/Evidence-LLM-Wiki-RAG.md)",
         "matchedKeywords": [
           "포트폴리오",
           "이력서",
@@ -1608,7 +1616,7 @@
           "WebRTC-vs-HLS",
           "WebRTC-vs-HLS",
           "WebRTC-vs-HLS",
-          "MJPEG-Streaming-Rollback-Report",
+          "WebRTC-vs-HLS",
           "WebRTC-vs-HLS"
         ],
         "hit1": 0,
@@ -1616,33 +1624,34 @@
         "hit5": 0,
         "mrr5": 0,
         "contextPrecision5": 0,
-        "keywordCoverage": 0.6,
+        "keywordCoverage": 0.7,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.71,
-          "searchLatencyMs": 0.71,
+          "totalSearchMs": 0.58,
+          "searchLatencyMs": 0.58,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.71
+          "totalLatencyMs": 0.58
         },
         "retrievedCount": 6,
-        "finalContextCount": 3,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- MediaMTX RTSP stream - HLS URL - WebRTC WHEP URL - MJPEG Stream URL VITE_MJPEG_BASE_URL - Browser playback stats HLS 지연 문제와 WebRTC 도입 이유를 비교 지표 중심으로 정리한다. - MJPEG Display Rollback Decision - ADR-001-WebRTC - Architecture - Bug-RTSP-Stream-404 - MJPEG 우선 재생 - WebRTC / HLS fallback 재생 - fallback reason Frontend는 VITE_MJPEG_BASE_URL 기본값 http://localhost:8010 을 기준으로 URL을 만든다. Code Keywords: http, host, 8010, camera, suffix, mjpeg, cameraLoginId 개발 환경은 localhost를 기본값으로 둔다. 배포 환경은 VITE_MJPEG_BASE_UR...\n\n### 참고 문서\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)",
+        "finalContextCount": 2,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- MediaMTX RTSP stream - HLS URL - WebRTC WHEP URL - MJPEG Stream URL VITE_MJPEG_BASE_URL - Browser playback stats - MJPEG Display Rollback Decision - ADR-001-WebRTC - Architecture - Bug-RTSP-Stream-404 HLS 지연 문제와 WebRTC 도입 이유를 비교 지표 중심으로 정리한다. - MJPEG 우선 재생 - WebRTC / HLS fallback 재생 - fallback reason 카메라별 WebRTC health metric 및 MJPEG stream의 생존 상태 stale check 를 모니터링하여 실패 reason을 정확히 구분한다. --- webrtc hls streaming latency mediamtx Code Keywords: Frontend, selected, cameraLoginId, MJPEG, renderi...\n\n### 참고 문서\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)",
         "matchedKeywords": [
           "WebRTC",
           "HLS",
           "MJPEG",
           "MediaMTX",
           "404",
-          "cameraLoginId"
+          "cameraLoginId",
+          "stale"
         ]
       },
       "hybrid": {
         "retrievedSources": [
-          "MJPEG-Streaming-Rollback-Report",
-          "MJPEG-Streaming-Rollback-Report",
           "WebRTC-vs-HLS",
+          "MJPEG-Streaming-Rollback-Report",
+          "MJPEG-Streaming-Rollback-Report",
           "WebRTC-vs-HLS",
           "mjpeg-display-rollback",
           "mjpeg-display-rollback"
@@ -1657,14 +1666,14 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 11.53,
-          "searchLatencyMs": 11.53,
+          "totalSearchMs": 21.09,
+          "searchLatencyMs": 21.09,
           "llmLatencyMs": null,
-          "totalLatencyMs": 11.53
+          "totalLatencyMs": 21.09
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n웹 관제 화면의 기본 영상 표시 경로를 HLS/WebRTC 중심에서 MJPEG로 되돌렸다. RTSP 입력, MediaMTX, MQTT, WebSocket, HLS/WebRTC 코드는 삭제하지 않고 보존했다. 변경 후 기본 웹 표시 URL은 cameraLoginId 숫자 suffix를 기준으로 포트를 계산한다. 예시: WebRTC 기본 표시로 되돌리려면 다음 설정만 바꾼다. Code Keywords: VITE_STREAM_MODE, webrtc, VITE_WEBRTC_BASE_URL, http, localhost, 8889, VITE_HLS_BASE_URL, 8888 HLS raw 표시로 되돌리려면: Code Keywords: VITE_STREAM_MODE, VITE_HLS_BASE_URL, http, localhost, 8888 AI worker의 MJPEG server를 끄려면: Code Keywords: MJPEG_ENABLED, false - MediaMTX RTSP strea...\n\n### 참고 문서\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [WebRTC vs HLS](file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n안전 관제 화면은 사고 상황을 몇 초 늦게 보는 것만으로도 대응 품질이 떨어진다. HLS는 안정적인 HTTP 기반 재생 장점이 있지만 segment와 buffering 구조 때문에 저지연 관제의 기본 경로로는 불리하다. 초저지연을 위해 WebRTC가 도입되었으나, 실제 개발/시연 환경의 네트워크 불안정성 및 MediaMTX 라이프사이클 이슈로 인해 2026-07-08일자로 브라우저 기본 전송 방식은 MJPEG로 원복하고 WebRTC/HLS는 예비/fallback 모드로 분리 하였다. 웹 관제 화면의 기본 영상 표시 경로를 HLS/WebRTC 중심에서 MJPEG로 되돌렸다. RTSP 입력, MediaMTX, MQTT, WebSocket, HLS/WebRTC 코드는 삭제하지 않고 보존했다. 변경 후 기본 웹 표시 URL은 cameraLoginId 숫자 suffix를 기준으로 포트를 계산한다. 예시: WebRTC 기본 표시로 되돌리려면 다음 설정만 바꾼다. Code Keywords: VI...\n\n### 참고 문서\n- [WebRTC/HLS] (정식 제목: WebRTC vs HLS) (file:///c:/llm_wiki_strange/content/WebRTC-vs-HLS.md)\n- [MJPEG 롤백] (정식 제목: MJPEG Streaming Rollback Report) (file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)",
         "matchedKeywords": [
           "WebRTC",
           "HLS",
@@ -1690,68 +1699,63 @@
       "difficulty": "medium",
       "baseline": {
         "retrievedSources": [
-          "Plan-WebRTC-DataChannel-Sync",
-          "Realtime-Camera-Runtime-Stabilization",
           "ADR-002-MQTT-Metadata-Separation",
-          "mjpeg-display-rollback",
-          "AI-Output-JSON",
-          "MQTT-Event-Schema"
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-003-YOLO26n-Selection",
+          "ADR-002-MQTT-Metadata-Separation",
+          "ADR-001-WebRTC"
         ],
         "hit1": 0,
         "hit3": 0,
-        "hit5": 1,
-        "mrr5": 0.25,
-        "contextPrecision5": 0.2,
+        "hit5": 0,
+        "mrr5": 0,
+        "contextPrecision5": 0,
         "keywordCoverage": 0,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.14,
-          "searchLatencyMs": 1.14,
+          "totalSearchMs": 1.02,
+          "searchLatencyMs": 1.02,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.14
+          "totalLatencyMs": 1.02
         },
         "retrievedCount": 6,
-        "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n카메라 스키마 갱신 : 카메라 정보 조회 API에 AI sync WebRTC URL 및 활성화 여부를 조회할 수 있도록 스펙 확장. JSON Payload Keys: cameraLoginId, streamUrl, webrtcUrl, aiSyncWebrtcUrl, aiSyncEnabled 역할 제한 : 시그널링 인증 Short TTL Signed Token 생성 등 및 메타데이터 조회 설정값 전파에 집중하며, 실시간 드로잉 좌표 데이터의 중계 연산에서는 완전히 배제함. camera 수 제한은 기능 축소가 아니라 실시간 안정성을 확보하기 위한 운영 제어다. - 기능 검증 단계에서는 전체 ACTIVE camera를 모두 실행하지 않는다. - smoke test 기본 대상은 cam_01,cam_02,cam_03,cam_04 로 제한한다. - 문제 재현 또는 빠른 검증은 단일 camera에서 시작한다. - 확장은 1 - 2 - 4 camera 순서로 진행한다. - GPU가 이미 다른 작업으로...\n\n### 참고 문서\n- [Plan - WebRTC DataChannel based Video-Overlay Synchronization](file:///c:/llm_wiki_strange/content/Plan-WebRTC-DataChannel-Sync.md)\n- [실시간 카메라 송출 안정화 및 카메라 수 제한 판단 기록](file:///c:/llm_wiki_strange/content/Realtime-Camera-Runtime-Stabilization.md)\n- [ADR-002 MQTT Metadata Separation](file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [AI Output JSON](file:///c:/llm_wiki_strange/content/AI-Output-JSON.md)\n- [MQTT Event Schema](file:///c:/llm_wiki_strange/content/MQTT-Event-Schema.md)",
+        "finalContextCount": 4,
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\nAI worker는 영상을 보고 이벤트 후보를 만든다. 하지만 개인 사용자와 기관 사용자의 권한, 알림 수신 대상, camera ownership은 Backend DB의 책임이다. AI payload에 사용자 정보를 직접 넣으면 privacy와 권한 경계가 흐려진다. Decision: - MQTT event에는 eventId , timestampMs , streamId , camera_login_id , frame size, event candidates만 담는다. - 사용자 ID, 기관 ID, 권한 scope는 Backend가 cameraLoginId 로 camera registry를 조회해 결정한다. - 원본 RTSP URL, 비밀번호, 토큰은 MQTT에 넣지 않는다. - 저장 가능한 안전 이벤트 - scope가 분리된 사용자 알림 - 민감정보 없는 event payload yolo26n-pose 는 FP가 많다. 선택 이유는 \"가장 완벽해서\"가 아니라 \"미탐을 줄이는 현재 운영...\n\n### 참고 문서\n- [ADR-002] (정식 제목: ADR-002 MQTT Metadata Separation) (file:///c:/llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md)\n- [ADR-003] (정식 제목: ADR-003 YOLO26n Selection) (file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)\n- [ADR-001] (정식 제목: ADR-001 WebRTC) (file:///c:/llm_wiki_strange/content/ADR-001-WebRTC.md)",
         "matchedKeywords": []
       },
       "hybrid": {
         "retrievedSources": [
           "mjpeg-display-rollback",
-          "mjpeg-display-rollback",
           "Realtime-Camera-Runtime-Stabilization",
+          "mjpeg-display-rollback",
           "ADR-003-YOLO26n-Selection",
           "Interview-Resume-Notes",
-          "MJPEG-Streaming-Rollback-Report"
+          "Evidence-Smart-Safety-System"
         ],
         "hit1": 1,
         "hit3": 1,
         "hit5": 1,
         "mrr5": 1,
         "contextPrecision5": 0.4,
-        "keywordCoverage": 0.875,
+        "keywordCoverage": 0.25,
         "mode": "rag-only",
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 27.57,
-          "searchLatencyMs": 27.57,
+          "totalSearchMs": 48.4,
+          "searchLatencyMs": 48.4,
           "llmLatencyMs": null,
-          "totalLatencyMs": 27.57
+          "totalLatencyMs": 48.4
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
-        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n실시간 영상 표시 경로는 초기에는 WebRTC/HLS 기반으로 검토했지만, 제한된 개발 기간과 시연 환경의 네트워크 지연, MediaMTX publisher lifecycle 불안정성으로 인해 안정화 비용이 크다고 판단했습니다. 이에 따라 브라우저 표시 경로는 디버깅과 시연 안정성이 높은 MJPEG로 원복하고, 남은 개발 리소스는 이상행동 모델 성능 개선과 VLM/RAG 기반 이벤트 검색 기능 고도화에 집중했습니다. 이는 단순 기능 축소가 아니라, 제한된 기간 안에서 사용자에게 보여줄 수 있는 핵심 가치와 운영 안정성을 우선한 기술적 의사결정입니다. MJPEG 원복 결정은 최종 시연 환경에서 안전성 확보를 위한 영리한 엔지니어링 절충안 Trade-off 이며, 핵심 AI 위급 행동 탐지와 메타데이터 분석 파이프라인의 완성도를 극한으로 높이는 디딤돌이 될 것입니다. - 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한...\n\n### 참고 문서\n- [MJPEG Display Rollback Decision](file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [실시간 카메라 송출 안정화 및 카메라 수 제한 판단 기록](file:///c:/llm_wiki_strange/content/Realtime-Camera-Runtime-Stabilization.md)\n- [ADR-003 YOLO26n Selection](file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)\n- [면접·이력서 정리](file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [MJPEG Streaming Rollback Report](file:///c:/llm_wiki_strange/content/MJPEG-Streaming-Rollback-Report.md)",
+        "answer": "[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n검색된 문서 기반 답변입니다.\n\n- 안정화 비용의 한계 : WebRTC와 HLS 프로토콜은 기술적으로 매우 우수하지만, 로컬 및 시연 테스트 망의 고유한 네트워크 지연, MediaMTX publisher lifecycle의 가용성 보장 한계, ffmpeg 자동 재시작 로직 및 브라우저 자체 비디오 재생 제약 조건이 복합되어 실시간성 디버깅 비용이 기하급수적으로 증가하였다. - Scope Control을 통한 가치 극대화 : 제한된 프로젝트 개발 일정 안에서 불안정한 실시간 스트리밍 재생 경로를 붙잡고 있는 것보다, 시연 시 확실하게 정상 작동을 보증하는 \"끊김 없는 카메라 영상의 안정적 렌더링\" 을 MJPEG를 통해 선제 확보하기로 결정했다. - 리소스 재배정 : 브라우저 표시 transport는 검증된 MJPEG 규격으로 단순화하고, 절약된 개발 리소스를 스마트 관제 시스템의 핵심 가치 영역인 다음 고도화 과제에 전면 재배치한다: - 쓰러짐 및 위험 이상행동 탐지 모델의 정밀 성능 개선 - 수집된 이상 징후 분석...\n\n### 참고 문서\n- [MJPEG 원복] (정식 제목: MJPEG Display Rollback Decision) (file:///c:/llm_wiki_strange/content/mjpeg-display-rollback.md)\n- [카메라 안정화] (정식 제목: 실시간 카메라 송출 안정화 및 카메라 수 제한 판단 기록) (file:///c:/llm_wiki_strange/content/Realtime-Camera-Runtime-Stabilization.md)\n- [ADR-003] (정식 제목: ADR-003 YOLO26n Selection) (file:///c:/llm_wiki_strange/content/ADR-003-YOLO26n-Selection.md)\n- [면접 노트] (정식 제목: 면접·이력서 정리) (file:///c:/llm_wiki_strange/content/Interview-Resume-Notes.md)\n- [시스템 근거] (정식 제목: Evidence Wiki - Smart Safety Monitoring) (file:///c:/llm_wiki_strange/content/Evidence-Smart-Safety-System.md)",
         "matchedKeywords": [
-          "개발 기간",
           "네트워크 지연",
-          "시연 안정성",
-          "모델 성능 개선",
-          "VLM",
-          "RAG",
-          "이벤트 검색"
+          "scope control"
         ]
       },
       "judge": {

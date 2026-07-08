@@ -1,5 +1,7 @@
 ---
 title: ADR-004 LSTM Feature Expansion
+navTitle: ADR-004
+shortTitle: ADR-004
 category: ADR
 relatedDocs: [Feature-Vector-51D-vs-54D, LSTM, AI-Pipeline]
 relatedFiles: [strange_ai/ai/action/motion_features.py, strange_ai/ai/action/classifier.py]

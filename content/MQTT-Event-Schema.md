@@ -1,5 +1,7 @@
 ---
 title: MQTT Event Schema
+navTitle: MQTT Schema
+shortTitle: MQTT Schema
 category: Backend
 relatedDocs: [Architecture, AI-Pipeline, AI-Output-JSON, ADR-002-MQTT-Metadata-Separation]
 relatedFiles: [PROJECT_CONTRACT.md, docs/MQTT_TOPIC_SPEC.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]

@@ -1,5 +1,7 @@
 ---
 title: LSTM Sequence Length Comparison
+navTitle: "LSTM 길이"
+shortTitle: "LSTM 길이"
 category: Experiments
 relatedDocs: [LSTM, LSTM-Experiment-Results, Benchmark-History]
 relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]

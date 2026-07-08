@@ -1,5 +1,7 @@
 ---
 title: MJPEG Streaming Rollback Report
+navTitle: "MJPEG 롤백"
+shortTitle: "MJPEG 롤백"
 category: Infra
 tags: [mjpeg, streaming, cameraLoginId, rollback]
 updatedAt: 2026-07-08

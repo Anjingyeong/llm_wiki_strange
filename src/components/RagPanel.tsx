@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { ANSWER_MODE_LABELS, QUICK_QUESTIONS } from './ragPanelData';
 
 type RagSource = {
   readonly documentId: string;
   readonly section: string;
   readonly sourceLink: string;
+  readonly displayTitle?: string | undefined;
   readonly title: string;
   readonly score?: number | undefined;
 };
@@ -25,7 +27,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function parseSource(value: unknown): RagSource | null {
   if (!isRecord(value)) return null;
-  const { documentId, section, sourceLink, title, score } = value;
+  const { documentId, section, sourceLink, displayTitle, title, score } = value;
   if (
     typeof documentId !== 'string' ||
     typeof section !== 'string' ||
@@ -36,6 +38,7 @@ function parseSource(value: unknown): RagSource | null {
     documentId,
     section,
     sourceLink,
+    displayTitle: typeof displayTitle === 'string' ? displayTitle : undefined,
     title,
     score: typeof score === 'number' ? score : undefined,
   };
@@ -62,22 +65,6 @@ function parseRagResponse(value: unknown): RagResponse {
     debugInfo,
   };
 }
-
-const ANSWER_MODE_LABELS: Record<string, string> = {
-  flow_mode: '⚙️ 동작 흐름',
-  evidence_template: '✅ 검증 근거',
-  portfolio_mode: '💼 포트폴리오',
-  troubleshooting_mode: '🔧 문제 해결',
-  general: '📄 일반',
-};
-
-const QUICK_QUESTIONS = [
-  { label: '⚙️ 동작 흐름', query: '스마트 안전 관제 시스템 동작 흐름' },
-  { label: '🔬 기술 선택 근거', query: 'YOLO26n-pose를 선택한 근거는?' },
-  { label: '✅ 검증 결과', query: 'py_compile 검증 결과는?' },
-  { label: '💼 포트폴리오', query: '이 프로젝트를 포트폴리오용으로 요약해줘' },
-  { label: '🎤 면접 답변', query: 'RAG 기능의 포트폴리오 근거를 알려줘' },
-];
 
 function AnswerModeBadge({ mode }: { readonly mode: string }) {
   return (
@@ -248,9 +235,9 @@ export function RagPanel() {
                       className="ragSourceChip"
                       href={src.sourceLink}
                       key={`${src.documentId}-${src.section}`}
-                      title={`${src.title} › ${src.section}`}
+                      title={`${src.displayTitle ?? src.title} › ${src.section}`}
                     >
-                      <span>{src.title}</span>
+                      <span>{src.displayTitle ?? src.title}</span>
                       <span className="chipSection">· {src.section}</span>
                     </a>
                   ))}

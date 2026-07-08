@@ -1,5 +1,7 @@
 ---
 title: Evidence Wiki - LLM Wiki RAG
+navTitle: Wiki RAG
+shortTitle: Wiki RAG
 category: Project
 tags: [portfolio, evidence, rag, markdown, embedding, grounded-answer]
 relatedDocs: [Overview, Glossary]

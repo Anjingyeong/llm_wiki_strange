@@ -1,5 +1,7 @@
 ---
 title: Model Comparison
+navTitle: "모델 비교"
+shortTitle: "모델 비교"
 category: Experiments
 relatedDocs: [Model-Decision-YOLO26n, Benchmark-History, LSTM-Experiment-Results]
 relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]

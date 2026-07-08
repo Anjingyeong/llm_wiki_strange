@@ -1,5 +1,7 @@
 ---
 title: Bug RTSP Stream 404
+navTitle: RTSP 404
+shortTitle: RTSP 404
 category: Bugs
 relatedDocs: [Architecture, WebRTC-vs-HLS, AI-Output-JSON]
 relatedFiles: [PROJECT_CONTRACT.md, strange_ai/.env.example, strange_front/src/features/dashboard/data/cameras.ts]

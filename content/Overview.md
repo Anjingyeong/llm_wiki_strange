@@ -1,5 +1,7 @@
 ---
 title: Overview
+navTitle: "개요"
+shortTitle: "개요"
 category: Project
 relatedDocs: [Architecture, AI-Pipeline, MQTT-Event-Schema]
 relatedFiles: [README.md, PROJECT_CONTRACT.md, MULTI_AGENT_PLAN.md]

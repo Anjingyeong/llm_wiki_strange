@@ -29,6 +29,7 @@ export function buildContextChunks(chunks, limit = DEFAULT_CONTEXT_CHUNKS) {
     .map((chunk) => ({
       id: chunk.id,
       documentId: chunk.documentId,
+      displayTitle: chunk.displayTitle ?? chunk.title,
       title: chunk.title,
       category: chunk.category,
       sectionTitle: chunk.sectionTitle ?? chunk.section,
@@ -48,6 +49,7 @@ export function buildContext(chunks, limit = DEFAULT_CONTEXT_CHUNKS) {
   const context = [];
   for (const chunk of buildContextChunks(chunks, limit)) {
     const next = [
+      `DisplayTitle: ${chunk.displayTitle}`,
       `Title: ${chunk.title}`,
       `Category: ${chunk.category}`,
       `Section: ${chunk.sectionTitle}`,

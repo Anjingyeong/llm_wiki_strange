@@ -1,5 +1,7 @@
 ---
 title: Architecture
+navTitle: "아키텍처"
+shortTitle: "아키텍처"
 category: Architecture
 relatedDocs: [Overview, AI-Pipeline, MQTT-Event-Schema, WebRTC-vs-HLS]
 relatedFiles: [PROJECT_CONTRACT.md, strange_infra/docker-compose.yml, strange_front/src/features/dashboard/data/cameras.ts]

@@ -6,6 +6,7 @@ import { Sidebar } from './components/Sidebar';
 import { TableOfContents } from './components/TableOfContents';
 import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
 import { isExcerptDuplicate } from './lib/frontmatter';
+import { getDisplayTitle } from './lib/types';
 
 function slugFromHash(): string {
   return window.location.hash.replace(/^#\/?/, '').split('#')[0] ?? '';
@@ -130,7 +131,10 @@ export function App() {
         <article className="docCard">
           <header className="docHeader">
             <span>{activeDocument.category}</span>
-            <h1>{activeDocument.title}</h1>
+            <h1>{getDisplayTitle(activeDocument)}</h1>
+            {getDisplayTitle(activeDocument) !== activeDocument.title ? (
+              <p className="formalTitle">정식 제목: {activeDocument.title}</p>
+            ) : null}
             {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
               <p>{activeDocument.excerpt}</p>
             )}
