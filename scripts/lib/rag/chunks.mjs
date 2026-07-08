@@ -171,7 +171,7 @@ function splitSections(body) {
   return sections;
 }
 
-function makeChunk(document, section, text) {
+function makeChunk(document, section, text, chunkOrder = 0) {
   const tags = asStringList(document.tags);
   const relatedSlugs = asStringList(document.relatedDocs ?? document.relatedSlugs);
   const entities = asStringList(document.entities);
@@ -184,6 +184,7 @@ function makeChunk(document, section, text) {
     sourcePath,
     sectionTitle: section,
     order: document.order ?? 999,
+    chunkOrder,
     relatedSlugs,
     entities,
   };
@@ -200,6 +201,7 @@ function makeChunk(document, section, text) {
     sourcePath,
     summary: document.summary ?? document.description ?? '',
     order: document.order ?? 999,
+    chunkOrder,
     project: document.project,
     type: document.type,
     tags,
@@ -220,9 +222,10 @@ export function buildRagIndex(documents, options = {}) {
     return orderDiff === 0 ? String(left.title).localeCompare(String(right.title)) : orderDiff;
   });
   for (const document of orderedDocuments) {
+    let chunkOrder = 0;
     for (const section of splitSections(document.body)) {
       for (const chunk of chunkSection(section, chunkSize)) {
-        chunks.push(makeChunk(document, chunk.section, chunk.text));
+        chunks.push(makeChunk(document, chunk.section, chunk.text, chunkOrder++));
       }
     }
   }

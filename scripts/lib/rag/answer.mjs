@@ -162,7 +162,7 @@ ${promptConstraint}`;
           },
           {
             role: 'user',
-            content: `질문: ${question}\n\n검색된 문서 context:\n${buildContext(chunks)}`,
+            content: `질문: ${question}\n\n검색된 문서 context:\n${buildContext(chunks, chunks.length)}`,
           },
         ],
       }),
@@ -261,7 +261,7 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
     .trim();
 
   const sources = chunks.map(makeSource);
-  const contextChunks = buildContextChunks(chunks);
+  const contextChunks = buildContextChunks(chunks, chunks.length);
   const debugInfo = {
     expandedQuery,
     answerMode,

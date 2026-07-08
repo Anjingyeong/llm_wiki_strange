@@ -30,9 +30,14 @@ function rankVector(chunks, query, filters, retrieveLimit) {
       const vectorScore = cosineSimilarity(queryVector, chunk.embedding);
       const lexicalScore = keywordOverlapScore(query, chunkSearchText(chunk));
       const score = (vectorScore * 0.75 + lexicalScore * 0.25) * metadataBoost(chunk, filters);
-      return { chunk, lexicalScore, score };
+      return { chunk, lexicalScore, score, vectorScore };
     })
-    .filter((result) => result.lexicalScore > 0 && result.score >= MIN_SCORE)
+    .filter((result) => {
+      if (result.lexicalScore > 0) {
+        return result.score >= MIN_SCORE;
+      }
+      return result.vectorScore >= 0.55 && result.score >= MIN_SCORE;
+    })
     .sort((left, right) => right.score - left.score || left.chunk.title.localeCompare(right.chunk.title))
     .slice(0, retrieveLimit);
 }

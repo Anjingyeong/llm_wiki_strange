@@ -21,24 +21,58 @@ const categoryOrder = new Map([
   ['Glossary', 950],
 ]);
 const slugOrder = new Map([
+  // 1. 프로젝트 개요
   ['Overview', 100],
+  ['Evidence-Smart-Safety-System', 110],
+
+  // 2. 시스템 아키텍처
   ['Architecture', 200],
+  ['ADR-001-WebRTC', 210],
+  ['ADR-002-MQTT-Metadata-Separation', 220],
+
+  // 3. AI 파이프라인
   ['AI-Pipeline', 300],
+  ['AI-Output-JSON', 310],
+  ['Model-Comparison', 320],
+  ['Model-Decision-YOLO26n', 330],
+  ['ADR-003-YOLO26n-Selection', 340],
+
+  // 4. 실시간 스트리밍/RTSP/WebRTC/MQTT
   ['WebRTC-vs-HLS', 400],
-  ['MQTT-Event-Schema', 430],
+  ['MQTT-Event-Schema', 410],
+  ['MJPEG-Display-Port-Normalization', 420],
+  ['MJPEG-Streaming-Rollback-Report', 430],
+  ['Plan-WebRTC-DataChannel-Sync', 440],
+
+  // 5. 프레임 동기화/Overlay Sync
   ['Frame-Matching-Report', 500],
   ['Frame-Sync-Debug-Report', 510],
   ['Multi-Camera-Frame-Latency-Report', 520],
+  ['2026-06-30-Overlay-Tracking-Evidence-Log', 530],
+
+  // 6. 모델 학습/평가/재학습
   ['LSTM', 600],
   ['LSTM-Experiment-Results', 610],
   ['LSTM-Sequence-Length-Comparison', 620],
   ['Feature-Vector-51D-vs-54D', 630],
+  ['ADR-004-LSTM-Feature-Expansion', 640],
+
+  // 7. 버그 해결 기록
   ['Bug-RTSP-Stream-404', 700],
   ['Bug-Notification-Scope', 710],
   ['Bug-Codeblock-Visibility', 720],
-  ['Realtime-Camera-Runtime-Stabilization', 730],
-  ['Bug-AI-Tracker-FrameRate-Mismatch', 740],
-  ['Interview-Resume-Notes', 900],
+  ['Bug-AI-Tracker-FrameRate-Mismatch', 730],
+  ['2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log', 740],
+
+  // 8. 배포/운영/모니터링
+  ['Realtime-Camera-Runtime-Stabilization', 800],
+  ['Benchmark-History', 810],
+
+  // 9. 회고/개선 방향
+  ['Evidence-LLM-Wiki-RAG', 900],
+  ['Evidence-Portfolio-Resume-Usage', 910],
+  ['Interview-Resume-Notes', 920],
+  ['Glossary', 930],
 ]);
 
 function parseFrontmatter(raw, fileName) {

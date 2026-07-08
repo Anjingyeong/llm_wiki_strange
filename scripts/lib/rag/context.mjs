@@ -1,7 +1,7 @@
-const MAX_CONTEXT_CHUNKS = 4;
-const MAX_CONTEXT_CHARS = 3600;
+const MAX_CONTEXT_CHARS = 4800;
+const DEFAULT_CONTEXT_CHUNKS = 6;
 
-export function buildContextChunks(chunks) {
+export function buildContextChunks(chunks, limit = DEFAULT_CONTEXT_CHUNKS) {
   const perDocumentCount = new Map();
   const selected = [];
   for (const chunk of chunks) {
@@ -11,14 +11,20 @@ export function buildContextChunks(chunks) {
     }
     perDocumentCount.set(chunk.documentId, currentCount + 1);
     selected.push(chunk);
-    if (selected.length >= MAX_CONTEXT_CHUNKS) {
+    if (selected.length >= limit) {
       break;
     }
   }
   return selected
     .sort((left, right) => {
       const orderDiff = (left.order ?? 999) - (right.order ?? 999);
-      return orderDiff === 0 ? String(left.sectionTitle ?? left.section).localeCompare(String(right.sectionTitle ?? right.section)) : orderDiff;
+      if (orderDiff !== 0) {
+        return orderDiff;
+      }
+      if (left.documentId === right.documentId) {
+        return (left.chunkOrder ?? 0) - (right.chunkOrder ?? 0);
+      }
+      return String(left.sectionTitle ?? left.section).localeCompare(String(right.sectionTitle ?? right.section));
     })
     .map((chunk) => ({
       id: chunk.id,
@@ -33,13 +39,14 @@ export function buildContextChunks(chunks) {
       score: chunk.score,
       matchedBy: chunk.matchedBy ?? [],
       reason: chunk.reason ?? '',
+      chunkOrder: chunk.chunkOrder ?? 0,
     }));
 }
 
-export function buildContext(chunks) {
+export function buildContext(chunks, limit = DEFAULT_CONTEXT_CHUNKS) {
   let used = 0;
   const context = [];
-  for (const chunk of buildContextChunks(chunks)) {
+  for (const chunk of buildContextChunks(chunks, limit)) {
     const next = [
       `Title: ${chunk.title}`,
       `Category: ${chunk.category}`,
