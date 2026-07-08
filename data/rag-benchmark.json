@@ -158,5 +158,47 @@
     "expected_keywords": ["포트폴리오", "이력서", "키워드", "구현"],
     "category": "면접·이력서 정리",
     "difficulty": "easy"
+  },
+  {
+    "id": "q_mjpeg_rollback",
+    "question": "왜 WebRTC/HLS 대신 MJPEG로 원복했어?",
+    "gold_sources": [
+      "mjpeg-display-rollback",
+      "mjpeg-port-normalization",
+      "webrtc-vs-hls"
+    ],
+    "expected_keywords": [
+      "WebRTC",
+      "HLS",
+      "MJPEG",
+      "MediaMTX",
+      "404",
+      "cameraLoginId",
+      "stale",
+      "네트워크 지연",
+      "시연 안정성",
+      "engineering trade-off"
+    ],
+    "category": "Streaming",
+    "difficulty": "medium"
+  },
+  {
+    "id": "q_mjpeg_scope_control",
+    "question": "MJPEG로 원복한 결정이 기능 축소가 아니라 우선순위 재조정인 이유는?",
+    "gold_sources": [
+      "mjpeg-display-rollback"
+    ],
+    "expected_keywords": [
+      "개발 기간",
+      "네트워크 지연",
+      "시연 안정성",
+      "모델 성능 개선",
+      "VLM",
+      "RAG",
+      "이벤트 검색",
+      "scope control"
+    ],
+    "category": "Streaming",
+    "difficulty": "medium"
   }
 ]
