@@ -260,9 +260,12 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
   let llmLatency = null;
   let llmAnswer = null;
 
+  const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
   if (enableLlmAnswer && llmProvider !== 'none') {
-    const startLlm = performance.now();
+    let startLlm = 0;
     try {
+      startLlm = now();
       llmAnswer = await generateAnswer({
         query: normalizedQuestion,
         contexts: contextChunks,
@@ -277,14 +280,14 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
           openaiApiKey: env.OPENAI_API_KEY || env.RAG_LLM_API_KEY
         }
       });
-      llmLatency = Number((performance.now() - startLlm).toFixed(2));
+      llmLatency = Number((now() - startLlm).toFixed(2));
       
       if (!llmAnswer || !llmAnswer.trim()) {
         throw new Error('LLM returned an empty response');
       }
       finalAnswer = llmAnswer;
     } catch (err) {
-      llmLatency = Number((performance.now() - startLlm).toFixed(2));
+      llmLatency = startLlm > 0 ? Number((now() - startLlm).toFixed(2)) : 0;
       fallback = true;
       fallbackReason = err.message || String(err);
       
