@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-07-08T01:59:44.555Z",
+    "timestamp": "2026-07-08T02:10:02.483Z",
     "questionCount": 22,
     "baselineSummary": {
       "hit1": 0.45454545454545453,
@@ -9,7 +9,7 @@
       "mrr5": 0.45454545454545453,
       "contextPrecision5": 0.35454545454545455,
       "keywordCoverage": 0.3893939393939394,
-      "latency": 1.4781818181818183
+      "latency": 1.4663636363636363
     },
     "hybridSummary": {
       "hit1": 0.4090909090909091,
@@ -18,7 +18,7 @@
       "mrr5": 0.5204545454545454,
       "contextPrecision5": 0.2727272727272728,
       "keywordCoverage": 0.49318181818181817,
-      "latency": 31.13227272727273
+      "latency": 29.57590909090909
     }
   },
   "questions": [
@@ -51,10 +51,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 13.3,
-          "searchLatencyMs": 13.3,
+          "totalSearchMs": 13.27,
+          "searchLatencyMs": 13.27,
           "llmLatencyMs": null,
-          "totalLatencyMs": 13.3
+          "totalLatencyMs": 13.27
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -82,10 +82,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 35.35,
-          "searchLatencyMs": 35.35,
+          "totalSearchMs": 35.27,
+          "searchLatencyMs": 35.27,
           "llmLatencyMs": null,
-          "totalLatencyMs": 35.35
+          "totalLatencyMs": 35.27
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -127,10 +127,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.69,
-          "searchLatencyMs": 0.69,
+          "totalSearchMs": 0.61,
+          "searchLatencyMs": 0.61,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.69
+          "totalLatencyMs": 0.61
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -161,10 +161,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 13.97,
-          "searchLatencyMs": 13.97,
+          "totalSearchMs": 12.65,
+          "searchLatencyMs": 12.65,
           "llmLatencyMs": null,
-          "totalLatencyMs": 13.97
+          "totalLatencyMs": 12.65
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -211,10 +211,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.87,
-          "searchLatencyMs": 0.87,
+          "totalSearchMs": 0.91,
+          "searchLatencyMs": 0.91,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.87
+          "totalLatencyMs": 0.91
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -240,10 +240,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 38.48,
-          "searchLatencyMs": 38.48,
+          "totalSearchMs": 36.27,
+          "searchLatencyMs": 36.27,
           "llmLatencyMs": null,
-          "totalLatencyMs": 38.48
+          "totalLatencyMs": 36.27
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -288,10 +288,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.42,
-          "searchLatencyMs": 1.42,
+          "totalSearchMs": 1.52,
+          "searchLatencyMs": 1.52,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.42
+          "totalLatencyMs": 1.52
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -319,10 +319,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 38.19,
-          "searchLatencyMs": 38.19,
+          "totalSearchMs": 36.24,
+          "searchLatencyMs": 36.24,
           "llmLatencyMs": null,
-          "totalLatencyMs": 38.19
+          "totalLatencyMs": 36.24
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -367,10 +367,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.79,
-          "searchLatencyMs": 0.79,
+          "totalSearchMs": 0.71,
+          "searchLatencyMs": 0.71,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.79
+          "totalLatencyMs": 0.71
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -400,10 +400,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 25.74,
-          "searchLatencyMs": 25.74,
+          "totalSearchMs": 23.95,
+          "searchLatencyMs": 23.95,
           "llmLatencyMs": null,
-          "totalLatencyMs": 25.74
+          "totalLatencyMs": 23.95
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -450,10 +450,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.12,
-          "searchLatencyMs": 1.12,
+          "totalSearchMs": 1.08,
+          "searchLatencyMs": 1.08,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.12
+          "totalLatencyMs": 1.08
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -481,10 +481,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 14.74,
-          "searchLatencyMs": 14.74,
+          "totalSearchMs": 14.19,
+          "searchLatencyMs": 14.19,
           "llmLatencyMs": null,
-          "totalLatencyMs": 14.74
+          "totalLatencyMs": 14.19
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -528,10 +528,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.7,
-          "searchLatencyMs": 0.7,
+          "totalSearchMs": 0.69,
+          "searchLatencyMs": 0.69,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.7
+          "totalLatencyMs": 0.69
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -553,10 +553,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 40.04,
-          "searchLatencyMs": 40.04,
+          "totalSearchMs": 40.88,
+          "searchLatencyMs": 40.88,
           "llmLatencyMs": null,
-          "totalLatencyMs": 40.04
+          "totalLatencyMs": 40.88
         },
         "retrievedCount": 2,
         "finalContextCount": 2,
@@ -597,10 +597,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.8,
-          "searchLatencyMs": 0.8,
+          "totalSearchMs": 0.65,
+          "searchLatencyMs": 0.65,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.8
+          "totalLatencyMs": 0.65
         },
         "retrievedCount": 6,
         "finalContextCount": 5,
@@ -628,10 +628,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 40.21,
-          "searchLatencyMs": 40.21,
+          "totalSearchMs": 38.83,
+          "searchLatencyMs": 38.83,
           "llmLatencyMs": null,
-          "totalLatencyMs": 40.21
+          "totalLatencyMs": 38.83
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -677,10 +677,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 2.53,
-          "searchLatencyMs": 2.53,
+          "totalSearchMs": 2.74,
+          "searchLatencyMs": 2.74,
           "llmLatencyMs": null,
-          "totalLatencyMs": 2.53
+          "totalLatencyMs": 2.74
         },
         "retrievedCount": 6,
         "finalContextCount": 5,
@@ -706,10 +706,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 42.21,
-          "searchLatencyMs": 42.21,
+          "totalSearchMs": 35.84,
+          "searchLatencyMs": 35.84,
           "llmLatencyMs": null,
-          "totalLatencyMs": 42.21
+          "totalLatencyMs": 35.84
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -752,10 +752,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.33,
-          "searchLatencyMs": 1.33,
+          "totalSearchMs": 2.08,
+          "searchLatencyMs": 2.08,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.33
+          "totalLatencyMs": 2.08
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -783,10 +783,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 43.6,
-          "searchLatencyMs": 43.6,
+          "totalSearchMs": 42.92,
+          "searchLatencyMs": 42.92,
           "llmLatencyMs": null,
-          "totalLatencyMs": 43.6
+          "totalLatencyMs": 42.92
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -830,10 +830,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 1.18,
-          "searchLatencyMs": 1.18,
+          "totalSearchMs": 1.21,
+          "searchLatencyMs": 1.21,
           "llmLatencyMs": null,
-          "totalLatencyMs": 1.18
+          "totalLatencyMs": 1.21
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -862,10 +862,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 37.23,
-          "searchLatencyMs": 37.23,
+          "totalSearchMs": 34.3,
+          "searchLatencyMs": 34.3,
           "llmLatencyMs": null,
-          "totalLatencyMs": 37.23
+          "totalLatencyMs": 34.3
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -911,10 +911,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.87,
-          "searchLatencyMs": 0.87,
+          "totalSearchMs": 0.54,
+          "searchLatencyMs": 0.54,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.87
+          "totalLatencyMs": 0.54
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -944,10 +944,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 15.11,
-          "searchLatencyMs": 15.11,
+          "totalSearchMs": 12.98,
+          "searchLatencyMs": 12.98,
           "llmLatencyMs": null,
-          "totalLatencyMs": 15.11
+          "totalLatencyMs": 12.98
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -993,10 +993,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.67,
-          "searchLatencyMs": 0.67,
+          "totalSearchMs": 0.66,
+          "searchLatencyMs": 0.66,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.67
+          "totalLatencyMs": 0.66
         },
         "retrievedCount": 6,
         "finalContextCount": 3,
@@ -1022,10 +1022,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 33.45,
-          "searchLatencyMs": 33.45,
+          "totalSearchMs": 33.16,
+          "searchLatencyMs": 33.16,
           "llmLatencyMs": null,
-          "totalLatencyMs": 33.45
+          "totalLatencyMs": 33.16
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1071,10 +1071,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.68,
-          "searchLatencyMs": 0.68,
+          "totalSearchMs": 0.71,
+          "searchLatencyMs": 0.71,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.68
+          "totalLatencyMs": 0.71
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -1102,10 +1102,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 22.64,
-          "searchLatencyMs": 22.64,
+          "totalSearchMs": 24.4,
+          "searchLatencyMs": 24.4,
           "llmLatencyMs": null,
-          "totalLatencyMs": 22.64
+          "totalLatencyMs": 24.4
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1146,10 +1146,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.58,
-          "searchLatencyMs": 0.58,
+          "totalSearchMs": 0.62,
+          "searchLatencyMs": 0.62,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.58
+          "totalLatencyMs": 0.62
         },
         "retrievedCount": 6,
         "finalContextCount": 2,
@@ -1178,10 +1178,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 31.76,
-          "searchLatencyMs": 31.76,
+          "totalSearchMs": 32.66,
+          "searchLatencyMs": 32.66,
           "llmLatencyMs": null,
-          "totalLatencyMs": 31.76
+          "totalLatencyMs": 32.66
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1226,10 +1226,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.78,
-          "searchLatencyMs": 0.78,
+          "totalSearchMs": 0.58,
+          "searchLatencyMs": 0.58,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.78
+          "totalLatencyMs": 0.58
         },
         "retrievedCount": 6,
         "finalContextCount": 2,
@@ -1258,10 +1258,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 30.77,
-          "searchLatencyMs": 30.77,
+          "totalSearchMs": 31.94,
+          "searchLatencyMs": 31.94,
           "llmLatencyMs": null,
-          "totalLatencyMs": 30.77
+          "totalLatencyMs": 31.94
         },
         "retrievedCount": 5,
         "finalContextCount": 5,
@@ -1305,10 +1305,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.66,
-          "searchLatencyMs": 0.66,
+          "totalSearchMs": 0.56,
+          "searchLatencyMs": 0.56,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.66
+          "totalLatencyMs": 0.56
         },
         "retrievedCount": 6,
         "finalContextCount": 2,
@@ -1339,10 +1339,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 12.83,
-          "searchLatencyMs": 12.83,
+          "totalSearchMs": 12.93,
+          "searchLatencyMs": 12.93,
           "llmLatencyMs": null,
-          "totalLatencyMs": 12.83
+          "totalLatencyMs": 12.93
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1387,10 +1387,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.66,
-          "searchLatencyMs": 0.66,
+          "totalSearchMs": 0.62,
+          "searchLatencyMs": 0.62,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.66
+          "totalLatencyMs": 0.62
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -1419,10 +1419,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 36.45,
-          "searchLatencyMs": 36.45,
+          "totalSearchMs": 32.61,
+          "searchLatencyMs": 32.61,
           "llmLatencyMs": null,
-          "totalLatencyMs": 36.45
+          "totalLatencyMs": 32.61
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1468,10 +1468,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.77,
-          "searchLatencyMs": 0.77,
+          "totalSearchMs": 0.54,
+          "searchLatencyMs": 0.54,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.77
+          "totalLatencyMs": 0.54
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1499,10 +1499,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 38.38,
-          "searchLatencyMs": 38.38,
+          "totalSearchMs": 35.63,
+          "searchLatencyMs": 35.63,
           "llmLatencyMs": null,
-          "totalLatencyMs": 38.38
+          "totalLatencyMs": 35.63
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1546,10 +1546,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.77,
-          "searchLatencyMs": 0.77,
+          "totalSearchMs": 0.72,
+          "searchLatencyMs": 0.72,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.77
+          "totalLatencyMs": 0.72
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -1579,10 +1579,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 37.74,
-          "searchLatencyMs": 37.74,
+          "totalSearchMs": 32.64,
+          "searchLatencyMs": 32.64,
           "llmLatencyMs": null,
-          "totalLatencyMs": 37.74
+          "totalLatencyMs": 32.64
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1629,10 +1629,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.63,
-          "searchLatencyMs": 0.63,
+          "totalSearchMs": 0.59,
+          "searchLatencyMs": 0.59,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.63
+          "totalLatencyMs": 0.59
         },
         "retrievedCount": 6,
         "finalContextCount": 2,
@@ -1666,10 +1666,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 16.5,
-          "searchLatencyMs": 16.5,
+          "totalSearchMs": 13.7,
+          "searchLatencyMs": 13.7,
           "llmLatencyMs": null,
-          "totalLatencyMs": 16.5
+          "totalLatencyMs": 13.7
         },
         "retrievedCount": 6,
         "finalContextCount": 6,
@@ -1716,10 +1716,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 0.72,
-          "searchLatencyMs": 0.72,
+          "totalSearchMs": 0.65,
+          "searchLatencyMs": 0.65,
           "llmLatencyMs": null,
-          "totalLatencyMs": 0.72
+          "totalLatencyMs": 0.65
         },
         "retrievedCount": 6,
         "finalContextCount": 4,
@@ -1745,10 +1745,10 @@
         "fallback": false,
         "fallbackReason": "LLM Answer mode disabled",
         "latency": {
-          "totalSearchMs": 39.52,
-          "searchLatencyMs": 39.52,
+          "totalSearchMs": 36.68,
+          "searchLatencyMs": 36.68,
           "llmLatencyMs": null,
-          "totalLatencyMs": 39.52
+          "totalLatencyMs": 36.68
         },
         "retrievedCount": 6,
         "finalContextCount": 6,

@@ -245,16 +245,55 @@ a:hover {
 }
 
 .navGroup {
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
-.navGroup h2 {
-  margin: 0 6px 6px;
-  color: var(--muted);
-  font-size: 10.5px;
+.navGroupHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 10px 8px;
+  text-align: left;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  border-radius: var(--radius-md);
+}
+
+.navGroupHeader:hover {
+  background: var(--panel-strong);
+}
+
+.folderIcon {
+  font-size: 15px;
+  margin-right: 8px;
+  line-height: 1;
+}
+
+.categoryTitle {
+  flex: 1;
+  color: var(--text);
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.arrowIcon {
+  font-size: 9px;
+  color: var(--muted);
+  margin-left: 6px;
+  transition: transform 0.15s var(--ease);
+}
+
+.navGroupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+  padding-left: 18px;
+  border-left: 1px dashed var(--line);
+  margin-left: 14px;
 }
 
 .navItem {
@@ -267,11 +306,18 @@ a:hover {
   color: var(--text-sub);
   cursor: pointer;
   text-align: left;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 8px 10px;
+  padding: 7px 10px;
   transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
   line-height: 1.35;
+  gap: 6px;
+}
+
+.docIcon {
+  font-size: 12px;
+  color: var(--muted-light);
+  line-height: 1;
 }
 
 .navItem:hover {
@@ -284,15 +330,10 @@ a:hover {
   background: var(--accent-light);
   color: var(--accent-text);
   border-color: rgba(5,150,105,0.2);
-  font-weight: 600;
-}
-
-/* Dark mode active */
-@media (prefers-color-scheme: dark) {
-  .navItem.active {
-    background: var(--accent-light);
-    color: var(--accent-text);
-  }
+  font-weight: 700;
+  border-left: 3px solid var(--accent);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /* ── 5. Main Content Area ────────────────────────────────────── */

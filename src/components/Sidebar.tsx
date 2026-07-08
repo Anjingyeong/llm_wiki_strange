@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { WikiDocument } from '../lib/types';
 import { getDisplayTitle } from '../lib/types';
 
@@ -13,6 +14,34 @@ type SidebarProps = {
 };
 
 export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
+  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>(() => {
+    const initial: Record<string, boolean> = {};
+    groups.forEach((group) => {
+      const hasActive = group.documents.some((doc) => doc.slug === activeSlug);
+      initial[group.category] = !hasActive;
+    });
+    return initial;
+  });
+
+  useEffect(() => {
+    groups.forEach((group) => {
+      const hasActive = group.documents.some((doc) => doc.slug === activeSlug);
+      if (hasActive) {
+        setCollapsedGroups((prev) => ({
+          ...prev,
+          [group.category]: false,
+        }));
+      }
+    });
+  }, [activeSlug, groups]);
+
+  const toggleGroup = (category: string) => {
+    setCollapsedGroups((prev) => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  };
+
   return (
     <aside className="sidebar" aria-label="Wiki navigation">
       {/* Brand / Logo */}
@@ -31,22 +60,40 @@ export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
       {/* Navigation */}
       <div className="sidebarNav">
         <nav aria-label="Document categories">
-          {groups.map((group) => (
-            <section className="navGroup" key={group.category}>
-              <h2>{group.category}</h2>
-              {group.documents.map((document) => (
+          {groups.map((group) => {
+            const isCollapsed = collapsedGroups[group.category] ?? true;
+            return (
+              <section className="navGroup" key={group.category}>
                 <button
-                  className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
-                  key={document.slug}
-                  onClick={() => onSelect(document.slug)}
+                  className="navGroupHeader"
+                  onClick={() => toggleGroup(group.category)}
+                  aria-expanded={!isCollapsed}
                   type="button"
-                  aria-current={document.slug === activeSlug ? 'page' : undefined}
                 >
-                  {getDisplayTitle(document)}
+                  <span className="folderIcon">{isCollapsed ? '📁' : '📂'}</span>
+                  <span className="categoryTitle">{group.category}</span>
+                  <span className="arrowIcon">{isCollapsed ? '▶' : '▼'}</span>
                 </button>
-              ))}
-            </section>
-          ))}
+                
+                {!isCollapsed && (
+                  <div className="navGroupItems">
+                    {group.documents.map((document) => (
+                      <button
+                        className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
+                        key={document.slug}
+                        onClick={() => onSelect(document.slug)}
+                        type="button"
+                        aria-current={document.slug === activeSlug ? 'page' : undefined}
+                      >
+                        <span className="docIcon">📄</span>
+                        <span className="docTitle">{getDisplayTitle(document)}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </nav>
       </div>
     </aside>
