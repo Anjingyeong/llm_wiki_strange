@@ -36,6 +36,41 @@ AI 파이프라인은 다음 요소로 구성된다.
 
 최신 benchmark 기준 YOLO26n-pose는 threshold 0.5에서 Faint Recall `0.750877`, F1 `0.612303`, FN `142`다. 출처는 `.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv`다.
 
+## 쓰러짐 판단 기준 및 흐름 상세
+
+이 프로젝트의 쓰러짐 판단은 단순히 Bounding Box가 누워 있는지 확인하는 단순 룰 기반이 아니라, **YOLO Pose + Tracking + LSTM Action Model**의 협업 파이프라인 결과를 기반으로 동작합니다.
+
+### 1. 판단 흐름 (Decision Flow)
+
+1. **YOLO26n-pose 검출**: 프레임마다 사람의 bbox 및 17개 COCO keypoint를 추출합니다.
+2. **ByteTrack 추적**: 검출된 사람별로 고유한 `track_id`를 연속적으로 부여하고 유지합니다.
+3. **Keypoint 시퀀스 구성**: 동일한 `track_id`를 가진 인물의 keypoint/bbox 특징들을 버퍼에 시간 순서대로 모읍니다.
+4. **LSTM 분류**: 모인 시퀀스 데이터를 LSTM Action Model에 입력하여 `Normal` / `Faint` 의 Softmax 확률 값을 출력합니다.
+5. **쓰러짐 후보(Faint Candidate) 판정**: LSTM이 판단한 `Faint` 확률이 임계값 이상인 경우, Faint 후보군으로 분류합니다.
+6. **연속 감지 필터**: 같은 `track_id`를 가진 인물에게서 **연속 3번**의 Faint 후보 판정이 나와야 최종 쓰러짐 상황으로 간주합니다.
+7. **카메라 쿨다운 적용**: 최종 감지 시 MQTT event를 발행하여 실시간 알림을 발생시키고, 중복 알림 방지를 위해 해당 카메라에는 **10초 쿨다운**을 적용합니다.
+
+### 2. 기본 기준값 및 관련 코드 위치
+
+| 기준 설정 항목 | 기본 설정값 | 역할 및 설명 | 소스 코드 위치 |
+| :--- | :--- | :--- | :--- |
+| **쓰러짐 확률 임계값<br>(Action Threshold)** | `0.3` | `Faint` 클래스 확률이 `0.3` 이상이어야 쓰러짐 후보로 판정합니다. (환경변수 `ACTION_THRESHOLD`로 오버라이드 가능) | [classifier.py:330](file:///C:/Users/user/ai-develop/ai/action/classifier.py#L330)<br>[faint_post_processing.py:1](file:///C:/Users/user/ai-develop/ai/action/faint_post_processing.py#L1) |
+| **연속 감지 횟수<br>(Consecutive Count)** | `3` | 동일 track에서 연속 3프레임 이상 `Faint` 후보여야 알림을 발생시킵니다. | [faint_post_processing.py:2](file:///C:/Users/user/ai-develop/ai/action/faint_post_processing.py#L2) |
+| **재알림 쿨다운<br>(Cooldown Seconds)** | `10초` | 동일 카메라에서 알림 발생 후 10초간 중복 알림을 차단합니다. | [faint_post_processing.py:3](file:///C:/Users/user/ai-develop/ai/action/faint_post_processing.py#L3) |
+| **LSTM 시퀀스 길이** | `30` | LSTM 모델의 입력 시퀀스 윈도우 크기입니다. | [lstm_contract.py:6](file:///C:/Users/user/ai-develop/ai/action/lstm_contract.py#L6) |
+| **시퀀스 stride** | `15` | 시퀀스 윈도우가 이동하는 간격(stride)입니다. | [lstm_contract.py:6](file:///C:/Users/user/ai-develop/ai/action/lstm_contract.py#L6) |
+
+### 3. 실제 판정 논리 조건 요약
+
+```text
+Faint 확률 >= 0.3 (또는 $ACTION_THRESHOLD)
+AND
+동일한 track_id에서 연속 3회 감지
+AND
+카메라별 쿨다운 10초가 경과함
+=> 최종 쓰러짐 알림 MQTT event 발행
+```
+
 ## 입력
 
 - `rtsp://<host>:8554/{cameraLoginId}`
