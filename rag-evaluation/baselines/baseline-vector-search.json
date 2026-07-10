@@ -1,7 +1,7 @@
 {
-  "runId": "20260710-141332562_b5f11c2_baseline-vector-search",
-  "timestamp": "2026-07-10T14:13:32.564Z",
-  "gitCommit": "b5f11c2",
+  "runId": "20260710-142718274_44f3412_baseline-vector-search",
+  "timestamp": "2026-07-10T14:27:18.276Z",
+  "gitCommit": "44f3412",
   "gitBranch": "main",
   "dirtyWorkingTree": true,
   "experimentName": "baseline-vector-search",
@@ -34,8 +34,8 @@
     "metadataFilterAccuracy": 0,
     "duplicateIncidentOrDocumentCount": 140,
     "noResultAccuracy": 0,
-    "p50LatencyMs": 0.6985000000000241,
-    "p95LatencyMs": 1.754199999999969,
+    "p50LatencyMs": 0.7065999999999804,
+    "p95LatencyMs": 1.6440000000000055,
     "meanRetrievedChunks": 5,
     "failureTaxonomy": {
       "EXPECTED_DOC_NOT_RETRIEVED": 11,
@@ -57,5 +57,5 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260710-141332562_b5f11c2_baseline-vector-search"
+  "runDir": "rag-evaluation/runs/20260710-142718274_44f3412_baseline-vector-search"
 }

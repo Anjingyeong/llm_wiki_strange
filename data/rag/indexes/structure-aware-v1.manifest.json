@@ -5,10 +5,10 @@
   "embeddingDimensions": 256,
   "documentCount": 39,
   "chunkCount": 585,
-  "generatedAt": "2026-07-10T14:13:59.673Z",
-  "sourceCommit": "b5f11c2",
+  "generatedAt": "2026-07-10T14:24:46.876Z",
+  "sourceCommit": "174e3f9",
   "indexPath": "data/rag/indexes/structure-aware-v1.json",
   "meanChunkChars": 272,
   "duplicateDocRatio": 1,
-  "manifestHash": "1ae8b590331908ec"
+  "manifestHash": "a1a224ae87be78ba"
 }
