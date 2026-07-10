@@ -1,7 +1,7 @@
 {
-  "runId": "20260710-142718274_44f3412_baseline-vector-search",
-  "timestamp": "2026-07-10T14:27:18.276Z",
-  "gitCommit": "44f3412",
+  "runId": "20260710-151709249_8fb6dbd_baseline-vector-search",
+  "timestamp": "2026-07-10T15:17:09.249Z",
+  "gitCommit": "8fb6dbd",
   "gitBranch": "main",
   "dirtyWorkingTree": true,
   "experimentName": "baseline-vector-search",
@@ -13,8 +13,8 @@
   "rerankerModel": "none",
   "topK": 5,
   "datasetVersion": "golden_queries.v1",
-  "documentCount": 39,
-  "chunkCount": 585,
+  "documentCount": 40,
+  "chunkCount": 628,
   "environment": {
     "node": "v22.22.0",
     "platform": "win32",
@@ -32,16 +32,16 @@
     "mrr": 0.6456666666666666,
     "ndcgAt5": 0.5219162383873163,
     "metadataFilterAccuracy": 0,
-    "duplicateIncidentOrDocumentCount": 140,
+    "duplicateIncidentOrDocumentCount": 137,
     "noResultAccuracy": 0,
-    "p50LatencyMs": 0.7065999999999804,
-    "p95LatencyMs": 1.6440000000000055,
+    "p50LatencyMs": 0.7006999999999834,
+    "p95LatencyMs": 1.7490999999999985,
     "meanRetrievedChunks": 5,
     "failureTaxonomy": {
       "EXPECTED_DOC_NOT_RETRIEVED": 11,
       "WRONG_TOP1": 11,
       "LOW_SIMILARITY": 0,
-      "KEYWORD_MISS": 6,
+      "KEYWORD_MISS": 7,
       "SEMANTIC_MISS": 11,
       "FILTER_FAILURE": 3,
       "DUPLICATE_RESULT": 46,
@@ -57,5 +57,5 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260710-142718274_44f3412_baseline-vector-search"
+  "runDir": "rag-evaluation/runs/20260710-151709249_8fb6dbd_baseline-vector-search"
 }
