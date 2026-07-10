@@ -35,7 +35,10 @@ async function main() {
   const topK = Number(process.env.RAG_TOP_K || config.topK || 5);
 
   const datasetPath = join(ROOT, config.datasetPath || 'rag-evaluation/datasets/golden_queries.v1.jsonl');
-  const indexPath = join(ROOT, config.indexPath || 'data/ragVectorIndex.json');
+  const indexPath = resolve(
+    ROOT,
+    process.env.RAG_INDEX_PATH || config.indexPath || 'data/ragVectorIndex.json',
+  );
   const dataset = await loadJsonl(datasetPath);
   const index = JSON.parse(await readFile(indexPath, 'utf8'));
   const git = collectGitMeta(ROOT);
@@ -218,7 +221,9 @@ async function main() {
     await writeJson(baselinePath, { ...manifest, metrics, runDir: relativePosix(runDir) });
   }
 
-  if (promotion.promote) {
+  const updateBest = process.env.RAG_EVAL_UPDATE_BEST !== 'false';
+  const shouldPromote = Boolean(promotion.promote && updateBest);
+  if (shouldPromote) {
     await writeJson(bestPath, {
       runId,
       experimentName,
@@ -243,7 +248,7 @@ async function main() {
     ndcgAt5: metrics.ndcgAt5,
     noResultAccuracy: metrics.noResultAccuracy,
     p95LatencyMs: metrics.p95LatencyMs,
-    promoted: promotion.promote,
+    promoted: shouldPromote,
   });
 
   await writeFailureTaxonomyCsv(join(ROOT, config.failureTaxonomyPath || 'rag-evaluation/failure-taxonomy.csv'), taxonomyCounts);
@@ -253,10 +258,11 @@ async function main() {
     'utf8',
   );
 
-  console.log(JSON.stringify({
+  const summary = {
     runId,
     runDir: relativePosix(runDir),
-    promoted: promotion.promote,
+    promoted: shouldPromote,
+    eligibleForPromotion: promotion.promote,
     hitAt5: round4(metrics.hitAt5),
     recallAt5: round4(metrics.recallAt5),
     mrr: round4(metrics.mrr),
@@ -264,7 +270,10 @@ async function main() {
     noResultAccuracy: round4(metrics.noResultAccuracy),
     p95LatencyMs: round4(metrics.p95LatencyMs),
     topFailures: Object.entries(taxonomyCounts).sort((a, b) => b[1] - a[1]).slice(0, 5),
-  }, null, 2));
+  };
+  console.log(JSON.stringify(summary, null, 2));
+  // Machine-parseable single line for experiment runners
+  console.log(`EVAL_SUMMARY_JSON:${JSON.stringify(summary)}`);
 }
 
 function matchesFilters(chunk, filters) {

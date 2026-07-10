@@ -1,0 +1,24 @@
+{
+  "runId": "20260710-141225714_b5f11c2_baseline-legacy-chunking",
+  "timestamp": "2026-07-10T14:12:25.716Z",
+  "gitCommit": "b5f11c2",
+  "gitBranch": "main",
+  "dirtyWorkingTree": true,
+  "experimentName": "baseline-legacy-chunking",
+  "retrievalMode": "baseline",
+  "embeddingModel": "local-hash-tfidf",
+  "embeddingDimension": 256,
+  "chunkingVersion": "section-blocks-v1",
+  "indexVersion": 1,
+  "rerankerModel": "none",
+  "topK": 5,
+  "datasetVersion": "golden_queries.v1",
+  "documentCount": 39,
+  "chunkCount": 513,
+  "environment": {
+    "node": "v22.22.0",
+    "platform": "win32",
+    "evaluateAnswer": false,
+    "enableLlmAnswer": false
+  }
+}

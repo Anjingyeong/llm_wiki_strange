@@ -1,0 +1,14 @@
+{
+  "indexVersion": "structure-aware-contextual-v1-2",
+  "chunkSchemaVersion": "structure-aware-contextual-v1",
+  "embeddingVersion": "local-hash-tfidf-v1",
+  "embeddingDimensions": 256,
+  "documentCount": 39,
+  "chunkCount": 585,
+  "generatedAt": "2026-07-10T14:13:23.593Z",
+  "sourceCommit": "b5f11c2",
+  "indexPath": "data/rag/indexes/structure-aware-contextual-v1.json",
+  "meanChunkChars": 439,
+  "duplicateDocRatio": 1,
+  "manifestHash": "77af4e649166a338"
+}

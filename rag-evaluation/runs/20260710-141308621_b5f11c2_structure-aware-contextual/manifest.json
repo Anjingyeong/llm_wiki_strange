@@ -1,0 +1,24 @@
+{
+  "runId": "20260710-141308621_b5f11c2_structure-aware-contextual",
+  "timestamp": "2026-07-10T14:13:08.621Z",
+  "gitCommit": "b5f11c2",
+  "gitBranch": "main",
+  "dirtyWorkingTree": true,
+  "experimentName": "structure-aware-contextual",
+  "retrievalMode": "baseline",
+  "embeddingModel": "local-hash-tfidf",
+  "embeddingDimension": 256,
+  "chunkingVersion": "section-blocks-v1",
+  "indexVersion": 2,
+  "rerankerModel": "none",
+  "topK": 5,
+  "datasetVersion": "golden_queries.v1",
+  "documentCount": 39,
+  "chunkCount": 585,
+  "environment": {
+    "node": "v22.22.0",
+    "platform": "win32",
+    "evaluateAnswer": false,
+    "enableLlmAnswer": false
+  }
+}

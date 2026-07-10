@@ -71,6 +71,21 @@ npm run rag:leaderboard
 결과 위치: `rag-evaluation/` (`datasets/`, `runs/`, `baselines/`, `best.json`, `leaderboard.csv`).  
 평가 원칙·승격 정책: `rag-evaluation/config/`. 문제 분석: `rag-evaluation/baseline-search-problems.md`.
 
+### Chunking experiments (stage-2)
+
+Legacy chunking is preserved (`legacy-v1`). Structure-aware schemas:
+
+- `structure-aware-v1`
+- `structure-aware-contextual-v1`
+
+```bash
+npm run rag:chunk-experiment
+```
+
+Versioned indexes: `data/rag/indexes/*.json`
+Manifest/pointer: `data/rag/index-manifest.json`, `data/rag/current-index.json`
+Promotion updates `best.json` and the operational pointer only when policy passes.
+
 `npm run build`는 Wiki 검색 인덱스와 RAG vector store를 모두 다시 생성하므로, 배포 전 문서 수정분이 반영된다.
 
 ## Grounded Answer Policy

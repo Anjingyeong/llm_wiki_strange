@@ -1,0 +1,34 @@
+{
+  "against": "20260710-140840695_c5ad4ce_baseline-vector-search",
+  "promote": false,
+  "reasons": [
+    "quality gain recallΔ=0.0300 mrrΔ=0.0650"
+  ],
+  "regressions": [
+    "p95 latency increased by 44.7% > 30%"
+  ],
+  "candidate": {
+    "hitAt1": 0.54,
+    "hitAt3": 0.74,
+    "hitAt5": 0.74,
+    "recallAt5": 0.4766666666666666,
+    "mrr": 0.6266666666666666,
+    "ndcgAt5": 0.4858684655004252,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 1.6105999999999767,
+    "duplicateIncidentOrDocumentCount": 158
+  },
+  "best": {
+    "hitAt1": 0.52,
+    "hitAt3": 0.6,
+    "hitAt5": 0.62,
+    "recallAt5": 0.44666666666666666,
+    "mrr": 0.5616666666666666,
+    "ndcgAt5": 0.4571722841319304,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 1.1131000000000313,
+    "duplicateIncidentOrDocumentCount": 166
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "indexVersion": "legacy-v1-1",
+  "chunkSchemaVersion": "legacy-v1",
+  "embeddingVersion": "local-hash-tfidf-v1",
+  "embeddingDimensions": 256,
+  "documentCount": 39,
+  "chunkCount": 513,
+  "generatedAt": "2026-07-10T14:13:38.724Z",
+  "sourceCommit": "b5f11c2",
+  "indexPath": "data/rag/indexes/legacy-v1.json",
+  "meanChunkChars": 290,
+  "duplicateDocRatio": 1,
+  "manifestHash": "d261a4e7b366195d"
+}

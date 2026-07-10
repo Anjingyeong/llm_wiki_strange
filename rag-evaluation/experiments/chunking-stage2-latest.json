@@ -1,0 +1,244 @@
+{
+  "baseline": {
+    "experiment": "baseline-legacy-chunking",
+    "schemaVersion": "legacy-v1",
+    "indexPath": "data/rag/indexes/legacy-v1.json",
+    "runId": "20260710-141322262_b5f11c2_baseline-legacy-chunking",
+    "runDir": "rag-evaluation/runs/20260710-141322262_b5f11c2_baseline-legacy-chunking",
+    "metrics": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.52,
+      "hitAt3": 0.6,
+      "hitAt5": 0.62,
+      "recallAt5": 0.44666666666666666,
+      "mrr": 0.5616666666666666,
+      "ndcgAt5": 0.4571722841319304,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 166,
+      "noResultAccuracy": 0,
+      "p50LatencyMs": 0.7235000000000014,
+      "p95LatencyMs": 1.3444999999999823,
+      "meanRetrievedChunks": 5,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 19,
+        "WRONG_TOP1": 5,
+        "LOW_SIMILARITY": 0,
+        "KEYWORD_MISS": 9,
+        "SEMANTIC_MISS": 19,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 5,
+        "STALE_DOCUMENT_SELECTED": 0
+      },
+      "answerFaithfulness": null,
+      "citationAccuracy": null,
+      "answerRelevance": null,
+      "noAnswerAccuracy": null,
+      "meanInputTokens": null,
+      "meanOutputTokens": null,
+      "meanCost": null,
+      "p95EndToEndLatencyMs": null
+    },
+    "chunkCount": 513,
+    "meanChunkChars": 290,
+    "duplicateDocRatio": 1
+  },
+  "comparisons": [
+    {
+      "experiment": "structure-aware-only",
+      "schemaVersion": "structure-aware-v1",
+      "vsLegacy": {
+        "hitAt5Delta": 0.16,
+        "recallAt5Delta": 0.08,
+        "mrrDelta": 0.084,
+        "ndcgAt5Delta": 0.0647,
+        "p95LatencyDeltaRatio": 0.0701,
+        "chunkCountDelta": 72,
+        "meanChunkCharsDelta": -18,
+        "promoteAgainstLegacy": true,
+        "reasons": [
+          "quality gain recallΔ=0.0800 mrrΔ=0.0840"
+        ],
+        "regressions": []
+      },
+      "vsBest": {
+        "promote": true,
+        "reasons": [
+          "quality gain recallΔ=0.0800 mrrΔ=0.0840"
+        ],
+        "regressions": []
+      },
+      "metrics": {
+        "hitAt1": 0.56,
+        "hitAt5": 0.78,
+        "recallAt5": 0.5266666666666666,
+        "mrr": 0.6456666666666666,
+        "ndcgAt5": 0.5219162383873163,
+        "noResultAccuracy": 0,
+        "p95LatencyMs": 1.438699999999983,
+        "duplicateIncidentOrDocumentCount": 140,
+        "meanRetrievedChunks": 5,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 11,
+          "WRONG_TOP1": 11,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 6,
+          "SEMANTIC_MISS": 11,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 46,
+          "NO_ANSWER_FAILURE": 5,
+          "STALE_DOCUMENT_SELECTED": 0
+        }
+      },
+      "chunkCount": 585,
+      "meanChunkChars": 272,
+      "runDir": "rag-evaluation/runs/20260710-141323201_b5f11c2_structure-aware-only",
+      "indexPath": "data/rag/indexes/structure-aware-v1.json"
+    },
+    {
+      "experiment": "structure-aware-contextual",
+      "schemaVersion": "structure-aware-contextual-v1",
+      "vsLegacy": {
+        "hitAt5Delta": 0.12,
+        "recallAt5Delta": 0.03,
+        "mrrDelta": 0.065,
+        "ndcgAt5Delta": 0.0287,
+        "p95LatencyDeltaRatio": -0.0803,
+        "chunkCountDelta": 72,
+        "meanChunkCharsDelta": 149,
+        "promoteAgainstLegacy": true,
+        "reasons": [
+          "quality gain recallΔ=0.0300 mrrΔ=0.0650"
+        ],
+        "regressions": []
+      },
+      "vsBest": {
+        "promote": true,
+        "reasons": [
+          "quality gain recallΔ=0.0300 mrrΔ=0.0650"
+        ],
+        "regressions": []
+      },
+      "metrics": {
+        "hitAt1": 0.54,
+        "hitAt5": 0.74,
+        "recallAt5": 0.4766666666666666,
+        "mrr": 0.6266666666666666,
+        "ndcgAt5": 0.4858684655004252,
+        "noResultAccuracy": 0,
+        "p95LatencyMs": 1.23660000000001,
+        "duplicateIncidentOrDocumentCount": 158,
+        "meanRetrievedChunks": 5,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 13,
+          "WRONG_TOP1": 10,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 5,
+          "SEMANTIC_MISS": 13,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 49,
+          "NO_ANSWER_FAILURE": 5,
+          "STALE_DOCUMENT_SELECTED": 2
+        }
+      },
+      "chunkCount": 585,
+      "meanChunkChars": 439,
+      "runDir": "rag-evaluation/runs/20260710-141324157_b5f11c2_structure-aware-contextual",
+      "indexPath": "data/rag/indexes/structure-aware-contextual-v1.json"
+    }
+  ],
+  "promotionResult": {
+    "promoted": true,
+    "selected": "structure-aware-v1",
+    "experiment": "structure-aware-only",
+    "note": "best.json/pointer/operational index updated."
+  },
+  "results": [
+    {
+      "experiment": "baseline-legacy-chunking",
+      "runId": "20260710-141322262_b5f11c2_baseline-legacy-chunking",
+      "metrics": {
+        "hitAt1": 0.52,
+        "hitAt5": 0.62,
+        "recallAt5": 0.44666666666666666,
+        "mrr": 0.5616666666666666,
+        "ndcgAt5": 0.4571722841319304,
+        "noResultAccuracy": 0,
+        "p95LatencyMs": 1.3444999999999823,
+        "duplicateIncidentOrDocumentCount": 166,
+        "meanRetrievedChunks": 5,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 19,
+          "WRONG_TOP1": 5,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 9,
+          "SEMANTIC_MISS": 19,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 50,
+          "NO_ANSWER_FAILURE": 5,
+          "STALE_DOCUMENT_SELECTED": 0
+        }
+      },
+      "chunkCount": 513,
+      "meanChunkChars": 290
+    },
+    {
+      "experiment": "structure-aware-only",
+      "runId": "20260710-141323201_b5f11c2_structure-aware-only",
+      "metrics": {
+        "hitAt1": 0.56,
+        "hitAt5": 0.78,
+        "recallAt5": 0.5266666666666666,
+        "mrr": 0.6456666666666666,
+        "ndcgAt5": 0.5219162383873163,
+        "noResultAccuracy": 0,
+        "p95LatencyMs": 1.438699999999983,
+        "duplicateIncidentOrDocumentCount": 140,
+        "meanRetrievedChunks": 5,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 11,
+          "WRONG_TOP1": 11,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 6,
+          "SEMANTIC_MISS": 11,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 46,
+          "NO_ANSWER_FAILURE": 5,
+          "STALE_DOCUMENT_SELECTED": 0
+        }
+      },
+      "chunkCount": 585,
+      "meanChunkChars": 272
+    },
+    {
+      "experiment": "structure-aware-contextual",
+      "runId": "20260710-141324157_b5f11c2_structure-aware-contextual",
+      "metrics": {
+        "hitAt1": 0.54,
+        "hitAt5": 0.74,
+        "recallAt5": 0.4766666666666666,
+        "mrr": 0.6266666666666666,
+        "ndcgAt5": 0.4858684655004252,
+        "noResultAccuracy": 0,
+        "p95LatencyMs": 1.23660000000001,
+        "duplicateIncidentOrDocumentCount": 158,
+        "meanRetrievedChunks": 5,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 13,
+          "WRONG_TOP1": 10,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 5,
+          "SEMANTIC_MISS": 13,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 49,
+          "NO_ANSWER_FAILURE": 5,
+          "STALE_DOCUMENT_SELECTED": 2
+        }
+      },
+      "chunkCount": 585,
+      "meanChunkChars": 439
+    }
+  ]
+}

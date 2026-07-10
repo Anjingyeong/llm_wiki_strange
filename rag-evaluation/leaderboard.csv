@@ -6,3 +6,14 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260710-140820223_c5ad4ce_baseline-vector-search,2026-07-10T14:08:20.223Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.1193,false
 20260710-140839367_c5ad4ce_baseline-vector-search,2026-07-10T14:08:39.367Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.5018,false
 20260710-140840695_c5ad4ce_baseline-vector-search,2026-07-10T14:08:40.695Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.1131,false
+20260710-141225714_b5f11c2_baseline-legacy-chunking,2026-07-10T14:12:25.716Z,baseline-legacy-chunking,baseline,b5f11c2,0.52,0.62,0.4467,0.5617,0.4572,0,1.2178,false
+20260710-141242579_b5f11c2_baseline-legacy-chunking,2026-07-10T14:12:42.581Z,baseline-legacy-chunking,baseline,b5f11c2,0.52,0.62,0.4467,0.5617,0.4572,0,1.4738,false
+20260710-141243435_b5f11c2_structure-aware-only,2026-07-10T14:12:43.436Z,structure-aware-only,baseline,b5f11c2,0.56,0.78,0.5267,0.6457,0.5219,0,1.5739,true
+20260710-141244280_b5f11c2_structure-aware-contextual,2026-07-10T14:12:44.281Z,structure-aware-contextual,baseline,b5f11c2,0.54,0.74,0.4767,0.6267,0.4859,0,5.0544,false
+20260710-141306534_b5f11c2_baseline-legacy-chunking,2026-07-10T14:13:06.535Z,baseline-legacy-chunking,baseline,b5f11c2,0.52,0.62,0.4467,0.5617,0.4572,0,1.5308,false
+20260710-141307526_b5f11c2_structure-aware-only,2026-07-10T14:13:07.527Z,structure-aware-only,baseline,b5f11c2,0.56,0.78,0.5267,0.6457,0.5219,0,1.7649,false
+20260710-141308621_b5f11c2_structure-aware-contextual,2026-07-10T14:13:08.621Z,structure-aware-contextual,baseline,b5f11c2,0.54,0.74,0.4767,0.6267,0.4859,0,1.6106,false
+20260710-141322262_b5f11c2_baseline-legacy-chunking,2026-07-10T14:13:22.263Z,baseline-legacy-chunking,baseline,b5f11c2,0.52,0.62,0.4467,0.5617,0.4572,0,1.3445,false
+20260710-141323201_b5f11c2_structure-aware-only,2026-07-10T14:13:23.203Z,structure-aware-only,baseline,b5f11c2,0.56,0.78,0.5267,0.6457,0.5219,0,1.4387,false
+20260710-141324157_b5f11c2_structure-aware-contextual,2026-07-10T14:13:24.157Z,structure-aware-contextual,baseline,b5f11c2,0.54,0.74,0.4767,0.6267,0.4859,0,1.2366,false
+20260710-141332562_b5f11c2_baseline-vector-search,2026-07-10T14:13:32.564Z,baseline-vector-search,baseline,b5f11c2,0.56,0.78,0.5267,0.6457,0.5219,0,1.7542,false

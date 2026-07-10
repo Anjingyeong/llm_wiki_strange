@@ -10,6 +10,7 @@
     "rag:eval": "node scripts/rag-eval.mjs",
     "rag:report": "node scripts/rag-report.mjs",
     "rag:leaderboard": "node scripts/rag-leaderboard.mjs",
+    "rag:chunk-experiment": "node scripts/rag-chunk-experiment.mjs",
     "test": "node --test tests/*.test.mjs",
     "start": "node server.mjs",
     "build": "npm run generate:index && npm run rag:index && tsc -b && vite build",

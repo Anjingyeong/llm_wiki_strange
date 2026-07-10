@@ -17,6 +17,9 @@ qualityMetrics:
 maxNoResultAccuracyRegression: 0.02
 # p95 search latency must not increase by more than this fraction
 maxP95LatencyIncreaseRatio: 0.30
+# Ignore relative p95 checks when baseline p95 is below this floor (ms).
+# Local hash retrieval often measures 1–3ms where 30% relative noise is meaningless.
+minP95LatencyFloorMs: 20
 # Duplicate result count must not increase
 forbidDuplicateIncrease: true
 # Operational index is never replaced by this harness

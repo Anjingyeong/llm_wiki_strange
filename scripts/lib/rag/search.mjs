@@ -19,10 +19,16 @@ function chunkSearchText(chunk) {
     chunk.summary,
     chunk.category,
     chunk.sectionTitle ?? chunk.section,
+    chunk.headingPath,
+    chunk.chunkType,
+    chunk.contextualPrefix,
     ...normalizeList(chunk.tags),
+    ...normalizeList(chunk.codeSymbols),
+    ...normalizeList(chunk.referencedFiles),
     chunk.updatedAt,
     chunk.sourcePath,
     chunk.text,
+    chunk.content,
   ]
     .filter(Boolean)
     .join(' ');

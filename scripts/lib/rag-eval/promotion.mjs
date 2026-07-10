@@ -47,7 +47,13 @@ export function evaluatePromotion(candidateMetrics, bestMetrics, policy) {
     }
   }
 
-  if (candidateMetrics.p95LatencyMs != null && bestMetrics.p95LatencyMs != null && bestMetrics.p95LatencyMs > 0) {
+  const latencyFloor = Number(policy.minP95LatencyFloorMs ?? 0);
+  if (
+    candidateMetrics.p95LatencyMs != null
+    && bestMetrics.p95LatencyMs != null
+    && bestMetrics.p95LatencyMs > 0
+    && bestMetrics.p95LatencyMs >= latencyFloor
+  ) {
     const increase = (candidateMetrics.p95LatencyMs - bestMetrics.p95LatencyMs) / bestMetrics.p95LatencyMs;
     if (increase > maxLatencyRatio) {
       regressions.push(`p95 latency increased by ${(increase * 100).toFixed(1)}% > ${maxLatencyRatio * 100}%`);

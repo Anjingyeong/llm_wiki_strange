@@ -1,0 +1,7 @@
+{
+  "chunkSchemaVersion": "structure-aware-v1",
+  "indexPath": "data/rag/indexes/structure-aware-v1.json",
+  "updatedAt": "2026-07-10T14:13:24.378Z",
+  "runDir": "rag-evaluation/runs/20260710-141323201_b5f11c2_structure-aware-only",
+  "note": "Promoted by structure-aware chunk experiment. Hybrid search code unchanged; pointer records active chunk schema."
+}
