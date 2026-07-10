@@ -1,0 +1,23 @@
+# Candidate auto-promotion thresholds (editable)
+requireTestsAndBuild: true
+# At least one of Recall@5 or MRR must improve by this amount vs best
+minRecallOrMrrDelta: 0.01
+# Other core quality metrics must not drop by more than this
+maxQualityRegression: 0.02
+# Metrics checked for regression when present
+qualityMetrics:
+  - hitAt1
+  - hitAt3
+  - hitAt5
+  - recallAt5
+  - mrr
+  - ndcgAt5
+  - metadataFilterAccuracy
+# No-result accuracy must not drop by more than this
+maxNoResultAccuracyRegression: 0.02
+# p95 search latency must not increase by more than this fraction
+maxP95LatencyIncreaseRatio: 0.30
+# Duplicate result count must not increase
+forbidDuplicateIncrease: true
+# Operational index is never replaced by this harness
+replaceOperationalIndexOnPromotion: false

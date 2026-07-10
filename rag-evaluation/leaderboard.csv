@@ -1,0 +1,8 @@
+runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,mrr,ndcgAt5,noResultAccuracy,p95LatencyMs,promoted
+20260710-140744_c5ad4ce_baseline-vector-search,2026-07-10T14:07:44.748Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,2.4749,true
+20260710-140808_c5ad4ce_baseline-vector-search,2026-07-10T14:08:08.017Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.3872,false
+20260710-140808_c5ad4ce_baseline-vector-search,2026-07-10T14:08:08.970Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.3637,false
+20260710-140819166_c5ad4ce_baseline-vector-search,2026-07-10T14:08:19.167Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.3281,false
+20260710-140820223_c5ad4ce_baseline-vector-search,2026-07-10T14:08:20.223Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.1193,false
+20260710-140839367_c5ad4ce_baseline-vector-search,2026-07-10T14:08:39.367Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.5018,false
+20260710-140840695_c5ad4ce_baseline-vector-search,2026-07-10T14:08:40.695Z,baseline-vector-search,baseline,c5ad4ce,0.52,0.62,0.4467,0.5617,0.4572,0,1.1131,false

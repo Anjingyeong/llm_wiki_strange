@@ -58,6 +58,19 @@ Wiki 문서는 정식 `title`과 UI 표시용 `navTitle`을 분리한다. 정식
 npm run rag:index
 ```
 
+### Retrieval evaluation (baseline harness)
+
+검색 품질은 운영 인덱스를 바꾸지 않고 Golden Query Dataset으로 자동 평가한다. 기본 모드는 pure vector `baseline`이다.
+
+```bash
+npm run rag:eval
+npm run rag:report
+npm run rag:leaderboard
+```
+
+결과 위치: `rag-evaluation/` (`datasets/`, `runs/`, `baselines/`, `best.json`, `leaderboard.csv`).  
+평가 원칙·승격 정책: `rag-evaluation/config/`. 문제 분석: `rag-evaluation/baseline-search-problems.md`.
+
 `npm run build`는 Wiki 검색 인덱스와 RAG vector store를 모두 다시 생성하므로, 배포 전 문서 수정분이 반영된다.
 
 ## Grounded Answer Policy
