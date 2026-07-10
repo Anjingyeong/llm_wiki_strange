@@ -1,0 +1,675 @@
+{
+  "candidates": {
+    "vector-only-structure-aware": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.56,
+      "hitAt3": 0.74,
+      "hitAt5": 0.78,
+      "recallAt5": 0.5266666666666666,
+      "mrr": 0.6456666666666666,
+      "ndcgAt5": 0.5219162383873163,
+      "exactTermHitAt5": 0.9090909090909091,
+      "semanticQueryRecallAt5": 0.4942528735632184,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 140,
+      "wrongTop1Count": 11,
+      "noResultAccuracy": 0,
+      "p50LatencyMs": 0.3181000000004133,
+      "p95LatencyMs": 0.5425000000013824,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 11,
+        "WRONG_TOP1": 11,
+        "LOW_SIMILARITY": 0,
+        "KEYWORD_MISS": 6,
+        "SEMANTIC_MISS": 11,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 5,
+        "STALE_DOCUMENT_SELECTED": 0
+      }
+    },
+    "lexical-only": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.64,
+      "hitAt3": 0.74,
+      "hitAt5": 0.76,
+      "recallAt5": 0.5133333333333333,
+      "mrr": 0.6916666666666668,
+      "ndcgAt5": 0.5289903660305627,
+      "exactTermHitAt5": 0.8181818181818182,
+      "semanticQueryRecallAt5": 0.5287356321839081,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 146,
+      "wrongTop1Count": 6,
+      "noResultAccuracy": 0.4,
+      "p50LatencyMs": 60.33860000000095,
+      "p95LatencyMs": 77.17950000000019,
+      "meanRetrievedChunks": 4.818181818181818,
+      "lexicalVectorOverlap": 0,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 12,
+        "WRONG_TOP1": 6,
+        "LOW_SIMILARITY": 0,
+        "KEYWORD_MISS": 3,
+        "SEMANTIC_MISS": 12,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 49,
+        "NO_ANSWER_FAILURE": 3,
+        "STALE_DOCUMENT_SELECTED": 1
+      }
+    },
+    "hybrid-rrf": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.62,
+      "hitAt3": 0.76,
+      "hitAt5": 0.8,
+      "recallAt5": 0.5499999999999999,
+      "mrr": 0.6966666666666668,
+      "ndcgAt5": 0.5559183529595951,
+      "exactTermHitAt5": 0.9090909090909091,
+      "semanticQueryRecallAt5": 0.5229885057471265,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 140,
+      "wrongTop1Count": 9,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 65.60759999999937,
+      "p95LatencyMs": 83.62829999999667,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4003729603729604,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 10,
+        "WRONG_TOP1": 9,
+        "LOW_SIMILARITY": 40,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    },
+    "hybrid-diversify-max1": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.62,
+      "hitAt3": 0.82,
+      "hitAt5": 0.86,
+      "recallAt5": 0.6766666666666667,
+      "mrr": 0.7166666666666666,
+      "ndcgAt5": 0.6383052583704337,
+      "exactTermHitAt5": 1,
+      "semanticQueryRecallAt5": 0.6551724137931034,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 29,
+      "wrongTop1Count": 12,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 59.77779999999984,
+      "p95LatencyMs": 78.31819999999789,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4003729603729604,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 7,
+        "WRONG_TOP1": 12,
+        "LOW_SIMILARITY": 43,
+        "KEYWORD_MISS": 2,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 10,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 0
+      }
+    },
+    "hybrid-diversify-max2": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.62,
+      "hitAt3": 0.82,
+      "hitAt5": 0.86,
+      "recallAt5": 0.6233333333333333,
+      "mrr": 0.7166666666666666,
+      "ndcgAt5": 0.609303140251333,
+      "exactTermHitAt5": 1,
+      "semanticQueryRecallAt5": 0.5919540229885056,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 91,
+      "wrongTop1Count": 12,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 60.5640999999996,
+      "p95LatencyMs": 81.21600000000035,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4003729603729604,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 7,
+        "WRONG_TOP1": 12,
+        "LOW_SIMILARITY": 43,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    },
+    "hybrid-contextual": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.64,
+      "hitAt3": 0.78,
+      "hitAt5": 0.8,
+      "recallAt5": 0.5133333333333333,
+      "mrr": 0.705,
+      "ndcgAt5": 0.5339551093014984,
+      "exactTermHitAt5": 0.9090909090909091,
+      "semanticQueryRecallAt5": 0.5114942528735632,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 149,
+      "wrongTop1Count": 8,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 68.84809999999925,
+      "p95LatencyMs": 90.0650999999998,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4006526806526807,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 10,
+        "WRONG_TOP1": 8,
+        "LOW_SIMILARITY": 40,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 52,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    },
+    "hybrid-contextual-diversify-max2": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.64,
+      "hitAt3": 0.84,
+      "hitAt5": 0.88,
+      "recallAt5": 0.6133333333333333,
+      "mrr": 0.7333333333333334,
+      "ndcgAt5": 0.6034244361907437,
+      "exactTermHitAt5": 1,
+      "semanticQueryRecallAt5": 0.5919540229885057,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 95,
+      "wrongTop1Count": 12,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 69.03029999999853,
+      "p95LatencyMs": 88.85129999999845,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4006526806526807,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 6,
+        "WRONG_TOP1": 12,
+        "LOW_SIMILARITY": 44,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 52,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    }
+  },
+  "byCategory": {
+    "vector-only-structure-aware": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 0.9090909090909091,
+        "recallAt5": 0.5909090909090909,
+        "mrr": 0.7954545454545454,
+        "wrongTop1Count": 2
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.4444444444444444,
+        "recallAt5": 0.2962962962962963,
+        "mrr": 0.30000000000000004,
+        "wrongTop1Count": 2
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.5833333333333334,
+        "mrr": 0.7222222222222223,
+        "wrongTop1Count": 3
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.38095238095238093,
+        "mrr": 0.6904761904761905,
+        "wrongTop1Count": 2
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.5,
+        "recallAt5": 0.5,
+        "mrr": 0.5,
+        "wrongTop1Count": 0
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.625,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.7857142857142857,
+        "mrr": 0.6666666666666666,
+        "wrongTop1Count": 2
+      }
+    },
+    "lexical-only": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 0.8181818181818182,
+        "recallAt5": 0.5909090909090909,
+        "mrr": 0.7727272727272727,
+        "wrongTop1Count": 1
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.7777777777777778,
+        "recallAt5": 0.5,
+        "mrr": 0.6111111111111112,
+        "wrongTop1Count": 3
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 0.6666666666666666,
+        "recallAt5": 0.5,
+        "mrr": 0.5555555555555555,
+        "wrongTop1Count": 1
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.75,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.3333333333333333,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.3333333333333333,
+        "wrongTop1Count": 0
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.4583333333333333,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.7857142857142857,
+        "mrr": 0.8571428571428571,
+        "wrongTop1Count": 0
+      }
+    },
+    "hybrid-rrf": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 0.9090909090909091,
+        "recallAt5": 0.6212121212121212,
+        "mrr": 0.8030303030303031,
+        "wrongTop1Count": 2
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.5555555555555556,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.3611111111111111,
+        "wrongTop1Count": 3
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.6666666666666666,
+        "mrr": 0.8333333333333334,
+        "wrongTop1Count": 2
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.380952380952381,
+        "mrr": 0.75,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.5,
+        "recallAt5": 0.5,
+        "mrr": 0.4166666666666667,
+        "wrongTop1Count": 1
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.625,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.7857142857142857,
+        "mrr": 0.8571428571428571,
+        "wrongTop1Count": 0
+      }
+    },
+    "hybrid-diversify-max1": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 1,
+        "recallAt5": 0.7575757575757577,
+        "mrr": 0.8333333333333333,
+        "wrongTop1Count": 3
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.6666666666666666,
+        "recallAt5": 0.48148148148148145,
+        "mrr": 0.39814814814814814,
+        "wrongTop1Count": 4
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.75,
+        "mrr": 0.8333333333333334,
+        "wrongTop1Count": 2
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.5714285714285714,
+        "mrr": 0.75,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.5,
+        "recallAt5": 0.5,
+        "mrr": 0.4166666666666667,
+        "wrongTop1Count": 1
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.875,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 1,
+        "recallAt5": 0.8809523809523808,
+        "mrr": 0.9047619047619048,
+        "wrongTop1Count": 1
+      }
+    },
+    "hybrid-diversify-max2": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 1,
+        "recallAt5": 0.6818181818181818,
+        "mrr": 0.8333333333333333,
+        "wrongTop1Count": 3
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.6666666666666666,
+        "recallAt5": 0.48148148148148145,
+        "mrr": 0.39814814814814814,
+        "wrongTop1Count": 4
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.6666666666666666,
+        "mrr": 0.8333333333333334,
+        "wrongTop1Count": 2
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.42857142857142855,
+        "mrr": 0.75,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.5,
+        "recallAt5": 0.5,
+        "mrr": 0.4166666666666667,
+        "wrongTop1Count": 1
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.875,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 1,
+        "recallAt5": 0.8333333333333333,
+        "mrr": 0.9047619047619048,
+        "wrongTop1Count": 1
+      }
+    },
+    "hybrid-contextual": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 0.9090909090909091,
+        "recallAt5": 0.5757575757575757,
+        "mrr": 0.9090909090909091,
+        "wrongTop1Count": 0
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.6666666666666666,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.3796296296296296,
+        "wrongTop1Count": 4
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.6666666666666666,
+        "mrr": 0.75,
+        "wrongTop1Count": 3
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.7619047619047619,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.3333333333333333,
+        "recallAt5": 0.3333333333333333,
+        "mrr": 0.3333333333333333,
+        "wrongTop1Count": 0
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.625,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.7857142857142857,
+        "mrr": 0.8571428571428571,
+        "wrongTop1Count": 0
+      }
+    },
+    "hybrid-contextual-diversify-max2": {
+      "exact-term": {
+        "count": 11,
+        "hitAt5": 1,
+        "recallAt5": 0.6363636363636364,
+        "mrr": 0.9393939393939393,
+        "wrongTop1Count": 1
+      },
+      "paraphrase": {
+        "count": 9,
+        "hitAt5": 0.7777777777777778,
+        "recallAt5": 0.4444444444444444,
+        "mrr": 0.4074074074074074,
+        "wrongTop1Count": 5
+      },
+      "decision": {
+        "count": 6,
+        "hitAt5": 1,
+        "recallAt5": 0.6666666666666666,
+        "mrr": 0.75,
+        "wrongTop1Count": 3
+      },
+      "multi-doc": {
+        "count": 7,
+        "hitAt5": 0.8571428571428571,
+        "recallAt5": 0.4761904761904762,
+        "mrr": 0.7619047619047619,
+        "wrongTop1Count": 1
+      },
+      "filter": {
+        "count": 6,
+        "hitAt5": 0.5,
+        "recallAt5": 0.5,
+        "mrr": 0.4166666666666667,
+        "wrongTop1Count": 1
+      },
+      "unanswerable": {
+        "count": 5,
+        "hitAt5": 0,
+        "recallAt5": 0,
+        "mrr": 0,
+        "wrongTop1Count": 0
+      },
+      "conflict": {
+        "count": 4,
+        "hitAt5": 1,
+        "recallAt5": 0.875,
+        "mrr": 1,
+        "wrongTop1Count": 0
+      },
+      "mixed-lang": {
+        "count": 7,
+        "hitAt5": 1,
+        "recallAt5": 0.8333333333333333,
+        "mrr": 0.9047619047619048,
+        "wrongTop1Count": 1
+      }
+    }
+  },
+  "bestRrf": {
+    "id": "rrf-0",
+    "rrfK": 60,
+    "lexicalWeight": 1,
+    "vectorWeight": 1,
+    "metrics": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.62,
+      "hitAt3": 0.76,
+      "hitAt5": 0.8,
+      "recallAt5": 0.5499999999999999,
+      "mrr": 0.6966666666666668,
+      "ndcgAt5": 0.5559183529595951,
+      "exactTermHitAt5": 0.9090909090909091,
+      "semanticQueryRecallAt5": 0.5229885057471265,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 140,
+      "wrongTop1Count": 9,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 66.03929999999991,
+      "p95LatencyMs": 78.09900000000016,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4003729603729604,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 10,
+        "WRONG_TOP1": 9,
+        "LOW_SIMILARITY": 40,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    },
+    "wrongTop1Count": 9
+  }
+}

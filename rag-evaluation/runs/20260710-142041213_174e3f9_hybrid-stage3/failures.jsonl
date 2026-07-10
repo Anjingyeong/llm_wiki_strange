@@ -1,0 +1,732 @@
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"WRONG_TOP1","detail":"top1=Frame-Sync-Debug-Report","candidate":"vector-only-structure-aware"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of 2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log, Feature-Vector-51D-vs-54D, ADR-004-LSTM-Feature-Expansion","candidate":"vector-only-structure-aware"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"WRONG_TOP1","detail":"top1=AI-Output-JSON","candidate":"vector-only-structure-aware"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, Overview, Glossary","candidate":"vector-only-structure-aware"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"vector-only-structure-aware"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC, WebRTC-vs-HLS","candidate":"vector-only-structure-aware"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"vector-only-structure-aware"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema","candidate":"vector-only-structure-aware"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"vector-only-structure-aware"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"vector-only-structure-aware"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"vector-only-structure-aware"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"vector-only-structure-aware"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"vector-only-structure-aware"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"WRONG_TOP1","detail":"top1=Model-Decision-YOLO26n","candidate":"vector-only-structure-aware"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"vector-only-structure-aware"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"vector-only-structure-aware"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"WRONG_TOP1","detail":"top1=Evidence-Portfolio-Resume-Usage","candidate":"vector-only-structure-aware"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"vector-only-structure-aware"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"vector-only-structure-aware"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"KEYWORD_MISS","detail":"keywordHitRate=0.3333333333333333","candidate":"vector-only-structure-aware"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"vector-only-structure-aware"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"vector-only-structure-aware"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"vector-only-structure-aware"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"vector-only-structure-aware"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"vector-only-structure-aware"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"vector-only-structure-aware"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"vector-only-structure-aware"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-035","query":"사내 급여 정산 시스템 쿠팡 연동 API 스펙","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=0.3616","candidate":"vector-only-structure-aware"}
+{"id":"q-035","query":"사내 급여 정산 시스템 쿠팡 연동 API 스펙","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=0.2222","candidate":"vector-only-structure-aware"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=0.4801","candidate":"vector-only-structure-aware"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=0.2804","candidate":"vector-only-structure-aware"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=0.5691","candidate":"vector-only-structure-aware"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Benchmark-History","candidate":"vector-only-structure-aware"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"vector-only-structure-aware"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"vector-only-structure-aware"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"WRONG_TOP1","detail":"top1=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"vector-only-structure-aware"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"vector-only-structure-aware"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"vector-only-structure-aware"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"vector-only-structure-aware"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=MQTT-Event-Schema","candidate":"vector-only-structure-aware"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"vector-only-structure-aware"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, Overview, Glossary","candidate":"lexical-only"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Decision-YOLO26n, Model-Comparison","candidate":"lexical-only"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"WRONG_TOP1","detail":"top1=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"lexical-only"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"lexical-only"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"lexical-only"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-VLM-RAG-Event-Search-Decision","candidate":"lexical-only"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"lexical-only"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"lexical-only"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"WRONG_TOP1","detail":"top1=Benchmark-History","candidate":"lexical-only"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema","candidate":"lexical-only"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"lexical-only"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Evidence-TensorRT-Adoption-Decision","candidate":"lexical-only"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"lexical-only"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"lexical-only"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"lexical-only"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"lexical-only"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"lexical-only"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Bug-RTSP-Stream-404","candidate":"lexical-only"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"lexical-only"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"lexical-only"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"lexical-only"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"lexical-only"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"lexical-only"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-035","query":"사내 급여 정산 시스템 쿠팡 연동 API 스펙","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=12.7656","candidate":"lexical-only"}
+{"id":"q-035","query":"사내 급여 정산 시스템 쿠팡 연동 API 스펙","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=14.0717","candidate":"lexical-only"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"NO_ANSWER_FAILURE","detail":"unanswerable query returned chunks maxScore=11.6605","candidate":"lexical-only"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Benchmark-History","candidate":"lexical-only"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"SEMANTIC_MISS","detail":"vector returned unrelated high scores","candidate":"lexical-only"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"lexical-only"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"lexical-only"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=2026-06-30-Overlay-Tracking-Evidence-Log missing newer=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"lexical-only"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"lexical-only"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"lexical-only"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, Overview, Glossary","candidate":"hybrid-rrf"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-rrf"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0309","candidate":"hybrid-rrf"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0306","candidate":"hybrid-rrf"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"WRONG_TOP1","detail":"top1=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-rrf"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-rrf"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-rrf"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-rrf"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0277","candidate":"hybrid-rrf"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Model-Decision-YOLO26n","candidate":"hybrid-rrf"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema","candidate":"hybrid-rrf"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"hybrid-rrf"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=AI-Pipeline","candidate":"hybrid-rrf"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0301","candidate":"hybrid-rrf"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"hybrid-rrf"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-rrf"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"hybrid-rrf"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0307","candidate":"hybrid-rrf"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"WRONG_TOP1","detail":"top1=VLM-RAG-DBless-Mock-MVP","candidate":"hybrid-rrf"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-rrf"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-rrf"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"STALE_DOCUMENT_SELECTED","detail":"top1=Interview-Resume-Notes missing newer=2026-06-30-Overlay-Tracking-Evidence-Log","candidate":"hybrid-rrf"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-rrf"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"hybrid-rrf"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"KEYWORD_MISS","detail":"keywordHitRate=0.3333333333333333","candidate":"hybrid-rrf"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"hybrid-rrf"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"hybrid-rrf"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"hybrid-rrf"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"WRONG_TOP1","detail":"top1=Realtime-Camera-Runtime-Stabilization","candidate":"hybrid-rrf"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0251","candidate":"hybrid-rrf"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"hybrid-rrf"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"hybrid-rrf"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"hybrid-rrf"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"hybrid-rrf"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-rrf"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-rrf"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Benchmark-History","candidate":"hybrid-rrf"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-rrf"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-rrf"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-rrf"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-rrf"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=2026-06-30-Overlay-Tracking-Evidence-Log missing newer=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-rrf"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-rrf"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-rrf"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-rrf"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-rrf"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-rrf"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"WRONG_TOP1","detail":"top1=MJPEG-Display-Port-Normalization","candidate":"hybrid-diversify-max1"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-diversify-max1"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0309","candidate":"hybrid-diversify-max1"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0306","candidate":"hybrid-diversify-max1"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"WRONG_TOP1","detail":"top1=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-diversify-max1"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max1"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-diversify-max1"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-diversify-max1"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-diversify-max1"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0277","candidate":"hybrid-diversify-max1"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Model-Decision-YOLO26n","candidate":"hybrid-diversify-max1"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-VLM-RAG-Event-Search-Decision","candidate":"hybrid-diversify-max1"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0304","candidate":"hybrid-diversify-max1"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"hybrid-diversify-max1"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max1"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=AI-Pipeline","candidate":"hybrid-diversify-max1"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0301","candidate":"hybrid-diversify-max1"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"hybrid-diversify-max1"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-diversify-max1"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"hybrid-diversify-max1"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0307","candidate":"hybrid-diversify-max1"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"hybrid-diversify-max1"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"WRONG_TOP1","detail":"top1=VLM-RAG-DBless-Mock-MVP","candidate":"hybrid-diversify-max1"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-diversify-max1"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-diversify-max1"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max1"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"hybrid-diversify-max1"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"hybrid-diversify-max1"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"hybrid-diversify-max1"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"hybrid-diversify-max1"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max1"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"WRONG_TOP1","detail":"top1=Realtime-Camera-Runtime-Stabilization","candidate":"hybrid-diversify-max1"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0251","candidate":"hybrid-diversify-max1"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"hybrid-diversify-max1"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"hybrid-diversify-max1"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max1"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"hybrid-diversify-max1"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"hybrid-diversify-max1"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-diversify-max1"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max1"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max1"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max1"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max1"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max1"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"WRONG_TOP1","detail":"top1=Model-Decision-YOLO26n","candidate":"hybrid-diversify-max1"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max1"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max1"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"KEYWORD_MISS","detail":"keywordHitRate=0","candidate":"hybrid-diversify-max1"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-diversify-max1"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-diversify-max1"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max1"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max1"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max1"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"WRONG_TOP1","detail":"top1=MJPEG-Display-Port-Normalization","candidate":"hybrid-diversify-max2"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-diversify-max2"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0309","candidate":"hybrid-diversify-max2"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0306","candidate":"hybrid-diversify-max2"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"WRONG_TOP1","detail":"top1=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max2"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-diversify-max2"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-diversify-max2"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-diversify-max2"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0277","candidate":"hybrid-diversify-max2"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Model-Decision-YOLO26n","candidate":"hybrid-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-VLM-RAG-Event-Search-Decision","candidate":"hybrid-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0304","candidate":"hybrid-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"hybrid-diversify-max2"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=AI-Pipeline","candidate":"hybrid-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0301","candidate":"hybrid-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"hybrid-diversify-max2"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-diversify-max2"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"hybrid-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0307","candidate":"hybrid-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"WRONG_TOP1","detail":"top1=VLM-RAG-DBless-Mock-MVP","candidate":"hybrid-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"STALE_DOCUMENT_SELECTED","detail":"top1=Interview-Resume-Notes missing newer=2026-06-30-Overlay-Tracking-Evidence-Log","candidate":"hybrid-diversify-max2"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max2"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"hybrid-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"KEYWORD_MISS","detail":"keywordHitRate=0.3333333333333333","candidate":"hybrid-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"hybrid-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"hybrid-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"hybrid-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"WRONG_TOP1","detail":"top1=Realtime-Camera-Runtime-Stabilization","candidate":"hybrid-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0251","candidate":"hybrid-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"hybrid-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"hybrid-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"hybrid-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"hybrid-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-diversify-max2"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max2"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max2"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max2"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"WRONG_TOP1","detail":"top1=Model-Decision-YOLO26n","candidate":"hybrid-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-diversify-max2"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max2"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-diversify-max2"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=2026-06-30-Overlay-Tracking-Evidence-Log missing newer=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-diversify-max2"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-diversify-max2"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-diversify-max2"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-diversify-max2"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-diversify-max2"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, Overview, Glossary","candidate":"hybrid-contextual"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-contextual"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0301","candidate":"hybrid-contextual"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=Bug-AI-Tracker-FrameRate-Mismatch missing newer=2026-06-30-Overlay-Tracking-Evidence-Log","candidate":"hybrid-contextual"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-contextual"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=LSTM-Experiment-Results","candidate":"hybrid-contextual"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0283","candidate":"hybrid-contextual"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-contextual"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-contextual"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema","candidate":"hybrid-contextual"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"hybrid-contextual"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=AI-Pipeline","candidate":"hybrid-contextual"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-contextual"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"hybrid-contextual"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-contextual"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"hybrid-contextual"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0304","candidate":"hybrid-contextual"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"WRONG_TOP1","detail":"top1=VLM-RAG-DBless-Mock-MVP","candidate":"hybrid-contextual"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0308","candidate":"hybrid-contextual"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"WRONG_TOP1","detail":"top1=Evidence-Portfolio-Resume-Usage","candidate":"hybrid-contextual"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0295","candidate":"hybrid-contextual"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-contextual"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"hybrid-contextual"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"KEYWORD_MISS","detail":"keywordHitRate=0.3333333333333333","candidate":"hybrid-contextual"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"hybrid-contextual"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"hybrid-contextual"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"hybrid-contextual"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Bug-RTSP-Stream-404","candidate":"hybrid-contextual"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"hybrid-contextual"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"hybrid-contextual"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"hybrid-contextual"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"hybrid-contextual"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0305","candidate":"hybrid-contextual"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-contextual"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-003-YOLO26n-Selection, Model-Comparison, Benchmark-History","candidate":"hybrid-contextual"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-contextual"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-contextual"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-contextual"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=2026-06-30-Overlay-Tracking-Evidence-Log missing newer=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-contextual"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-contextual"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"WRONG_TOP1","detail":"top1=MJPEG-Display-Port-Normalization","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-001","query":"cameraLoginId","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-002","query":"yolo26n-pose","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-003","query":"safety/events MQTT","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-004","query":"MediaMTX WHEP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0301","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-005","query":"keypoint_bbox54","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-006","query":"ByteTrack track_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=Bug-AI-Tracker-FrameRate-Mismatch missing newer=2026-06-30-Overlay-Tracking-Evidence-Log","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-007","query":"VLM-RAG-DBless-Mock-MVP","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-008","query":"TensorRT actual_backend","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-009","query":"카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=LSTM-Experiment-Results","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-010","query":"실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0283","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Interview-Resume-Notes","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-011","query":"쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=Evidence-VLM-RAG-Event-Search-Decision","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0303","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-012","query":"AI 알림에 사용자 권한 정보를 넣지 않는 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Frame-Sync-Debug-Report, 2026-06-30-Overlay-Tracking-Evidence-Log, Frame-Matching-Report","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-013","query":"오버레이와 영상이 안 맞을 때 어떤 타임스탬프를 보나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-014","query":"DB 없이 VLM 검색을 어떻게 검증했나요","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"WRONG_TOP1","detail":"top1=AI-Pipeline","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0311","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-015","query":"LSTM 입력 feature를 51에서 54로 늘린 배경","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of mjpeg-display-rollback, MJPEG-Display-Port-Normalization, MJPEG-Streaming-Rollback-Report","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-016","query":"브라우저에서 MJPEG 표시 이슈를 되돌린 이유","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-017","query":"Why was YOLO26n selected over YOLO11n for faint detection","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"WRONG_TOP1","detail":"top1=Bug-Notification-Scope","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0304","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-018","query":"Why separate MQTT event metadata from user authorization","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"WRONG_TOP1","detail":"top1=VLM-RAG-DBless-Mock-MVP","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0308","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-019","query":"TensorRT 도입을 보류하거나 신중히 검증한 근거","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-020","query":"VLM을 실시간 감지 경로에 넣지 않은 이유","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"WRONG_TOP1","detail":"top1=Evidence-Portfolio-Resume-Usage","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.0295","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-021","query":"Self-Improving AI보다 evidence chain을 먼저 한 판단","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"LOW_SIMILARITY","detail":"maxScore=0.032","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-022","query":"WebRTC primary HLS fallback decision","category":"decision","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture, AI-Pipeline, MQTT-Event-Schema","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"KEYWORD_MISS","detail":"keywordHitRate=0.3333333333333333","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-023","query":"RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"WRONG_TOP1","detail":"top1=Overview","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-024","query":"pose extraction tracking and LSTM classification stages","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-025","query":"frameId capturedAtMs evidenceId overlay sync chain","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-026","query":"Incident 단위 VLM 검색과 MQTT 이벤트 스키마 관계","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-027","query":"LSTM experiment results and sequence length comparison","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-028","query":"portfolio evidence map for smart safety system","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of ADR-001-WebRTC","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"ADR\"}","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-029","query":"ADR WebRTC decision category architecture streaming","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"WRONG_TOP1","detail":"top1=Realtime-Camera-Runtime-Stabilization","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.028","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-030","query":"Bug RTSP stream 404 troubleshooting","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-031","query":"2026-06-30 overlay tracking evidence log","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-032","query":"updated documents about TensorRT adoption decision evidence","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Glossary","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Glossary\"}","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-033","query":"Glossary 용어 cameraLoginId RTSP WebRTC MQTT","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"EXPECTED_DOC_NOT_RETRIEVED","detail":"expected one of Architecture","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"FILTER_FAILURE","detail":"{\"category\":\"Architecture\"}","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-034","query":"Architecture category cameraLoginId MediaMTX path standards","category":"filter","code":"DUPLICATE_RESULT","detail":"duplicates=3","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-036","query":"quantum sandwich lunar chess warranty florist inventory","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-037","query":"AWS 실제 운영 RDS 비밀번호 로테이션 주기 내부 규정","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-038","query":"의료 진단 정확도로 낙상 환자를 처방하는 방법","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-039","query":"xylophone zeppelin nebula cafeteria payroll reimbursement","category":"unanswerable","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0305","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-040","query":"MJPEG display 최신 결정과 rollback 판단 중 무엇을 따라야 하나","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0313","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-041","query":"최신 VLM mock MVP와 이전 VLM event search decision 차이","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-042","query":"2026-07-02 bbox54 log vs older overlay tracking log priorities","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-043","query":"realtime camera runtime stabilization vs plan webrtc datachannel sync status","category":"conflict","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"WRONG_TOP1","detail":"top1=Evidence-Smart-Safety-System","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0325","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-044","query":"Faint Recall 기준으로 yolo26n-pose를 고른 벤치 근거","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-045","query":"fallbackIdRate trackSwitchCount overlay metric 의미","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-046","query":"pgvector 없이 Mock Embedding 768-d로 Incident 검색 검증","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-047","query":"LLM Wiki RAG local-hash embedding dimensions 256","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-048","query":"notification scope bug 알림 범위 문제","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-049","query":"codeblock visibility bug mermaid frontend","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-050","query":"Multi-Camera Frame Latency Report p95 latency","category":"mixed-lang","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-051","query":"AI Output JSON MQTT payload fields event candidates","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=2","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0318","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-052","query":"hard negative mining synthetic augmentation leakage parent_clip_id","category":"exact-term","code":"STALE_DOCUMENT_SELECTED","detail":"top1=2026-06-30-Overlay-Tracking-Evidence-Log missing newer=2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"LOW_SIMILARITY","detail":"maxScore=0.0328","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-053","query":"Wiki 검색과 RAG vector store 파일 구조 searchIndex ragVectorIndex","category":"paraphrase","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"LOW_SIMILARITY","detail":"maxScore=0.0315","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-054","query":"originalEventId Incident natural key VLM mock search","category":"exact-term","code":"DUPLICATE_RESULT","detail":"duplicates=4","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"LOW_SIMILARITY","detail":"maxScore=0.0323","candidate":"hybrid-contextual-diversify-max2"}
+{"id":"q-055","query":"Spring Boot backend WebSocket STOMP alert broadcast flow","category":"multi-doc","code":"DUPLICATE_RESULT","detail":"duplicates=1","candidate":"hybrid-contextual-diversify-max2"}

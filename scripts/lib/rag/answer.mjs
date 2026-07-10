@@ -30,7 +30,10 @@ function hasSufficientContext(chunks, mode) {
   if (mode === 'baseline') {
     return topScore >= 0.02;
   }
-  const hasLexicalMatch = chunks.some((chunk) => (chunk.matchedBy ?? []).includes('bm25'));
+  const hasLexicalMatch = chunks.some((chunk) => {
+    const matched = chunk.matchedBy ?? [];
+    return matched.includes('bm25') || matched.includes('lexical');
+  });
   return hasLexicalMatch && topScore >= 0.02;
 }
 

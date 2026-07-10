@@ -1,0 +1,111 @@
+{
+  "runId": "20260710-142041213_174e3f9_hybrid-stage3",
+  "timestamp": "2026-07-10T14:21:12.662Z",
+  "gitCommit": "174e3f9",
+  "gitBranch": "main",
+  "dirtyWorkingTree": true,
+  "experimentName": "hybrid-stage3",
+  "datasetVersion": "golden_queries.v1",
+  "stage2Anchor": "hybrid-rrf",
+  "stage2FailureTaxonomy": {
+    "EXPECTED_DOC_NOT_RETRIEVED": 10,
+    "WRONG_TOP1": 9,
+    "LOW_SIMILARITY": 40,
+    "KEYWORD_MISS": 1,
+    "SEMANTIC_MISS": 0,
+    "FILTER_FAILURE": 3,
+    "DUPLICATE_RESULT": 50,
+    "NO_ANSWER_FAILURE": 0,
+    "STALE_DOCUMENT_SELECTED": 2
+  },
+  "stage2FailureSamples": {
+    "DUPLICATE_RESULT": {
+      "count": 46,
+      "sampleId": "q-001",
+      "sampleQuery": "cameraLoginId",
+      "detail": "duplicates=1"
+    },
+    "WRONG_TOP1": {
+      "count": 11,
+      "sampleId": "q-004",
+      "sampleQuery": "MediaMTX WHEP",
+      "detail": "top1=Frame-Sync-Debug-Report"
+    },
+    "KEYWORD_MISS": {
+      "count": 6,
+      "sampleId": "q-009",
+      "sampleQuery": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
+      "detail": "keywordHitRate=0"
+    },
+    "SEMANTIC_MISS": {
+      "count": 11,
+      "sampleId": "q-005",
+      "sampleQuery": "keypoint_bbox54",
+      "detail": "vector returned unrelated high scores"
+    },
+    "EXPECTED_DOC_NOT_RETRIEVED": {
+      "count": 11,
+      "sampleId": "q-005",
+      "sampleQuery": "keypoint_bbox54",
+      "detail": "expected one of 2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log, Feature-Vector-51D-vs-54D, ADR-004-LSTM-Feature-Expansion"
+    }
+  },
+  "bestRrf": {
+    "id": "rrf-0",
+    "rrfK": 60,
+    "lexicalWeight": 1,
+    "vectorWeight": 1,
+    "metrics": {
+      "queryCount": 55,
+      "answerableCount": 50,
+      "unanswerableCount": 5,
+      "hitAt1": 0.62,
+      "hitAt3": 0.76,
+      "hitAt5": 0.8,
+      "recallAt5": 0.5499999999999999,
+      "mrr": 0.6966666666666668,
+      "ndcgAt5": 0.5559183529595951,
+      "exactTermHitAt5": 0.9090909090909091,
+      "semanticQueryRecallAt5": 0.5229885057471265,
+      "metadataFilterAccuracy": 0,
+      "duplicateIncidentOrDocumentCount": 140,
+      "wrongTop1Count": 9,
+      "noResultAccuracy": 1,
+      "p50LatencyMs": 66.03929999999991,
+      "p95LatencyMs": 78.09900000000016,
+      "meanRetrievedChunks": 5,
+      "lexicalVectorOverlap": 0.4003729603729604,
+      "failureTaxonomy": {
+        "EXPECTED_DOC_NOT_RETRIEVED": 10,
+        "WRONG_TOP1": 9,
+        "LOW_SIMILARITY": 40,
+        "KEYWORD_MISS": 1,
+        "SEMANTIC_MISS": 0,
+        "FILTER_FAILURE": 3,
+        "DUPLICATE_RESULT": 50,
+        "NO_ANSWER_FAILURE": 0,
+        "STALE_DOCUMENT_SELECTED": 2
+      }
+    },
+    "wrongTop1Count": 9
+  },
+  "candidates": [
+    "vector-only-structure-aware",
+    "lexical-only",
+    "hybrid-rrf",
+    "hybrid-diversify-max1",
+    "hybrid-diversify-max2",
+    "hybrid-contextual",
+    "hybrid-contextual-diversify-max2"
+  ],
+  "documentCount": 39,
+  "chunkCount": 585,
+  "contextualChunkCount": 585,
+  "embeddingModel": "local-hash-tfidf",
+  "embeddingDimension": 256,
+  "chunkSchemaVersion": "structure-aware-v1",
+  "environment": {
+    "node": "v22.22.0",
+    "platform": "win32"
+  }
+}

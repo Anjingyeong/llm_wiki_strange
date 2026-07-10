@@ -39,7 +39,6 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260710-141323201_b5f11c2_structure-aware-only",
   "chunkSchemaVersion": "structure-aware-v1",
-  "note": "Promoted by structure-aware chunk experiment (search metrics only)."
+  "note": "Stage-2 structure-aware vector-only remains operational best after Stage-3 (no hybrid candidate fully passed wrongTop1/dup/latency policy against this anchor)."
 }

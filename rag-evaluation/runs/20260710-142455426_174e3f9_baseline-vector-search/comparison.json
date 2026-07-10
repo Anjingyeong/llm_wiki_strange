@@ -1,0 +1,32 @@
+{
+  "against": "20260710-141323201_b5f11c2_structure-aware-only",
+  "promote": false,
+  "reasons": [],
+  "regressions": [
+    "no quality gain: recallΔ=0.0000 mrrΔ=0.0000 < 0.01"
+  ],
+  "candidate": {
+    "hitAt1": 0.56,
+    "hitAt3": 0.74,
+    "hitAt5": 0.78,
+    "recallAt5": 0.5266666666666666,
+    "mrr": 0.6456666666666666,
+    "ndcgAt5": 0.5219162383873163,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 1.4243000000000166,
+    "duplicateIncidentOrDocumentCount": 140
+  },
+  "best": {
+    "hitAt1": 0.56,
+    "hitAt3": 0.74,
+    "hitAt5": 0.78,
+    "recallAt5": 0.5266666666666666,
+    "mrr": 0.6456666666666666,
+    "ndcgAt5": 0.5219162383873163,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 1.438699999999983,
+    "duplicateIncidentOrDocumentCount": 140
+  }
+}

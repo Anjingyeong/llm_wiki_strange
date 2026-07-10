@@ -68,6 +68,14 @@ export function evaluatePromotion(candidateMetrics, bestMetrics, policy) {
     }
   }
 
+  if (policy.forbidWrongTop1Increase !== false) {
+    const candWrong = candidateMetrics.wrongTop1Count ?? bestMetrics.wrongTop1Count;
+    const bestWrong = bestMetrics.wrongTop1Count;
+    if (candWrong != null && bestWrong != null && candWrong > bestWrong) {
+      regressions.push(`wrongTop1 increased ${bestWrong} -> ${candWrong}`);
+    }
+  }
+
   return {
     promote: qualityImproved && regressions.length === 0,
     reasons,

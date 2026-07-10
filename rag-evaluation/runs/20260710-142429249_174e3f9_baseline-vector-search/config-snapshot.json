@@ -1,0 +1,45 @@
+{
+  "evaluation": {
+    "datasetPath": "rag-evaluation/datasets/golden_queries.v1.jsonl",
+    "datasetVersion": "golden_queries.v1",
+    "indexPath": "data/ragVectorIndex.json",
+    "retrievalMode": "baseline",
+    "topK": 5,
+    "retrieveLimit": 40,
+    "minScore": 0.03,
+    "chunkingVersion": "section-blocks-v1",
+    "indexVersionField": "version",
+    "evaluateAnswer": false,
+    "enableLlmAnswer": false,
+    "latencyWarmups": 0,
+    "latencyRepeats": 1,
+    "runsDir": "rag-evaluation/runs",
+    "baselinesDir": "rag-evaluation/baselines",
+    "leaderboardPath": "rag-evaluation/leaderboard.csv",
+    "failureTaxonomyPath": "rag-evaluation/failure-taxonomy.csv",
+    "latestPath": "rag-evaluation/latest.md",
+    "bestPath": "rag-evaluation/best.json",
+    "baselineName": "baseline-vector-search",
+    "experimentName": "baseline-vector-search"
+  },
+  "promotion": {
+    "requireTestsAndBuild": true,
+    "minRecallOrMrrDelta": 0.01,
+    "maxQualityRegression": 0.02,
+    "qualityMetrics": [
+      "hitAt1",
+      "hitAt3",
+      "hitAt5",
+      "recallAt5",
+      "mrr",
+      "ndcgAt5",
+      "metadataFilterAccuracy"
+    ],
+    "maxNoResultAccuracyRegression": 0.02,
+    "maxP95LatencyIncreaseRatio": 0.3,
+    "minP95LatencyFloorMs": 20,
+    "forbidDuplicateIncrease": true,
+    "forbidWrongTop1Increase": true,
+    "replaceOperationalIndexOnPromotion": false
+  }
+}

@@ -22,5 +22,7 @@ maxP95LatencyIncreaseRatio: 0.30
 minP95LatencyFloorMs: 20
 # Duplicate result count must not increase
 forbidDuplicateIncrease: true
+# Wrong Top1 count must not increase (Stage-3)
+forbidWrongTop1Increase: true
 # Operational index is never replaced by this harness
 replaceOperationalIndexOnPromotion: false
