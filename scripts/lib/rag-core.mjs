@@ -9,4 +9,3 @@ export {
   STRUCTURE_CONTEXTUAL_SCHEMA_VERSION,
 } from './rag/chunks.mjs';
 export { searchRelevantChunks } from './rag/search.mjs';
-
