@@ -1,0 +1,23 @@
+{"id":"ua-a-01","group":"A","label":"full_off_domain","query":"직원 급여 정책","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-02","group":"A","label":"full_off_domain","query":"회사 연차 규정","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-03","group":"A","label":"full_off_domain","query":"의료보험 청구 방식","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-04","group":"A","label":"full_off_domain","query":"블록체인 합의 알고리즘","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-05","group":"A","label":"full_off_domain","query":"쿠버네티스 장애 대응","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-06","group":"A","label":"full_off_domain","query":"오늘 서울 날씨","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-07","group":"A","label":"full_off_domain","query":"JavaScript 면접 문제","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-a-08","group":"A","label":"full_off_domain","query":"주식 투자 전략","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-b-01","group":"B","label":"near_domain_no_answer","query":"이 시스템의 산업재해 보상금은 얼마인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-02","group":"B","label":"near_domain_no_answer","query":"낙상 사고가 발생하면 법적 책임자는 누구인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-03","group":"B","label":"near_domain_no_answer","query":"카메라 구매 가격은 얼마인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-04","group":"B","label":"near_domain_no_answer","query":"얼굴인식 정확도는 몇 퍼센트인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-05","group":"B","label":"near_domain_no_answer","query":"화재 감지 모델은 어떤 모델인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-06","group":"B","label":"near_domain_no_answer","query":"음성 인식 기능도 지원하나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-b-07","group":"B","label":"near_domain_no_answer","query":"작업자 심박수를 측정하나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}
+{"id":"ua-c-01","group":"C","label":"partial_word_no_numeric","query":"TensorRT 적용 후 전력 사용량이 몇 와트 감소했나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-c-02","group":"C","label":"partial_word_no_numeric","query":"낙상 탐지로 실제 사고율이 몇 퍼센트 감소했나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-c-03","group":"C","label":"partial_word_no_numeric","query":"100대 카메라 운영 비용은 얼마인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-c-04","group":"C","label":"partial_word_no_numeric","query":"ByteTrack의 현장 ID switch 비율은 정확히 몇 퍼센트인가요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-c-05","group":"C","label":"partial_word_no_numeric","query":"실제 알림 지연이 항상 1초 이내였나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-c-06","group":"C","label":"partial_word_no_numeric","query":"YOLO 추론이 항상 30ms 이내였나요?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true,"falseAnswerForbidden":true}}
+{"id":"ua-a-09","group":"A","label":"full_off_domain","query":"오늘 야구 경기 스코어","expect":{"status":"insufficient_context","retrievalRelevant":false,"answerSupported":false,"sourcesEmpty":true}}
+{"id":"ua-b-08","group":"B","label":"near_domain_no_answer","query":"스마트 안전 시스템의 보험 가입 조건은?","expect":{"status":"insufficient_context","answerSupported":false,"allowRetrievalRelevant":true}}

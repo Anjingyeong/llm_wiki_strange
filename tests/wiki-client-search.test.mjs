@@ -16,7 +16,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 async function loadSearchIndex() {
   const path = join(root, 'src/generated/searchIndex.json');
   const raw = await readFile(path, 'utf8');
-  return JSON.parse(raw);
+  const bundle = JSON.parse(raw);
+  return Array.isArray(bundle) ? bundle : (bundle.documents ?? []);
 }
 
 describe('search tokenization / variants', () => {

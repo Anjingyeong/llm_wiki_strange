@@ -1,15 +1,15 @@
 {
-  "version": "1.0",
-  "description": "Frontend document search golden queries (not RAG). Expected slugs are soft targets: topK must include at least one.",
+  "version": "1.1",
+  "description": "Frontend document search golden queries (not RAG).",
   "defaultTopK": 3,
+  "noResultThreshold": 18,
   "queries": [
     {
       "id": "cs-001",
       "query": "frameId",
       "expectedSlugs": ["ED-FrameId-Evidence-Overlay-Sync", "Frame-Sync-Debug-Report", "Frame-Matching-Report", "2026-06-30-Overlay-Tracking-Evidence-Log"],
       "topK": 3,
-      "category": "code-symbol",
-      "notes": "exact identifier"
+      "category": "code-symbol"
     },
     {
       "id": "cs-002",
@@ -23,8 +23,7 @@
       "query": "cameraLoginId",
       "expectedSlugs": ["Architecture", "Overview", "Glossary", "MQTT-Event-Schema", "AI-Output-JSON", "Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization", "MJPEG-Streaming-Rollback-Report", "Bug-RTSP-Stream-404", "ADR-002-MQTT-Metadata-Separation"],
       "topK": 3,
-      "category": "code-symbol",
-      "notes": "symbol appears across pipeline docs; any contract doc is acceptable"
+      "category": "code-symbol"
     },
     {
       "id": "cs-004",
@@ -38,9 +37,7 @@
       "query": "텐서알티",
       "expectedSlugs": ["Evidence-TensorRT-Adoption-Decision"],
       "topK": 5,
-      "category": "korean-phonetic",
-      "optional": true,
-      "notes": "local hash search may miss phonetic alias; optional soft check"
+      "category": "korean-phonetic"
     },
     {
       "id": "cs-006",
@@ -115,7 +112,7 @@
     {
       "id": "cs-016",
       "query": "camera_login_id",
-      "expectedSlugs": ["Architecture", "Glossary", "Overview", "MQTT-Event-Schema", "Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization"],
+      "expectedSlugs": ["Architecture", "Glossary", "Overview", "MQTT-Event-Schema", "Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization", "AI-Output-JSON", "MJPEG-Streaming-Rollback-Report"],
       "topK": 3,
       "category": "snake-case"
     },
@@ -132,7 +129,47 @@
       "expectedSlugs": [],
       "topK": 3,
       "category": "no-result",
-      "expectEmptyOrWeak": true
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-neg-001",
+      "query": "직원 급여 정책",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-neg-002",
+      "query": "회사 연차 규정",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-neg-003",
+      "query": "쿠버네티스 장애 대응",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-neg-004",
+      "query": "블록체인 합의 알고리즘",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-neg-005",
+      "query": "의료보험 청구 방식",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmpty": true
     }
   ]
 }

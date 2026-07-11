@@ -16,16 +16,20 @@ function codeLanguageClass(language: string): string {
 
 export function MarkdownRenderer({ markdown, documentTitle = '', displayTitle = '' }: MarkdownRendererProps) {
   const blocks = parseMarkdownBlocks(markdown);
+  let skippedDuplicateH1 = false;
 
   return (
     <div className="markdown">
       {blocks.map((block, index) => {
         switch (block.kind) {
           case 'heading': {
+            // Only the first body H1 that duplicates the page title is suppressed.
             if (
               block.level === 1
+              && !skippedDuplicateH1
               && isDuplicateDocumentH1(block.text, documentTitle, displayTitle)
             ) {
+              skippedDuplicateH1 = true;
               return null;
             }
             const id = headingId(block.text);

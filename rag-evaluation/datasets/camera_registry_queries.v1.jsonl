@@ -1,0 +1,11 @@
+{"id":"cam-a-01","group":"answerable","query":"카메라는 하드코딩되어 있나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability","Realtime-Camera-Runtime-Stabilization"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-a-02","group":"answerable","query":"카메라 목록이 코드에 고정되어 있나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability","Realtime-Camera-Runtime-Stabilization"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-a-03","group":"answerable","query":"카메라는 동적으로 추가되나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability","Realtime-Camera-Runtime-Stabilization"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-a-04","group":"answerable","query":"카메라가 삭제되면 worker도 종료되나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-a-05","group":"answerable","query":"RTSP URL이 바뀌면 worker는 어떻게 되나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-a-06","group":"answerable","query":"cameraLoginId는 고정된 네 개만 지원하나요?","expectedSlugs":["Multi-Camera-Worker-Session-Reliability","Architecture"],"expect":{"status":"answered","retrievalRelevant":true,"answerSupported":true,"top3Expected":true}}
+{"id":"cam-u-01","group":"unanswerable","query":"지원 가능한 카메라는 정확히 최대 몇 대인가요?","expect":{"status":"insufficient_context","answerSupported":false}}
+{"id":"cam-u-02","group":"unanswerable","query":"100대 카메라 운영 비용은 얼마인가요?","expect":{"status":"insufficient_context","answerSupported":false}}
+{"id":"cam-u-03","group":"unanswerable","query":"카메라 구매 가격은 얼마인가요?","expect":{"status":"insufficient_context","answerSupported":false}}
+{"id":"cam-u-04","group":"unanswerable","query":"모든 제조사의 CCTV를 공식 지원하나요?","expect":{"status":"insufficient_context","answerSupported":false}}
+{"id":"cam-u-05","group":"unanswerable","query":"카메라 장애율은 몇 퍼센트인가요?","expect":{"status":"insufficient_context","answerSupported":false}}

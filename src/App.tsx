@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
 import { RagPanel } from './components/RagPanel';
 import { SearchPanel } from './components/SearchPanel';
@@ -8,8 +8,19 @@ import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/
 import { isExcerptDuplicate } from './lib/frontmatter';
 import { getDisplayTitle } from './lib/types';
 
-function slugFromHash(): string {
-  return window.location.hash.replace(/^#\/?/, '').split('#')[0] ?? '';
+/** Hash format: #/Slug or #/Slug/section-id */
+function parseLocationHash(): { slug: string; sectionId: string | null } {
+  const raw = window.location.hash.replace(/^#\/?/, '');
+  if (!raw) return { slug: '', sectionId: null };
+  const slash = raw.indexOf('/');
+  if (slash < 0) return { slug: raw, sectionId: null };
+  const slug = raw.slice(0, slash);
+  const sectionId = raw.slice(slash + 1) || null;
+  return { slug, sectionId };
+}
+
+function writeLocationHash(slug: string, sectionId?: string | null) {
+  window.location.hash = sectionId ? `#/${slug}/${sectionId}` : `#/${slug}`;
 }
 
 export function App() {
@@ -22,28 +33,65 @@ export function App() {
   const [shake, setShake] = useState(false);
 
   const initial = getInitialDocument();
-  const [activeSlug, setActiveSlug] = useState(() => slugFromHash() || initial.slug);
+  const initialHash = parseLocationHash();
+  const [activeSlug, setActiveSlug] = useState(() => initialHash.slug || initial.slug);
+  const [pendingSectionId, setPendingSectionId] = useState<string | null>(
+    () => initialHash.sectionId,
+  );
   const [query, setQuery] = useState('');
   const activeDocument = useMemo(
     () => documentsBySlug.get(activeSlug),
     [activeSlug],
   );
 
+  // Scroll after document body is in the DOM (search selection or hash restore).
+  useEffect(() => {
+    if (!pendingSectionId || !activeDocument) return;
+    let cancelled = false;
+    const tryScroll = (attempt: number) => {
+      if (cancelled) return;
+      const el = document.getElementById(pendingSectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setPendingSectionId(null);
+        return;
+      }
+      if (attempt < 12) {
+        window.setTimeout(() => tryScroll(attempt + 1), 40);
+      } else {
+        setPendingSectionId(null);
+      }
+    };
+    tryScroll(0);
+    return () => {
+      cancelled = true;
+    };
+  }, [activeDocument, pendingSectionId, activeSlug]);
+
+  useEffect(() => {
+    const onHash = () => {
+      const { slug, sectionId } = parseLocationHash();
+      if (slug && slug !== activeSlug) {
+        setActiveSlug(slug);
+      }
+      if (sectionId) {
+        setPendingSectionId(sectionId);
+      }
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, [activeSlug]);
+
   const selectDocument = (slug: string, sectionId?: string | null) => {
     setActiveSlug(slug);
     setQuery('');
-    window.location.hash = slug;
-    // Jump to matched section when search provides a heading id (H2/H3).
-    requestAnimationFrame(() => {
-      if (sectionId) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          return;
-        }
-      }
+    writeLocationHash(slug, sectionId);
+    if (sectionId) {
+      setPendingSectionId(sectionId);
+    } else {
+      setPendingSectionId(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    }
   };
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
@@ -88,25 +136,22 @@ export function App() {
     return (
       <div className="lockScreenContainer">
         <div className={`lockCard ${shake ? 'shake' : ''}`}>
-          <div className="lockIcon">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-            </svg>
+          <div className="lockBrand">
+            <span className="brandMark" aria-hidden="true">SS</span>
+            <strong>LLM Wiki</strong>
           </div>
-          <h2>Smart Safety LLM Wiki</h2>
-          <p className="lockSubtitle">시스템 내부 문서 조회 및 RAG 서비스를 이용하시려면 접근 키를 입력해 주세요.</p>
-          <form onSubmit={handleAuthSubmit}>
-            <div className="inputGroup">
-              <input
-                type="password"
-                placeholder="Access Key 입력"
-                value={keyInput}
-                onChange={(e) => setKeyInput(e.target.value)}
-                disabled={isSubmitting}
-                autoFocus
-              />
-            </div>
+          <h1>접근 키가 필요합니다</h1>
+          <p>Wiki 및 RAG 질의는 접근 키 인증 후 이용할 수 있습니다.</p>
+          <form onSubmit={handleAuthSubmit} className="lockForm">
+            <label htmlFor="wiki-key">접근 키</label>
+            <input
+              id="wiki-key"
+              type="password"
+              value={keyInput}
+              onChange={(e) => setKeyInput(e.target.value)}
+              placeholder="접근 키 입력"
+              autoFocus
+            />
             {authError && <p className="errorMessage">{authError}</p>}
             <button type="submit" className="submitBtn" disabled={isSubmitting}>
               {isSubmitting ? '인증 중...' : '접근하기'}

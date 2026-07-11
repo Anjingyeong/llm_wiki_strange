@@ -47,11 +47,19 @@ export type Heading = {
   readonly level: 2 | 3;
 };
 
+export type SearchHeading = {
+  readonly id: string;
+  readonly text: string;
+  readonly level: 2 | 3;
+  readonly searchableText: string;
+};
+
 export type SearchDocument = Frontmatter & {
   readonly slug: string;
   readonly displayTitle: string;
   readonly excerpt: string;
   readonly text: string;
+  readonly headings?: readonly SearchHeading[];
 };
 
 export type SearchResult = SearchDocument & {

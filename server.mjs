@@ -42,25 +42,10 @@ async function loadRagIndex() {
   return JSON.parse(raw);
 }
 
-async function buildHealthPayload() {
-  const { summarizeIndex, detectStaleIndex } = await import('./scripts/lib/rag/index-meta.mjs');
+async function buildHealthPayloadForRequest() {
+  const { buildHealthPayload } = await import('./scripts/lib/rag/index-meta.mjs');
   const index = await loadRagIndex();
-  const expectedEd = [
-    'ED-Latest-Frame-Queue-Policy',
-    'ED-FrameId-Evidence-Overlay-Sync',
-    'ED-Fall-Faint-Lifecycle',
-    'ED-MQTT-Backend-Event-Path',
-    'ED-Snapshot-VLM-Side-Channel',
-  ];
-  const summary = summarizeIndex(index);
-  const stale = detectStaleIndex(index, { expectedSlugs: expectedEd });
-  return {
-    ok: true,
-    index: summary,
-    stale: stale.stale,
-    staleReasons: stale.reasons,
-    operationalSource: 'data/ragVectorIndex.json',
-  };
+  return buildHealthPayload(index);
 }
 
 async function handleVerify(request, response) {
@@ -133,7 +118,7 @@ async function serveStatic(request, response) {
 
 const server = createServer((request, response) => {
   if (request.method === 'GET' && (request.url === '/api/rag/health' || request.url?.startsWith('/api/rag/health?'))) {
-    void buildHealthPayload()
+    void buildHealthPayloadForRequest()
       .then((payload) => sendJson(response, 200, payload))
       .catch((error) => {
         sendJson(response, 500, { ok: false, error: String(error?.message || error) });

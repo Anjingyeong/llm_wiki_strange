@@ -4,11 +4,12 @@
   "embeddingVersion": "local-hash-tfidf-v1",
   "embeddingDimensions": 256,
   "documentCount": 46,
-  "chunkCount": 696,
-  "generatedAt": "2026-07-11T11:10:03.390Z",
-  "sourceCommit": "6e28ea1",
+  "chunkCount": 699,
+  "generatedAt": "2026-07-11T11:58:33.131Z",
+  "sourceCommit": "cc1c91d",
   "indexPath": "data/rag/indexes/structure-aware-v1.json",
   "meanChunkChars": 261,
   "duplicateDocRatio": 1,
-  "manifestHash": "b5e0b2606dac12b4"
+  "manifestHash": "ad541ede5b04445b",
+  "corpusHash": "f2ed7cdd7c50d8428e9ef8e59834a0ede45feaa4a1f455ff94134e32e181bf10"
 }

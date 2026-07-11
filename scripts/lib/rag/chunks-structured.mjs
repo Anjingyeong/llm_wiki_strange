@@ -291,10 +291,11 @@ function buildContextualPrefix(document, unit, techTerms, referencedFiles) {
 
 function makeStructuredChunk(document, unit, content, chunkOrder, options) {
   const tags = asStringList(document.tags);
+  const entities = asStringList(document.entities);
   const relatedDocs = asStringList(document.relatedDocs ?? document.relatedSlugs);
   const codeSymbols = unit.kind === 'code' ? extractCodeSymbols(content) : extractCodeSymbols(content).slice(0, 8);
   const referencedFiles = extractReferencedFiles(`${content}\n${document.summary || ''}`);
-  const techTerms = extractTechTerms(content, tags);
+  const techTerms = extractTechTerms(`${content}\n${entities.join(' ')}`, tags);
   const chunkType = classifyChunkType(unit.headingPath, content, unit.kind);
   const contextualPrefix = options.contextualPrefix
     ? buildContextualPrefix(document, unit, techTerms, referencedFiles)
@@ -327,6 +328,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     displayTitle,
     category: document.category,
     tags,
+    entities,
     updatedAt: document.updatedAt,
     headingPath: unit.headingPath,
     section: unit.headingPath,
@@ -354,6 +356,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     metadata: {
       category: document.category,
       tags,
+      entities,
       updatedAt: document.updatedAt,
       slug: document.slug,
       title: document.title,
@@ -364,7 +367,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
       relatedSlugs: relatedDocs,
     },
     embedding: embedText(
-      `${displayTitle} ${document.title} ${document.slug} ${unit.headingPath} ${tags.join(' ')} ${codeSymbols.join(' ')} ${searchableText}`,
+      `${displayTitle} ${document.title} ${document.slug} ${unit.headingPath} ${tags.join(' ')} ${entities.join(' ')} ${document.summary || ''} ${codeSymbols.join(' ')} ${searchableText}`,
     ),
   };
 }

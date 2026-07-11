@@ -3,7 +3,9 @@ title: 멀티카메라 AI Worker의 세션 경계와 운영 안정성 설계
 navTitle: Multi-Cam Session Reliability
 shortTitle: Multi-Cam Session
 category: Architecture
-tags: [portfolio, architecture, multi-camera, worker-session, rtsp, tracking, supervisor, queue, mqtt, incident, offline-verification]
+summary: "카메라 목록은 cam_01~04로 하드코딩하지 않는다. Backend active camera API 기반 동적 등록·polling 후 sync_camera_workers가 추가·삭제·RTSP URL 변경 시 worker를 reconcile한다. 런타임 식별자는 cameraLoginId. 영상이 끝났을 때(VIDEO_EOF) reset_analysis_session으로 상태 초기화."
+tags: [portfolio, architecture, multi-camera, worker-session, rtsp, tracking, supervisor, queue, mqtt, incident, offline-verification, dynamic-camera-registry, active-camera-polling, hardcoded-camera-list, cameraLoginId, worker-reconciliation, VIDEO_EOF, state-reset]
+entities: [cameraLoginId, sync_camera_workers, registered_camera_workers, plan_source_change_restarts, active camera API, CameraWorker, WorkerSession]
 relatedDocs: [Architecture, AI-Pipeline, MQTT-Event-Schema, Evidence-TensorRT-Adoption-Decision, Evidence-VLM-RAG-Event-Search-Decision, Realtime-Camera-Runtime-Stabilization, Multi-Camera-Frame-Latency-Report, VLM-RAG-DBless-Mock-MVP]
 relatedFiles: [ai/ai/analysis_session.py, ai/ai/worker_session.py, ai/ai/frame_sync.py, ai/ai/supervisor_policy.py, ai/ai/event_idempotency.py, ai/ai/registered_camera_workers.py, ai/ai/evidence.py, ai/ai/publishers/event_publisher.py, ai/ai/vlm/incident_pipeline.py, ai/scripts/serve_ai_overlay.py, ai/scripts/run_rtsp_inference.py, ai/docs/WORKER_SESSION_WIRING.md, ai/docs/MULTI_CAMERA_SUPERVISOR.md, ai/tests/test_multi_camera_isolation.py, ai/tests/test_session_stale_guards.py, ai/tests/test_worker_analysis_session_wiring.py]
 updatedAt: 2026-07-11
@@ -18,7 +20,8 @@ status_split: "코드상 검증 완료 / Mock·Synthetic·오프라인 테스트
 
 ## Hook
 
-카메라 4대가 **독립 OS 프로세스 Worker**로 동작하는 스마트 안전관제 환경에서, RTSP reconnect·영상(source) 변경·EOF 이후 **이전 프레임·Track·LSTM sequence·Fall 상태·Event가 새 세션으로 혼입되지 않도록** 세션 경계(`workerRunId` / `streamRunId` / generation)와 Supervisor·Queue·Metrics·Incident 안전장치를 **실제 AI 코드 경로**에 구현하고, 오프라인 회귀 테스트로 검증했다.  
+카메라 4대가 **독립 OS 프로세스 Worker**로 동작하는 스마트 안전관제 환경에서, RTSP reconnect·영상(source) 변경·**영상이 끝났을 때(VIDEO_EOF) 상태 초기화** 이후 **이전 프레임·Track·LSTM sequence·Fall 상태·Event가 새 세션으로 혼입되지 않도록** 세션 경계(`workerRunId` / `streamRunId` / generation)와 Supervisor·Queue·Metrics·Incident 안전장치를 **실제 AI 코드 경로**에 구현하고, 오프라인 회귀 테스트로 검증했다.
+EOF·source 변경 시 `reset_analysis_session` 단일 경로로 상태를 초기화한다.
 이 문서는 계획서가 아니라 **현재 코드와 재실행 가능한 테스트 결과**를 근거로 한다. 4대 TensorRT FPS·Tracking 정확도·VRAM이 개선됐다고 주장하지 않는다.
 
 ---
@@ -33,6 +36,20 @@ status_split: "코드상 검증 완료 / Mock·Synthetic·오프라인 테스트
 | Worker 진입점 | `scripts/serve_ai_overlay.py` (`OverlayWorker`), `scripts/run_rtsp_inference.py` |
 | 세션 런타임 | 프로세스 내 `AnalysisWorkerRuntime` + `WorkerSession` |
 | 검증 환경 | 실 RTSP·GPU·TensorRT 운영 없이 **코드·unit/regression** |
+
+### 1.1 카메라 목록은 하드코딩하지 않는다 (동적 등록 / worker reconcile)
+
+프로덕션에서 카메라 ID를 `cam_01`~`cam_04` **고정 목록(하드코딩·정적 카메라 목록)** 으로 코드에 박아 두지 않는다.
+Backend **active camera API** 로 등록된 카메라 목록을 주기적으로 조회(active camera polling / camera registry)하고, `registered_camera_workers` 의 `sync_camera_workers` 가 런타임 목록과 worker 프로세스를 맞춘다.
+
+| 런타임 사건 | 코드상 동작 |
+| --- | --- |
+| 신규 카메라 등록 | active 목록에 나타나면 Supervisor가 해당 `cameraLoginId` worker 시작 |
+| 카메라 삭제 | 목록에서 빠지면 해당 worker 중지 |
+| RTSP URL / source signature 변경 | `plan_source_change_restarts` 로 **해당 카메라만** restart (worker reconciliation) |
+| 식별자 | 런타임 키는 `cameraLoginId` — 고정 네 개 ID만 지원한다는 전제 없음 |
+
+시연·오프라인 fixture에서 4대를 쓰는 것은 **운영 조건 재현**이며, 프로덕션 ID 집합을 네 개로 고정한 것이 아니다. 시뮬레이션 영상 매핑과 Backend 카메라 등록 정보는 분리한다. 이 절의 내용은 위 표·§4.5 Supervisor·관련 코드 경로와 동일한 사실의 검색 가능한 서술이다.
 
 ```mermaid
 flowchart TB

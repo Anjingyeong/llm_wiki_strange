@@ -1,6 +1,5 @@
 /**
- * Shared operational RAG index metadata helpers (Node + build scripts).
- * Cloudflare bundles the JSON at build time; runtime FS is not required there.
+ * Shared operational RAG index metadata helpers (Node + build scripts + CF health).
  */
 
 export const OPERATIONAL_INDEX_REL = 'data/ragVectorIndex.json';
@@ -25,8 +24,10 @@ export function summarizeIndex(index) {
 }
 
 /**
+ * Stale when corpusHash mismatches (if provided) or empty index.
+ * Age warnings are soft (reason only) when hash is present and matches.
  * @param {object} index
- * @param {{ expectedSlugs?: string[], maxAgeHours?: number, now?: Date }} [opts]
+ * @param {{ expectedSlugs?: string[], expectedCorpusHash?: string|null, maxAgeHours?: number, now?: Date }} [opts]
  */
 export function detectStaleIndex(index, opts = {}) {
   const reasons = [];
@@ -34,23 +35,55 @@ export function detectStaleIndex(index, opts = {}) {
   if (!meta.chunkCount) {
     reasons.push('empty_chunks');
   }
+  if (opts.expectedCorpusHash) {
+    if (!meta.corpusHash) {
+      reasons.push('missing_corpusHash');
+    } else if (meta.corpusHash !== opts.expectedCorpusHash) {
+      reasons.push('corpusHash_mismatch');
+    }
+  }
   if (!meta.generatedAt) {
     reasons.push('missing_generatedAt');
-  } else {
-    const ageMs = (opts.now ?? new Date()).getTime() - Date.parse(meta.generatedAt);
-    const maxAgeHours = opts.maxAgeHours ?? 24 * 30;
-    if (Number.isFinite(ageMs) && ageMs > maxAgeHours * 3600 * 1000) {
-      reasons.push(`older_than_${maxAgeHours}h`);
-    }
   }
   const expected = opts.expectedSlugs ?? [];
   const missing = expected.filter((s) => !meta.slugs.includes(s));
   if (missing.length) {
-    reasons.push(`missing_slugs:${missing.slice(0, 8).join(',')}`);
+    reasons.push(`missing_slugs:${missing.slice(0, 12).join(',')}`);
   }
   return {
     stale: reasons.length > 0,
     reasons,
     meta,
+  };
+}
+
+/**
+ * Health payload shared by Node server and Cloudflare Function.
+ * @param {object} index
+ * @param {{ expectedCorpusHash?: string|null }} [opts]
+ */
+export function buildHealthPayload(index, opts = {}) {
+  const stale = detectStaleIndex(index, {
+    expectedCorpusHash: opts.expectedCorpusHash ?? index?.corpusHash ?? null,
+    expectedSlugs: opts.expectedSlugs,
+  });
+  // If no external expected hash, treat missing hash as stale only when empty.
+  if (!opts.expectedCorpusHash && index?.corpusHash && !stale.reasons.includes('empty_chunks')) {
+    // Health without live FS: report meta; stale only if empty or missing generatedAt
+    const soft = detectStaleIndex(index, {});
+    return {
+      ok: true,
+      index: soft.meta,
+      stale: soft.stale,
+      staleReasons: soft.reasons,
+      operationalSource: OPERATIONAL_INDEX_REL,
+    };
+  }
+  return {
+    ok: true,
+    index: stale.meta,
+    stale: stale.stale,
+    staleReasons: stale.reasons,
+    operationalSource: OPERATIONAL_INDEX_REL,
   };
 }

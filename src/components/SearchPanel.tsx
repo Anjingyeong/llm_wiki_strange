@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ExpandableText } from './ExpandableText';
-import { searchDocuments } from '../lib/search';
+import { SEARCH_RESULT_LIMIT_MAX, searchDocuments } from '../lib/search';
 import { getDisplayTitle } from '../lib/types';
 
 type SearchPanelProps = {
@@ -11,15 +11,12 @@ type SearchPanelProps = {
 
 const PAGE_SIZE = 12;
 
-function highlightSnippet(snippet: string, query: string): string {
-  // ExpandableText is plain; keep snippet raw. Reasons carry the signal.
-  return snippet;
-  void query;
-}
-
 export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps) {
   const [visible, setVisible] = useState(PAGE_SIZE);
-  const allResults = useMemo(() => searchDocuments(query, { limit: 40 }), [query]);
+  const allResults = useMemo(
+    () => searchDocuments(query, { limit: SEARCH_RESULT_LIMIT_MAX }),
+    [query],
+  );
   const results = allResults.slice(0, visible);
 
   return (
@@ -44,7 +41,7 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
         <div className="searchResults" role="listbox" aria-label="검색 결과">
           <p className="searchMeta">
             {allResults.length
-              ? `${allResults.length}건 중 ${results.length}건 표시`
+              ? `${allResults.length}건 중 ${results.length}건 표시 (최대 ${SEARCH_RESULT_LIMIT_MAX}건)`
               : '검색 결과 없음'}
           </p>
           {results.length ? (
@@ -70,9 +67,7 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
                       <em className="searchResultFormal">{result.title}</em>
                     ) : null}
                     {reasons ? <small className="searchResultReason">{reasons}</small> : null}
-                    {snip ? (
-                      <ExpandableText text={highlightSnippet(snip, query)} maxLength={140} />
-                    ) : null}
+                    {snip ? <ExpandableText text={snip} maxLength={140} /> : null}
                     {result.tags.length > 0 ? (
                       <small className="searchResultTags">{result.tags.slice(0, 4).join(' · ')}</small>
                     ) : null}

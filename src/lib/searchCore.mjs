@@ -3,6 +3,12 @@
  * Pure functions for Node tests and browser search.ts.
  */
 
+/** Production floor: scores below this are not shown as normal hits. */
+export const NO_RESULT_THRESHOLD = 18;
+
+/** Soft floor used only when caller explicitly wants weak candidates. */
+export const WEAK_RESULT_MIN_SCORE = 1;
+
 const STOP_KO = new Set([
   '이', '가', '을', '를', '은', '는', '에', '의', '와', '과', '도', '로', '으로',
   '및', '등', '그', '저', '수', '것', '때', '더', '좀', '위해', '대한', '있는',
@@ -41,11 +47,24 @@ const QUERY_ALIASES = {
   낙상: ['fall', 'faint', 'lifecycle'],
 };
 
+/** Strip common Korean particles so 오버레이가 → 오버레이. */
+export function stripKoreanParticles(token) {
+  return String(token ?? '').replace(
+    /(이|가|을|를|은|는|와|과|의|로|으로|에서|에게|께|한테|까지|부터|만|도|라도|이나|나)$/u,
+    '',
+  );
+}
+
 export function expandTokenVariants(token) {
-  const t = token.trim();
-  if (!t) return [];
-  const out = new Set([t, normalizeSearchText(t)]);
-  const aliasHit = QUERY_ALIASES[t] || QUERY_ALIASES[normalizeSearchText(t)];
+  const t0 = token.trim();
+  if (!t0) return [];
+  const t = stripKoreanParticles(t0) || t0;
+  const out = new Set([t0, t, normalizeSearchText(t0), normalizeSearchText(t)]);
+  const aliasHit =
+    QUERY_ALIASES[t]
+    || QUERY_ALIASES[normalizeSearchText(t)]
+    || QUERY_ALIASES[t0]
+    || QUERY_ALIASES[normalizeSearchText(t0)];
   if (aliasHit) {
     for (const a of aliasHit) out.add(a);
   }
@@ -245,8 +264,41 @@ export function scoreSearchDocument(document, q) {
     }
   }
 
+  // Heading metadata boost (does not rely on stripped body text)
+  const headings = Array.isArray(document.headings) ? document.headings : [];
+  for (const h of headings) {
+    const hs = normalizeSearchText(h.searchableText || h.text || '');
+    if (!hs) continue;
+    if (q.phrase && hs.includes(q.phrase)) {
+      score += 24;
+      reasons.add('본문 일치');
+    } else if (q.tokens.some((t) => hs.includes(t))) {
+      score += 12;
+      reasons.add('본문 일치');
+    }
+  }
+
+  // Weak body-only hits: require multi-token coverage or a long rare token.
+  // Prevents "방식/장애/대응" noise from outranking real no-results.
+  const reasonList = [...reasons];
+  const strong = reasonList.some(
+    (r) => r.includes('제목') || r.includes('코드') || r.includes('태그'),
+  );
+  if (!strong && score > 0) {
+    const sig = (q.significant.length ? q.significant : q.tokens)
+      .map((t) => stripKoreanParticles(t))
+      .filter((t) => t.length >= 2);
+    const field = `${title} ${nav} ${summary} ${body} ${relatedFiles}`;
+    const hits = sig.filter((t) => field.includes(t));
+    const longHits = hits.filter((t) => t.length >= 3);
+    const coverage = sig.length ? hits.length / sig.length : 0;
+    if (longHits.length === 0 || coverage < 0.6) {
+      score = Math.min(score, NO_RESULT_THRESHOLD - 1);
+    }
+  }
+
   const snippet = buildSnippet(document, q);
-  const sectionId = guessSectionId(document, q);
+  const sectionId = pickSectionIdFromHeadings(document, q);
 
   return {
     score,
@@ -284,48 +336,55 @@ function buildSnippet(document, q) {
 }
 
 /**
+ * Pick best H2/H3 from index headings metadata (never re-parse stripped body text).
  * @param {object} document
- * @param {{ tokens: string[] }} q
+ * @param {{ tokens: string[], phrase: string, significant: string[] }} q
+ * @returns {string|null}
  */
-function guessSectionId(document, q) {
-  const text = String(document.text ?? '');
-  // headings collected as plain in text; generate-search-index may not preserve ids
-  // Prefer slugify of first token hit near "## "
-  const lines = text.split(/\n/u);
-  for (const line of lines) {
-    const m = /^(#{2,3})\s+(.+)$/u.exec(line.trim());
-    if (!m) continue;
-    const heading = m[2] ?? '';
-    const hNorm = normalizeSearchText(heading);
-    if (q.tokens.some((t) => hNorm.includes(t))) {
-      return slugifyHeading(heading);
+export function pickSectionIdFromHeadings(document, q) {
+  const headings = Array.isArray(document.headings) ? document.headings : [];
+  if (!headings.length) return null;
+
+  let best = null;
+  let bestScore = 0;
+  for (const h of headings) {
+    const hs = normalizeSearchText(h.searchableText || h.text || '');
+    if (!hs) continue;
+    let s = 0;
+    if (q.phrase && hs === q.phrase) s += 100;
+    else if (q.phrase && hs.includes(q.phrase)) s += 40;
+    for (const t of q.tokens) {
+      if (hs === t) s += 30;
+      else if (hs.includes(t)) s += 12;
+    }
+    // Prefer H2 slightly for navigation
+    if (h.level === 2) s += 1;
+    if (s > bestScore) {
+      bestScore = s;
+      best = h.id || null;
     }
   }
-  return null;
-}
-
-function slugifyHeading(text) {
-  const normalized = String(text)
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9가-힣]+/gu, '-')
-    .replace(/^-+|-+$/gu, '');
-  return normalized || 'section';
+  return bestScore > 0 ? best : null;
 }
 
 /**
- * @param {readonly object[]} index
+ * @param {readonly object[] | { documents?: object[] }} indexOrBundle
  * @param {string} query
- * @param {{ limit?: number, minScore?: number }} [options]
+ * @param {{ limit?: number, minScore?: number, includeWeak?: boolean }} [options]
  */
-export function searchDocumentsInIndex(index, query, options = {}) {
+export function searchDocumentsInIndex(indexOrBundle, query, options = {}) {
   const limit = options.limit ?? 24;
-  const minScore = options.minScore ?? 1;
+  const minScore =
+    options.minScore
+    ?? (options.includeWeak ? WEAK_RESULT_MIN_SCORE : NO_RESULT_THRESHOLD);
+  const docs = Array.isArray(indexOrBundle)
+    ? indexOrBundle
+    : (indexOrBundle?.documents ?? []);
   const q = tokenizeQuery(query);
   if (!q.phrase) return [];
 
   const scored = [];
-  for (const document of index) {
+  for (const document of docs) {
     const { score, reasons, snippet, sectionId } = scoreSearchDocument(document, q);
     if (score >= minScore) {
       scored.push({
@@ -334,17 +393,16 @@ export function searchDocumentsInIndex(index, query, options = {}) {
         matchReasons: reasons,
         snippet,
         matchedSectionId: sectionId,
+        weak: score < NO_RESULT_THRESHOLD,
       });
     }
   }
 
-  // Prefer full-token coverage first: re-sort with coverage as soft key already in score
   scored.sort(
     (a, b) =>
       b.score - a.score
       || String(a.displayTitle ?? a.title).localeCompare(String(b.displayTitle ?? b.title), 'ko'),
   );
 
-  // If we have strong full matches, prefer them; else return partials
   return scored.slice(0, limit);
 }
