@@ -1,6 +1,10 @@
 {
   "chunkSchemaVersion": "structure-aware-v1",
-  "indexPath": "data/rag/indexes/structure-aware-v1.json",
-  "updatedAt": "2026-07-10T14:21:53.290Z",
-  "note": "Stage-2 best retained after Stage-3 hybrid experiment (no promotion)."
+  "indexPath": "data/ragVectorIndex.json",
+  "versionedPath": "data/rag/indexes/structure-aware-v1.json",
+  "chunkCount": 696,
+  "documentCount": 46,
+  "generatedAt": "2026-07-11T11:10:03.390Z",
+  "updatedAt": "2026-07-11T11:10:03.549Z",
+  "note": "Operational index is data/ragVectorIndex.json (Node + Cloudflare). Versioned copy kept under data/rag/indexes/."
 }

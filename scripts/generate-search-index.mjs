@@ -189,4 +189,8 @@ entries.sort((left, right) => left.order - right.order || left.displayTitle.loca
 const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
 
 await writeFile(outputPath, output, 'utf8');
+// Machine-readable copy for Node unit tests (avoids parsing TS `satisfies`).
+const jsonPath = join(wikiRoot, 'src', 'generated', 'searchIndex.json');
+await writeFile(jsonPath, `${JSON.stringify(entries)}\n`, 'utf8');
 console.log(`Generated ${relative(wikiRoot, outputPath)} with ${entries.length} documents.`);
+console.log(`Generated ${relative(wikiRoot, jsonPath)} for tests.`);

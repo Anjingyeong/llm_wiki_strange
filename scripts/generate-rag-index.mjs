@@ -54,23 +54,27 @@ await writeIndexManifest(join(indexesDir, `${schemaKey}.manifest.json`), manifes
 // Operational write: rebuild active pointer schema into ragVectorIndex.json (default).
 // Experiments set RAG_WRITE_OPERATIONAL=false to avoid clobbering mid-run.
 if (writeOperational) {
+  // Canonical runtime artifact for Node server.mjs AND Cloudflare ask.js import.
   await writeFile(operationalPath, `${JSON.stringify(index, null, 2)}\n`, 'utf8');
   await writeIndexManifest(manifestPath, {
     ...manifest,
     indexPath: 'data/ragVectorIndex.json',
   });
-  if (!pointer) {
-    await writeFile(
-      pointerPath,
-      `${JSON.stringify({
-        chunkSchemaVersion: schemaKey,
-        indexPath: 'data/ragVectorIndex.json',
-        updatedAt: new Date().toISOString(),
-        note: 'Operational default until a candidate is promoted.',
-      }, null, 2)}\n`,
-      'utf8',
-    );
-  }
+  // Always refresh pointer so build/deploy logs and health agree on operational path.
+  await writeFile(
+    pointerPath,
+    `${JSON.stringify({
+      chunkSchemaVersion: schemaKey,
+      indexPath: 'data/ragVectorIndex.json',
+      versionedPath: relative(wikiRoot, versionedPath).replace(/\\/g, '/'),
+      chunkCount: index.chunks.length,
+      documentCount: manifest.documentCount,
+      generatedAt: index.generatedAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      note: 'Operational index is data/ragVectorIndex.json (Node + Cloudflare). Versioned copy kept under data/rag/indexes/.',
+    }, null, 2)}\n`,
+    'utf8',
+  );
 } else {
   await writeIndexManifest(manifestPath, manifest);
 }
@@ -80,10 +84,13 @@ console.log(
     {
       schemaVersion: schemaKey,
       chunkCount: index.chunks.length,
+      documentCount: manifest.documentCount,
       reused: merged.reused,
       rebuilt: merged.rebuilt,
+      generatedAt: index.generatedAt,
       versionedPath: relative(wikiRoot, versionedPath).replace(/\\/g, '/'),
-      operationalWritten: writeOperational && (schemaKey === 'legacy-v1' || (await readJsonIfExists(pointerPath))?.chunkSchemaVersion === schemaKey),
+      operationalPath: writeOperational ? 'data/ragVectorIndex.json' : null,
+      operationalWritten: writeOperational,
       meanChunkChars: manifest.meanChunkChars,
     },
     null,

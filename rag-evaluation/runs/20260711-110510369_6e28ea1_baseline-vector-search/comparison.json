@@ -1,0 +1,39 @@
+{
+  "against": "20260711-101020520_fce379b_baseline-vector-search",
+  "promote": false,
+  "reasons": [],
+  "regressions": [
+    "no quality gain: recallΔ=-0.0754 mrrΔ=-0.0760 < 0.01",
+    "hitAt1 regressed by 0.0779 > 0.02",
+    "hitAt3 regressed by 0.0793 > 0.02",
+    "hitAt5 regressed by 0.0836 > 0.02",
+    "recallAt5 regressed by 0.0754 > 0.02",
+    "mrr regressed by 0.0760 > 0.02",
+    "ndcgAt5 regressed by 0.0663 > 0.02",
+    "duplicates increased 136 -> 147"
+  ],
+  "candidate": {
+    "hitAt1": 0.48214285714285715,
+    "hitAt3": 0.6607142857142857,
+    "hitAt5": 0.6964285714285714,
+    "recallAt5": 0.4613095238095237,
+    "mrr": 0.5696428571428572,
+    "ndcgAt5": 0.4617549685927445,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 1.3824999999999932,
+    "duplicateIncidentOrDocumentCount": 147
+  },
+  "best": {
+    "hitAt1": 0.56,
+    "hitAt3": 0.74,
+    "hitAt5": 0.78,
+    "recallAt5": 0.5366666666666666,
+    "mrr": 0.6456666666666666,
+    "ndcgAt5": 0.5280477103149708,
+    "metadataFilterAccuracy": 0,
+    "noResultAccuracy": 0,
+    "p95LatencyMs": 2.2918000000000234,
+    "duplicateIncidentOrDocumentCount": 136
+  }
+}

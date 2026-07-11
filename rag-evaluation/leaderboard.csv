@@ -45,3 +45,16 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260711-101020520_fce379b_baseline-vector-search,2026-07-11T10:10:20.520Z,baseline-vector-search,baseline,fce379b,0.56,0.78,0.5367,0.6457,0.528,0,2.2918,true
 20260711-103212157_5611eea_baseline-vector-search,2026-07-11T10:32:12.157Z,baseline-vector-search,baseline,5611eea,0.5,0.72,0.5,0.5923,0.4917,0,2.1318,false
 20260711-104216564_5611eea_baseline-vector-search,2026-07-11T10:42:16.565Z,baseline-vector-search,baseline,5611eea,0.5,0.72,0.5,0.5923,0.4917,0,5.0431,false
+20260711-105600335_6e28ea1_baseline-vector-search,2026-07-11T10:56:00.341Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.6749,false
+20260711-105609234_6e28ea1_baseline-vector-search,2026-07-11T10:56:09.234Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.8441,false
+20260711-105615017_6e28ea1_baseline-vector-search,2026-07-11T10:56:15.017Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.4681,false
+20260711-105628713_6e28ea1_baseline-vector-search,2026-07-11T10:56:28.714Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.759,false
+20260711-105648847_6e28ea1_baseline-vector-search,2026-07-11T10:56:48.848Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,5.2414,false
+20260711-105713939_6e28ea1_baseline-vector-search,2026-07-11T10:57:13.939Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.4864,false
+20260711-105956310_6e28ea1_baseline-vector-search,2026-07-11T10:59:56.311Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.9878,false
+20260711-110135342_6e28ea1_baseline-vector-search,2026-07-11T11:01:35.343Z,baseline-vector-search,baseline,6e28ea1,0.52,0.74,0.5,0.608,0.499,0,1.7411,false
+20260711-110501375_6e28ea1_baseline-vector-search,2026-07-11T11:05:01.376Z,baseline-vector-search,baseline,6e28ea1,0.4821,0.6964,0.4613,0.5696,0.4618,0,1.4129,false
+20260711-110510369_6e28ea1_baseline-vector-search,2026-07-11T11:05:10.372Z,baseline-vector-search,baseline,6e28ea1,0.4821,0.6964,0.4613,0.5696,0.4618,0,1.3825,false
+20260711-110550175_6e28ea1_baseline-vector-search,2026-07-11T11:05:50.175Z,baseline-vector-search,baseline,6e28ea1,0.4821,0.6964,0.4613,0.5696,0.4618,0,1.2757,false
+20260711-110555386_6e28ea1_baseline-vector-search,2026-07-11T11:05:55.390Z,baseline-vector-search,baseline,6e28ea1,0.4821,0.6964,0.4613,0.5696,0.4618,0,1.6136,false
+20260711-110952304_6e28ea1_baseline-vector-search,2026-07-11T11:09:52.305Z,baseline-vector-search,baseline,6e28ea1,0.4821,0.6964,0.4613,0.5696,0.4618,0,1.7829,false

@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "description": "Frontend document search golden queries (not RAG). Expected slugs are soft targets: topK must include at least one.",
+  "defaultTopK": 3,
+  "queries": [
+    {
+      "id": "cs-001",
+      "query": "frameId",
+      "expectedSlugs": ["ED-FrameId-Evidence-Overlay-Sync", "Frame-Sync-Debug-Report", "Frame-Matching-Report", "2026-06-30-Overlay-Tracking-Evidence-Log"],
+      "topK": 3,
+      "category": "code-symbol",
+      "notes": "exact identifier"
+    },
+    {
+      "id": "cs-002",
+      "query": "frame id",
+      "expectedSlugs": ["ED-FrameId-Evidence-Overlay-Sync", "Frame-Sync-Debug-Report", "Frame-Matching-Report"],
+      "topK": 3,
+      "category": "spacing-variant"
+    },
+    {
+      "id": "cs-003",
+      "query": "cameraLoginId",
+      "expectedSlugs": ["Architecture", "Overview", "Glossary", "MQTT-Event-Schema", "AI-Output-JSON", "Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization", "MJPEG-Streaming-Rollback-Report", "Bug-RTSP-Stream-404", "ADR-002-MQTT-Metadata-Separation"],
+      "topK": 3,
+      "category": "code-symbol",
+      "notes": "symbol appears across pipeline docs; any contract doc is acceptable"
+    },
+    {
+      "id": "cs-004",
+      "query": "TensorRT",
+      "expectedSlugs": ["Evidence-TensorRT-Adoption-Decision"],
+      "topK": 3,
+      "category": "code-symbol"
+    },
+    {
+      "id": "cs-005",
+      "query": "텐서알티",
+      "expectedSlugs": ["Evidence-TensorRT-Adoption-Decision"],
+      "topK": 5,
+      "category": "korean-phonetic",
+      "optional": true,
+      "notes": "local hash search may miss phonetic alias; optional soft check"
+    },
+    {
+      "id": "cs-006",
+      "query": "낙상 상태 머신",
+      "expectedSlugs": ["ED-Fall-Faint-Lifecycle"],
+      "topK": 3,
+      "category": "korean-title"
+    },
+    {
+      "id": "cs-007",
+      "query": "낙상 알림이 반복되는 이유",
+      "expectedSlugs": ["ED-Fall-Faint-Lifecycle"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-008",
+      "query": "영상과 오버레이가 맞지 않음",
+      "expectedSlugs": ["ED-FrameId-Evidence-Overlay-Sync", "Frame-Sync-Debug-Report", "Frame-Matching-Report"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-009",
+      "query": "실시간 영상 지연",
+      "expectedSlugs": ["ED-Latest-Frame-Queue-Policy", "Multi-Camera-Frame-Latency-Report"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-010",
+      "query": "오래된 프레임 버리기",
+      "expectedSlugs": ["ED-Latest-Frame-Queue-Policy"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-011",
+      "query": "MQTT 이벤트 스키마",
+      "expectedSlugs": ["MQTT-Event-Schema", "ED-MQTT-Backend-Event-Path", "ADR-002-MQTT-Metadata-Separation"],
+      "topK": 3,
+      "category": "mixed"
+    },
+    {
+      "id": "cs-012",
+      "query": "worker 재시작",
+      "expectedSlugs": ["Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-013",
+      "query": "영상이 끝났을 때 상태 초기화",
+      "expectedSlugs": ["Multi-Camera-Worker-Session-Reliability", "ED-Latest-Frame-Queue-Policy"],
+      "topK": 3,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-014",
+      "query": "언제 어디서 누가 넘어졌는지 검색",
+      "expectedSlugs": ["Evidence-VLM-RAG-Event-Search-Decision", "VLM-RAG-DBless-Mock-MVP", "ED-Snapshot-VLM-Side-Channel"],
+      "topK": 5,
+      "category": "paraphrase"
+    },
+    {
+      "id": "cs-015",
+      "query": "FRAMEID",
+      "expectedSlugs": ["ED-FrameId-Evidence-Overlay-Sync", "Frame-Sync-Debug-Report"],
+      "topK": 3,
+      "category": "case-variant"
+    },
+    {
+      "id": "cs-016",
+      "query": "camera_login_id",
+      "expectedSlugs": ["Architecture", "Glossary", "Overview", "MQTT-Event-Schema", "Multi-Camera-Worker-Session-Reliability", "Realtime-Camera-Runtime-Stabilization"],
+      "topK": 3,
+      "category": "snake-case"
+    },
+    {
+      "id": "cs-017",
+      "query": "safety/events",
+      "expectedSlugs": ["MQTT-Event-Schema", "ED-MQTT-Backend-Event-Path", "ADR-002-MQTT-Metadata-Separation"],
+      "topK": 3,
+      "category": "special-char"
+    },
+    {
+      "id": "cs-018",
+      "query": "zzzz-no-such-wiki-topic-xyz-999",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "no-result",
+      "expectEmptyOrWeak": true
+    }
+  ]
+}

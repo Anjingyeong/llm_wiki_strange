@@ -29,11 +29,21 @@ export function App() {
     [activeSlug],
   );
 
-  const selectDocument = (slug: string) => {
+  const selectDocument = (slug: string, sectionId?: string | null) => {
     setActiveSlug(slug);
     setQuery('');
     window.location.hash = slug;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Jump to matched section when search provides a heading id (H2/H3).
+    requestAnimationFrame(() => {
+      if (sectionId) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   };
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
@@ -144,7 +154,11 @@ export function App() {
               ))}
             </div>
           </header>
-          <MarkdownRenderer markdown={activeDocument.body} />
+          <MarkdownRenderer
+            markdown={activeDocument.body}
+            documentTitle={activeDocument.title}
+            displayTitle={getDisplayTitle(activeDocument)}
+          />
         </article>
       </main>
       <TableOfContents headings={activeDocument.headings} />

@@ -26,15 +26,27 @@ function hasSufficientContext(chunks, mode) {
   if (chunks.length === 0) {
     return false;
   }
-  const topScore = chunks[0]?.score ?? 0;
+  const top = chunks[0] ?? {};
+  const topScore = top.score ?? 0;
   if (mode === 'baseline') {
     return topScore >= 0.02;
   }
+
+  // Hybrid / default: do not reject strong vector-only hits solely because BM25
+  // is empty (semantic paraphrases like "왜 오래된 프레임을 버리나요?").
   const hasLexicalMatch = chunks.some((chunk) => {
     const matched = chunk.matchedBy ?? [];
     return matched.includes('bm25') || matched.includes('lexical');
   });
-  return hasLexicalMatch && topScore >= 0.02;
+  const topVector = top.vectorScore ?? top.rawScore ?? 0;
+  const strongVector = topVector >= 0.45 || topScore >= 0.08;
+  if (hasLexicalMatch && topScore >= 0.02) {
+    return true;
+  }
+  if (strongVector && topScore >= 0.02) {
+    return true;
+  }
+  return false;
 }
 
 function detectAnswerMode(question) {
@@ -59,24 +71,62 @@ function detectAnswerMode(question) {
   return 'general';
 }
 
+/**
+ * Topic-scoped expansion only. Avoid bolting the entire stack onto every
+ * "흐름/구조/파이프라인" question.
+ */
 function expandQuery(question) {
   const q = question.toLowerCase();
-  let expanded = question;
-  
-  if (q.includes('동작') || q.includes('흐름') || q.includes('구조') || q.includes('아키텍처') || q.includes('architecture') || q.includes('pipeline') || q.includes('파이프라인')) {
-    expanded += " architecture pipeline RTSP YOLO Pose ByteTrack LSTM MQTT Spring React WebRTC HLS 동작 흐름 구조 아키텍처 파이프라인 Overview";
+  const aliases = [];
+
+  const add = (...terms) => {
+    for (const t of terms) {
+      if (t && !aliases.includes(t)) aliases.push(t);
+    }
+  };
+
+  // Topic extract first
+  if (/tensor\s*rt|tensorrt|텐서/.test(q)) {
+    add('TensorRT', 'engine', 'backend', 'benchmark', 'actual_backend', 'PyTorch', '.engine');
   }
-  
-  if (q.includes('검증') || q.includes('테스트') || q.includes('결과') || q.includes('근거') || q.includes('pass') || q.includes('fail') || q.includes('합격') || q.includes('실패')) {
-    expanded += " 검증 결과 테스트 PASS FAIL 점검 항목 검증 방법 명령 결과 비고 py_compile";
+  if (/mqtt|safety\/events|이벤트\s*스키마|이벤트\s*경로|subscriber/.test(q)) {
+    add('MQTT', 'safety/events', 'payload', 'subscriber', 'WebSocket', 'topic', 'schema', 'AlertEvent');
+  }
+  if (/overlay|오버레이|frameid|frame_id|동기/.test(q)) {
+    add('frameId', 'capturedAtMs', 'overlay', 'buffer', 'STOMP', 'OverlaySyncBuffer', 'timestamp');
+  }
+  if (/latest|frame\s*queue|오래된\s*프레임|실시간\s*(영상\s*)?지연|버리/.test(q)) {
+    add('latest-frame', 'CameraFrameQueue', 'put_latest', 'get_latest', 'drop_stale', 'RTSP', 'latency');
+  }
+  if (/낙상|fall|faint|실신|lifecycle|상태\s*머신/.test(q)) {
+    add('NEW_FALL', 'UNRECOVERED', 'POST_FALL', 'FallState', 'LifecycleKind', 'FAINT_SUSPECTED');
+  }
+  if (/worker|세션|eof|재시작|초기화|camera\s*worker/.test(q)) {
+    add('WorkerSession', 'streamRunId', 'sessionGeneration', 'reset', 'supervisor', 'VIDEO_EOF');
+  }
+  if (/vlm|rag|자연어|넘어졌는지\s*검색|사고\s*검색/.test(q)) {
+    add('VLM', 'RAG', 'Incident', 'snapshot', 'semantic search', 'pgvector');
+  }
+  if (/yolo|pose|bytetrack|lstm|파이프라인|pipeline/.test(q) && aliases.length === 0) {
+    add('YOLO', 'Pose', 'ByteTrack', 'LSTM', 'RTSP', 'MQTT');
   }
 
-  if (q.includes('포트폴리오') || q.includes('이력서') || q.includes('면접') || q.includes('자소서') || q.includes('기여')) {
-    expanded += " 포트폴리오 이력서 면접 답변 핵심 기여 근거 bullet 초안 질문 답변";
+  // Mode-only light boosts (no full stack dump)
+  if (/검증|테스트|결과|근거|pass|fail|합격|실패/.test(q)) {
+    add('검증', 'PASS', 'FAIL', '테스트');
   }
-  
-  return expanded;
+  if (/포트폴리오|이력서|면접|자소서|기여/.test(q)) {
+    add('포트폴리오', '이력서', '면접');
+  }
+
+  if (aliases.length === 0) {
+    return question;
+  }
+  return `${question} ${aliases.join(' ')}`;
 }
+
+// Exported for unit tests
+export { expandQuery, hasSufficientContext, detectAnswerMode };
 
 export async function answerQuestionFromIndex(index, question, options = {}) {
   const normalizedQuestion = question.trim();

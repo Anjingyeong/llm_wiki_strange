@@ -1,0 +1,24 @@
+{
+  "runId": "20260711-110550175_6e28ea1_baseline-vector-search",
+  "timestamp": "2026-07-11T11:05:50.175Z",
+  "gitCommit": "6e28ea1",
+  "gitBranch": "main",
+  "dirtyWorkingTree": true,
+  "experimentName": "baseline-vector-search",
+  "retrievalMode": "baseline",
+  "embeddingModel": "local-hash-tfidf",
+  "embeddingDimension": 256,
+  "chunkingVersion": "section-blocks-v1",
+  "indexVersion": 2,
+  "rerankerModel": "none",
+  "topK": 5,
+  "datasetVersion": "golden_queries.v1",
+  "documentCount": 46,
+  "chunkCount": 696,
+  "environment": {
+    "node": "v22.22.0",
+    "platform": "win32",
+    "evaluateAnswer": false,
+    "enableLlmAnswer": false
+  }
+}

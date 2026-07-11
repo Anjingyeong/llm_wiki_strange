@@ -56,6 +56,9 @@ export type SearchDocument = Frontmatter & {
 
 export type SearchResult = SearchDocument & {
   readonly score: number;
+  readonly matchReasons?: readonly string[];
+  readonly snippet?: string;
+  readonly matchedSectionId?: string | null;
 };
 
 export function getDisplayTitle(document: {

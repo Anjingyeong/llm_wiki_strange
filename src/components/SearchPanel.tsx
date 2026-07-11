@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react';
 import { ExpandableText } from './ExpandableText';
 import { searchDocuments } from '../lib/search';
 import { getDisplayTitle } from '../lib/types';
@@ -5,11 +6,21 @@ import { getDisplayTitle } from '../lib/types';
 type SearchPanelProps = {
   readonly query: string;
   readonly onQueryChange: (query: string) => void;
-  readonly onSelect: (slug: string) => void;
+  readonly onSelect: (slug: string, sectionId?: string | null) => void;
 };
 
+const PAGE_SIZE = 12;
+
+function highlightSnippet(snippet: string, query: string): string {
+  // ExpandableText is plain; keep snippet raw. Reasons carry the signal.
+  return snippet;
+  void query;
+}
+
 export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps) {
-  const results = searchDocuments(query);
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const allResults = useMemo(() => searchDocuments(query, { limit: 40 }), [query]);
+  const results = allResults.slice(0, visible);
 
   return (
     <section className="searchPanel" aria-label="Wiki search">
@@ -19,8 +30,11 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
         <input
           autoComplete="off"
           id="wiki-search"
-          onChange={(event) => onQueryChange(event.currentTarget.value)}
-          placeholder="문서 제목, 카테고리, 태그, 본문 검색…"
+          onChange={(event) => {
+            onQueryChange(event.currentTarget.value);
+            setVisible(PAGE_SIZE);
+          }}
+          placeholder="문서 제목, 코드 심볼, 태그, 본문 검색…"
           type="search"
           value={query}
         />
@@ -28,28 +42,55 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
 
       {query ? (
         <div className="searchResults" role="listbox" aria-label="검색 결과">
+          <p className="searchMeta">
+            {allResults.length
+              ? `${allResults.length}건 중 ${results.length}건 표시`
+              : '검색 결과 없음'}
+          </p>
           {results.length ? (
-            results.map((result) => (
-              <button
-                className="searchResult"
-                key={result.slug}
-                onClick={() => onSelect(result.slug)}
-                type="button"
-                role="option"
-                aria-selected={false}
-              >
-                <span>{result.category}</span>
-                <strong>{getDisplayTitle(result)}</strong>
-                {result.excerpt ? (
-                  <ExpandableText text={result.excerpt} maxLength={120} />
-                ) : null}
-                {result.tags.length > 0 ? (
-                  <small>{result.tags.join(' · ')}</small>
-                ) : null}
-              </button>
-            ))
+            <>
+              {results.map((result) => {
+                const short = result.shortTitle || getDisplayTitle(result);
+                const reasons = result.matchReasons?.length
+                  ? result.matchReasons.join(' · ')
+                  : null;
+                const snip = result.snippet || result.excerpt || '';
+                return (
+                  <button
+                    className="searchResult"
+                    key={result.slug}
+                    onClick={() => onSelect(result.slug, result.matchedSectionId)}
+                    type="button"
+                    role="option"
+                    aria-selected={false}
+                  >
+                    <span className="searchResultCategory">{result.category}</span>
+                    <strong className="searchResultTitle">{short}</strong>
+                    {short !== result.title ? (
+                      <em className="searchResultFormal">{result.title}</em>
+                    ) : null}
+                    {reasons ? <small className="searchResultReason">{reasons}</small> : null}
+                    {snip ? (
+                      <ExpandableText text={highlightSnippet(snip, query)} maxLength={140} />
+                    ) : null}
+                    {result.tags.length > 0 ? (
+                      <small className="searchResultTags">{result.tags.slice(0, 4).join(' · ')}</small>
+                    ) : null}
+                  </button>
+                );
+              })}
+              {visible < allResults.length ? (
+                <button
+                  type="button"
+                  className="searchMoreBtn"
+                  onClick={() => setVisible((v) => Math.min(v + PAGE_SIZE, allResults.length))}
+                >
+                  더 보기 ({allResults.length - visible}건 남음)
+                </button>
+              ) : null}
+            </>
           ) : (
-            <p className="emptyState">검색 결과가 없습니다.</p>
+            <p className="emptyState">검색 결과가 없습니다. 다른 키워드나 코드 심볼을 시도해 보세요.</p>
           )}
         </div>
       ) : null}

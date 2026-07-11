@@ -1,8 +1,12 @@
-import { headingId, inlineMarkdown, parseMarkdownBlocks } from '../lib/markdown';
+import { headingId, inlineMarkdown, isDuplicateDocumentH1, parseMarkdownBlocks, renderParagraphLines } from '../lib/markdown';
 import { MermaidDiagram } from './MermaidDiagram';
 
 type MarkdownRendererProps = {
   readonly markdown: string;
+  /** Formal document title (frontmatter title) for H1 de-dupe */
+  readonly documentTitle?: string;
+  /** Display title shown in docHeader (navTitle etc.) */
+  readonly displayTitle?: string;
 };
 
 function codeLanguageClass(language: string): string {
@@ -10,7 +14,7 @@ function codeLanguageClass(language: string): string {
   return normalized ? `language-${normalized}` : 'language-text';
 }
 
-export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
+export function MarkdownRenderer({ markdown, documentTitle = '', displayTitle = '' }: MarkdownRendererProps) {
   const blocks = parseMarkdownBlocks(markdown);
 
   return (
@@ -18,6 +22,12 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
       {blocks.map((block, index) => {
         switch (block.kind) {
           case 'heading': {
+            if (
+              block.level === 1
+              && isDuplicateDocumentH1(block.text, documentTitle, displayTitle)
+            ) {
+              return null;
+            }
             const id = headingId(block.text);
             if (block.level === 1) {
               return <h1 key={`${id}-${index}`}>{inlineMarkdown(block.text)}</h1>;
@@ -36,7 +46,9 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
             );
           }
           case 'paragraph':
-            return <p key={`${block.text}-${index}`}>{inlineMarkdown(block.text)}</p>;
+            return (
+              <p key={`p-${index}`}>{renderParagraphLines(block.lines)}</p>
+            );
           case 'list':
             return (
               <ul key={`list-${index}`}>
@@ -45,8 +57,18 @@ export function MarkdownRenderer({ markdown }: MarkdownRendererProps) {
                 ))}
               </ul>
             );
-          case 'quote':
-            return <blockquote key={`${block.text}-${index}`}>{inlineMarkdown(block.text)}</blockquote>;
+          case 'quote': {
+            const lines = 'lines' in block && Array.isArray(block.lines)
+              ? block.lines
+              : [(block as { text?: string }).text ?? ''];
+            return (
+              <blockquote key={`q-${index}`} className="decisionQuote">
+                {lines.map((line, i) => (
+                  <p key={`ql-${i}`}>{inlineMarkdown(line || '\u00a0')}</p>
+                ))}
+              </blockquote>
+            );
+          }
           case 'table': {
             const firstRow = block.rows[0] ?? [];
             const bodyRows = block.rows.slice(1);
