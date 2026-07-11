@@ -2,6 +2,9 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { computeCorpusHash } from './lib/corpus-hash.mjs';
+import { extractHeadingsFromBody } from './lib/heading-utils.mjs';
+
 const wikiRoot = fileURLToPath(new URL('..', import.meta.url));
 const contentDir = join(wikiRoot, 'content');
 const outputPath = join(wikiRoot, 'src', 'generated', 'searchIndex.ts');
@@ -158,6 +161,9 @@ function searchableText(body) {
     .trim();
 }
 
+const { corpusHash, documentCount } = await computeCorpusHash(contentDir, wikiRoot);
+const generatedAt = new Date().toISOString();
+
 const entries = [];
 const files = (await readdir(contentDir)).filter((file) => file.endsWith('.md')).sort();
 
@@ -165,6 +171,7 @@ for (const file of files) {
   const raw = await readFile(join(contentDir, file), 'utf8');
   const parsed = parseFrontmatter(raw, file);
   const slug = file.replace(/\.md$/, '');
+  const headings = extractHeadingsFromBody(parsed.body);
   entries.push({
     slug,
     title: parsed.data.title,
@@ -180,13 +187,40 @@ for (const file of files) {
     order: inferOrder(slug, parsed.data),
     sourcePath: `content/${file}`,
     excerpt: excerptFrom(parsed.body),
-    text: searchableText(`${parsed.data.title} ${parsed.data.navTitle ?? ''} ${parsed.data.shortTitle ?? ''} ${slug}\n${parsed.body}`),
+    headings,
+    text: searchableText(
+      [
+        parsed.data.title,
+        parsed.data.navTitle ?? '',
+        parsed.data.shortTitle ?? '',
+        slug,
+        parsed.data.summary ?? parsed.data.description ?? '',
+        Array.isArray(parsed.data.tags) ? parsed.data.tags.join(' ') : String(parsed.data.tags ?? ''),
+        Array.isArray(parsed.data.entities) ? parsed.data.entities.join(' ') : String(parsed.data.entities ?? ''),
+        parsed.body,
+      ].join('\n'),
+    ),
   });
 }
 
 entries.sort((left, right) => left.order - right.order || left.displayTitle.localeCompare(right.displayTitle));
 
-const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
+const meta = {
+  corpusHash,
+  documentCount,
+  generatedAt,
+  source: 'content/*.md',
+};
+
+const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndexMeta = ${JSON.stringify(meta)} as const;\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
 
 await writeFile(outputPath, output, 'utf8');
+// Machine-readable copy for Node unit tests (avoids parsing TS `satisfies`).
+const jsonPath = join(wikiRoot, 'src', 'generated', 'searchIndex.json');
+await writeFile(
+  jsonPath,
+  `${JSON.stringify({ meta, documents: entries }, null, 0)}\n`,
+  'utf8',
+);
 console.log(`Generated ${relative(wikiRoot, outputPath)} with ${entries.length} documents.`);
+console.log(`Generated ${relative(wikiRoot, jsonPath)} corpusHash=${corpusHash.slice(0, 12)}…`);

@@ -1,0 +1,225 @@
+{
+  "generatedAt": "2026-07-11T11:59:01.033Z",
+  "mode": "hybrid",
+  "answerable": {
+    "total": 6,
+    "pass": 6,
+    "top1": 6,
+    "top3": 6
+  },
+  "unanswerable": {
+    "total": 5,
+    "pass": 5,
+    "falseAnswers": []
+  },
+  "latency": {
+    "p50": 246.411,
+    "p95": 280.023
+  },
+  "rows": [
+    {
+      "id": "cam-a-01",
+      "group": "answerable",
+      "query": "카메라는 하드코딩되어 있나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 289.581
+    },
+    {
+      "id": "cam-a-02",
+      "group": "answerable",
+      "query": "카메라 목록이 코드에 고정되어 있나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability",
+        "Realtime-Camera-Runtime-Stabilization"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 246.499
+    },
+    {
+      "id": "cam-a-03",
+      "group": "answerable",
+      "query": "카메라는 동적으로 추가되나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 235.89
+    },
+    {
+      "id": "cam-a-04",
+      "group": "answerable",
+      "query": "카메라가 삭제되면 worker도 종료되나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 248.192
+    },
+    {
+      "id": "cam-a-05",
+      "group": "answerable",
+      "query": "RTSP URL이 바뀌면 worker는 어떻게 되나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 143.291
+    },
+    {
+      "id": "cam-a-06",
+      "group": "answerable",
+      "query": "cameraLoginId는 고정된 네 개만 지원하나요?",
+      "status": "answered",
+      "retrievalRelevant": true,
+      "answerSupported": true,
+      "abstentionReason": null,
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": true,
+      "hitTop3": true,
+      "pass": true,
+      "latencyMs": 246.411
+    },
+    {
+      "id": "cam-u-01",
+      "group": "unanswerable",
+      "query": "지원 가능한 카메라는 정확히 최대 몇 대인가요?",
+      "status": "insufficient_context",
+      "retrievalRelevant": true,
+      "answerSupported": false,
+      "abstentionReason": "metric_family_missing:device_count_max",
+      "top1": "WebRTC-vs-HLS",
+      "top3": [
+        "WebRTC-vs-HLS",
+        "Interview-Resume-Notes",
+        "Multi-Camera-Frame-Latency-Report"
+      ],
+      "hitTop1": null,
+      "hitTop3": null,
+      "pass": true,
+      "latencyMs": 280.023
+    },
+    {
+      "id": "cam-u-02",
+      "group": "unanswerable",
+      "query": "100대 카메라 운영 비용은 얼마인가요?",
+      "status": "insufficient_context",
+      "retrievalRelevant": true,
+      "answerSupported": false,
+      "abstentionReason": "high_stakes_token_missing",
+      "top1": "Multi-Camera-Worker-Session-Reliability",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Realtime-Camera-Runtime-Stabilization",
+        "Multi-Camera-Worker-Session-Reliability"
+      ],
+      "hitTop1": null,
+      "hitTop3": null,
+      "pass": true,
+      "latencyMs": 138.426
+    },
+    {
+      "id": "cam-u-03",
+      "group": "unanswerable",
+      "query": "카메라 구매 가격은 얼마인가요?",
+      "status": "insufficient_context",
+      "retrievalRelevant": true,
+      "answerSupported": false,
+      "abstentionReason": "metric_family_missing:cost_money",
+      "top1": "Realtime-Camera-Runtime-Stabilization",
+      "top3": [
+        "Realtime-Camera-Runtime-Stabilization",
+        "Realtime-Camera-Runtime-Stabilization",
+        "Evidence-Smart-Safety-System"
+      ],
+      "hitTop1": null,
+      "hitTop3": null,
+      "pass": true,
+      "latencyMs": 142.563
+    },
+    {
+      "id": "cam-u-04",
+      "group": "unanswerable",
+      "query": "모든 제조사의 CCTV를 공식 지원하나요?",
+      "status": "insufficient_context",
+      "retrievalRelevant": true,
+      "answerSupported": false,
+      "abstentionReason": "high_stakes_token_missing",
+      "top1": "Bug-Codeblock-Visibility",
+      "top3": [
+        "Bug-Codeblock-Visibility",
+        "Frame-Sync-Debug-Report",
+        "Evidence-TensorRT-Adoption-Decision"
+      ],
+      "hitTop1": null,
+      "hitTop3": null,
+      "pass": true,
+      "latencyMs": 269.538
+    },
+    {
+      "id": "cam-u-05",
+      "group": "unanswerable",
+      "query": "카메라 장애율은 몇 퍼센트인가요?",
+      "status": "insufficient_context",
+      "retrievalRelevant": true,
+      "answerSupported": false,
+      "abstentionReason": "high_stakes_token_missing",
+      "top1": "Realtime-Camera-Runtime-Stabilization",
+      "top3": [
+        "Realtime-Camera-Runtime-Stabilization",
+        "Realtime-Camera-Runtime-Stabilization",
+        "Multi-Camera-Frame-Latency-Report"
+      ],
+      "hitTop1": null,
+      "hitTop3": null,
+      "pass": true,
+      "latencyMs": 140.364
+    }
+  ]
+}

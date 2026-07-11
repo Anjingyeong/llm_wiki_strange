@@ -6,3 +6,9 @@ wiki-*.png
 .omo/
 .wrangler/
 .env
+
+# Local MCP task artifacts
+mcps/
+
+# Raw RAG evaluation runs
+rag-evaluation/runs/

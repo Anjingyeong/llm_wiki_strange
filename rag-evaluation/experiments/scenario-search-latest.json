@@ -1,0 +1,3392 @@
+{
+  "generatedAt": "2026-07-11T11:58:31.649Z",
+  "noResultThreshold": 18,
+  "modes": [
+    "baseline",
+    "lexical",
+    "hybrid",
+    "hybrid-raw"
+  ],
+  "byMode": {
+    "baseline": {
+      "relatedHits": 9,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5,
+      "rows": [
+        {
+          "question": "왜 오래된 RTSP 프레임을 버리나요?",
+          "related": true,
+          "expected": [
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "frontTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Frame-Matching-Report"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 30.969,
+          "mode": "baseline",
+          "top1": "ED-Latest-Frame-Queue-Policy",
+          "top3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.566138,
+            0.450036,
+            0.38313
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.7926,
+            0.6301,
+            0.5364
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "latencyMs": 12.401
+        },
+        {
+          "question": "낙상 알림이 계속 반복되는 문제는 어떻게 해결했나요?",
+          "related": true,
+          "expected": [
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 23.903,
+          "mode": "baseline",
+          "top1": "ED-MQTT-Backend-Event-Path",
+          "top3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.39167394769599995,
+            0.317525904696,
+            0.248707539336
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4152,
+            0.3366,
+            0.2636
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "latencyMs": 3.262
+        },
+        {
+          "question": "frameId는 왜 필요한가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Sync-Debug-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Multi-Camera-Frame-Latency-Report",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 20.252,
+          "mode": "baseline",
+          "top1": "MJPEG-Streaming-Rollback-Report",
+          "top3": [
+            "MJPEG-Streaming-Rollback-Report",
+            "MJPEG-Streaming-Rollback-Report",
+            "MJPEG-Streaming-Rollback-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.442325834101,
+            0.41983205332400003,
+            0.374766002893
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4689,
+            0.445,
+            0.3973
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 2.336
+        },
+        {
+          "question": "영상과 AI Overlay가 어긋나는 이유는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Matching-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+            "Interview-Resume-Notes"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 26.623,
+          "mode": "baseline",
+          "top1": "AI-Pipeline",
+          "top3": [
+            "AI-Pipeline",
+            "AI-Output-JSON",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.395577615072,
+            0.319504682752,
+            0.31593496224
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4193,
+            0.3387,
+            0.3349
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 2.36
+        },
+        {
+          "question": "TensorRT가 실제 worker에 적용됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 18.805,
+          "mode": "baseline",
+          "top1": "ADR-004-LSTM-Feature-Expansion",
+          "top3": [
+            "ADR-004-LSTM-Feature-Expansion",
+            "Interview-Resume-Notes",
+            "Feature-Vector-51D-vs-54D"
+          ],
+          "expectedHit": false,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.334482,
+            0.2965,
+            0.27735000000000004
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.3546,
+            0.3143,
+            0.294
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Interview-Resume-Notes",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 3.056
+        },
+        {
+          "question": "PyTorch와 TensorRT 성능 차이는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 19.222,
+          "mode": "baseline",
+          "top1": "Evidence-TensorRT-Adoption-Decision",
+          "top3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Interview-Resume-Notes",
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.30660231576200003,
+            0.302372118536,
+            0.29289386502
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.325,
+            0.3205,
+            0.3105
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Frame-Matching-Report",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 2.252
+        },
+        {
+          "question": "영상이 끝난 뒤 이전 상태가 남지 않게 어떻게 처리했나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "frontHit": false,
+          "frontLatencyMs": 17.181,
+          "mode": "baseline",
+          "top1": "AI-Output-JSON",
+          "top3": [
+            "AI-Output-JSON",
+            "AI-Output-JSON",
+            "Bug-Codeblock-Visibility"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.3055045215600001,
+            0.288008945964,
+            0.271537652808
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.3238,
+            0.3053,
+            0.2878
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 1.545
+        },
+        {
+          "question": "카메라는 하드코딩되어 있나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Frame-Latency-Report",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.157,
+          "mode": "baseline",
+          "top1": "Frame-Sync-Debug-Report",
+          "top3": [
+            "Frame-Sync-Debug-Report",
+            "Realtime-Camera-Runtime-Stabilization",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.2241792315,
+            0.20412382455000003,
+            0.1951800957
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.2376,
+            0.2164,
+            0.2069
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 2.781
+        },
+        {
+          "question": "MQTT 이벤트가 DB와 프론트까지 어떻게 전달되나요?",
+          "related": true,
+          "expected": [
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "frontTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ADR-002-MQTT-Metadata-Separation",
+            "VLM-RAG-DBless-Mock-MVP"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 18.095,
+          "mode": "baseline",
+          "top1": "LSTM",
+          "top3": [
+            "LSTM",
+            "LSTM",
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.38729850435,
+            0.377964700956,
+            0.32391039199
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4803,
+            0.4687,
+            0.4535
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path"
+          ],
+          "latencyMs": 2.687
+        },
+        {
+          "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "VLM-RAG-DBless-Mock-MVP",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontTop3": [],
+          "frontHit": false,
+          "frontLatencyMs": 16.394,
+          "mode": "baseline",
+          "top1": "Realtime-Camera-Runtime-Stabilization",
+          "top3": [
+            "Realtime-Camera-Runtime-Stabilization",
+            "ED-Snapshot-VLM-Side-Channel",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.28319633035200004,
+            0.22428005796000003,
+            0.21843295488
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.3002,
+            0.2377,
+            0.2315
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "latencyMs": 1.958
+        },
+        {
+          "question": "직원 급여 정책",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.498,
+          "mode": "baseline",
+          "top1": "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+          "top3": [
+            "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+            "AI-Pipeline",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.29397218625000004,
+            0.2598282846,
+            0.25264547325000003
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.3116,
+            0.2754,
+            0.2678
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 2.263
+        },
+        {
+          "question": "회사 연차 규정",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.628,
+          "mode": "baseline",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Interview-Resume-Notes",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.44222574933099995,
+            0.24519915136999998,
+            0.215352977644
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4688,
+            0.2599,
+            0.2283
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 1.263
+        },
+        {
+          "question": "쿠버네티스 장애 대응",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.367,
+          "mode": "baseline",
+          "top1": "Frame-Sync-Debug-Report",
+          "top3": [
+            "Frame-Sync-Debug-Report",
+            "ADR-004-LSTM-Feature-Expansion",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.21821751540000003,
+            0.2162949399,
+            0.20594247705000002
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.2313,
+            0.2293,
+            0.2183
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 1.264
+        },
+        {
+          "question": "블록체인 합의 알고리즘",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.125,
+          "mode": "baseline",
+          "top1": "MQTT-Event-Schema",
+          "top3": [
+            "MQTT-Event-Schema",
+            "Graphify-Semantic-Map",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.44444403000000005,
+            0.31647497985,
+            0.29277014355
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.4711,
+            0.3355,
+            0.3103
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 1.338
+        },
+        {
+          "question": "의료보험 청구 방식",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.749,
+          "mode": "baseline",
+          "top1": "MJPEG-Streaming-Rollback-Report",
+          "top3": [
+            "MJPEG-Streaming-Rollback-Report",
+            "MJPEG-Streaming-Rollback-Report",
+            "MJPEG-Streaming-Rollback-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ],
+            [
+              "vector"
+            ]
+          ],
+          "vectorScore": [
+            0.399999627,
+            0.30599492265,
+            0.3042900081
+          ],
+          "lexicalScore": [
+            0,
+            0,
+            0
+          ],
+          "finalScore": [
+            0.424,
+            0.3244,
+            0.3225
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 1.228
+        }
+      ]
+    },
+    "lexical": {
+      "relatedHits": 8,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5,
+      "rows": [
+        {
+          "question": "왜 오래된 RTSP 프레임을 버리나요?",
+          "related": true,
+          "expected": [
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "frontTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Frame-Matching-Report"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 15.978,
+          "mode": "lexical",
+          "top1": "ED-Latest-Frame-Queue-Policy",
+          "top3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            17.336469782323036,
+            16.896575452175846,
+            16.863079268893454
+          ],
+          "finalScore": [
+            17.3365,
+            16.8966,
+            16.8631
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "latencyMs": 141.84
+        },
+        {
+          "question": "낙상 알림이 계속 반복되는 문제는 어떻게 해결했나요?",
+          "related": true,
+          "expected": [
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 19.55,
+          "mode": "lexical",
+          "top1": "Bug-Notification-Scope",
+          "top3": [
+            "Bug-Notification-Scope",
+            "Bug-Notification-Scope",
+            "Bug-Notification-Scope"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            13.737121337642513,
+            13.377880745624644,
+            13.108557371927082
+          ],
+          "finalScore": [
+            13.7371,
+            13.3779,
+            13.1086
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "latencyMs": 196.268
+        },
+        {
+          "question": "frameId는 왜 필요한가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Sync-Debug-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Multi-Camera-Frame-Latency-Report",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.938,
+          "mode": "lexical",
+          "top1": "Evidence-Portfolio-Resume-Usage",
+          "top3": [
+            "Evidence-Portfolio-Resume-Usage",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            7.758638694162279,
+            7.542764263486396,
+            7.074118805767221
+          ],
+          "finalScore": [
+            7.7586,
+            7.5428,
+            7.0741
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 175.857
+        },
+        {
+          "question": "영상과 AI Overlay가 어긋나는 이유는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Matching-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+            "Interview-Resume-Notes"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.968,
+          "mode": "lexical",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            26.65309435606044,
+            15.849415992041564,
+            15.530578306778033
+          ],
+          "finalScore": [
+            26.6531,
+            15.8494,
+            15.5306
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 189.354
+        },
+        {
+          "question": "TensorRT가 실제 worker에 적용됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 19.182,
+          "mode": "lexical",
+          "top1": "Multi-Camera-Worker-Session-Reliability",
+          "top3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Interview-Resume-Notes",
+            "Frame-Matching-Report"
+          ],
+          "expectedHit": false,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            7.337506731911095,
+            4.190767191704158,
+            4.113877318230478
+          ],
+          "finalScore": [
+            7.3375,
+            4.1908,
+            4.1139
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 200.134
+        },
+        {
+          "question": "PyTorch와 TensorRT 성능 차이는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.05,
+          "mode": "lexical",
+          "top1": "Evidence-TensorRT-Adoption-Decision",
+          "top3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Interview-Resume-Notes",
+            "Evidence-VLM-RAG-Event-Search-Decision"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            17.701731404465725,
+            15.798472355208832,
+            10.590420268487074
+          ],
+          "finalScore": [
+            17.7017,
+            15.7985,
+            10.5904
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Frame-Latency-Report"
+          ],
+          "latencyMs": 202.269
+        },
+        {
+          "question": "영상이 끝난 뒤 이전 상태가 남지 않게 어떻게 처리했나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "frontHit": false,
+          "frontLatencyMs": 17.795,
+          "mode": "lexical",
+          "top1": "Multi-Camera-Worker-Session-Reliability",
+          "top3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            13.294122593842175,
+            10.18746193080188,
+            10.11536495192616
+          ],
+          "finalScore": [
+            13.2941,
+            10.1875,
+            10.1154
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 198.438
+        },
+        {
+          "question": "카메라는 하드코딩되어 있나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Frame-Latency-Report",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.102,
+          "mode": "lexical",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Architecture",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            11.681727289842973,
+            10.526754641866555,
+            4.540585813683356
+          ],
+          "finalScore": [
+            11.6817,
+            10.5268,
+            4.5406
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 181.67
+        },
+        {
+          "question": "MQTT 이벤트가 DB와 프론트까지 어떻게 전달되나요?",
+          "related": true,
+          "expected": [
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "frontTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ADR-002-MQTT-Metadata-Separation",
+            "VLM-RAG-DBless-Mock-MVP"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.244,
+          "mode": "lexical",
+          "top1": "Bug-Notification-Scope",
+          "top3": [
+            "Bug-Notification-Scope",
+            "Bug-AI-Tracker-FrameRate-Mismatch",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            12.128851163191133,
+            9.3728560409156,
+            8.885755949950173
+          ],
+          "finalScore": [
+            12.1289,
+            9.3729,
+            8.8858
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "latencyMs": 109.514
+        },
+        {
+          "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "VLM-RAG-DBless-Mock-MVP",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontTop3": [],
+          "frontHit": false,
+          "frontLatencyMs": 17.116,
+          "mode": "lexical",
+          "top1": "Feature-Vector-51D-vs-54D",
+          "top3": [
+            "Feature-Vector-51D-vs-54D",
+            "Evidence-TensorRT-Adoption-Decision",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": false,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            8.457587872824265,
+            7.8739556013806045,
+            7.7154277819743005
+          ],
+          "finalScore": [
+            8.4576,
+            7.874,
+            7.7154
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 200.004
+        },
+        {
+          "question": "직원 급여 정책",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.785,
+          "mode": "lexical",
+          "top1": "Multi-Camera-Frame-Latency-Report",
+          "top3": [
+            "Multi-Camera-Frame-Latency-Report",
+            "Graphify-Semantic-Map",
+            "Model-Decision-YOLO26n"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            8.344947482572417,
+            6.659162950963979,
+            6.521289353446602
+          ],
+          "finalScore": [
+            8.3449,
+            6.6592,
+            6.5213
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 197.519
+        },
+        {
+          "question": "회사 연차 규정",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 17.943,
+          "mode": "lexical",
+          "top1": "Evidence-VLM-RAG-Event-Search-Decision",
+          "top3": [
+            "Evidence-VLM-RAG-Event-Search-Decision"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0
+          ],
+          "lexicalScore": [
+            8.475302262507006
+          ],
+          "finalScore": [
+            8.4753
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 187.564
+        },
+        {
+          "question": "쿠버네티스 장애 대응",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 14.732,
+          "mode": "lexical",
+          "top1": "Bug-AI-Tracker-FrameRate-Mismatch",
+          "top3": [
+            "Bug-AI-Tracker-FrameRate-Mismatch",
+            "Bug-AI-Tracker-FrameRate-Mismatch",
+            "WebRTC-vs-HLS"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            8.639747597207323,
+            8.434674215343103,
+            8.252691582724417
+          ],
+          "finalScore": [
+            8.6397,
+            8.4347,
+            8.2527
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 183.645
+        },
+        {
+          "question": "블록체인 합의 알고리즘",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 14.986,
+          "mode": "lexical",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Frame-Matching-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            9.886248718405632,
+            9.829758420323566,
+            9.775967168368638
+          ],
+          "finalScore": [
+            9.8862,
+            9.8298,
+            9.776
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 190.217
+        },
+        {
+          "question": "의료보험 청구 방식",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 16.454,
+          "mode": "lexical",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Frame-Matching-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ],
+            [
+              "bm25"
+            ]
+          ],
+          "vectorScore": [
+            0,
+            0,
+            0
+          ],
+          "lexicalScore": [
+            8.553252238573396,
+            8.485885266498048,
+            8.456279766079678
+          ],
+          "finalScore": [
+            8.5533,
+            8.4859,
+            8.4563
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 195.282
+        }
+      ]
+    },
+    "hybrid": {
+      "relatedHits": 10,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5,
+      "rows": [
+        {
+          "question": "왜 오래된 RTSP 프레임을 버리나요?",
+          "related": true,
+          "expected": [
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "frontTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Frame-Matching-Report"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.066,
+          "mode": "hybrid",
+          "top1": "ED-Latest-Frame-Queue-Policy",
+          "top3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "Multi-Camera-Frame-Latency-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.566138,
+            0.38313,
+            0.293105
+          ],
+          "lexicalScore": [
+            17.336469782323036,
+            16.896575452175846,
+            11.77984330743085
+          ],
+          "finalScore": [
+            0.0328,
+            0.032,
+            0.028
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "2026-06-30-Overlay-Tracking-Evidence-Log"
+          ],
+          "latencyMs": 184.785
+        },
+        {
+          "question": "낙상 알림이 계속 반복되는 문제는 어떻게 해결했나요?",
+          "related": true,
+          "expected": [
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 19.537,
+          "mode": "hybrid",
+          "top1": "Bug-Notification-Scope",
+          "top3": [
+            "Bug-Notification-Scope",
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.149626157984,
+            0.317525904696,
+            0.115470089064
+          ],
+          "lexicalScore": [
+            13.737121337642513,
+            9.304997145070596,
+            13.108557371927082
+          ],
+          "finalScore": [
+            0.0315,
+            0.0297,
+            0.0294
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle",
+            "VLM-RAG-DBless-Mock-MVP"
+          ],
+          "latencyMs": 274.668
+        },
+        {
+          "question": "frameId는 왜 필요한가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Sync-Debug-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Multi-Camera-Frame-Latency-Report",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 15.87,
+          "mode": "hybrid",
+          "top1": "Evidence-Portfolio-Resume-Usage",
+          "top3": [
+            "Evidence-Portfolio-Resume-Usage",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.26533483067999997,
+            0.05712010346000001,
+            0.105539962392
+          ],
+          "lexicalScore": [
+            7.758638694162279,
+            7.542764263486396,
+            7.074118805767221
+          ],
+          "finalScore": [
+            0.0328,
+            0.032,
+            0.032
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Multi-Camera-Frame-Latency-Report"
+          ],
+          "latencyMs": 238.648
+        },
+        {
+          "question": "영상과 AI Overlay가 어긋나는 이유는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Matching-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+            "Interview-Resume-Notes"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 18.037,
+          "mode": "hybrid",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Interview-Resume-Notes",
+            "AI-Output-JSON"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.31593496224,
+            0.161949532112,
+            0.319504682752
+          ],
+          "lexicalScore": [
+            26.65309435606044,
+            11.391595945860807,
+            0.3985676324085025
+          ],
+          "finalScore": [
+            0.0328,
+            0.0294,
+            0.0277
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "2026-06-30-Overlay-Tracking-Evidence-Log"
+          ],
+          "latencyMs": 241.497
+        },
+        {
+          "question": "TensorRT가 실제 worker에 적용됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.254,
+          "mode": "hybrid",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Feature-Vector-51D-vs-54D",
+            "Bug-AI-Tracker-FrameRate-Mismatch"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.2965,
+            0.255155,
+            0.22047899999999998
+          ],
+          "lexicalScore": [
+            4.190767191704158,
+            3.9441310355882466,
+            3.9332474466255563
+          ],
+          "finalScore": [
+            0.0325,
+            0.0302,
+            0.0297
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "latencyMs": 280.018
+        },
+        {
+          "question": "PyTorch와 TensorRT 성능 차이는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.752,
+          "mode": "hybrid",
+          "top1": "Evidence-TensorRT-Adoption-Decision",
+          "top3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Interview-Resume-Notes",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.30660231576200003,
+            0.173045432374,
+            0.13046574022
+          ],
+          "lexicalScore": [
+            17.701731404465725,
+            15.798472355208832,
+            9.781246609227987
+          ],
+          "finalScore": [
+            0.0328,
+            0.0313,
+            0.0299
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 281.537
+        },
+        {
+          "question": "영상이 끝난 뒤 이전 상태가 남지 않게 어떻게 처리했나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "frontHit": false,
+          "frontLatencyMs": 17.386,
+          "mode": "hybrid",
+          "top1": "Multi-Camera-Worker-Session-Reliability",
+          "top3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.10694831547599999,
+            0.103712565672,
+            0.09905302548
+          ],
+          "lexicalScore": [
+            13.294122593842175,
+            10.18746193080188,
+            10.11536495192616
+          ],
+          "finalScore": [
+            0.0311,
+            0.0293,
+            0.0287
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 276.34
+        },
+        {
+          "question": "카메라는 하드코딩되어 있나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Frame-Latency-Report",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.626,
+          "mode": "hybrid",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Architecture",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.14893262865,
+            0.077849874,
+            0.0572581089
+          ],
+          "lexicalScore": [
+            11.681727289842973,
+            10.526754641866555,
+            4.540585813683356
+          ],
+          "finalScore": [
+            0.0328,
+            0.0323,
+            0.0317
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 259.788
+        },
+        {
+          "question": "MQTT 이벤트가 DB와 프론트까지 어떻게 전달되나요?",
+          "related": true,
+          "expected": [
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "frontTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ADR-002-MQTT-Metadata-Separation",
+            "VLM-RAG-DBless-Mock-MVP"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 18.379,
+          "mode": "hybrid",
+          "top1": "ED-MQTT-Backend-Event-Path",
+          "top3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "Bug-AI-Tracker-FrameRate-Mismatch"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.286038521614,
+            0.251312801728,
+            0.21516583575000003
+          ],
+          "lexicalScore": [
+            1.350586679007739,
+            1.3550531679620725,
+            9.3728560409156
+          ],
+          "finalScore": [
+            0.0301,
+            0.0301,
+            0.0296
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "latencyMs": 157.247
+        },
+        {
+          "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "VLM-RAG-DBless-Mock-MVP",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontTop3": [],
+          "frontHit": false,
+          "frontLatencyMs": 17.339,
+          "mode": "hybrid",
+          "top1": "Feature-Vector-51D-vs-54D",
+          "top3": [
+            "Feature-Vector-51D-vs-54D",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.11363865624,
+            0.17942404636800002,
+            0.112826789568
+          ],
+          "lexicalScore": [
+            8.457587872824265,
+            6.313290481181277,
+            7.7154277819743005
+          ],
+          "finalScore": [
+            0.032,
+            0.032,
+            0.0313
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 296.49
+        },
+        {
+          "question": "직원 급여 정책",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 16.421,
+          "mode": "hybrid",
+          "top1": "Graphify-Semantic-Map",
+          "top3": [
+            "Graphify-Semantic-Map",
+            "Model-Decision-YOLO26n",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.09491576265,
+            0.13423098825000002,
+            0.15104168820000002
+          ],
+          "lexicalScore": [
+            6.659162950963979,
+            6.521289353446602,
+            4.9381125724036306
+          ],
+          "finalScore": [
+            0.032,
+            0.032,
+            0.0309
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 277.902
+        },
+        {
+          "question": "회사 연차 규정",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 19.491,
+          "mode": "hybrid",
+          "top1": "Evidence-VLM-RAG-Event-Search-Decision",
+          "top3": [
+            "Evidence-VLM-RAG-Event-Search-Decision"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.058848824465000005
+          ],
+          "lexicalScore": [
+            8.475302262507006
+          ],
+          "finalScore": [
+            0.0328
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 322.573
+        },
+        {
+          "question": "쿠버네티스 장애 대응",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 16.834,
+          "mode": "hybrid",
+          "top1": "WebRTC-vs-HLS",
+          "top3": [
+            "WebRTC-vs-HLS",
+            "WebRTC-vs-HLS",
+            "Bug-AI-Tracker-FrameRate-Mismatch"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.14852213280000004,
+            0.18786738060000002,
+            0.05832101025
+          ],
+          "lexicalScore": [
+            8.252691582724417,
+            7.5575423547150615,
+            8.639747597207323
+          ],
+          "finalScore": [
+            0.032,
+            0.0307,
+            0.0289
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 269.126
+        },
+        {
+          "question": "블록체인 합의 알고리즘",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.042,
+          "mode": "hybrid",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Multi-Camera-Frame-Latency-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.1172424645,
+            0.19611598004999997,
+            0.0692542872
+          ],
+          "lexicalScore": [
+            9.886248718405632,
+            9.775967168368638,
+            9.339576343781912
+          ],
+          "finalScore": [
+            0.0323,
+            0.0323,
+            0.0303
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 281.804
+        },
+        {
+          "question": "의료보험 청구 방식",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 17.559,
+          "mode": "hybrid",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Glossary"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.0912871179,
+            0.0986529492,
+            0.0666666045
+          ],
+          "lexicalScore": [
+            8.553252238573396,
+            8.485885266498048,
+            6.622554364572482
+          ],
+          "finalScore": [
+            0.0323,
+            0.0323,
+            0.0281
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 268.363
+        }
+      ]
+    },
+    "hybrid-raw": {
+      "relatedHits": 9,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5,
+      "rows": [
+        {
+          "question": "왜 오래된 RTSP 프레임을 버리나요?",
+          "related": true,
+          "expected": [
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "frontTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Frame-Matching-Report"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 15.591,
+          "mode": "hybrid-raw",
+          "top1": "ED-Latest-Frame-Queue-Policy",
+          "top3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.566138,
+            0.38313,
+            0.450036
+          ],
+          "lexicalScore": [
+            17.336469782323036,
+            16.896575452175846,
+            16.83769048737556
+          ],
+          "finalScore": [
+            0.0328,
+            0.032,
+            0.0315
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy",
+            "ED-Latest-Frame-Queue-Policy"
+          ],
+          "latencyMs": 182.483
+        },
+        {
+          "question": "낙상 알림이 계속 반복되는 문제는 어떻게 해결했나요?",
+          "related": true,
+          "expected": [
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 19.651,
+          "mode": "hybrid-raw",
+          "top1": "Bug-Notification-Scope",
+          "top3": [
+            "Bug-Notification-Scope",
+            "ED-Fall-Faint-Lifecycle",
+            "Bug-Notification-Scope"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.149626157984,
+            0.317525904696,
+            0.115470089064
+          ],
+          "lexicalScore": [
+            13.737121337642513,
+            9.304997145070596,
+            13.108557371927082
+          ],
+          "finalScore": [
+            0.0315,
+            0.0297,
+            0.0294
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle",
+            "ED-Fall-Faint-Lifecycle"
+          ],
+          "latencyMs": 273.043
+        },
+        {
+          "question": "frameId는 왜 필요한가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Sync-Debug-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Multi-Camera-Frame-Latency-Report",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 15.638,
+          "mode": "hybrid-raw",
+          "top1": "Evidence-Portfolio-Resume-Usage",
+          "top3": [
+            "Evidence-Portfolio-Resume-Usage",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.26533483067999997,
+            0.05712010346000001,
+            0.105539962392
+          ],
+          "lexicalScore": [
+            7.758638694162279,
+            7.542764263486396,
+            7.074118805767221
+          ],
+          "finalScore": [
+            0.0328,
+            0.032,
+            0.032
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 241.181
+        },
+        {
+          "question": "영상과 AI Overlay가 어긋나는 이유는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "Frame-Matching-Report"
+          ],
+          "frontTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log",
+            "Interview-Resume-Notes"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 18.793,
+          "mode": "hybrid-raw",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Interview-Resume-Notes",
+            "AI-Output-JSON"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.31593496224,
+            0.161949532112,
+            0.319504682752
+          ],
+          "lexicalScore": [
+            26.65309435606044,
+            11.391595945860807,
+            0.3985676324085025
+          ],
+          "finalScore": [
+            0.0328,
+            0.0294,
+            0.0277
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "latencyMs": 253.494
+        },
+        {
+          "question": "TensorRT가 실제 worker에 적용됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.032,
+          "mode": "hybrid-raw",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Feature-Vector-51D-vs-54D",
+            "Bug-AI-Tracker-FrameRate-Mismatch"
+          ],
+          "expectedHit": false,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.2965,
+            0.255155,
+            0.22047899999999998
+          ],
+          "lexicalScore": [
+            4.190767191704158,
+            3.9441310355882466,
+            3.9332474466255563
+          ],
+          "finalScore": [
+            0.0325,
+            0.0302,
+            0.0297
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 281.361
+        },
+        {
+          "question": "PyTorch와 TensorRT 성능 차이는 무엇인가요?",
+          "related": true,
+          "expected": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontTop3": [
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 17.602,
+          "mode": "hybrid-raw",
+          "top1": "Evidence-TensorRT-Adoption-Decision",
+          "top3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Interview-Resume-Notes",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.30660231576200003,
+            0.173045432374,
+            0.13046574022
+          ],
+          "lexicalScore": [
+            17.701731404465725,
+            15.798472355208832,
+            9.781246609227987
+          ],
+          "finalScore": [
+            0.0328,
+            0.0313,
+            0.0299
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Evidence-TensorRT-Adoption-Decision",
+            "Evidence-TensorRT-Adoption-Decision",
+            "Evidence-TensorRT-Adoption-Decision"
+          ],
+          "latencyMs": 267.27
+        },
+        {
+          "question": "영상이 끝난 뒤 이전 상태가 남지 않게 어떻게 처리했나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "frontTop3": [
+            "ED-Fall-Faint-Lifecycle",
+            "ED-FrameId-Evidence-Overlay-Sync"
+          ],
+          "frontHit": false,
+          "frontLatencyMs": 17.363,
+          "mode": "hybrid-raw",
+          "top1": "Multi-Camera-Worker-Session-Reliability",
+          "top3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.10694831547599999,
+            0.103712565672,
+            0.09905302548
+          ],
+          "lexicalScore": [
+            13.294122593842175,
+            10.18746193080188,
+            10.11536495192616
+          ],
+          "finalScore": [
+            0.0311,
+            0.0293,
+            0.0287
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 266.5
+        },
+        {
+          "question": "카메라는 하드코딩되어 있나요?",
+          "related": true,
+          "expected": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Frame-Latency-Report",
+            "Realtime-Camera-Runtime-Stabilization"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 14.686,
+          "mode": "hybrid-raw",
+          "top1": "Interview-Resume-Notes",
+          "top3": [
+            "Interview-Resume-Notes",
+            "Architecture",
+            "Interview-Resume-Notes"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.14893262865,
+            0.077849874,
+            0.0572581089
+          ],
+          "lexicalScore": [
+            11.681727289842973,
+            10.526754641866555,
+            4.540585813683356
+          ],
+          "finalScore": [
+            0.0328,
+            0.0323,
+            0.0317
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "latencyMs": 250.225
+        },
+        {
+          "question": "MQTT 이벤트가 DB와 프론트까지 어떻게 전달되나요?",
+          "related": true,
+          "expected": [
+            "ED-MQTT-Backend-Event-Path",
+            "MQTT-Event-Schema"
+          ],
+          "frontTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ADR-002-MQTT-Metadata-Separation",
+            "VLM-RAG-DBless-Mock-MVP"
+          ],
+          "frontHit": true,
+          "frontLatencyMs": 16.921,
+          "mode": "hybrid-raw",
+          "top1": "ED-MQTT-Backend-Event-Path",
+          "top3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.286038521614,
+            0.251312801728,
+            0.26171186887
+          ],
+          "lexicalScore": [
+            1.350586679007739,
+            1.3550531679620725,
+            1.3517372758289004
+          ],
+          "finalScore": [
+            0.0301,
+            0.0301,
+            0.0301
+          ],
+          "insufficient_context": false,
+          "ragStatus": "answered",
+          "ragTop3": [
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path",
+            "ED-MQTT-Backend-Event-Path"
+          ],
+          "latencyMs": 163.26
+        },
+        {
+          "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+          "related": true,
+          "expected": [
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "VLM-RAG-DBless-Mock-MVP",
+            "ED-Snapshot-VLM-Side-Channel"
+          ],
+          "frontTop3": [],
+          "frontHit": false,
+          "frontLatencyMs": 17.973,
+          "mode": "hybrid-raw",
+          "top1": "Feature-Vector-51D-vs-54D",
+          "top3": [
+            "Feature-Vector-51D-vs-54D",
+            "Evidence-VLM-RAG-Event-Search-Decision",
+            "Evidence-Smart-Safety-System"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.11363865624,
+            0.17942404636800002,
+            0.112826789568
+          ],
+          "lexicalScore": [
+            8.457587872824265,
+            6.313290481181277,
+            7.7154277819743005
+          ],
+          "finalScore": [
+            0.032,
+            0.032,
+            0.0313
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 277.808
+        },
+        {
+          "question": "직원 급여 정책",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 16.331,
+          "mode": "hybrid-raw",
+          "top1": "Graphify-Semantic-Map",
+          "top3": [
+            "Graphify-Semantic-Map",
+            "Model-Decision-YOLO26n",
+            "Multi-Camera-Worker-Session-Reliability"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.09491576265,
+            0.13423098825000002,
+            0.15104168820000002
+          ],
+          "lexicalScore": [
+            6.659162950963979,
+            6.521289353446602,
+            4.9381125724036306
+          ],
+          "finalScore": [
+            0.032,
+            0.032,
+            0.0309
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 267.474
+        },
+        {
+          "question": "회사 연차 규정",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 14.938,
+          "mode": "hybrid-raw",
+          "top1": "Evidence-VLM-RAG-Event-Search-Decision",
+          "top3": [
+            "Evidence-VLM-RAG-Event-Search-Decision"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.058848824465000005
+          ],
+          "lexicalScore": [
+            8.475302262507006
+          ],
+          "finalScore": [
+            0.0328
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 265.031
+        },
+        {
+          "question": "쿠버네티스 장애 대응",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.574,
+          "mode": "hybrid-raw",
+          "top1": "WebRTC-vs-HLS",
+          "top3": [
+            "WebRTC-vs-HLS",
+            "WebRTC-vs-HLS",
+            "Bug-AI-Tracker-FrameRate-Mismatch"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.14852213280000004,
+            0.18786738060000002,
+            0.05832101025
+          ],
+          "lexicalScore": [
+            8.252691582724417,
+            7.5575423547150615,
+            8.639747597207323
+          ],
+          "finalScore": [
+            0.032,
+            0.0307,
+            0.0289
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 281.521
+        },
+        {
+          "question": "블록체인 합의 알고리즘",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 15.808,
+          "mode": "hybrid-raw",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Frame-Matching-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.1172424645,
+            0.19611598004999997,
+            0.06804127485
+          ],
+          "lexicalScore": [
+            9.886248718405632,
+            9.775967168368638,
+            9.829758420323566
+          ],
+          "finalScore": [
+            0.0323,
+            0.0323,
+            0.0315
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 279.974
+        },
+        {
+          "question": "의료보험 청구 방식",
+          "related": false,
+          "expected": [],
+          "frontTop3": [],
+          "frontHit": true,
+          "frontLatencyMs": 14.884,
+          "mode": "hybrid-raw",
+          "top1": "Frame-Matching-Report",
+          "top3": [
+            "Frame-Matching-Report",
+            "Frame-Matching-Report",
+            "Frame-Matching-Report"
+          ],
+          "expectedHit": true,
+          "matchedBy": [
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ],
+            [
+              "bm25",
+              "vector",
+              "rrf"
+            ]
+          ],
+          "vectorScore": [
+            0.0912871179,
+            0.0986529492,
+            0.18898224345
+          ],
+          "lexicalScore": [
+            8.553252238573396,
+            8.485885266498048,
+            8.381469545422068
+          ],
+          "finalScore": [
+            0.0323,
+            0.0323,
+            0.0318
+          ],
+          "insufficient_context": true,
+          "ragStatus": "insufficient_context",
+          "ragTop3": [],
+          "latencyMs": 263.404
+        }
+      ]
+    }
+  },
+  "failures": [
+    {
+      "mode": "baseline",
+      "question": "TensorRT가 실제 worker에 적용됐나요?",
+      "top3": [
+        "ADR-004-LSTM-Feature-Expansion",
+        "Interview-Resume-Notes",
+        "Feature-Vector-51D-vs-54D"
+      ],
+      "reason": "expected_doc_miss"
+    },
+    {
+      "mode": "lexical",
+      "question": "TensorRT가 실제 worker에 적용됐나요?",
+      "top3": [
+        "Multi-Camera-Worker-Session-Reliability",
+        "Interview-Resume-Notes",
+        "Frame-Matching-Report"
+      ],
+      "reason": "expected_doc_miss"
+    },
+    {
+      "mode": "lexical",
+      "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+      "top3": [
+        "Feature-Vector-51D-vs-54D",
+        "Evidence-TensorRT-Adoption-Decision",
+        "Evidence-Smart-Safety-System"
+      ],
+      "reason": "expected_doc_miss"
+    },
+    {
+      "mode": "hybrid-raw",
+      "question": "TensorRT가 실제 worker에 적용됐나요?",
+      "top3": [
+        "Interview-Resume-Notes",
+        "Feature-Vector-51D-vs-54D",
+        "Bug-AI-Tracker-FrameRate-Mismatch"
+      ],
+      "reason": "expected_doc_miss"
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "relatedHits": 9,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5
+    },
+    "lexical": {
+      "relatedHits": 8,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5
+    },
+    "hybrid": {
+      "relatedHits": 10,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5
+    },
+    "hybrid-raw": {
+      "relatedHits": 9,
+      "relatedTotal": 10,
+      "noAnswerCorrect": 5,
+      "noAnswerTotal": 5,
+      "frontRelatedHits": 8,
+      "frontNoResultCorrect": 5
+    }
+  }
+}

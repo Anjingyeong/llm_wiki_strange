@@ -1,9 +1,9 @@
 import { writeFile, mkdir } from 'node:fs/promises';
-import { join, relative, dirname } from 'node:path';
+import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { computeCorpusHash } from './lib/corpus-hash.mjs';
 import {
-  buildRagIndex,
   buildRagIndexLegacy,
   buildRagIndexStructured,
   mergeIncrementalIndex,
@@ -25,6 +25,7 @@ const schemaVersion =
   || 'legacy-v1';
 const writeOperational = process.env.RAG_WRITE_OPERATIONAL !== 'false';
 
+const { corpusHash } = await computeCorpusHash(contentDir, wikiRoot);
 const documents = await loadWikiDocuments(contentDir);
 
 let index;
@@ -41,6 +42,7 @@ const versionedPath = join(indexesDir, `${schemaKey}.json`);
 const previous = await readJsonIfExists(versionedPath);
 const merged = mergeIncrementalIndex(previous, index);
 index = merged.index;
+index.corpusHash = corpusHash;
 
 await mkdir(indexesDir, { recursive: true });
 await writeFile(versionedPath, `${JSON.stringify(index, null, 2)}\n`, 'utf8');
@@ -49,30 +51,35 @@ const manifest = buildIndexManifest(index, {
   chunkSchemaVersion: schemaKey,
   indexPath: relative(wikiRoot, versionedPath).replace(/\\/g, '/'),
 });
-await writeIndexManifest(join(indexesDir, `${schemaKey}.manifest.json`), manifest);
+// Always write experiment/versioned manifest next to the versioned index.
+await writeIndexManifest(join(indexesDir, `${schemaKey}.manifest.json`), {
+  ...manifest,
+  corpusHash,
+});
 
-// Operational write: rebuild active pointer schema into ragVectorIndex.json (default).
-// Experiments set RAG_WRITE_OPERATIONAL=false to avoid clobbering mid-run.
+// Operational write only when enabled (default). Experiments must not touch these.
 if (writeOperational) {
   await writeFile(operationalPath, `${JSON.stringify(index, null, 2)}\n`, 'utf8');
   await writeIndexManifest(manifestPath, {
     ...manifest,
     indexPath: 'data/ragVectorIndex.json',
+    corpusHash,
   });
-  if (!pointer) {
-    await writeFile(
-      pointerPath,
-      `${JSON.stringify({
-        chunkSchemaVersion: schemaKey,
-        indexPath: 'data/ragVectorIndex.json',
-        updatedAt: new Date().toISOString(),
-        note: 'Operational default until a candidate is promoted.',
-      }, null, 2)}\n`,
-      'utf8',
-    );
-  }
-} else {
-  await writeIndexManifest(manifestPath, manifest);
+  await writeFile(
+    pointerPath,
+    `${JSON.stringify({
+      chunkSchemaVersion: schemaKey,
+      indexPath: 'data/ragVectorIndex.json',
+      versionedPath: relative(wikiRoot, versionedPath).replace(/\\/g, '/'),
+      chunkCount: index.chunks.length,
+      documentCount: manifest.documentCount,
+      corpusHash,
+      generatedAt: index.generatedAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      note: 'Operational index is data/ragVectorIndex.json (Node + Cloudflare).',
+    }, null, 2)}\n`,
+    'utf8',
+  );
 }
 
 console.log(
@@ -80,10 +87,14 @@ console.log(
     {
       schemaVersion: schemaKey,
       chunkCount: index.chunks.length,
+      documentCount: manifest.documentCount,
+      corpusHash,
       reused: merged.reused,
       rebuilt: merged.rebuilt,
+      generatedAt: index.generatedAt,
       versionedPath: relative(wikiRoot, versionedPath).replace(/\\/g, '/'),
-      operationalWritten: writeOperational && (schemaKey === 'legacy-v1' || (await readJsonIfExists(pointerPath))?.chunkSchemaVersion === schemaKey),
+      operationalPath: writeOperational ? 'data/ragVectorIndex.json' : null,
+      operationalWritten: writeOperational,
       meanChunkChars: manifest.meanChunkChars,
     },
     null,

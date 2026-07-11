@@ -12,7 +12,8 @@ export const categories = [
   '02. AI & Data Pipeline (AI 및 데이터 처리)',
   '03. Streaming & Sync (스트리밍 및 동기화)',
   '04. Knowledge Base (위키 및 검색)',
-  '05. Management & Retrospective (운영 및 회고)'
+  '05. Management & Retrospective (운영 및 회고)',
+  '06. 설계 판단 (Engineering Decisions)'
 ] as const;
 
 const categoryMapping: Record<string, string> = {
@@ -52,7 +53,14 @@ const categoryMapping: Record<string, string> = {
   'MQTT-Event-Schema': '05. Management & Retrospective (운영 및 회고)',
   'Interview-Resume-Notes': '05. Management & Retrospective (운영 및 회고)',
   'Benchmark-History': '05. Management & Retrospective (운영 및 회고)',
-  'Model-Comparison': '05. Management & Retrospective (운영 및 회고)'
+  'Model-Comparison': '05. Management & Retrospective (운영 및 회고)',
+  // Engineering decision records (안진경 1인칭 기술 판단)
+  'ED-Latest-Frame-Queue-Policy': '06. 설계 판단 (Engineering Decisions)',
+  'ED-FrameId-Evidence-Overlay-Sync': '06. 설계 판단 (Engineering Decisions)',
+  'ED-Fall-Faint-Lifecycle': '06. 설계 판단 (Engineering Decisions)',
+  'ED-MQTT-Backend-Event-Path': '06. 설계 판단 (Engineering Decisions)',
+  'ED-Snapshot-VLM-Side-Channel': '06. 설계 판단 (Engineering Decisions)',
+  'Multi-Camera-Worker-Session-Reliability': '06. 설계 판단 (Engineering Decisions)'
 };
 
 const slugOrderWithinCategory: Record<string, readonly string[]> = {
@@ -102,6 +110,14 @@ const slugOrderWithinCategory: Record<string, readonly string[]> = {
     'Interview-Resume-Notes',
     'Benchmark-History',
     'Model-Comparison'
+  ],
+  '06. 설계 판단 (Engineering Decisions)': [
+    'ED-Latest-Frame-Queue-Policy',
+    'ED-FrameId-Evidence-Overlay-Sync',
+    'ED-Fall-Faint-Lifecycle',
+    'ED-MQTT-Backend-Event-Path',
+    'ED-Snapshot-VLM-Side-Channel',
+    'Multi-Camera-Worker-Session-Reliability'
   ]
 };
 

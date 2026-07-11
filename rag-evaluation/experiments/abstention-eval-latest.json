@@ -1,0 +1,553 @@
+{
+  "generatedAt": "2026-07-11T11:58:58.185Z",
+  "mode": "hybrid",
+  "related10": {
+    "top1": 9,
+    "top3": 10,
+    "total": 10,
+    "mrr": 0.9333,
+    "answered": 10,
+    "insufficient": 0,
+    "falseRejections": [],
+    "misses": [],
+    "rows": [
+      {
+        "question": "왜 오래된 RTSP 프레임을 버리나요?",
+        "expected": [
+          "ED-Latest-Frame-Queue-Policy"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "ED-Latest-Frame-Queue-Policy",
+        "top3": [
+          "ED-Latest-Frame-Queue-Policy",
+          "ED-Latest-Frame-Queue-Policy",
+          "2026-06-30-Overlay-Tracking-Evidence-Log"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 288.08,
+        "abstentionReason": null
+      },
+      {
+        "question": "낙상 알림이 계속 반복되는 문제는 어떻게 해결했나요?",
+        "expected": [
+          "ED-Fall-Faint-Lifecycle"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "ED-Fall-Faint-Lifecycle",
+        "top3": [
+          "ED-Fall-Faint-Lifecycle",
+          "ED-Fall-Faint-Lifecycle",
+          "VLM-RAG-DBless-Mock-MVP"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 278.173,
+        "abstentionReason": null
+      },
+      {
+        "question": "frameId는 왜 필요한가요?",
+        "expected": [
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "Frame-Sync-Debug-Report"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "ED-FrameId-Evidence-Overlay-Sync",
+        "top3": [
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "Multi-Camera-Frame-Latency-Report"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 218.699,
+        "abstentionReason": null
+      },
+      {
+        "question": "영상과 AI Overlay가 어긋나는 이유는 무엇인가요?",
+        "expected": [
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "Frame-Matching-Report"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "ED-FrameId-Evidence-Overlay-Sync",
+        "top3": [
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "ED-FrameId-Evidence-Overlay-Sync",
+          "2026-06-30-Overlay-Tracking-Evidence-Log"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 218.41,
+        "abstentionReason": null
+      },
+      {
+        "question": "TensorRT가 실제 worker에 적용됐나요?",
+        "expected": [
+          "Evidence-TensorRT-Adoption-Decision"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "Multi-Camera-Worker-Session-Reliability",
+        "top3": [
+          "Multi-Camera-Worker-Session-Reliability",
+          "Multi-Camera-Worker-Session-Reliability",
+          "Evidence-TensorRT-Adoption-Decision"
+        ],
+        "hitTop1": false,
+        "hitTop3": true,
+        "rank": 3,
+        "latencyMs": 277.574,
+        "abstentionReason": null
+      },
+      {
+        "question": "PyTorch와 TensorRT 성능 차이는 무엇인가요?",
+        "expected": [
+          "Evidence-TensorRT-Adoption-Decision"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "Evidence-TensorRT-Adoption-Decision",
+        "top3": [
+          "Evidence-TensorRT-Adoption-Decision",
+          "Evidence-TensorRT-Adoption-Decision",
+          "Multi-Camera-Worker-Session-Reliability"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 278.117,
+        "abstentionReason": null
+      },
+      {
+        "question": "영상이 끝난 뒤 이전 상태가 남지 않게 어떻게 처리했나요?",
+        "expected": [
+          "Multi-Camera-Worker-Session-Reliability"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "Multi-Camera-Worker-Session-Reliability",
+        "top3": [
+          "Multi-Camera-Worker-Session-Reliability",
+          "Multi-Camera-Worker-Session-Reliability"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 274.235,
+        "abstentionReason": null
+      },
+      {
+        "question": "카메라는 하드코딩되어 있나요?",
+        "expected": [
+          "Multi-Camera-Worker-Session-Reliability",
+          "Realtime-Camera-Runtime-Stabilization"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "Multi-Camera-Worker-Session-Reliability",
+        "top3": [
+          "Multi-Camera-Worker-Session-Reliability",
+          "Multi-Camera-Worker-Session-Reliability"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 237.802,
+        "abstentionReason": null
+      },
+      {
+        "question": "MQTT 이벤트가 DB와 프론트까지 어떻게 전달되나요?",
+        "expected": [
+          "ED-MQTT-Backend-Event-Path",
+          "MQTT-Event-Schema"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "ED-MQTT-Backend-Event-Path",
+        "top3": [
+          "ED-MQTT-Backend-Event-Path",
+          "ED-MQTT-Backend-Event-Path",
+          "MQTT-Event-Schema"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 159.531,
+        "abstentionReason": null
+      },
+      {
+        "question": "언제 어디서 누가 넘어졌는지 검색하는 기능은 구현됐나요?",
+        "expected": [
+          "Evidence-VLM-RAG-Event-Search-Decision",
+          "VLM-RAG-DBless-Mock-MVP",
+          "ED-Snapshot-VLM-Side-Channel"
+        ],
+        "status": "answered",
+        "retrievalRelevant": true,
+        "answerSupported": true,
+        "top1": "VLM-RAG-DBless-Mock-MVP",
+        "top3": [
+          "VLM-RAG-DBless-Mock-MVP",
+          "Evidence-VLM-RAG-Event-Search-Decision",
+          "Evidence-VLM-RAG-Event-Search-Decision"
+        ],
+        "hitTop1": true,
+        "hitTop3": true,
+        "rank": 1,
+        "latencyMs": 283.426,
+        "abstentionReason": null
+      }
+    ]
+  },
+  "unanswerable": {
+    "total": 23,
+    "pass": 23,
+    "accuracy": 1,
+    "insufficient_context": 23,
+    "falseAnswers": [],
+    "byGroup": {
+      "A": {
+        "total": 9,
+        "pass": 9,
+        "insufficient": 9,
+        "falseAnswers": 0
+      },
+      "B": {
+        "total": 8,
+        "pass": 8,
+        "insufficient": 8,
+        "falseAnswers": 0
+      },
+      "C": {
+        "total": 6,
+        "pass": 6,
+        "insufficient": 6,
+        "falseAnswers": 0
+      }
+    },
+    "rows": [
+      {
+        "id": "ua-a-01",
+        "group": "A",
+        "query": "직원 급여 정책",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 134.85
+      },
+      {
+        "id": "ua-a-02",
+        "group": "A",
+        "query": "회사 연차 규정",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 134.774
+      },
+      {
+        "id": "ua-a-03",
+        "group": "A",
+        "query": "의료보험 청구 방식",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 131.442
+      },
+      {
+        "id": "ua-a-04",
+        "group": "A",
+        "query": "블록체인 합의 알고리즘",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 132.606
+      },
+      {
+        "id": "ua-a-05",
+        "group": "A",
+        "query": "쿠버네티스 장애 대응",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 131.061
+      },
+      {
+        "id": "ua-a-06",
+        "group": "A",
+        "query": "오늘 서울 날씨",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 125.621
+      },
+      {
+        "id": "ua-a-07",
+        "group": "A",
+        "query": "JavaScript 면접 문제",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "expansion_only_no_original",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 135.156
+      },
+      {
+        "id": "ua-a-08",
+        "group": "A",
+        "query": "주식 투자 전략",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 161.185
+      },
+      {
+        "id": "ua-b-01",
+        "group": "B",
+        "query": "이 시스템의 산업재해 보상금은 얼마인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 141.749
+      },
+      {
+        "id": "ua-b-02",
+        "group": "B",
+        "query": "낙상 사고가 발생하면 법적 책임자는 누구인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "high_stakes_token_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 136.371
+      },
+      {
+        "id": "ua-b-03",
+        "group": "B",
+        "query": "카메라 구매 가격은 얼마인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "metric_family_missing:cost_money",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 68.254
+      },
+      {
+        "id": "ua-b-04",
+        "group": "B",
+        "query": "얼굴인식 정확도는 몇 퍼센트인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 134.862
+      },
+      {
+        "id": "ua-b-05",
+        "group": "B",
+        "query": "화재 감지 모델은 어떤 모델인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "high_stakes_token_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 132.814
+      },
+      {
+        "id": "ua-b-06",
+        "group": "B",
+        "query": "음성 인식 기능도 지원하나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "empty",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 131.323
+      },
+      {
+        "id": "ua-b-07",
+        "group": "B",
+        "query": "작업자 심박수를 측정하나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 129.613
+      },
+      {
+        "id": "ua-c-01",
+        "group": "C",
+        "query": "TensorRT 적용 후 전력 사용량이 몇 와트 감소했나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "high_stakes_token_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 138.337
+      },
+      {
+        "id": "ua-c-02",
+        "group": "C",
+        "query": "낙상 탐지로 실제 사고율이 몇 퍼센트 감소했나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "metric_family_missing:accident_rate",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 140.301
+      },
+      {
+        "id": "ua-c-03",
+        "group": "C",
+        "query": "100대 카메라 운영 비용은 얼마인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 5,
+        "abstentionReason": "high_stakes_token_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 69.223
+      },
+      {
+        "id": "ua-c-04",
+        "group": "C",
+        "query": "ByteTrack의 현장 ID switch 비율은 정확히 몇 퍼센트인가요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "metric_key_tokens_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 140.229
+      },
+      {
+        "id": "ua-c-05",
+        "group": "C",
+        "query": "실제 알림 지연이 항상 1초 이내였나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "notification_latency_sla_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 136.142
+      },
+      {
+        "id": "ua-c-06",
+        "group": "C",
+        "query": "YOLO 추론이 항상 30ms 이내였나요?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "metric_family_missing:always_claim",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 132.171
+      },
+      {
+        "id": "ua-a-09",
+        "group": "A",
+        "query": "오늘 야구 경기 스코어",
+        "status": "insufficient_context",
+        "retrievalRelevant": false,
+        "answerSupported": false,
+        "sourcesCount": 0,
+        "abstentionReason": "lexical_generic_only",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 134.926
+      },
+      {
+        "id": "ua-b-08",
+        "group": "B",
+        "query": "스마트 안전 시스템의 보험 가입 조건은?",
+        "status": "insufficient_context",
+        "retrievalRelevant": true,
+        "answerSupported": false,
+        "sourcesCount": 6,
+        "abstentionReason": "high_stakes_token_missing",
+        "falseAnswer": false,
+        "pass": true,
+        "latencyMs": 132.878
+      }
+    ]
+  },
+  "latency": {
+    "p50": 136.142,
+    "p95": 278.173,
+    "mean": 166.665
+  }
+}

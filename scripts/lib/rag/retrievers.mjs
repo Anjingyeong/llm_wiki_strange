@@ -24,6 +24,7 @@ export function buildChunkSearchText(chunk) {
     chunk.chunkType,
     chunk.contextualPrefix,
     ...normalizeList(chunk.tags),
+    ...normalizeList(chunk.entities),
     ...normalizeList(chunk.codeSymbols),
     ...normalizeList(chunk.referencedFiles),
     ...normalizeList(chunk.relatedDocs),
@@ -49,7 +50,9 @@ export function buildExactTermText(chunk) {
     chunk.shortTitle,
     chunk.headingPath,
     chunk.sectionTitle,
+    chunk.summary,
     ...normalizeList(chunk.tags),
+    ...normalizeList(chunk.entities),
     ...normalizeList(chunk.codeSymbols),
     ...normalizeList(chunk.referencedFiles),
     ...normalizeList(chunk.relatedDocs),
@@ -57,7 +60,7 @@ export function buildExactTermText(chunk) {
     chunk.sourceFile,
     // preserve symbols/env-like tokens from content
     String(chunk.content || chunk.text || '').match(
-      /(?:[A-Z][A-Z0-9_]{2,}|[a-zA-Z_][\w.-]*\.(?:py|ts|tsx|js|mjs|java|yml|yaml|md|json|sh|bat)|--[\w-]+|VITE_[\w]+|RAG_[\w]+|cameraLoginId|cam_\d+|yolo[\w.-]*|ByteTrack|LSTM|RTSP|WebRTC|MQTT|MediaMTX|TensorRT|pgvector)/g,
+      /(?:[A-Z][A-Z0-9_]{2,}|[a-zA-Z_][\w.-]*\.(?:py|ts|tsx|js|mjs|java|yml|yaml|md|json|sh|bat)|--[\w-]+|VITE_[\w]+|RAG_[\w]+|cameraLoginId|cam_\d+|yolo[\w.-]*|ByteTrack|LSTM|RTSP|WebRTC|MQTT|MediaMTX|TensorRT|pgvector|sync_camera_workers|registered_camera_workers)/g,
     )?.join(' ') || '',
   ]
     .filter(Boolean)

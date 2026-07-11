@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { answerQuestionFromIndex } from './scripts/lib/rag-core.mjs';
+import { answerQuestionFromIndex } from './scripts/lib/rag/answer.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');
@@ -40,6 +40,12 @@ function sendJson(response, status, payload) {
 async function loadRagIndex() {
   const raw = await readFile(indexPath, 'utf8');
   return JSON.parse(raw);
+}
+
+async function buildHealthPayloadForRequest() {
+  const { buildHealthPayload } = await import('./scripts/lib/rag/index-meta.mjs');
+  const index = await loadRagIndex();
+  return buildHealthPayload(index);
 }
 
 async function handleVerify(request, response) {
@@ -111,8 +117,12 @@ async function serveStatic(request, response) {
 }
 
 const server = createServer((request, response) => {
-  if (request.method === 'GET' && request.url === '/api/rag/health') {
-    sendJson(response, 200, { ok: true });
+  if (request.method === 'GET' && (request.url === '/api/rag/health' || request.url?.startsWith('/api/rag/health?'))) {
+    void buildHealthPayloadForRequest()
+      .then((payload) => sendJson(response, 200, payload))
+      .catch((error) => {
+        sendJson(response, 500, { ok: false, error: String(error?.message || error) });
+      });
     return;
   }
   if (request.method === 'POST' && request.url === '/api/auth/verify') {
