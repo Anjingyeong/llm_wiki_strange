@@ -1,7 +1,7 @@
 {
-  "runId": "20260711-115806244_cc1c91d_baseline-vector-search",
-  "timestamp": "2026-07-11T11:58:06.245Z",
-  "gitCommit": "cc1c91d",
+  "runId": "20260711-121306231_3ade525_baseline-vector-search",
+  "timestamp": "2026-07-11T12:13:06.231Z",
+  "gitCommit": "3ade525",
   "gitBranch": "fix/wiki-readability-search",
   "dirtyWorkingTree": true,
   "experimentName": "baseline-vector-search",
@@ -34,8 +34,8 @@
     "metadataFilterAccuracy": 0,
     "duplicateIncidentOrDocumentCount": 147,
     "noResultAccuracy": 0,
-    "p50LatencyMs": 0.7705999999999449,
-    "p95LatencyMs": 1.6992999999999938,
+    "p50LatencyMs": 1.3879000000000588,
+    "p95LatencyMs": 2.6516000000000304,
     "meanRetrievedChunks": 5,
     "failureTaxonomy": {
       "EXPECTED_DOC_NOT_RETRIEVED": 17,
@@ -57,5 +57,5 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260711-115806244_cc1c91d_baseline-vector-search"
+  "runDir": "rag-evaluation/runs/20260711-121306231_3ade525_baseline-vector-search"
 }

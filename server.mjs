@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { answerQuestionFromIndex } from './scripts/lib/rag-core.mjs';
+import { answerQuestionFromIndex } from './scripts/lib/rag/answer.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');

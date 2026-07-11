@@ -1,4 +1,4 @@
-import { answerQuestionFromIndex } from '../../../scripts/lib/rag-core.mjs';
+import { answerQuestionFromIndex } from '../../../scripts/lib/rag/answer.mjs';
 import index from '../../../data/ragVectorIndex.json';
 
 export async function onRequestPost(context) {
