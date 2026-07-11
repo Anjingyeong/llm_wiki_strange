@@ -14,7 +14,8 @@ export type WikiCategory =
   | '02. AI & Data Pipeline (AI 및 데이터 처리)'
   | '03. Streaming & Sync (스트리밍 및 동기화)'
   | '04. Knowledge Base (위키 및 검색)'
-  | '05. Management & Retrospective (운영 및 회고)';
+  | '05. Management & Retrospective (운영 및 회고)'
+  | '06. 설계 판단 (Engineering Decisions)';
 
 export type Frontmatter = {
   readonly title: string;

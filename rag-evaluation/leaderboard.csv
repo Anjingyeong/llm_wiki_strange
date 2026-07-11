@@ -43,3 +43,5 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260710-142718274_44f3412_baseline-vector-search,2026-07-10T14:27:18.276Z,baseline-vector-search,baseline,44f3412,0.56,0.78,0.5267,0.6457,0.5219,0,1.644,false
 20260710-151709249_8fb6dbd_baseline-vector-search,2026-07-10T15:17:09.249Z,baseline-vector-search,baseline,8fb6dbd,0.56,0.78,0.5267,0.6457,0.5219,0,1.7491,false
 20260711-101020520_fce379b_baseline-vector-search,2026-07-11T10:10:20.520Z,baseline-vector-search,baseline,fce379b,0.56,0.78,0.5367,0.6457,0.528,0,2.2918,true
+20260711-103212157_5611eea_baseline-vector-search,2026-07-11T10:32:12.157Z,baseline-vector-search,baseline,5611eea,0.5,0.72,0.5,0.5923,0.4917,0,2.1318,false
+20260711-104216564_5611eea_baseline-vector-search,2026-07-11T10:42:16.565Z,baseline-vector-search,baseline,5611eea,0.5,0.72,0.5,0.5923,0.4917,0,5.0431,false
