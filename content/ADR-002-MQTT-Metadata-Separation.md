@@ -4,8 +4,8 @@ navTitle: ADR-002
 shortTitle: ADR-002
 category: ADR
 relatedDocs: [MQTT-Event-Schema, AI-Output-JSON, Bug-Notification-Scope]
-relatedFiles: [PROJECT_CONTRACT.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
-updatedAt: 2026-06-26
+relatedFiles: [PROJECT_CONTRACT.md, strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java, strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java, strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java, strange_ai/messaging/event_schema.py]
+updatedAt: 2026-07-11
 ---
 
 ## 목적
@@ -50,13 +50,18 @@ AI publishes cameraLoginId
 ## 관련 파일
 
 - `PROJECT_CONTRACT.md`
-- `strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java`
+- `strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java` — MQTT `safety/events` 구독 진입점
+- `strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java` — 구독 후 WebSocket/알림 브로드캐스트
+- `strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java` — payload 매핑
+- `strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java` — 저장·조회·scope resolve (전체 backend 트리 기준)
+- `strange_ai/messaging/event_schema.py` — AI 측 `build_safety_event` 발행 계약
 
 ## 관련 문서
 
 - [MQTT-Event-Schema](MQTT-Event-Schema.md)
 - [AI-Output-JSON](AI-Output-JSON.md)
 - [Bug-Notification-Scope](Bug-Notification-Scope.md)
+- [Graphify-Semantic-Map](Graphify-Semantic-Map.md)
 
 ## 주의사항
 

@@ -1,0 +1,942 @@
+{
+  "meta": {
+    "title": "Smart Safety — Core Architecture Subgraph",
+    "from_pilot": "outputs/graphify-semantic/graph.json",
+    "node_count": 48,
+    "edge_count": 68,
+    "sanitized": true,
+    "note": "Curated 1-hop expansion around MQTT/AI contract seeds. Not a full codebase graph."
+  },
+  "nodes": [
+    {
+      "id": "build_fall_event_cb621b97f4",
+      "label": "build_fall_event()",
+      "file_type": "code",
+      "source_file": "strange_ai/main.py",
+      "origin": "ast",
+      "community": 57
+    },
+    {
+      "id": "build_safety_event_eef168f223",
+      "label": "build_safety_event()",
+      "file_type": "code",
+      "source_file": "strange_ai/messaging/event_schema.py",
+      "origin": "ast",
+      "community": 86
+    },
+    {
+      "id": "event_schema_py_9b31fb7001",
+      "label": "event_schema.py",
+      "file_type": "code",
+      "source_file": "strange_ai/messaging/event_schema.py",
+      "origin": "ast",
+      "community": 86
+    },
+    {
+      "id": "utc_now_iso_4fd4d222e2",
+      "label": "utc_now_iso()",
+      "file_type": "code",
+      "source_file": "strange_ai/messaging/event_schema.py",
+      "origin": "ast",
+      "community": 86
+    },
+    {
+      "id": "build_event_bbd6fc6197",
+      "label": "build_event()",
+      "file_type": "code",
+      "source_file": "strange_ai/mock_edge_ai.py",
+      "origin": "ast",
+      "community": 86
+    },
+    {
+      "id": "test_build_safety_event_contains_backen_f0346d05d9",
+      "label": ".test_build_safety_event_contains_backend_friendly_fields()",
+      "file_type": "code",
+      "source_file": "strange_ai/tests/test_event_schema.py",
+      "origin": "ast",
+      "community": 86
+    },
+    {
+      "id": "alertbroadcastservice_028008b04d",
+      "label": "AlertBroadcastService",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "alertbroadcastservice_324725b8dc",
+      "label": ".AlertBroadcastService()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "broadcast_26e8aae887",
+      "label": ".broadcast()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "alertbroadcastservice_java_81ffab7196",
+      "label": "AlertBroadcastService.java",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "mqttsafetyeventsubscriber_java_daee7bd101",
+      "label": "MqttSafetyEventSubscriber.java",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "label": "MqttSafetyEventSubscriber",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "connectcomplete_e27733a590",
+      "label": ".connectComplete()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "connectionlost_fa6c34940a",
+      "label": ".connectionLost()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "deliverycomplete_eaf9d69d40",
+      "label": ".deliveryComplete()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "ensureconnected_3b3bff75c9",
+      "label": ".ensureConnected()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "getorcreateclient_a86b3e296d",
+      "label": ".getOrCreateClient()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "isconnected_57c9a70a9c",
+      "label": ".isConnected()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "messagearrived_1a2a83a278",
+      "label": ".messageArrived()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "mqttsafetyeventsubscriber_57e6bfddef",
+      "label": ".MqttSafetyEventSubscriber()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "shutdown_fe80d824b0",
+      "label": ".shutdown()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "subscribetosafetyevents_21e9bbf72f",
+      "label": ".subscribeToSafetyEvents()",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "safetyeventdto_java_b331db6668",
+      "label": "SafetyEventDto.java",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "safetyeventdto_0b3082eb3c",
+      "label": "SafetyEventDto",
+      "file_type": "code",
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "mqttcallbackextended_f7046e77a4",
+      "label": "MqttCallbackExtended",
+      "file_type": "code",
+      "source_file": "",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "service_97ee2190d8",
+      "label": "Service",
+      "file_type": "code",
+      "source_file": "",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "simpmessagingtemplate_67a26282c4",
+      "label": "SimpMessagingTemplate",
+      "file_type": "code",
+      "source_file": "",
+      "origin": "ast",
+      "community": 9
+    },
+    {
+      "id": "strange_ai_project_summary_dff7477e65",
+      "label": "Strange AI Project Summary",
+      "file_type": "document",
+      "source_file": "strange_ai/PROJECT_SUMMARY.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "mqtt_safety_event_contract_7cf36b5dc4",
+      "label": "MQTT Safety Event Contract",
+      "file_type": "concept",
+      "source_file": "strange_ai/PROJECT_SUMMARY.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "strange_back_project_summary_30cafde4e7",
+      "label": "Strange Back Project Summary",
+      "file_type": "document",
+      "source_file": "strange_back/PROJECT_SUMMARY.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "mqtt_to_websocket_alert_contract_7cdc4211e4",
+      "label": "MQTT to WebSocket Alert Contract",
+      "file_type": "concept",
+      "source_file": "strange_back/PROJECT_SUMMARY.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "adr_001_webrtc_2035f51186",
+      "label": "ADR-001 WebRTC",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/ADR-001-WebRTC.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "mqtt_metadata_separation_94cd912986",
+      "label": "MQTT Metadata Separation",
+      "file_type": "rationale",
+      "source_file": "llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "adr_002_mqtt_metadata_separation_0187fee5f2",
+      "label": "ADR-002 MQTT Metadata Separation",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "adr_004_lstm_feature_expansion_6530f21572",
+      "label": "ADR-004 LSTM Feature Expansion",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "ai_output_json_a1e5fa3da2",
+      "label": "AI Output JSON",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/AI-Output-JSON.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "ai_pipeline_f0501c3106",
+      "label": "AI Pipeline",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/AI-Pipeline.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "cameraloginid_identity_contract_98f56a7750",
+      "label": "cameraLoginId Identity Contract",
+      "file_type": "concept",
+      "source_file": "llm_wiki_strange/content/Architecture.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "architecture_40af047c5a",
+      "label": "Architecture",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Architecture.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "feature_vector_51d_vs_54d_49890e2373",
+      "label": "Feature Vector 51D vs 54D",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "lstm_048a0e8db4",
+      "label": "LSTM",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/LSTM.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "model_decision_yolo26n_bee855d870",
+      "label": "Model Decision YOLO26n",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Model-Decision-YOLO26n.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "mqtt_event_schema_2934e344e8",
+      "label": "MQTT Event Schema",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/MQTT-Event-Schema.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "safety_events_mqtt_contract_a2982015ab",
+      "label": "safety/events MQTT Contract",
+      "file_type": "concept",
+      "source_file": "llm_wiki_strange/content/MQTT-Event-Schema.md",
+      "origin": "semantic",
+      "community": 86
+    },
+    {
+      "id": "multi_camera_frame_latency_report_ebb22430f5",
+      "label": "Multi-Camera Frame Latency Report",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Frame-Latency-Report.md",
+      "origin": "semantic",
+      "community": 85
+    },
+    {
+      "id": "multi_camera_worker_session_reliability_63ca8fff1a",
+      "label": "Multi-Camera Worker Session Reliability",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Worker-Session-Reliability.md",
+      "origin": "semantic",
+      "community": 85
+    },
+    {
+      "id": "worker_session_boundary_7304677e84",
+      "label": "Worker Session Boundary",
+      "file_type": "concept",
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Worker-Session-Reliability.md",
+      "origin": "semantic",
+      "community": 85
+    },
+    {
+      "id": "realtime_camera_runtime_stabilization_a93a477fd9",
+      "label": "Realtime Camera Runtime Stabilization",
+      "file_type": "document",
+      "source_file": "llm_wiki_strange/content/Realtime-Camera-Runtime-Stabilization.md",
+      "origin": "semantic",
+      "community": 85
+    }
+  ],
+  "edges": [
+    {
+      "source": "build_fall_event_cb621b97f4",
+      "target": "build_safety_event_eef168f223",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "strange_ai/main.py"
+    },
+    {
+      "source": "event_schema_py_9b31fb7001",
+      "target": "build_safety_event_eef168f223",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_ai/messaging/event_schema.py"
+    },
+    {
+      "source": "event_schema_py_9b31fb7001",
+      "target": "utc_now_iso_4fd4d222e2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_ai/messaging/event_schema.py"
+    },
+    {
+      "source": "build_safety_event_eef168f223",
+      "target": "utc_now_iso_4fd4d222e2",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_ai/messaging/event_schema.py"
+    },
+    {
+      "source": "build_event_bbd6fc6197",
+      "target": "build_safety_event_eef168f223",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "strange_ai/mock_edge_ai.py"
+    },
+    {
+      "source": "test_build_safety_event_contains_backen_f0346d05d9",
+      "target": "build_safety_event_eef168f223",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "strange_ai/tests/test_event_schema.py"
+    },
+    {
+      "source": "mqtt_safety_event_contract_7cf36b5dc4",
+      "target": "build_safety_event_eef168f223",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "strange_ai/PROJECT_SUMMARY.md"
+    },
+    {
+      "source": "ai_pipeline_f0501c3106",
+      "target": "build_safety_event_eef168f223",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "llm_wiki_strange/content/AI-Pipeline.md"
+    },
+    {
+      "source": "alertbroadcastservice_java_81ffab7196",
+      "target": "alertbroadcastservice_028008b04d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_java_81ffab7196",
+      "target": "service_97ee2190d8",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_java_81ffab7196",
+      "target": "simpmessagingtemplate_67a26282c4",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_028008b04d",
+      "target": "alertbroadcastservice_324725b8dc",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_028008b04d",
+      "target": "broadcast_26e8aae887",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_028008b04d",
+      "target": "service_97ee2190d8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "alertbroadcastservice_028008b04d",
+      "target": "simpmessagingtemplate_67a26282c4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "alertbroadcastservice_028008b04d",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_57e6bfddef",
+      "target": "alertbroadcastservice_028008b04d",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "alertbroadcastservice_324725b8dc",
+      "target": "simpmessagingtemplate_67a26282c4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "broadcast_26e8aae887",
+      "target": "safetyeventdto_0b3082eb3c",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java"
+    },
+    {
+      "source": "messagearrived_1a2a83a278",
+      "target": "broadcast_26e8aae887",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_java_daee7bd101",
+      "target": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_java_daee7bd101",
+      "target": "mqttcallbackextended_f7046e77a4",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "connectcomplete_e27733a590",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "connectionlost_fa6c34940a",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "deliverycomplete_eaf9d69d40",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "ensureconnected_3b3bff75c9",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "getorcreateclient_a86b3e296d",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "isconnected_57c9a70a9c",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "messagearrived_1a2a83a278",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "mqttsafetyeventsubscriber_57e6bfddef",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "shutdown_fe80d824b0",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "subscribetosafetyevents_21e9bbf72f",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "target": "mqttcallbackextended_f7046e77a4",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "mqtt_to_websocket_alert_contract_7cdc4211e4",
+      "target": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "strange_back/PROJECT_SUMMARY.md"
+    },
+    {
+      "source": "mqtt_event_schema_2934e344e8",
+      "target": "mqttsafetyeventsubscriber_fa5eb75ffe",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "llm_wiki_strange/content/MQTT-Event-Schema.md"
+    },
+    {
+      "source": "ensureconnected_3b3bff75c9",
+      "target": "getorcreateclient_a86b3e296d",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "ensureconnected_3b3bff75c9",
+      "target": "isconnected_57c9a70a9c",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "ensureconnected_3b3bff75c9",
+      "target": "subscribetosafetyevents_21e9bbf72f",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "connectcomplete_e27733a590",
+      "target": "getorcreateclient_a86b3e296d",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "connectcomplete_e27733a590",
+      "target": "subscribetosafetyevents_21e9bbf72f",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java"
+    },
+    {
+      "source": "safetyeventdto_java_b331db6668",
+      "target": "safetyeventdto_0b3082eb3c",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java"
+    },
+    {
+      "source": "adr_001_webrtc_2035f51186",
+      "target": "architecture_40af047c5a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-001-WebRTC.md"
+    },
+    {
+      "source": "adr_002_mqtt_metadata_separation_0187fee5f2",
+      "target": "mqtt_metadata_separation_94cd912986",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md"
+    },
+    {
+      "source": "adr_002_mqtt_metadata_separation_0187fee5f2",
+      "target": "ai_output_json_a1e5fa3da2",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md"
+    },
+    {
+      "source": "adr_002_mqtt_metadata_separation_0187fee5f2",
+      "target": "mqtt_event_schema_2934e344e8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-002-MQTT-Metadata-Separation.md"
+    },
+    {
+      "source": "adr_004_lstm_feature_expansion_6530f21572",
+      "target": "ai_pipeline_f0501c3106",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md"
+    },
+    {
+      "source": "adr_004_lstm_feature_expansion_6530f21572",
+      "target": "feature_vector_51d_vs_54d_49890e2373",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md"
+    },
+    {
+      "source": "adr_004_lstm_feature_expansion_6530f21572",
+      "target": "lstm_048a0e8db4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/ADR-004-LSTM-Feature-Expansion.md"
+    },
+    {
+      "source": "ai_output_json_a1e5fa3da2",
+      "target": "ai_pipeline_f0501c3106",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Output-JSON.md"
+    },
+    {
+      "source": "ai_output_json_a1e5fa3da2",
+      "target": "architecture_40af047c5a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Output-JSON.md"
+    },
+    {
+      "source": "ai_output_json_a1e5fa3da2",
+      "target": "mqtt_event_schema_2934e344e8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Output-JSON.md"
+    },
+    {
+      "source": "ai_pipeline_f0501c3106",
+      "target": "lstm_048a0e8db4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Pipeline.md"
+    },
+    {
+      "source": "ai_pipeline_f0501c3106",
+      "target": "model_decision_yolo26n_bee855d870",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Pipeline.md"
+    },
+    {
+      "source": "ai_pipeline_f0501c3106",
+      "target": "mqtt_event_schema_2934e344e8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/AI-Pipeline.md"
+    },
+    {
+      "source": "architecture_40af047c5a",
+      "target": "ai_pipeline_f0501c3106",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Architecture.md"
+    },
+    {
+      "source": "feature_vector_51d_vs_54d_49890e2373",
+      "target": "ai_pipeline_f0501c3106",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md"
+    },
+    {
+      "source": "architecture_40af047c5a",
+      "target": "cameraloginid_identity_contract_98f56a7750",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Architecture.md"
+    },
+    {
+      "source": "architecture_40af047c5a",
+      "target": "mqtt_event_schema_2934e344e8",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Architecture.md"
+    },
+    {
+      "source": "feature_vector_51d_vs_54d_49890e2373",
+      "target": "lstm_048a0e8db4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Feature-Vector-51D-vs-54D.md"
+    },
+    {
+      "source": "lstm_048a0e8db4",
+      "target": "model_decision_yolo26n_bee855d870",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/LSTM.md"
+    },
+    {
+      "source": "mqtt_event_schema_2934e344e8",
+      "target": "safety_events_mqtt_contract_a2982015ab",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/MQTT-Event-Schema.md"
+    },
+    {
+      "source": "multi_camera_worker_session_reliability_63ca8fff1a",
+      "target": "multi_camera_frame_latency_report_ebb22430f5",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Worker-Session-Reliability.md"
+    },
+    {
+      "source": "multi_camera_worker_session_reliability_63ca8fff1a",
+      "target": "worker_session_boundary_7304677e84",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Worker-Session-Reliability.md"
+    },
+    {
+      "source": "multi_camera_worker_session_reliability_63ca8fff1a",
+      "target": "realtime_camera_runtime_stabilization_a93a477fd9",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "llm_wiki_strange/content/Multi-Camera-Worker-Session-Reliability.md"
+    },
+    {
+      "source": "strange_ai_project_summary_dff7477e65",
+      "target": "mqtt_safety_event_contract_7cf36b5dc4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_ai/PROJECT_SUMMARY.md"
+    },
+    {
+      "source": "strange_back_project_summary_30cafde4e7",
+      "target": "strange_ai_project_summary_dff7477e65",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/PROJECT_SUMMARY.md"
+    },
+    {
+      "source": "mqtt_to_websocket_alert_contract_7cdc4211e4",
+      "target": "mqtt_safety_event_contract_7cf36b5dc4",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/PROJECT_SUMMARY.md"
+    },
+    {
+      "source": "strange_back_project_summary_30cafde4e7",
+      "target": "mqtt_to_websocket_alert_contract_7cdc4211e4",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "strange_back/PROJECT_SUMMARY.md"
+    }
+  ]
+}

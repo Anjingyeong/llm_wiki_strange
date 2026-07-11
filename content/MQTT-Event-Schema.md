@@ -3,9 +3,9 @@ title: MQTT Event Schema
 navTitle: MQTT Schema
 shortTitle: MQTT Schema
 category: Backend
-relatedDocs: [Architecture, AI-Pipeline, AI-Output-JSON, ADR-002-MQTT-Metadata-Separation]
-relatedFiles: [PROJECT_CONTRACT.md, docs/MQTT_TOPIC_SPEC.md, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
-updatedAt: 2026-06-26
+relatedDocs: [Architecture, AI-Pipeline, AI-Output-JSON, ADR-002-MQTT-Metadata-Separation, Graphify-Semantic-Map]
+relatedFiles: [PROJECT_CONTRACT.md, docs/MQTT_TOPIC_SPEC.md, strange_ai/messaging/event_schema.py, strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java, strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java, strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
+updatedAt: 2026-07-11
 ---
 
 ## 목적
@@ -82,13 +82,19 @@ AI event candidate
 
 - `PROJECT_CONTRACT.md`
 - `docs/MQTT_TOPIC_SPEC.md`
-- `strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java`
+- `strange_ai/messaging/event_schema.py` — `build_safety_event` (발행 측 스키마)
+- `strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java` — `safety/events` 구독
+- `strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java`
+- `strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java`
+- `strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java` — 영속화·조회 (전체 backend)
 
 ## 관련 문서
 
 - [Architecture](Architecture.md)
+- [AI-Pipeline](AI-Pipeline.md)
 - [AI-Output-JSON](AI-Output-JSON.md)
 - [ADR-002-MQTT-Metadata-Separation](ADR-002-MQTT-Metadata-Separation.md)
+- [Graphify-Semantic-Map](Graphify-Semantic-Map.md)
 
 ## 주의사항
 

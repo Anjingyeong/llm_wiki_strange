@@ -3,12 +3,12 @@
   "chunkSchemaVersion": "structure-aware-v1",
   "embeddingVersion": "local-hash-tfidf-v1",
   "embeddingDimensions": 256,
-  "documentCount": 40,
-  "chunkCount": 628,
-  "generatedAt": "2026-07-10T15:20:29.166Z",
-  "sourceCommit": "8fb6dbd",
+  "documentCount": 41,
+  "chunkCount": 643,
+  "generatedAt": "2026-07-11T10:11:17.328Z",
+  "sourceCommit": "fce379b",
   "indexPath": "data/ragVectorIndex.json",
-  "meanChunkChars": 272,
+  "meanChunkChars": 271,
   "duplicateDocRatio": 1,
-  "manifestHash": "d7183cd737c644b6"
+  "manifestHash": "690e9b3942a7f210"
 }

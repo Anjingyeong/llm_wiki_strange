@@ -1,0 +1,10 @@
+{
+  "nodes": 48,
+  "edges": 68,
+  "leaks": [],
+  "outputs": [
+    "wiki-safe/graph-core.json",
+    "wiki-safe/graph-core.html",
+    "wiki-safe/graph-core.mmd"
+  ]
+}

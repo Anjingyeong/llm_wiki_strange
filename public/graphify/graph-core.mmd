@@ -1,0 +1,37 @@
+flowchart LR
+  mqtt_safety_event_contract_7cf36b5dc4["MQTT Safety Event Contract"]
+  build_safety_event_eef168f223["build_safety_event()"]
+  mqtt_safety_event_contract_7cf36b5dc4 -.->|implements| build_safety_event_eef168f223
+  ai_pipeline_f0501c3106["AI Pipeline"]
+  ai_pipeline_f0501c3106 -.->|conceptually_related_to| build_safety_event_eef168f223
+  mqttsafetyeventsubscriber_fa5eb75ffe["MqttSafetyEventSubscriber"]
+  alertbroadcastservice_028008b04d["AlertBroadcastService"]
+  mqttsafetyeventsubscriber_fa5eb75ffe -->|references| alertbroadcastservice_028008b04d
+  mqtt_to_websocket_alert_contract_7cdc4211e4["MQTT to WebSocket Alert Contract"]
+  mqtt_to_websocket_alert_contract_7cdc4211e4 -.->|implements| mqttsafetyeventsubscriber_fa5eb75ffe
+  mqtt_event_schema_2934e344e8["MQTT Event Schema"]
+  mqtt_event_schema_2934e344e8 -.->|conceptually_related_to| mqttsafetyeventsubscriber_fa5eb75ffe
+  adr_002_mqtt_metadata_separation_0187fee5f2["ADR-002 MQTT Metadata Separation"]
+  mqtt_metadata_separation_94cd912986["MQTT Metadata Separation"]
+  adr_002_mqtt_metadata_separation_0187fee5f2 -->|rationale_for| mqtt_metadata_separation_94cd912986
+  ai_output_json_a1e5fa3da2["AI Output JSON"]
+  adr_002_mqtt_metadata_separation_0187fee5f2 -->|references| ai_output_json_a1e5fa3da2
+  adr_002_mqtt_metadata_separation_0187fee5f2 -->|references| mqtt_event_schema_2934e344e8
+  ai_output_json_a1e5fa3da2 -->|references| ai_pipeline_f0501c3106
+  architecture_40af047c5a["Architecture"]
+  ai_output_json_a1e5fa3da2 -->|references| architecture_40af047c5a
+  ai_output_json_a1e5fa3da2 -->|references| mqtt_event_schema_2934e344e8
+  ai_pipeline_f0501c3106 -->|references| mqtt_event_schema_2934e344e8
+  architecture_40af047c5a -->|references| ai_pipeline_f0501c3106
+  architecture_40af047c5a -->|references| mqtt_event_schema_2934e344e8
+  safety_events_mqtt_contract_a2982015ab["safety/events MQTT Contract"]
+  mqtt_event_schema_2934e344e8 -->|rationale_for| safety_events_mqtt_contract_a2982015ab
+  multi_camera_worker_session_reliability_63ca8fff1a["Multi-Camera Worker Session Reliability"]
+  worker_session_boundary_7304677e84["Worker Session Boundary"]
+  multi_camera_worker_session_reliability_63ca8fff1a -->|references| worker_session_boundary_7304677e84
+  strange_ai_project_summary_dff7477e65["Strange AI Project Summary"]
+  strange_ai_project_summary_dff7477e65 -->|references| mqtt_safety_event_contract_7cf36b5dc4
+  strange_back_project_summary_30cafde4e7["Strange Back Project Summary"]
+  strange_back_project_summary_30cafde4e7 -->|references| strange_ai_project_summary_dff7477e65
+  mqtt_to_websocket_alert_contract_7cdc4211e4 -->|shares_data_with| mqtt_safety_event_contract_7cf36b5dc4
+  strange_back_project_summary_30cafde4e7 -->|references| mqtt_to_websocket_alert_contract_7cdc4211e4

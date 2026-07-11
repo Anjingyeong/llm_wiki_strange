@@ -42,6 +42,7 @@ const categoryMapping: Record<string, string> = {
   'Multi-Camera-Frame-Latency-Report': '03. Streaming & Sync (스트리밍 및 동기화)',
   'Evidence-LLM-Wiki-RAG': '04. Knowledge Base (위키 및 검색)',
   'Evidence-Portfolio-Resume-Usage': '04. Knowledge Base (위키 및 검색)',
+  'Graphify-Semantic-Map': '04. Knowledge Base (위키 및 검색)',
   'Realtime-Camera-Runtime-Stabilization': '05. Management & Retrospective (운영 및 회고)',
   'Bug-Notification-Scope': '05. Management & Retrospective (운영 및 회고)',
   'Bug-RTSP-Stream-404': '05. Management & Retrospective (운영 및 회고)',
@@ -87,7 +88,8 @@ const slugOrderWithinCategory: Record<string, readonly string[]> = {
   ],
   '04. Knowledge Base (위키 및 검색)': [
     'Evidence-LLM-Wiki-RAG',
-    'Evidence-Portfolio-Resume-Usage'
+    'Evidence-Portfolio-Resume-Usage',
+    'Graphify-Semantic-Map'
   ],
   '05. Management & Retrospective (운영 및 회고)': [
     'Realtime-Camera-Runtime-Stabilization',

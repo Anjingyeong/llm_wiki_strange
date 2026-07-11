@@ -3,9 +3,9 @@ title: AI Pipeline
 navTitle: "AI 파이프라인"
 shortTitle: "AI 파이프라인"
 category: AI Pipeline
-relatedDocs: [LSTM, Model-Decision-YOLO26n, MQTT-Event-Schema, AI-Output-JSON]
-relatedFiles: [docs/AI_GUIDE.md, docs/ai_training_preprocessing_summary.md, strange_ai/.env.example]
-updatedAt: 2026-06-26
+relatedDocs: [LSTM, Model-Decision-YOLO26n, MQTT-Event-Schema, AI-Output-JSON, Graphify-Semantic-Map]
+relatedFiles: [docs/AI_GUIDE.md, docs/ai_training_preprocessing_summary.md, strange_ai/messaging/event_schema.py, strange_ai/messaging/mqtt_publisher.py]
+updatedAt: 2026-07-11
 project: smart-safety-ai
 type: pipeline
 portfolio_use: true

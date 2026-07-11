@@ -1,0 +1,12 @@
+{
+  "promoted_from": "outputs/graphify-semantic/wiki-safe",
+  "node_count": 48,
+  "files": [
+    "graph-core.html",
+    "graph-core.json",
+    "graph-core.mmd",
+    "MANIFEST.json"
+  ],
+  "policy": "internal-graphify-core-only-cloudflare",
+  "note": "Full graph.json/html must never land in public/"
+}
