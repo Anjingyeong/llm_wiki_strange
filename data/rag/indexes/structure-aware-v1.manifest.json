@@ -3,13 +3,13 @@
   "chunkSchemaVersion": "structure-aware-v1",
   "embeddingVersion": "local-hash-tfidf-v1",
   "embeddingDimensions": 256,
-  "documentCount": 46,
-  "chunkCount": 699,
-  "generatedAt": "2026-07-11T12:13:19.969Z",
-  "sourceCommit": "3ade525",
+  "documentCount": 48,
+  "chunkCount": 751,
+  "generatedAt": "2026-07-13T04:16:40.782Z",
+  "sourceCommit": "23544b9",
   "indexPath": "data/rag/indexes/structure-aware-v1.json",
-  "meanChunkChars": 261,
+  "meanChunkChars": 264,
   "duplicateDocRatio": 1,
-  "manifestHash": "d2971cfe402013cc",
-  "corpusHash": "f2ed7cdd7c50d8428e9ef8e59834a0ede45feaa4a1f455ff94134e32e181bf10"
+  "manifestHash": "f599ffd3536e45cd",
+  "corpusHash": "a986ea522a65dcc3d2e555a5e336532c59482b717c4b374a96f693127bbfe99f"
 }
