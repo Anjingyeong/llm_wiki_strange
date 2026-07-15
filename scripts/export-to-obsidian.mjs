@@ -60,17 +60,25 @@ function parseArgs(argv) {
 }
 
 function parseFrontmatter(raw) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) return { data: {}, body: raw };
   const block = match[1];
   const body = match[2];
   const data = {};
-  for (const line of block.split(/\r?\n/)) {
-    const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+  const lines = block.split(/\r?\n/);
+  for (let index = 0; index < lines.length; index += 1) {
+    const m = lines[index].match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (!m) continue;
     const key = m[1];
-    let val = m[2].trim();
-    if (val.startsWith('[') && val.endsWith(']')) {
+    const val = m[2].trim();
+    if (!val) {
+      const items = [];
+      while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
+        index += 1;
+        items.push(stripQuotes(lines[index].replace(/^\s+-\s+/, '').trim()));
+      }
+      data[key] = items;
+    } else if (val.startsWith('[') && val.endsWith(']')) {
       data[key] = val
         .slice(1, -1)
         .split(',')

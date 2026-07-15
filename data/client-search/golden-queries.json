@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "description": "Frontend document search golden queries (not RAG).",
   "defaultTopK": 3,
   "noResultThreshold": 18,
@@ -170,6 +170,42 @@
       "topK": 3,
       "category": "no-result",
       "expectEmpty": true
+    },
+    {
+      "id": "cs-019",
+      "query": "develop 기준선 faint cooldown 60",
+      "expectedSlugs": ["Develop-Code-Baseline-2026-07-15", "AI-Pipeline"],
+      "topK": 5,
+      "category": "baseline"
+    },
+    {
+      "id": "cs-020",
+      "query": "frameId overlay 동기화",
+      "expectedSlugs": ["Frame-Sync-Canonical", "ED-FrameId-Evidence-Overlay-Sync", "Frame-Matching-Report"],
+      "topK": 5,
+      "category": "canonical"
+    },
+    {
+      "id": "cs-021",
+      "query": "서 있는 사람 faint upright gate",
+      "expectedSlugs": ["ED-Standing-Faint-Upright-Gate", "ED-Fall-Faint-Lifecycle"],
+      "topK": 5,
+      "category": "canonical"
+    },
+    {
+      "id": "cs-neg-006",
+      "query": "TensorRT 블록체인",
+      "expectedSlugs": [],
+      "topK": 3,
+      "category": "mixed-present-absent",
+      "expectEmpty": true
+    },
+    {
+      "id": "cs-022",
+      "query": "중복 streamUrl 바인딩",
+      "expectedSlugs": ["Bug-Duplicate-Stream-Binding", "Realtime-Camera-Runtime-Stabilization"],
+      "topK": 5,
+      "category": "canonical"
     }
   ]
 }

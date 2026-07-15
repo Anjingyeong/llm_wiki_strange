@@ -9,11 +9,9 @@ relatedFiles: [portfolio/project-evidence-map.md, portfolio/resume-bullets.md, p
 updatedAt: 2026-06-30
 project: portfolio
 status: archived
-wikiVisibility:
- internal
+wikiVisibility: internal
 portfolio_use: false
 type: evidence
-portfolio_use: true
 evidence_type: resume
 ---
 

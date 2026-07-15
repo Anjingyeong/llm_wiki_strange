@@ -344,6 +344,117 @@ a:hover {
 }
 
 /* ── 6. Search Panel ─────────────────────────────────────────── */
+/* ── 6. Wiki tools (search + RAG + system) ───────────────────── */
+.wikiToolsPanel {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.wikiToolsTabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+
+.wikiToolsTab {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.wikiToolsTab.active {
+  color: var(--accent);
+  background: var(--panel);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.wikiToolsPane {
+  padding: 16px 18px 18px;
+}
+
+.wikiToolsHint {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.wikiRagSystemTitle {
+  font-size: 1.1rem;
+  margin: 0 0 12px;
+}
+
+.wikiRagSystem h3 {
+  font-size: 0.95rem;
+  margin: 18px 0 8px;
+}
+
+.wikiRagSystem table {
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.wikiRagSystem th {
+  text-align: left;
+  width: 28%;
+  vertical-align: top;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.wikiToolsFooter {
+  padding: 10px 18px 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.linkish {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
+.ragAskForm textarea {
+  width: 100%;
+  min-height: 72px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  font: inherit;
+  resize: vertical;
+}
+
+.ragAnswerMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.ragSourceChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
 .searchPanel {
   position: sticky;
   top: 0;

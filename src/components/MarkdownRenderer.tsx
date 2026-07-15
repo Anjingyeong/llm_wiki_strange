@@ -1,4 +1,5 @@
 import { headingId, inlineMarkdown, isDuplicateDocumentH1, parseMarkdownBlocks, renderParagraphLines } from '../lib/markdown';
+import { wikiLink } from '../lib/wikiHash';
 import { MermaidDiagram } from './MermaidDiagram';
 
 type MarkdownRendererProps = {
@@ -7,6 +8,7 @@ type MarkdownRendererProps = {
   readonly documentTitle?: string;
   /** Display title shown in docHeader (navTitle etc.) */
   readonly displayTitle?: string;
+  readonly documentSlug?: string;
 };
 
 function codeLanguageClass(language: string): string {
@@ -14,7 +16,12 @@ function codeLanguageClass(language: string): string {
   return normalized ? `language-${normalized}` : 'language-text';
 }
 
-export function MarkdownRenderer({ markdown, documentTitle = '', displayTitle = '' }: MarkdownRendererProps) {
+export function MarkdownRenderer({
+  markdown,
+  documentTitle = '',
+  displayTitle = '',
+  documentSlug = '',
+}: MarkdownRendererProps) {
   const blocks = parseMarkdownBlocks(markdown);
   let skippedDuplicateH1 = false;
 
@@ -39,13 +46,13 @@ export function MarkdownRenderer({ markdown, documentTitle = '', displayTitle = 
             if (block.level === 2) {
               return (
                 <h2 id={id} key={`${id}-${index}`}>
-                  <a href={`#${id}`}>{inlineMarkdown(block.text)}</a>
+                  <a href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}>{inlineMarkdown(block.text)}</a>
                 </h2>
               );
             }
             return (
               <h3 id={id} key={`${id}-${index}`}>
-                <a href={`#${id}`}>{inlineMarkdown(block.text)}</a>
+                <a href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}>{inlineMarkdown(block.text)}</a>
               </h3>
             );
           }

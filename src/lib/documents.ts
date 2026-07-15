@@ -1,5 +1,12 @@
 import { parseWikiDocument } from './frontmatter';
-import type { WikiDocument } from './types';
+import type { WikiCategory, WikiDocument } from './types';
+
+function isArchivedWikiDoc(raw: string): boolean {
+  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!m) return false;
+  const block = m[1] ?? '';
+  return /(^|\n)status:\s*archived\b/m.test(block) || /(^|\n)wikiVisibility:\s*internal\b/m.test(block);
+}
 
 const rawModules = import.meta.glob<string>('../../content/*.md', {
   eager: true,
@@ -122,6 +129,7 @@ const slugOrderWithinCategory: Record<string, readonly string[]> = {
 };
 
 export const documents = Object.entries(rawModules)
+  .filter(([, raw]) => !isArchivedWikiDoc(raw))
   .map(([filePath, raw]) => parseWikiDocument(filePath, raw))
   .sort((left, right) => {
     const leftCat = categoryMapping[left.slug] ?? '05. Management & Retrospective (운영 및 회고)';
@@ -160,7 +168,7 @@ export function getInitialDocument(): WikiDocument {
   return documentsBySlug.get('Overview') ?? documents[0] ?? {
     slug: 'missing',
     title: '문서 없음',
-    category: '01. Project Overview (프로젝트 개요)',
+    category: '01. Project Overview (프로젝트 개요)' as WikiCategory,
     tags: [],
     relatedDocs: [],
     relatedFiles: [],

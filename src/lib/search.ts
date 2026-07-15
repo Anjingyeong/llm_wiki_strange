@@ -1,6 +1,6 @@
 import { searchIndex } from '../generated/searchIndex';
 import { NO_RESULT_THRESHOLD, searchDocumentsInIndex } from './searchCore.mjs';
-import type { SearchResult } from './types';
+import type { SearchDocument, SearchResult } from './types';
 
 export {
   expandTokenVariants,
@@ -25,8 +25,8 @@ export function searchDocuments(
   options?: { readonly limit?: number },
 ): readonly SearchResult[] {
   const limit = Math.min(options?.limit ?? DEFAULT_LIMIT, SEARCH_RESULT_LIMIT_MAX);
-  return searchDocumentsInIndex(searchIndex as readonly object[], query, {
+  return searchDocumentsInIndex(searchIndex as readonly SearchDocument[], query, {
     limit,
     minScore: NO_RESULT_THRESHOLD,
-  }) as unknown as SearchResult[];
+  }) as SearchResult[];
 }

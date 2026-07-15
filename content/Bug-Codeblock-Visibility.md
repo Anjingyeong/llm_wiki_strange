@@ -72,7 +72,7 @@ Markdown fenced code
 
 ## 후속 작업
 
-브라우저에서 `AI Output JSON`과 `MQTT Event Schema`를 라이트/다크 환경 모두에서 캡처해 회귀 확인한다.
-
+- 자동: `tests/codeblock-styles.test.mjs` — `--code-bg`/`--code-text`, `.codeBlock pre` 대비 규칙.
+- 수동(선택): 브라우저에서 `AI-Output-JSON`, `MQTT-Event-Schema` 라이트/다크 스크린샷.
 ---
 #bug #codeblock #css #json #dark-mode

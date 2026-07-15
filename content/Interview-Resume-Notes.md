@@ -5,8 +5,7 @@ shortTitle: "면접 노트"
 category: 면접·이력서 정리
 status: archived
 wikiVisibility: internal
-type:
- meta
+type: meta
 portfolio_use: false
 updatedAt: 2026-06-30
 relatedDocs: [2026-06-30-Overlay-Tracking-Evidence-Log, AI-Pipeline, Architecture, Frame-Matching-Report]

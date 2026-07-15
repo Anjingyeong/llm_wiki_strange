@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { computeCorpusHash } from './lib/corpus-hash.mjs';
 import { extractHeadingsFromBody } from './lib/heading-utils.mjs';
+import { isExcludedFromPublicIndex } from './lib/indexable-content.mjs';
 
 const wikiRoot = fileURLToPath(new URL('..', import.meta.url));
 const contentDir = join(wikiRoot, 'content');
@@ -26,10 +27,13 @@ const categoryOrder = new Map([
 const slugOrder = new Map([
   // 1. 프로젝트 개요
   ['Overview', 100],
+  ['Develop-Code-Baseline-2026-07-15', 95],
   ['Evidence-Smart-Safety-System', 110],
 
   // 2. 시스템 아키텍처
   ['Architecture', 200],
+  ['Frame-Sync-Canonical', 198],
+  ['ED-Standing-Faint-Upright-Gate', 305],
   ['ADR-001-WebRTC', 210],
   ['ADR-002-MQTT-Metadata-Separation', 220],
 
@@ -79,7 +83,7 @@ const slugOrder = new Map([
 ]);
 
 function parseFrontmatter(raw, fileName) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match || !match[1] || !match[2]) {
     throw new Error(`${fileName} is missing frontmatter`);
   }
@@ -103,6 +107,18 @@ function parseFrontmatter(raw, fileName) {
     }
   }
 
+  const frontmatterLines = match[1].split(/\r?\n/);
+  for (const key of ['tags', 'relatedDocs', 'relatedFiles', 'entities']) {
+    const start = frontmatterLines.findIndex((line) => line.split(':', 1)[0].trim() === key);
+    if (start < 0) {
+      continue;
+    }
+    let end = start + 1;
+    while (end < frontmatterLines.length && /^\s+-\s+/.test(frontmatterLines[end])) {
+      end += 1;
+    }
+    data[key] = parseListField(frontmatterLines.slice(start, end).join('\n'), key) ?? [];
+  }
   for (const key of requiredKeys) {
     if (!data[key]) {
       throw new Error(`${fileName} is missing required frontmatter key: ${key}`);
@@ -115,14 +131,47 @@ function parseFrontmatter(raw, fileName) {
 function stripOuterQuotes(value) {
   let normalized = String(value).trim();
   while (
-    normalized.length >= 2 &&
-    ((normalized.startsWith('"') && normalized.endsWith('"')) ||
-      (normalized.startsWith("'") && normalized.endsWith("'")))
+    normalized.length >= 2
+    && ((normalized.startsWith('"') && normalized.endsWith('"'))
+      || (normalized.startsWith("'") && normalized.endsWith("'")))
   ) {
     normalized = normalized.slice(1, -1).trim();
   }
   return normalized;
 }
+
+function parseYamlListBlock(lines) {
+  const items = [];
+  for (const line of lines) {
+    const m = line.match(/^\s*-\s+(.+)$/);
+    if (m) {
+      items.push(stripOuterQuotes(m[1].trim()));
+    }
+  }
+  return items;
+}
+
+function parseListField(block, key) {
+  const lines = block.split(/\r?\n/);
+  const first = lines[0] ?? '';
+  const colon = first.indexOf(':');
+  if (colon < 0 || first.slice(0, colon).trim() !== key) {
+    return null;
+  }
+  const inline = first.slice(colon + 1).trim();
+  if (inline) {
+    if (inline.startsWith('[') && inline.endsWith(']')) {
+      return inline
+        .slice(1, -1)
+        .split(',')
+        .map((item) => stripOuterQuotes(item.trim()))
+        .filter(Boolean);
+    }
+    return inline ? [stripOuterQuotes(inline)] : [];
+  }
+  return parseYamlListBlock(lines.slice(1));
+}
+
 
 function displayTitle(data, slug) {
   return data.navTitle || data.shortTitle || data.title || slug;
@@ -161,7 +210,7 @@ function searchableText(body) {
     .trim();
 }
 
-const { corpusHash, documentCount } = await computeCorpusHash(contentDir, wikiRoot);
+const { corpusHash } = await computeCorpusHash(contentDir, wikiRoot);
 const generatedAt = new Date().toISOString();
 
 const entries = [];
@@ -170,6 +219,9 @@ const files = (await readdir(contentDir)).filter((file) => file.endsWith('.md'))
 for (const file of files) {
   const raw = await readFile(join(contentDir, file), 'utf8');
   const parsed = parseFrontmatter(raw, file);
+  if (isExcludedFromPublicIndex(parsed.data)) {
+    continue;
+  }
   const slug = file.replace(/\.md$/, '');
   const headings = extractHeadingsFromBody(parsed.body);
   entries.push({
@@ -207,12 +259,12 @@ entries.sort((left, right) => left.order - right.order || left.displayTitle.loca
 
 const meta = {
   corpusHash,
-  documentCount,
+  documentCount: entries.length,
   generatedAt,
   source: 'content/*.md',
 };
 
-const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndexMeta = ${JSON.stringify(meta)} as const;\n\nexport const searchIndex = ${JSON.stringify(entries)} satisfies readonly SearchDocument[];\n`;
+const output = `import type { SearchDocument } from '../lib/types';\n\nexport const searchIndexMeta = ${JSON.stringify(meta)} as const;\n\nexport const searchIndex: readonly SearchDocument[] = ${JSON.stringify(entries)};\n`;
 
 await writeFile(outputPath, output, 'utf8');
 // Machine-readable copy for Node unit tests (avoids parsing TS `satisfies`).

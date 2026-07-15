@@ -1,5 +1,6 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { isExcludedFromPublicIndex } from '../indexable-content.mjs';
 
 const categoryOrder = new Map([
   ['Project', 100],
@@ -61,17 +62,28 @@ function makeSummary(body, explicitSummary) {
 }
 
 function parseFrontmatter(raw, fileName) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match || !match[1] || !match[2]) {
     throw new Error(`${fileName} is missing frontmatter`);
   }
   const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
+  const lines = match[1].split(/\r?\n/);
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     const separator = line.indexOf(':');
     if (separator < 0) continue;
     const key = line.slice(0, separator).trim();
     const value = line.slice(separator + 1).trim();
-    data[key] = stripOuterQuotes(value);
+    if (!value) {
+      const items = [];
+      while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
+        index += 1;
+        items.push(stripOuterQuotes(lines[index].replace(/^\s+-\s+/, '')));
+      }
+      data[key] = items;
+    } else {
+      data[key] = stripOuterQuotes(value);
+    }
   }
   return { data, body: match[2] };
 }
@@ -82,6 +94,7 @@ export async function loadWikiDocuments(contentDir) {
   for (const file of files) {
     const raw = await readFile(join(contentDir, file), 'utf8');
     const parsed = parseFrontmatter(raw, file);
+    if (isExcludedFromPublicIndex(parsed.data)) continue;
     const slug = file.replace(/\.md$/, '');
     documents.push({
       slug,

@@ -1,27 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
-import { RagPanel } from './components/RagPanel';
-import { SearchPanel } from './components/SearchPanel';
 import { Sidebar } from './components/Sidebar';
 import { TableOfContents } from './components/TableOfContents';
+import { WikiToolsPanel } from './components/WikiToolsPanel';
 import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
 import { isExcerptDuplicate } from './lib/frontmatter';
 import { getDisplayTitle } from './lib/types';
-
-/** Hash format: #/Slug or #/Slug/section-id */
-function parseLocationHash(): { slug: string; sectionId: string | null } {
-  const raw = window.location.hash.replace(/^#\/?/, '');
-  if (!raw) return { slug: '', sectionId: null };
-  const slash = raw.indexOf('/');
-  if (slash < 0) return { slug: raw, sectionId: null };
-  const slug = raw.slice(0, slash);
-  const sectionId = raw.slice(slash + 1) || null;
-  return { slug, sectionId };
-}
-
-function writeLocationHash(slug: string, sectionId?: string | null) {
-  window.location.hash = sectionId ? `#/${slug}/${sectionId}` : `#/${slug}`;
-}
+import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
 
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -34,17 +19,19 @@ export function App() {
 
   const initial = getInitialDocument();
   const initialHash = parseLocationHash();
-  const [activeSlug, setActiveSlug] = useState(() => initialHash.slug || initial.slug);
-  const [pendingSectionId, setPendingSectionId] = useState<string | null>(
-    () => initialHash.sectionId,
+  const [contentView, setContentView] = useState<WikiView>(() => initialHash.view);
+  const [activeSlug, setActiveSlug] = useState(() =>
+    initialHash.view === 'doc' ? initialHash.slug || initial.slug : initial.slug,
   );
-  const [query, setQuery] = useState('');
-  const activeDocument = useMemo(
-    () => documentsBySlug.get(activeSlug),
-    [activeSlug],
+  const [pendingSectionId, setPendingSectionId] = useState<string | null>(() =>
+    initialHash.view === 'doc' ? initialHash.sectionId : null,
+  );
+  const [toolsTab, setToolsTab] = useState<'search' | 'ask' | 'system'>(() =>
+    initialHash.view === 'rag' ? 'ask' : 'search',
   );
 
-  // Scroll after document body is in the DOM (search selection or hash restore).
+  const activeDocument = useMemo(() => documentsBySlug.get(activeSlug), [activeSlug]);
+
   useEffect(() => {
     if (!pendingSectionId || !activeDocument) return;
     let cancelled = false;
@@ -70,22 +57,23 @@ export function App() {
 
   useEffect(() => {
     const onHash = () => {
-      const { slug, sectionId } = parseLocationHash();
-      if (slug && slug !== activeSlug) {
-        setActiveSlug(slug);
-      }
-      if (sectionId) {
-        setPendingSectionId(sectionId);
+      const parsed = parseLocationHash();
+      setContentView(parsed.view);
+      if (parsed.view === 'search') setToolsTab('search');
+      if (parsed.view === 'rag') setToolsTab('ask');
+      if (parsed.view === 'doc' && parsed.slug) {
+        setActiveSlug(parsed.slug);
+        setPendingSectionId(parsed.sectionId);
       }
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
-  }, [activeSlug]);
+  }, []);
 
   const selectDocument = (slug: string, sectionId?: string | null) => {
+    setContentView('doc');
     setActiveSlug(slug);
-    setQuery('');
-    writeLocationHash(slug, sectionId);
+    writeDocumentHash(slug, sectionId);
     if (sectionId) {
       setPendingSectionId(sectionId);
     } else {
@@ -106,9 +94,7 @@ export function App() {
     try {
       const response = await fetch('/api/auth/verify', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: keyInput }),
       });
       const data = await response.json();
@@ -119,7 +105,7 @@ export function App() {
         setAuthError(data.message || '인증에 실패했습니다.');
         triggerShake();
       }
-    } catch (err) {
+    } catch {
       setAuthError('서버 통신 중 오류가 발생했습니다.');
       triggerShake();
     } finally {
@@ -162,13 +148,15 @@ export function App() {
     );
   }
 
-  if (!activeDocument) {
+  if (!activeDocument && contentView === 'doc') {
     return (
       <div className="appShell">
         <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
         <main className="notFound">
           <h1>문서를 찾을 수 없습니다</h1>
-          <p>요청한 Wiki 경로가 존재하지 않습니다. 왼쪽 네비게이션이나 검색으로 문서를 다시 선택하세요.</p>
+          <p>
+            경로 <code>#{activeSlug}</code> 에 해당하는 문서가 없습니다. archived slug이거나 잘못된 링크일 수 있습니다.
+          </p>
           <button onClick={() => selectDocument(initial.slug)} type="button">
             Overview로 이동
           </button>
@@ -181,32 +169,36 @@ export function App() {
     <div className="appShell">
       <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
       <main className="content">
-        <SearchPanel onQueryChange={setQuery} onSelect={selectDocument} query={query} />
-        <RagPanel />
-        <article className="docCard">
-          <header className="docHeader">
-            <span>{activeDocument.category}</span>
-            <h1>{getDisplayTitle(activeDocument)}</h1>
-            {getDisplayTitle(activeDocument) !== activeDocument.title ? (
-              <p className="formalTitle">정식 제목: {activeDocument.title}</p>
-            ) : null}
-            {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
-              <p>{activeDocument.excerpt}</p>
-            )}
-            <div className="tagRow">
-              {activeDocument.tags.map((tag) => (
-                <small key={tag}>{tag}</small>
-              ))}
-            </div>
-          </header>
-          <MarkdownRenderer
-            markdown={activeDocument.body}
-            documentTitle={activeDocument.title}
-            displayTitle={getDisplayTitle(activeDocument)}
-          />
-        </article>
+        <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} />
+        {contentView === 'doc' && activeDocument ? (
+          <article className="docCard">
+            <header className="docHeader">
+              <span>{activeDocument.category}</span>
+              <h1>{getDisplayTitle(activeDocument)}</h1>
+              {getDisplayTitle(activeDocument) !== activeDocument.title ? (
+                <p className="formalTitle">정식 제목: {activeDocument.title}</p>
+              ) : null}
+              {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
+                <p>{activeDocument.excerpt}</p>
+              )}
+              <div className="tagRow">
+                {(activeDocument.tags ?? []).map((tag) => (
+                  <small key={tag}>{tag}</small>
+                ))}
+              </div>
+            </header>
+            <MarkdownRenderer
+              markdown={activeDocument.body}
+              documentTitle={activeDocument.title}
+              displayTitle={getDisplayTitle(activeDocument)}
+              documentSlug={activeDocument.slug}
+            />
+          </article>
+        ) : null}
       </main>
-      <TableOfContents headings={activeDocument.headings} />
+      {contentView === 'doc' && activeDocument ? (
+        <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
+      ) : null}
     </div>
   );
 }

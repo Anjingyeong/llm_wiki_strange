@@ -4,9 +4,9 @@ navTitle: "카메라 안정화"
 shortTitle: "카메라 안정화"
 category: Bugs
 summary: "active camera 과다 실행이 불안정 원인. allowlist 제한, cameraLoginId 및 등록 목록 기반 동적 할당, 그리고 session_reset_reason 기반 비디오 바운더리 초기화 규격."
-tags: [bugs, camera-runtime, active-camera, allowlist, webrtc, mediamtx, ffmpeg, cameraLoginId, dynamic-camera-registry, video-boundary]
+tags: [bugs, camera-runtime, active-camera, allowlist, webrtc, mediamtx, ffmpeg, cameraLoginId, dynamic-camera-registry, video-boundary, streamUrl]
 entities: [cameraLoginId, active camera, allowlist, cam_01, cam_04, MediaMTX]
-relatedDocs: [Architecture, WebRTC-vs-HLS, Bug-RTSP-Stream-404, AI-Pipeline, Multi-Camera-Worker-Session-Reliability]
+relatedDocs: [Architecture, WebRTC-vs-HLS, Bug-RTSP-Stream-404, Bug-Duplicate-Stream-Binding, AI-Pipeline, Multi-Camera-Worker-Session-Reliability]
 relatedFiles: [strange_ai/scripts/start_simulated_rtsp_from_folder.py, strange_ai/scripts/run_registered_cameras.py, strange_ai/scripts/start_ai_stable.sh, AI_실행_딸깍.bat]
 updatedAt: 2026-07-14
 ---

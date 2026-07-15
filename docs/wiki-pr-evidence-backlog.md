@@ -25,7 +25,7 @@
 
 | 주제 | PR | Wiki 후보 |
 |------|-----|-----------|
-| 중복 streamUrl 바인딩 | #16 | `Bug-Duplicate-Stream-Binding` |
+| 중복 streamUrl 바인딩 | #16 | **`Bug-Duplicate-Stream-Binding`** (2026-07-15 승격) |
 | Stale stream 자동 재연결 | #13 | Realtime-Camera § 또는 신규 Incident |
 | Incident 의미 검색 UI | #14·#15 | VLM-RAG-DBless § UI |
 

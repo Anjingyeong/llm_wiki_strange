@@ -44,6 +44,7 @@
 | Slug | 역할 |
 |------|------|
 | **ED-Standing-Faint-Upright-Gate** | PR #83 STAR, `partial` |
+| **Bug-Duplicate-Stream-Binding** | PR #16 DEV 중복 stream 경고 | 2026-07-15 |
 
 ## 5. VLM·RAG
 

@@ -1,4 +1,5 @@
 import { searchRelevantChunks } from './search.mjs';
+import { dedupeSourcesByDocument } from './source-dedupe.mjs';
 import { buildContextChunks } from './context.mjs';
 import { buildLocalTemplateAnswer } from './templates.mjs';
 import { generateAnswer } from './providers/index.mjs';
@@ -204,7 +205,7 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
   }
 
   const support = evaluateAnswerSupport(normalizedQuestion, chunks);
-  const sources = chunks.map(makeSource);
+  const sources = dedupeSourcesByDocument(chunks.map(makeSource));
 
   // Related retrieval but no direct answer evidence for numeric/status intents.
   if (!support.supported) {

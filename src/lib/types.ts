@@ -10,6 +10,7 @@ export type WikiCategory =
   | 'Bugs'
   | 'ADR'
   | 'Glossary'
+  | 'Evidence'
   | '01. Project Overview (프로젝트 개요)'
   | '02. AI & Data Pipeline (AI 및 데이터 처리)'
   | '03. Streaming & Sync (스트리밍 및 동기화)'
@@ -22,9 +23,9 @@ export type Frontmatter = {
   readonly navTitle?: string;
   readonly shortTitle?: string;
   readonly category: WikiCategory;
-  readonly tags: readonly string[];
-  readonly relatedDocs: readonly string[];
-  readonly relatedFiles: readonly string[];
+  readonly tags?: readonly string[];
+  readonly relatedDocs?: readonly string[];
+  readonly relatedFiles?: readonly string[];
   readonly updatedAt: string;
   readonly description?: string;
   readonly summary?: string;

@@ -52,6 +52,7 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
                   ? result.matchReasons.join(' · ')
                   : null;
                 const snip = result.snippet || result.excerpt || '';
+                const tags = result.tags ?? [];
                 return (
                   <button
                     className="searchResult"
@@ -68,8 +69,8 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
                     ) : null}
                     {reasons ? <small className="searchResultReason">{reasons}</small> : null}
                     {snip ? <ExpandableText text={snip} maxLength={140} /> : null}
-                    {result.tags.length > 0 ? (
-                      <small className="searchResultTags">{result.tags.slice(0, 4).join(' · ')}</small>
+                    {tags.length > 0 ? (
+                      <small className="searchResultTags">{tags.slice(0, 4).join(' · ')}</small>
                     ) : null}
                   </button>
                 );

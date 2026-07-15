@@ -28,7 +28,7 @@
     "topic": "VLM extension structure",
     "question": "How is the VLM extension connected to Self-Improving AI and Synthetic Data?",
     "expectedAnswer": "VLM and self-improving extensions are treated as later steps after frame evidence chain correctness is secured.",
-    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log", "Interview-Resume-Notes"],
+    "expectedDocumentIds": ["Evidence-Smart-Safety-System", "AI-Pipeline"],
     "topK": 5
   },
   {
@@ -36,7 +36,7 @@
     "topic": "Self-Improving AI structure",
     "question": "What is the Self-Improving AI first stage training_manifest_v2 hard negative plan?",
     "expectedAnswer": "The first stage is a reviewed training_manifest_v2 pipeline built from hard negatives, missed faint cases, and approved metadata.",
-    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log"],
+    "expectedDocumentIds": ["Evidence-Smart-Safety-System"],
     "topK": 5
   },
   {
@@ -44,7 +44,7 @@
     "topic": "Synthetic Data usage",
     "question": "How should Synthetic Data Augmentation use max_synthetic_ratio parent_clip_id leakage?",
     "expectedAnswer": "Synthetic augmentation should track parent_clip_id, split by parent clip to avoid leakage, and cap synthetic ratio at max_synthetic_ratio.",
-    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log"],
+    "expectedDocumentIds": ["Evidence-Smart-Safety-System"],
     "topK": 5
   },
   {
@@ -52,7 +52,7 @@
     "topic": "Deployment and environment components",
     "question": "What deployment environment components use RTSP MediaMTX Spring Boot MQTT Broker WebSocket?",
     "expectedAnswer": "The deployment path connects RTSP/MediaMTX input, AI inference, MQTT broker events, Spring Boot backend, and WebSocket delivery.",
-    "expectedDocumentIds": ["AI-Pipeline", "MQTT-Event-Schema", "Frame-Sync-Debug-Report", "Interview-Resume-Notes"],
+    "expectedDocumentIds": ["AI-Pipeline", "MQTT-Event-Schema", "Frame-Sync-Debug-Report"],
     "topK": 5
   },
   {
@@ -76,7 +76,15 @@
     "topic": "Frame sync and overlay matching",
     "question": "How does frame_sync overlay buffer capturedAtMs frameId synchronization work?",
     "expectedAnswer": "Frame sync and overlay matching use frameId, capturedAtMs, evidence IDs, and per-camera buffers to align AI output with playback timing.",
-    "expectedDocumentIds": ["2026-06-30-Overlay-Tracking-Evidence-Log", "Interview-Resume-Notes"],
+    "expectedDocumentIds": ["Frame-Sync-Canonical", "ED-FrameId-Evidence-Overlay-Sync", "Frame-Matching-Report"],
+    "topK": 5
+  },
+  {
+    "id": "develop-baseline-faint-cooldown",
+    "topic": "Develop baseline faint cooldown",
+    "question": "What is faint exit hazard cooldown on origin develop 27093423 faint_post_processing?",
+    "expectedAnswer": "On develop, exit and hazard cooldown defaults were raised to 60 seconds in faint_post_processing.",
+    "expectedDocumentIds": ["Develop-Code-Baseline-2026-07-15", "AI-Pipeline"],
     "topK": 5
   }
 ]

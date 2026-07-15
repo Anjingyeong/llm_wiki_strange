@@ -43,8 +43,11 @@ const QUERY_ALIASES = {
   텐서알티: ['tensorrt', 'tensor rt', 'tensor_rt'],
   텐서rt: ['tensorrt'],
   프레임아이디: ['frameid', 'frame_id', 'frame id'],
+  develop기준선: ['develop', 'baseline', '27093423', 'faint', 'cooldown', 'develop-code-baseline'],
+  기준선: ['develop-code-baseline', 'develop', 'baseline'],
   오버레이: ['overlay'],
   낙상: ['fall', 'faint', 'lifecycle'],
+  넘어졌는지: ['쓰러진', '넘어짐', '낙상', 'faint'],
 };
 
 /** Strip common Korean particles so 오버레이가 → 오버레이. */
@@ -278,21 +281,45 @@ export function scoreSearchDocument(document, q) {
     }
   }
 
-  // Weak body-only hits: require multi-token coverage or a long rare token.
-  // Prevents "방식/장애/대응" noise from outranking real no-results.
+  // Evaluate coverage per original query token. Identifier and language aliases
+  // are alternatives within a group, not separate obligations.
   const reasonList = [...reasons];
   const strong = reasonList.some(
     (r) => r.includes('제목') || r.includes('코드') || r.includes('태그'),
   );
+  const field = `${title} ${nav} ${summary} ${body} ${relatedFiles}`;
+  const tokenGroups = q.rawTokens
+    .map((rawToken) => {
+      const original = stripKoreanParticles(rawToken);
+      const variants = [...new Set(
+        expandTokenVariants(original)
+          .map((variant) => normalizeSearchText(variant))
+          .filter((variant) => variant.length >= 2 && !STOP_KO.has(variant) && !STOP_EN.has(variant)),
+      )];
+      return { original, variants, matched: variants.some((variant) => field.includes(variant)) };
+    })
+    .filter((group) => group.variants.length > 0);
+
   if (!strong && score > 0) {
-    const sig = (q.significant.length ? q.significant : q.tokens)
-      .map((t) => stripKoreanParticles(t))
-      .filter((t) => t.length >= 2);
-    const field = `${title} ${nav} ${summary} ${body} ${relatedFiles}`;
-    const hits = sig.filter((t) => field.includes(t));
-    const longHits = hits.filter((t) => t.length >= 3);
-    const coverage = sig.length ? hits.length / sig.length : 0;
-    if (longHits.length === 0 || coverage < 0.6) {
+    const matched = tokenGroups.filter((group) => group.matched);
+    const hasLongHit = matched.some((group) => group.variants.some((variant) => variant.length >= 3));
+    const coverage = tokenGroups.length ? matched.length / tokenGroups.length : 0;
+    if (!hasLongHit || coverage < 0.6) {
+      score = Math.min(score, NO_RESULT_THRESHOLD - 1);
+    }
+  }
+
+  if (strong && tokenGroups.length >= 2) {
+    const genericTerms = new Set([
+      '알고리즘', '구조', '방식', '문제', '오류', '검색', '처리',
+      '언제', '어디서', '누가', '맞지', '않음',
+    ]);
+    const concreteGroups = tokenGroups.filter((group) => !genericTerms.has(group.original));
+    const matchedConcrete = concreteGroups.filter((group) => group.matched);
+    const concreteCoverage = concreteGroups.length
+      ? matchedConcrete.length / concreteGroups.length
+      : 1;
+    if (concreteCoverage < 0.6) {
       score = Math.min(score, NO_RESULT_THRESHOLD - 1);
     }
   }
@@ -404,5 +431,14 @@ export function searchDocumentsInIndex(indexOrBundle, query, options = {}) {
       || String(a.displayTitle ?? a.title).localeCompare(String(b.displayTitle ?? b.title), 'ko'),
   );
 
-  return scored.slice(0, limit);
+  const unique = [];
+  const seenSlug = new Set();
+  for (const hit of scored) {
+    const slug = hit.slug ?? hit.document?.slug;
+    if (slug && seenSlug.has(slug)) continue;
+    if (slug) seenSlug.add(slug);
+    unique.push(hit);
+  }
+
+  return unique.slice(0, limit);
 }
