@@ -69,22 +69,9 @@ WebRTC/HLS 대비 MJPEG(Multipart HTTP Stream) 방식이 가지는 장점은 다
 
 ---
 
-## 4. 최신 MJPEG 포트 매핑
+## 4. MJPEG 포트 및 URL 매핑
 
-동적 카메라 등록 구조를 완벽히 충족하기 위해 하드코딩된 cam1~cam4 포트 구조를 배제하고, 등록된 active camera 목록을 토대로 `cameraLoginId` 숫자 suffix를 추출하여 Deterministic 포트를 계산한다.
-
-- **포트 계산 공식**: `port = 8010 + numericSuffix(cameraLoginId) - 1`
-
-| cameraLoginId | 계산식 | 포트 |
-| :--- | :---: | :---: |
-| `cam_01` | 8010 + 1 - 1 | `8010` |
-| `cam_02` | 8010 + 2 - 1 | `8011` |
-| `cam_03` | 8010 + 3 - 1 | `8012` |
-| `cam_04` | 8010 + 4 - 1 | `8013` |
-| `cam_05` | 8010 + 5 - 1 | `8014` |
-
-- **동적 파이프라인 관리**: `cameraLoginId` 기반 동적 할당을 통해 등록된 active camera의 추가/삭제/수정 주기에 맞춰 적합한 포트로 자동 분기 및 Worker 구동 생명주기가 매핑된다.
-- **프론트엔드 연동**: 프론트엔드는 URL 파싱 시 위 suffix 규칙에 의해 `http://localhost:<computedPort>/mjpeg/{cameraLoginId}` 로 접근하여 렌더링을 처리한다.
+동적 카메라 등록 구조를 반영한 카메라별 MJPEG 포팅 및 URL 매핑에 관한 공식 규칙과 테이블은 Canonical 문서인 **[Realtime-Camera-Runtime-Stabilization](Realtime-Camera-Runtime-Stabilization.md)**의 `4.2 RTSP 포트 및 URL 매핑 규칙`을 참고해 주시기 바랍니다.
 
 ---
 

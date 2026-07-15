@@ -6,13 +6,7 @@ displayTitle: "Tracking Association Offline A/B"
 category: Evidence
 tags: [tracking, bytetrack, simple-tracker, offline-ab, iou, multi-det]
 relatedDocs: [Tracking-Association-Stabilization, Bug-AI-Tracker-FrameRate-Mismatch, AI-Pipeline, Realtime-Camera-Runtime-Stabilization]
-relatedFiles:
-  - strange_ai/scripts/replay_tracking_from_cache.py
-  - strange_ai/scripts/multi_person_proxy_from_cache.py
-  - strange_ai/tracking/simple_tracker.py
-  - strange_ai/ai/postprocess/supervision_postprocessor.py
-  - strange_ai/ai/simulated_rtsp_publisher.py
-  - strange_ai/tests/test_tracking_ab_replay.py
+relatedFiles: [strange_ai/scripts/replay_tracking_from_cache.py, strange_ai/scripts/multi_person_proxy_from_cache.py, strange_ai/tracking/simple_tracker.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_ai/ai/simulated_rtsp_publisher.py, strange_ai/tests/test_tracking_ab_replay.py]
 updatedAt: 2026-07-13
 project: smart-safety-ai
 type: experiment-report

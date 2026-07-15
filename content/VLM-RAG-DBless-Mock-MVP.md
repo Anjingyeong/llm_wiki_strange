@@ -4,9 +4,9 @@ navTitle: VLM Mock MVP
 shortTitle: VLM Mock MVP
 category: Architecture
 tags: [portfolio, architecture, vlm, rag, mock, semantic-search, incident, embedding, db-less]
-relatedDocs: [Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema]
+relatedDocs: [Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema, Develop-Code-Baseline-2026-07-15]
 relatedFiles: [ai/scripts/process_vlm_mock.py, ai/ai/vlm_mock.py, ai/fixtures/vlm/demo_job.json, ai/tests/test_vlm_mock_worker.py, back/src/main/java/com/strange/safety/vlm/mock/MockIncidentFixture.java, back/src/main/java/com/strange/safety/vlm/mock/InMemoryIncidentRepository.java, back/src/main/java/com/strange/safety/vlm/mock/MockVlmClient.java, back/src/main/java/com/strange/safety/vlm/mock/MockEmbeddingRepository.java, back/src/main/java/com/strange/safety/vlm/mock/IncidentSearchDocumentBuilder.java, back/src/main/java/com/strange/safety/vlm/mock/MockSemanticSearchService.java, back/src/test/java/com/strange/safety/vlm/mock/MockVlmRagServiceTest.java, back/DB_LESS_VLM_RAG_MOCK.md, front/src/features/dashboard/api/alertEventsApi.ts, front/src/features/dashboard/data/mockVlmIncidents.json]
-updatedAt: 2026-07-10
+updatedAt: 2026-07-15
 project: smart-safety
 type: architecture-case
 portfolio_use: true
@@ -26,6 +26,12 @@ GPU PC, 운영 PostgreSQL, S3, 외부 Vision API 없이도 **실제 `ai` / `back
 실제 Gemini 분석, pgvector ANN, S3 미디어, GPU 추론이 끝난 것처럼 쓰지 않는다.
 
 ---
+
+## Develop·draft hardening 정합 (2026-07-15)
+
+- **코드 기준선**: [Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md)
+- **골격 문서**: `back/SMART_SAFETY_VLM.md`, `ai/docs/SMART_SAFETY_VLM.md` (draft hardening; develop 머지 범위는 기준선 참고)
+- **실험 원문**: `ai-pipeline-stabilization-source.md` (벤치·판단; Wiki canonical 페이지로 추출)
 
 ## 1. 문제 정의
 

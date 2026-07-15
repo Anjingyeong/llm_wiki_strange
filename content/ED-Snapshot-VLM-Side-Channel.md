@@ -4,9 +4,9 @@ navTitle: 스냅샷 VLM 보조 설명
 shortTitle: Snapshot VLM
 category: Experiments
 tags: [engineering-decision, vlm-rag, snapshot, side-channel, partial, portfolio]
-relatedDocs: [VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-MQTT-Backend-Event-Path, AI-Pipeline]
+relatedDocs: [VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-MQTT-Backend-Event-Path, AI-Pipeline, Develop-Code-Baseline-2026-07-15]
 relatedFiles: [ai/ai/snapshot_assist_upload.py, ai/tests/test_snapshot_assist_upload.py, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistController.java, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistService.java, front/scripts/verify-vlm-snapshot-assist.mjs]
-updatedAt: 2026-07-11
+updatedAt: 2026-07-15
 project: smart-safety
 type: engineering-decision
 decision_domain: VLM & RAG

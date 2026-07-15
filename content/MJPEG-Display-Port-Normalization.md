@@ -32,47 +32,9 @@ Notifications were arriving, and MJPEG bytes could be fetched, but the browser d
 - AI runner and standalone MJPEG server default `MJPEG_ENABLE_OVERLAY=true`, while explicit opt-out remains available.
 - `AI_실행_딸깍.bat` forwards the configured MJPEG port range so GPU-PC workers can be reached from the web PC.
 
-## Port Mapping
+## Port Mapping & URL Generation
 
-Formula:
-
-```text
-port = 8010 + numericSuffix(cameraLoginId) - 1
-url = http://<host>:<port>/mjpeg/{cameraLoginId}
-```
-
-| cameraLoginId | Port | URL |
-| --- | ---: | --- |
-| `cam_01` | `8010` | `http://localhost:8010/mjpeg/cam_01` |
-| `cam_02` | `8011` | `http://localhost:8011/mjpeg/cam_02` |
-| `cam_03` | `8012` | `http://localhost:8012/mjpeg/cam_03` |
-| `cam_04` | `8013` | `http://localhost:8013/mjpeg/cam_04` |
-| `cam_05` | `8014` | `http://localhost:8014/mjpeg/cam_05` |
-
-`VITE_MJPEG_PORT_END` and `MJPEG_PORT_END` describe the expected forwarded/served range. They do not cap frontend port calculation, because capping would make later cameras collide on the last port.
-
-## Frontend URL Generation
-
-Development direct mode:
-
-```text
-VITE_STREAM_MODE=mjpeg
-VITE_MJPEG_BASE_URL=http://localhost:8010
-VITE_MJPEG_PORT_END=8020
-VITE_MJPEG_BASE_PATH=/mjpeg
-VITE_MJPEG_PROXY_MODE=false
-```
-
-Production or reverse-proxy mode:
-
-```text
-VITE_STREAM_MODE=mjpeg
-VITE_MJPEG_BASE_URL=https://<public-stream-host>
-VITE_MJPEG_BASE_PATH=/mjpeg
-VITE_MJPEG_PROXY_MODE=true
-```
-
-Direct mode creates `http://host:8014/mjpeg/cam_05` for `cam_05`. Proxy mode creates `https://host/mjpeg/cam_05` and expects the proxy to route that path to the correct worker.
+포트 매핑 공식, 상세 매핑 테이블, 그리고 프론트엔드 환경 기본값은 Canonical 문서인 **[Realtime-Camera-Runtime-Stabilization](Realtime-Camera-Runtime-Stabilization.md)**의 `4.2 RTSP 포트 및 URL 매핑 규칙`을 참고해 주시기 바랍니다.
 
 ## Backend/API Impact
 

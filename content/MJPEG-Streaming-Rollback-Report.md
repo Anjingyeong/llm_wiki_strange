@@ -47,41 +47,9 @@ relatedFiles: [strange_front/src/features/dashboard/data/cameras.ts, strange_fro
 - AI worker port는 `cameraLoginId`의 trailing number 기준으로 계산한다.
 - HLS/WebRTC 코드는 남아 있으며, `VITE_STREAM_MODE=webrtc` 또는 `raw`로 되돌릴 수 있다.
 
-## Port Mapping
+## Port Mapping & URL Generation
 
-기본 base port는 `8010`이다. 규칙은 `MJPEG_PORT + numericSuffix(cameraLoginId) - 1`이다.
-
-| cameraLoginId | port |
-| --- | ---: |
-| `cam_01` | `8010` |
-| `cam_02` | `8011` |
-| `cam_03` | `8012` |
-| `cam_04` | `8013` |
-| `cam_05` | `8014` |
-| `cam_12` | `8021` |
-
-숫자 suffix가 없는 cameraLoginId는 기존 next-free allocator fallback을 사용한다. 운영 표준 카메라 ID는 `cam_01`, `cam_02`처럼 suffix가 있는 형태를 권장한다.
-
-## Frontend URL Generation
-
-Frontend는 `VITE_MJPEG_BASE_URL` 기본값 `http://localhost:8010`을 기준으로 URL을 만든다.
-
-```text
-http://<host>:<8010 + camera suffix - 1>/mjpeg/{cameraLoginId}
-```
-
-개발 환경은 localhost를 기본값으로 둔다. 배포 환경은 `VITE_MJPEG_BASE_URL`로 host를 분리한다. HLS/WebRTC host는 각각 `VITE_HLS_BASE_URL`, `VITE_WEBRTC_BASE_URL`로 보존한다.
-
-Frontend env baseline:
-
-```text
-VITE_STREAM_MODE=mjpeg
-VITE_MJPEG_BASE_URL=http://localhost:8010
-VITE_OVERLAY_BASE_URL=http://localhost:8010
-VITE_WEBRTC_BASE_URL=http://localhost:8889
-VITE_HLS_BASE_URL=http://localhost:8888
-VITE_STREAM_FALLBACK_ENABLED=true
-```
+포트 매핑 공식, 상세 매핑 테이블, 그리고 프론트엔드 환경 기본값은 Canonical 문서인 **[Realtime-Camera-Runtime-Stabilization](Realtime-Camera-Runtime-Stabilization.md)**의 `4.2 RTSP 포트 및 URL 매핑 규칙`을 참고해 주시기 바랍니다.
 
 ## Backend/API Impact
 

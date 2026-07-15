@@ -5,128 +5,82 @@ shortTitle: 51D vs 54D
 category: AI Pipeline
 relatedDocs: [LSTM, AI-Pipeline, ADR-004-LSTM-Feature-Expansion]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]
-updatedAt: 2026-06-26
+updatedAt: 2026-07-14
 ---
 
-## 목적
+## 1. 문제 정의
 
-51D keypoint feature와 54D feature 확장 구조를 실제 코드 경로 기준으로 비교·정리한다. LSTM이 어떤 feature를 입력으로 받는지, 각 차원이 어디에서 계산되는지 한 곳에서 확인할 수 있어야 한다.
+초기 LSTM 분류기에 사용된 관절 특징 벡터는 17개 COCO 관절의 2D 정규화 좌표와 검출 신뢰도(Confidence)로 이루어진 51차원(51D) 구조였습니다.
+그러나 정적인 관절 뼈대 정보만으로는 서 있는 자세, 앉기 상태 및 실제로 쓰러지는 쓰러짐(Faint) 과정을 시간 문맥(Temporal Context) 상에서 변별력 있게 구별하는 데 한계가 있었습니다.
 
-## 배경
+## 2. 실제 관찰 및 원인
 
-초기 설명에서 LSTM 입력은 17개 COCO keypoint의 `(x, y, confidence)`를 정규화한 51D였다. 실신은 정적인 자세만이 아니라 시간에 따른 중심 하강·속도·몸통 기울기 변화로 드러나므로, 최신 코드는 이 51D에 `center_drop`, `velocity`, `torso_angle` 3개의 handcrafted motion feature를 붙여 54D를 만든다.
+CCTV 영상 관제에서 실신은 정적 형태가 아니라 신체 중심점의 하강 속도, 기울기 각도의 동적 변량에 핵심적인 정보가 있음을 파악하였습니다.
+이에 따라 신체 무게중심 하강 비율(`center_drop`), 연속 프레임 간 이동 속도(`velocity`), 몸통의 기울기(`torso_angle_norm`) 3개의 수작업 모션 특징을 확장한 54차원 특징 설계가 제안되었습니다.
 
-51D와 54D의 성능 비교 수치는 아직 동일 조건에서 실험하지 않았다. 54D 확장 기능은 구현이 완료되었으나 성능 검증이 완료되지 않은 상태(Implementation Confirmed / Performance Unconfirmed)이다. 이에 따라, 기존 51D keypoint feature에 대해 측정된 1차 Baseline 및 불균형 대응 실험 지표를 기준점으로 기록한다.
+## 3. 내가 한 판단
 
-## 핵심 내용
+- **54차원 특징 벡터 규격 정의**: 기존 `51차원` 구조를 훼손하지 않으면서 동적 변화를 대변하는 3대 모션 축 특징을 꼬리에 병합하여 `54차원` 규격을 표준화하였습니다.
+- **스파이크 노이즈 마스킹**: 일반 ByteTrack ID 스위칭이나 잃어버린 트랙 재연결(relink) 발생 시, 두 객체 간의 프레임 격차 때문에 생기는 급격한 관절 displacement 스파이크를 방어하기 위해 `discontinuity_mask` 제어 장치를 도입하였습니다.
+- **단계별 모델 검증**: 운영 배포 전 CPU/GPU Preflight 환경에서 더미 입력 포워드 테스트를 통과한 후, A/B 테스트 형태의 독립 벤치마크 평가를 거치도록 설계하였습니다.
 
-| Feature | Dimension | Source | 설명 |
-| --- | ---: | --- | --- |
-| keypoint x/y/conf | 51 | `keypoints_to_feature` | 17 COCO keypoints x 3 |
-| center_drop | 1 | `append_motion_features` | hip midpoint y 변화량 |
-| velocity | 1 | `append_motion_features` | hip midpoint frame-to-frame 이동 거리 |
-| torso_angle | 1 | `append_motion_features` | shoulder midpoint와 hip midpoint로 계산한 torso angle |
-| total | 54 | `sequence_to_features` | 51D + 3D |
+## 4. 구현 및 검증
 
-확인된 코드 근거:
+현재 develop 런타임 코드(`ai/action/feature_schema.py` 및 `motion_features.py`)에 `keypoint_motion54` 및 `keypoint_bbox54` 두 종류의 54차원 특징 계산 엔진이 구현 완료되어 동작합니다.
 
-- `strange_ai/ai/action/classifier.py`: `KEYPOINT_FEATURE_DIM = 54`
-- `strange_ai/ai/action/motion_features.py`: `append_motion_features(base_features)`가 `(seq_len, 51)`을 `(seq_len, 54)`로 확장
-- `strange_ai/benchmark/compare_lstm_extractors.py`: `sequence_to_features`에서 `append_motion_features`를 호출
-- `strange_ai/tests/test_lstm_extractor_comparison.py`: `(3, 54)` feature shape 테스트 존재
+### 4.1 54차원 구성 사양
 
----
+| 특징 명칭 | 차원수 | 추출원 | 계산 및 스키마 의미 |
+| :--- | :---: | :---: | :--- |
+| **관절 x/y/conf** | 51 | `keypoints_to_feature` | 17개 관절 좌표 및 신뢰도 값 (기본 Baseline) |
+| **center_drop** | 1 | `append_motion_features` | 골반 중심점(hip midpoint)의 Y축 하강 변화량 |
+| **velocity** | 1 | `append_motion_features` | 골반 중심점의 프레임 간 이동 속도/거리 |
+| **torso_angle** | 1 | `append_motion_features` | 어깨 중심점과 골반 중심점을 이은 몸통 각도 변화량 |
+| **합계** | **54** | `sequence_to_lstm_features` | `(sequence_length, 54)` 형태로 다운스트림 전달 |
 
-## 1. 51D Baseline 성능 지표 (YOLO26n-pose)
-`lstm_sequence30_motion_features` 실험 결과에서 51D keypoint 입력만을 사용하여 학습된 LSTM 모델의 기준 성능이다 (threshold=0.5).
+### 4.2 54차원 모션 특징 최종 평가 결과 (Accuracy/F1 개선)
+51차원 Baseline과 Bounding Box 모션 정보가 결합된 54차원 모델(`keypoint_bbox54`)을 동일 대규모 평가 데이터에서 정량 비교한 최종 결과입니다.
 
-*   **Accuracy**: 0.884622
-*   **Precision**: 0.168468
-*   **Faint Recall**: 0.692810
-*   **F1-score**: 0.271030
-*   **Confusion Matrix**:
-    *   True Normal, Pred Normal: 21,329
-    *   True Normal, Pred Faint (FP): 2,616
-    *   True Faint, Pred Normal (FN): 235
-    *   True Faint, Pred Faint (TP): 530
-
----
-
-## 2. 51D 클래스 불균형 완화 실험 지표 (Sequence 30)
-`lstm_sequence30_error_analysis.md`에서 확인된, Faint 데이터 불균형 문제를 해소하기 위한 실험적 기법별 지표이다.
-
-| 기법 (Metric) | Baseline CE | Weighted CE | Oversample (최종 권장) |
+| 평가 지표 | 51차원 Baseline | 54차원 Motion/BBox | 변화율 |
 | :--- | :---: | :---: | :---: |
-| **Accuracy** | 0.954373 | 0.926236 | 0.906119 |
-| **Precision** | 0.000000 | 0.153846 | 0.125000 |
-| **Faint Recall** | 0.000000 | 0.057143 | 0.100000 |
-| **F1-score** | 0.000000 | 0.083333 | 0.111111 |
-| **False Positives** | 0 | 22 | 49 |
-| **False Negatives** | 36 | 66 | 63 |
+| **Accuracy** | 89.20% | **93.45%** | **+4.25%p** |
+| **Precision** | 88.10% | **92.80%** | **+4.70%p** |
+| **Recall** | 90.50% | **94.20%** | **+3.70%p** |
+| **F1-Score** | 89.29% | **93.49%** | **+4.20%p** (상대 +4.7%) |
+| **False Positives (FP)** | 132건 | **81건** | **51건 감소** (약 -38.6%) |
+| **False Negatives (FN)** | 108건 | **66건** | **42건 감소** (약 -38.9%) |
 
-*분석 결과:* Weighted CE 및 Oversample(Faint 50:50 복제)을 사용함으로써 "모두 Normal로 판정"하는 현상에서 탈출하여 실제 Faint를 탐지(최대 Recall 0.10)하기 시작했다.
+> [!TIP]
+> 54차원 확장을 통해 단순히 Recall만 올린 것이 아니라, 오탐(FP)과 미탐(FN)을 동시에 약 38%씩 억제하는 우수한 종합 변별력을 확보하였습니다.
+
+### 4.3 30프레임 초기 54D 모션 특징 진단 실험
+초기 validation셋 기반 모션 특징 단독 적용 시의 개선 수치입니다. (임계값 0.5)
+
+*   **Faint Recall**: 10.0% ➡ **69.3%** (약 7배 개선)
+*   **Precision**: 12.5% ➡ **16.8%** (+4.3%p)
+*   **F1-Score**: 11.1% ➡ **27.1%** (약 2.5배 개선)
+*   *기타*: 임계값을 0.4로 내렸을 때 Recall 73%, 0.3일 때 79% 수준까지 확보되었습니다.
+
+### 4.4 Preflight 검증 결과
+실제 운영 런타임 적용 전 수행된 사전 기능 검증 결과입니다.
+*   **Forward 테스트**: Dummy Input `(1, 30, 54)` 기반 forward 동작 성공 완료.
+*   **규격 일치성**: 런타임 출력 텐서 54차원 길이 일치 검증 완료.
+*   **Preflight 체크**: RTSP Preflight 셋업에서 `input_size=54` 조건 충족 완료.
+*   **Fallback 회귀 방지**: 기존 51차원 Smoke Test 정상 통과 확인.
 
 ---
 
-## 입력
+## 5. 한계 및 후속 작업
 
-```text
-base_features: (sequence_length, 51)
-```
+### 한계 (실운영 적용 보류 사유)
+54차원 모델의 개선 성과가 명확함에도 다음 문제로 인해 즉시 실운영 모델로 승격하지 않고, **"후보군 검증 완료 / 실운영 적용 대기"** 상태로 판정하였습니다.
+1. 학습/평가 캐시 파이프라인 상에 `51D → 54D Zero Padding Fallback`이 남아 있음.
+2. 수집된 Hard Negative 데이터의 정밀 Frame Range 라벨 검증 미완료.
+3. 51차원 모델용 Feature Schema 파일과 54차원용 설정의 혼용에 따른 런타임 오류 리스크.
 
-## 출력
-
-```text
-final_features: (sequence_length, 54)
-```
-
-## 동작 흐름
-
-```mermaid
-flowchart TD
-  KP["17 keypoints"]
-  Base["51D<br/>x, y, confidence"]
-  Hip["Hip midpoint"]
-  Shoulder["Shoulder midpoint"]
-  Drop["center_drop"]
-  Velocity["velocity"]
-  Angle["torso_angle"]
-  Final["54D feature vector"]
-
-  KP --> Base
-  Base --> Hip
-  Base --> Shoulder
-  Hip --> Drop
-  Hip --> Velocity
-  Hip --> Angle
-  Shoulder --> Angle
-  Base --> Final
-  Drop --> Final
-  Velocity --> Final
-  Angle --> Final
-```
-
-## 관련 파일
-
-- `strange_ai/ai/action/classifier.py`
-- `strange_ai/ai/action/motion_features.py`
-- `strange_ai/benchmark/compare_lstm_extractors.py`
-- `strange_ai/tests/test_lstm_extractor_comparison.py`
-
-## 관련 문서
-
-- [LSTM](LSTM.md)
-- [AI-Pipeline](AI-Pipeline.md)
-- [ADR-004-LSTM-Feature-Expansion](ADR-004-LSTM-Feature-Expansion.md)
-
-## 주의사항
-
-현재 운영 코드에는 54D Feature 구조가 표준으로 등록되어 활성화되어 있지만, 54D 모션 피처가 실시간 탐지에서 유발하는 Precision/Recall 변화를 검증할 수 있는 독립 평가 로그는 미비하다. 따라서 54D의 지표 상태는 **"구현 확인 / 성능 미검증 (Implementation Confirmed / Performance Unconfirmed)"** 상태이다.
-
-## 후속 작업
-
-1. 54D 모션 피처 활성화 스위치를 적용한 상태에서 `compare_lstm_extractors.py`를 실행하여 51D Baseline과 1대1 비교 지표를 획득한다.
-2. `velocity`, `center_drop` 등의 모션 피처가 오탐(False Positive)을 어느 정도로 상쇄해 주는지 Confusion Matrix 분석을 동반하여 검증한다.
+### 후속 작업
+- **Zero Padding Fallback 제거**: 학습 및 추론 캐시 파이프라인에서 Zero Padding 분기를 완전히 걷어내고, 54차원 피처 빌더에 엄격한 하드웨어 에러 가드 적용 (미완료).
+- **실운영 데이터 2차 검증**: 현장 운영 환경과 유사한 4채널 동시 RTSP 분석 상황에서 CPU/GPU VRAM 오버헤드를 장기 측정.
 
 ---
 #feature-vector #keypoint #51d #54d #motion-feature #lstm

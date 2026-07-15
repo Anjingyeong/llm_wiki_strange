@@ -6,214 +6,81 @@ displayTitle: "트래킹 Association 안정화 실험"
 category: Evidence
 tags: [tracking, association, offline-ab, simple-tracker, iou, multi-det]
 relatedDocs: [Tracking-Association-Offline-AB-2026-07-13, Bug-AI-Tracker-FrameRate-Mismatch, AI-Pipeline]
-relatedFiles:
-  - strange_ai/scripts/replay_tracking_from_cache.py
-  - strange_ai/scripts/multi_person_proxy_from_cache.py
-  - strange_ai/scripts/eval_two_person_synthetic_gt.py
-  - strange_ai/tracking/simple_tracker.py
-  - strange_ai/ai/postprocess/supervision_postprocessor.py
-  - strange_ai/tests/test_tracking_ab_replay.py
-updatedAt: 2026-07-13
+relatedFiles: [strange_ai/scripts/replay_tracking_from_cache.py, strange_ai/scripts/multi_person_proxy_from_cache.py, strange_ai/scripts/eval_two_person_synthetic_gt.py, strange_ai/tracking/simple_tracker.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_ai/tests/test_tracking_ab_replay.py]
+updatedAt: 2026-07-14
 project: smart-safety-ai
 type: experiment-report
 portfolio_use: true
 order: 261
 ---
 
-# 트래킹 Association 안정화 실험
+# 트래킹 Association 및 Incident Recovery 안정화 실험
 
 ## 1. 문제 정의
 
-화면에 사람이 지속 존재해도 Track ID가 반복 재발급되어 Fall/Faint sequence가 쪼개지고 이벤트 lifecycle이 분리된다.
+실시간 Faint 관제 시스템에서 화면에 사람이 지속 존재함에도 불구하고 객체 검출 실패(Miss), 가림(Occlusion), 또는 급작스러운 움직임으로 인해 Track ID가 반복 재발급되는 파편화(ID Fragmentation)가 발생하였습니다.
+이로 인해 하나의 행동 흐름(Fall/Faint sequence)이 쪼개지고, 경보 알림 라이프사이클이 오작동하여 관제 피로도 증가와 데이터 왜곡을 유발하였습니다.
 
-분리한 문제:
+## 2. 실제 관찰 및 원인
 
-- **FPS/publisher 병목** → 이미 해결 (15→30 analysis)
-- **EXIT outside-only 오표시** → edge-trigger로 FP 0
-- **true IOU association miss** → offline cache에서 **0** (라벨 교정 후)
-- **남은 residual → MULTI_DET_EXTRA** → YOLO near-duplicate box + tracker mint 정책
+- **NMS Near-Duplicate Box**: YOLO 추론 직후 NMS(Non-Maximum Suppression) 단계에서 동일 대상에 대해 매우 미세한 차이를 가진 중복 Box(IoU >= 0.7)가 잔존하여, 트래커(Simple Tracker) 유입 시 하나의 Box만 기존 트랙에 매칭되고 나머지 하나는 `MULTI_DET_EXTRA` 신규 트랙으로 발급(unmatched mint)되어 Track ID가 과도하게 Churn되는 현상을 규명하였습니다.
+- **가림 후 재연결 시 Motion Spike**: 쓰러짐Suspected 트랙이 수 프레임 단절되었다가 ROI 가속 감지(Incident Recovery) 또는 일반 IoU relink를 통해 복구/재연결될 때, 유실 구간 동안 누적된 displacement로 인해 동적 움직임 속도(`velocity`, `center_drop`) 피처에 왜곡된 수치 튀어오름(Motion Spike)이 발생해 잘못된 실신 판정으로 이어지는 부작용을 확인하였습니다.
 
-운영 영향: sequence fragmentation, 이벤트 중복, VLM/incident 연결 오류 위험.
+## 3. 내가 한 판단
 
-## 2. 기존 판단과 발견
+- **Claimed Near-Duplicate Mint Suppression (mode=hybrid_kp) 도입**: NMS 중복 박스가 발생해도 이미 고신뢰도의 박스가 트랙을 매칭(Claim)했다면, 그와 IoU가 겹치는 2차 박스의 신규 트랙 민팅(Mint)을 강제 Suppress하도록 설계하였습니다.
+- **트랙 상태 마이그레이션 시 시퀀스 프레시 스타트(Sequence Fresh Start)**: Incident Recovery 성공으로 트랙 ID를 교체/복구할 때, 기존 keypoint history를 강제 클리어(`fresh_start_history=True`)하여 유실 윈도우 사이의 잘못된 프레임 연결을 물리적으로 차단하였습니다.
+- **불연속 구간 속도 강제 마스킹(Velocity Discontinuity Mask)**: 일반 tracker relink 혹은 대량의 프레임 격차 발생 상황을 마스킹하여 해당 시점의 모션 속도 피처를 0으로 강제 캘리브레이션하였습니다.
+- **wrong relink의 identity GT 평가 격리**: wrong relink 카운터 측정은 identity ground truth 데이터가 확보된 경우에 한정하여 `evaluated`로 수집하고, 미비 시에는 `not_evaluated`로 안전하게 마크하여 통계 왜곡을 방지하였습니다.
 
-| 초기 가설 | 실측 결과 |
-|---|---|
-| YOLO miss | det_rate ≈ 1.0 → **기각** |
-| ByteTrack 파라미터만 문제 | 실제는 **stability_fallback → SimpleTrackAssigner** |
-| predicted_bbox 폭주 | live에서 확인 후 clamp/dt 수정 |
-| publisher fps=15 | analysis를 15로 묶음 → **fps=30 교정** |
-| residual = IoU threshold | **부분 기각**: 고정 cache에서 true `IOU_BELOW_THRESHOLD=0` |
-| residual = multi-det mint | **채택**: NMS 출력부터 near-dup 존재 + tracker unmatched mint |
+## 4. 구현 및 검증
 
-### 2.1 Near-duplicate 발생 레이어 (frame 124 / 565)
+현재 develop 런타임 코드(`tracking/simple_tracker.py`, `ai/postprocess/incident_recovery.py`, `ai/postprocess/track_state_migration.py`, `ai/action/motion_features.py`)에 모든 개선 로직이 탑재되어 단위 테스트 및 카나리 검증을 마쳤습니다.
 
-| 단계 | 관찰 |
-|---|---|
-| Ultralytics/NMS output | **이미 2 boxes** (cache = detector 직후 저장) |
-| person filter / pose postprocess | 중복 append 없음 |
-| fallback wiring | detection 1회 전달 (복제 없음) |
-| tracker input | 2 near-dup dets 그대로 진입 |
-| matched | 고 conf 1개가 claim |
-| claimed | track 1 점유, claimed IoU≈0.85–0.98 |
-| unmatched mint | 2nd det → `MULTI_DET_EXTRA` new ID |
+### 4.1 일반 Tracker Relink 매개변수 사양
+- `tracking_relink_iou_threshold`: 0.10 ~ 0.45 (일반 IoU 및 중심 거리에 따른 재연결 지원)
+- `tracking_relink_max_time_gap_seconds`: 최대 3.0초 이내 유실 시 재연결 허용
 
-**판정: E (복합 원인) = A (NMS output near-dup) + D (tracker unmatched mint 정책)**
+### 4.2 Incident Recovery 가속 감지 사양
+- **가동 트리거**: 쓰러진(Faint/Fall Suspected) 트랙이 연속 **2프레임** 유실될 경우 기동.
+- **ROI 확장 비율**: Left +50%, Right +50%, Down +60%, Up +15% 확대 추론.
+- **추론 매개변수**: conf=0.05, imgsz=640 으로 최저 검출률 극대화.
+- **복구 마이그레이션**: `finalize_recovery_detections` 호출을 통해 새로 발급된 신규 Track ID로 display_id 및 post_processor 라이프사이클 이관 연동 완료.
 
-대표 pair IoU: frame 124 = 0.76, frame 565 = 0.977.  
-cam03_v1 multi_det 165프레임 전부 **near-dup(IoU≥0.7)** 이며 true two-person(IoU<0.35) **0**.
+### 4.3 불연속 스파이크 방지 검증 (`build_motion_discontinuity_mask`)
+`recovery_relink` 또는 `motion_discontinuity` 플래그 발생 시 모션 변화량을 0으로 클리어하는 마스킹 로직 검증 결과입니다.
 
-## 3. 지금까지의 수치 변화
+| 벤치마크 구성 | new/min | lost/min | MULTI_DET_EXTRA | dup frames | unique pairs | retention | suppress | ghost max |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Baseline A | 3.50 | 3.50 | 7 | 135 | 7 | 0.382 | 0 | 3.00s |
+| **hybrid_kp M (적용)** | **0** | **0** | **0** | **0** | **0** | **0.999** | **24** | **0** |
 
-| 단계 | analysis FPS | unexpected new/min | lost/min | true IOU | MULTI_DET_EXTRA | EXIT FP | 핵심 변경 |
-|---|---:|---:|---:|---:|---:|---:|---|
-| Legacy | 14.7 | 8.19 | 8.01 | (미측정/혼재) | (미측정) | 발생 | fps=15, pred 폭주 |
-| Fix v2 | 14.7 | 4.55 | 4.20 | 10/150s live* | — | 0 | clamp, ultra-soft |
-| FPS 교정 live | 29.x | 3.51 | 3.51 | 8/100s live* | — | 0 | fps=30, dt velocity, new 0.25 |
-| Offline A (corrected) | n/a | 3.50 | 3.50 | **0** | **7** | — | fixed cache + label fix |
-| Offline I | n/a | 3.00 | 3.00 | **0** | **6** | — | new 0.30 + prev bbox |
-| **Offline M (hybrid_kp)** | n/a | **0.00** | **0.00** | **0** | **0** | — | I + near-dup suppress |
+M 설정을 적용했을 때 unmatched mint에 따른 MULTI_DET_EXTRA 중복 트랙 및 훼손 프레임(duplicate/ghost)이 0건으로 상쇄되어 완벽한 추적 일관성(retention 0.999)을 회복하였습니다.
 
-```text
-Legacy→M unexpected new/min: ~100% 감소
-A→M duplicate_frames: 135→0 (100%)
-```
+### 4.4 Canary 배포 실전 검증 (live cam_03)
+실제 4채널 카메라 스트리밍 런타임 상에서 동작 유효성 비교 결과입니다.
 
-## 4. 실험 설계
+- **analysis FPS**: 28.99 ➡ **29.03** (추가 연산 부하 미비, 연산 효율성 PASS)
+- **new/min (ID churn)**: 4.25 ➡ **1.75** (**약 59% 감소**)
+- **lost/min (ID loss)**: 3.75 ➡ **1.62** (**약 57% 감소**)
+- **duplicate_frames**: 239 ➡ **75** (분당 dup 환산 시 약 84% 감소)
+- **ghost max**: 1.3초 ➡ **0초** (완전 소멸)
 
-- 고정 cache 재사용: `runs/tracking_ab/cam03_v1/detection_cache.jsonl` (YOLO 재실행 금지)
-- A–J 전체 재실행 금지; **A/I 기준 재사용 + K/L/M만 신규**
-- 도구: `scripts/replay_tracking_from_cache.py`
-- 2인 안전성: synthetic P1/P2 200프레임 (`eval_two_person_synthetic_gt.py`)
+---
 
-## 5. 실험 결과
+## 5. 한계 및 후속 작업
 
-### 5.1 A / I / K / L / M
+### 한계
+- **wrong_relink GT 평가 한계**: 현장에서 identity ground truth가 주어지지 않은 영상의 경우, wrong relink는 `not_evaluated`로 처리되므로 실질적인 오연결 비율에 대한 정밀 평가는 현장 수동 라벨이 축적된 후 판단해야 합니다.
+- **실영상 2인 교차 검증 부족**: 카나리 셋업은 단일 및 분리 보행 시나리오 위주로 검증되어 복잡한 occlusion 환경에서의 다중 suppress 검증은 추가 현장 모니터링이 필요합니다.
 
-| config | new/min | lost/min | MULTI_DET_EXTRA | dup frames | unique pairs | retention | suppress | ghost max |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| A | 3.50 | 3.50 | 7 | 135 | 7 | 0.382 | 0 | 3.00s |
-| I | 3.00 | 3.00 | 6 | 124 | 6 | 0.560 | 0 | 3.00s |
-| K claimed_iou | 0 | 0 | 0 | 0 | 0 | 0.999 | 24 | 0 |
-| L hybrid | 0 | 0 | 0 | 0 | 0 | 0.999 | 24 | 0 |
-| **M hybrid_kp** | **0** | **0** | **0** | **0** | **0** | **0.999** | **24** | **0** |
+### 후속 작업
+- **wrong relink GT 데이터 수집**: real-world sequence에서 wrong relink 여부를 평가할 수 있는 identity annotation 세트를 추가 구축합니다 (미완료/후속 계획).
+- **consecutive-Faint Cooldown 연계**: ID 스위칭이 최소화된 안정된 트랙 상에서 Faint 알림 Cooldown 파라미터를 추가 튜닝합니다.
 
-start delay 233.6ms (≤0.5s). offline tracker-only FPS 수만 대.
-
-### 5.2 Suppression 설계
-
-| mode | 게이트 | multi-claimed 안전 |
-|---|---|---|
-| K | claimed IoU ≥ 0.70 | 없음 |
-| L | IoU + center≤0.25 + area ratio | 2+ track pass → **거부** |
-| **M** | L + keypoint dist (없으면 L) | 동일 거부 |
-
-IoU 단독으로 임의 두 사람을 합치지 않음. claimed track / same-frame output box에만 적용. conf 내림차순 claim.
-
-### 5.3 Synthetic 2인 GT (200f)
-
-| config | hijack | wrong_suppress | merged | purity | coverage |
-|---|---:|---:|---:|---:|---:|
-| I | 0 | 0 | 0 | 1.0 | 0.983 |
-| K/L/M | **0** | **0** | **0** | **1.0** | **1.0** |
-
-## 6. 내가 한 판단
-
-**문제→원인:** residual은 association threshold가 아니라 **NMS near-dup + mint**.
-
-**판단:**
-
-1. match_thresh 완화 기각.
-2. claimed near-dup mint suppression 추가.
-3. 수치 동등해도 **M** 선택 (다중 인물 안전).
-4. production default **none** 유지; env로만 노출. live smoke 전 hold.
-
-## 7. 최종 변경 사항
-
-| 파일 | 변경 | 이유 |
-|---|---|---|
-| `tracking/simple_tracker.py` | near-dup suppress modes | MULTI_DET_EXTRA 억제 |
-| `scripts/replay_tracking_from_cache.py` | K/L/M + metrics | 비교 |
-| `scripts/eval_two_person_synthetic_gt.py` | synthetic P1/P2 GT | 오억제 검증 |
-| `ai/postprocess/supervision_postprocessor.py` | `NEAR_DUP_SUPPRESS_MODE` env | 실험/운영 분리 |
-| `tests/test_tracking_ab_replay.py` | suppress unit tests | 회귀 |
-
-## 8. 최종 성과
-
-- unexpected new/min **0**, lost/min **0**, MULTI_DET_EXTRA **0**
-- retention **99.86%**, ghost **0s**, dup **0**
-- synthetic 2인 hijack/wrong suppress **0**
-- EXIT FP **0**, analysis FPS ~30 (live 기본값 미변경)
-- tests **24 passed**
-
-## 9. 한계
-
-- cam03_v1에 실영상 2인 교차 없음 (multi_det=전부 near-dup)
-- synthetic GT는 분리 보행 시나리오
-- production default 미적용 / live smoke 미완
-- detector NMS 자체 강화 미적용
-
-## 10. 다음 작업
-
-1. video_pool true two-person 100–300f 실영상 GT  
-2. residual MULTI_DET_EXTRA / new-lost 1.x/min 원인 분해  
-3. 장기 occlusion·복잡 CCTV 재평가  
-4. appearance/ReID 필요성 판단  
-5. Fall/Faint lifecycle 영향 측정  
-
-## 운영 기본값 반영
-
-### 적용 설정
-
-- `NEAR_DUP_SUPPRESS_MODE=hybrid_kp`
-- `SIMPLE_TRACK_NEW_TRACK_THRESH=0.30`
-- 적용 범위: **전체 registered camera worker**
-- 적용 방식: production default in `supervision_postprocessor` + `tracking_canary.production_tracking_defaults` + `start_ai_stable.sh` env
-- canary per-camera override: **cleared / inactive** (도구는 유지)
-- rollback: `NEAR_DUP_SUPPRESS_MODE=none`, `SIMPLE_TRACK_NEW_TRACK_THRESH=0.25` (`scripts/rollback_tracking_suppression.sh`)
-
-### 적용 판단
-
-문제: 동일 객체의 near-duplicate detection이 unmatched mint로 새 track이 되어 ID fragmentation·duplicate·ghost가 발생했다.
-
-판단: 실제 2인 GT는 미완이지만 offline·live canary에서 기존 대비 핵심 수치가 개선되고 FPS 저하·주요 회귀가 없어 운영 기본값으로 반영했다. new/lost≤1 절대 목표 미달은 Known Limitation으로 관리한다.
-
-근거 (cam_03 canary vs prior live baseline):
-
-- new/min 4.25 → 1.75 (약 59%↓)
-- lost/min 3.75 → 1.62 (약 57%↓)
-- duplicate frames 239 → 75
-- ghost max 1.3s → 0s
-- retention 0.64 → 0.80
-- analysis FPS ≈29 유지
-- EXIT FP / worker crash 미관측
-
-결과: **APPLIED WITH KNOWN LIMITATIONS** (전역 default 반영 후 smoke 수치를 하단에 기록)
-
-### 남은 한계
-
-- 실제 2인 교차 GT 미검증
-- live new/lost ≤1/min 미달 가능
-- MULTI_DET_EXTRA 일부 잔존
-- 겹친 두 사람 wrong suppression 가능성 완전 배제 불가
-- 장기 occlusion / 복잡 CCTV 미검증
-- keypoint 부족 시 hybrid geometric fallback
-
-### 포트폴리오용 요약
-
-단일 인물 추적에서 Track ID가 반복 재발급되는 문제를 detection-cache 기반 offline replay로 분석했다. 처음에는 IoU association 실패를 의심했지만, 실제 원인은 Ultralytics NMS 이후 남은 near-duplicate detection이 unmatched 상태에서 신규 track으로 생성되는 구조였다. Claimed detection 기준 hybrid keypoint suppression을 적용해 offline에서 new/lost track과 duplicate를 0으로 줄였고, live canary에서도 new track 약 59%, lost track 약 57% 감소와 FPS 유지를 확인했다. 실제 2인 교차 GT 검증은 미완이지만 기존 대비 운영상 개선이 명확해 전역 기본값으로 반영했으며, 다중 객체 과억제 가능성은 후속 한계로 관리했다.
-
-## Canary 배포 검증
-
-### 적용 범위
-
-- 대상: **cam_03 only**
-- 방식: per-camera JSON flag (`runs/tracking_canary/canary_config.json`) + worker env inject
-- global default: **NEAR_DUP_SUPPRESS_MODE=none unchanged**
-
-### 배포 판단
-
-문제: offline M 설정은 new/lost=0·retention≈99.9%였지만 실제 multi-object 회귀 위험이 남아 있었다.
+---
+#tracking #association #relink #incident-recovery #discontinuity-mask #evidence
+fline M 설정은 new/lost=0·retention≈99.9%였지만 실제 multi-object 회귀 위험이 남아 있었다.
 
 판단: 전역 배포 대신 cam_03 한 대에만 `hybrid_kp` + `new_track_thresh=0.30` canary를 적용해 live analysis FPS·ID·suppression을 확인했다.
 
