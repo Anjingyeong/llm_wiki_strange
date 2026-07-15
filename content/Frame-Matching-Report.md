@@ -1,10 +1,16 @@
 ---
-title: "Edge AI & Frontend 프레임 동기화 및 버퍼 메커니즘 보고서"
+title: "AI Metadata와 영상 프레임 매칭 알고리즘"
 navTitle: "프레임 매칭"
 shortTitle: "프레임 매칭"
 category: Architecture
-updatedAt: "2026-06-27"
+status: verified
+evidenceLevel: unit-test
+canonicalFor: null
+relatedDocs: [Frame-Sync-Canonical, ED-FrameId-Evidence-Overlay-Sync]
+updatedAt: 2026-07-15
 ---
+
+> **시작점:** [Frame-Sync-Canonical](Frame-Sync-Canonical.md). 본 문서는 버퍼·`select` 알고리즘 **Implementation** 상세다.
 
 > 본 보고서는 Edge AI 패킷의 지연 시간 계산 방식, 버퍼의 메모리 관리(Pruning/Drop) 방식, 그리고 웹 프론트엔드에서 수신한 메타데이터와 WebRTC 비디오 프레임을 정밀하게 싱크하는 매칭 알고리즘을 상세히 설명합니다.
 

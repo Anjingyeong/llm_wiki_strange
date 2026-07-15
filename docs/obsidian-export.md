@@ -8,8 +8,19 @@
 ```powershell
 cd C:\llm_wiki_strange
 npm run generate:index
+npm run rag:index
 npm run export:obsidian
+npm test
+git status --short
 ```
+
+Push는 **마지막**에 (인덱스·export 반영 후):
+
+```powershell
+& "C:\Users\user\.gemini\antigravity\scratch\이상행동\.agents\wiki-goal\push-wiki-to-github.ps1"
+```
+
+> 절대 경로 스크립트는 `.\C:\...` 가 아니라 `& "C:\..."` 로 호출합니다.
 
 - `C:\옵시디안\03_Knowledge\LLM_Wiki\` — Wiki `content/*.md` 49개
 - `C:\옵시디안\06_Sources\` — `ai-pipeline-stabilization-source.md`, README
@@ -21,9 +32,10 @@ Obsidian은 이미 `C:\옵시디안`을 볼트로 열어두면 됩니다. **새 
 
 1. [[홈]]
 2. [[LLM Wiki 프로젝트]]
-3. [[Develop-Code-Baseline-2026-07-15]] (develop 기준선)
-4. [[AI-Pipeline]]
-5. [[전체 지식 문서 MOC]] — 수동 목차(export 후 신규 문서 행 추가 권장)
+3. [[Develop-Code-Baseline-2026-07-15]]
+4. [[Frame-Sync-Canonical]] · [[ED-Standing-Faint-Upright-Gate]]
+5. [[AI-Pipeline]]
+6. [[전체 지식 문서 MOC]]
 
 ## 3. 옵션
 
@@ -47,11 +59,10 @@ npm run export:obsidian -- --no-sources
 
 ## 6. GitHub (원격 Wiki)
 
-Obsidian export와 별개로, `content/`·검색/RAG 인덱스 변경은 **저장소 push**가 필요합니다.
+`content/`·`docs/`·검색/RAG 인덱스는 **push**가 필요합니다. 권장 순서는 §1과 동일하고, **push는 마지막**.
 
 ```powershell
-cd C:\Users\user\.gemini\antigravity\scratch\이상행동
-.\.agents\wiki-goal\push-wiki-to-github.ps1
+& "C:\Users\user\.gemini\antigravity\scratch\이상행동\.agents\wiki-goal\push-wiki-to-github.ps1"
 ```
 
 또는 `C:\llm_wiki_strange`에서: `npm run generate:index` → `npm run rag:index` → `npm test` → `git add` → `git commit` → `git push origin main`

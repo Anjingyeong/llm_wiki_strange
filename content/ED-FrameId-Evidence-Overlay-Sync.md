@@ -13,6 +13,8 @@ decision_domain: Frontend Synchronization
 portfolio_use: true
 ---
 
+> **통합 읽기:** 구현·검증·한계 전체는 [Frame-Sync-Canonical](Frame-Sync-Canonical.md)을 먼저 본다. 본 문서는 **Decision(왜 frameId)** 만 유지한다.
+
 > **한 줄 결론**
 >
 > 영상과 AI Overlay를 맞추기 위해 **timestamp 보조 + frameId 우선** 매칭을 택하고,  

@@ -1,11 +1,15 @@
 ---
-title: ADR-003 YOLO26n Selection
-navTitle: ADR-003
-shortTitle: ADR-003
+title: "YOLO26n을 기본 Pose 모델로 선택한 이유"
+navTitle: "YOLO26n 선택 이유"
+shortTitle: "ADR-003"
 category: ADR
-relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
-relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]
-updatedAt: 2026-07-14
+relatedDocs: [Model-Comparison, Benchmark-History, LSTM-Experiment-Results]
+relatedFiles: []
+updatedAt: 2026-07-15
+type: decision
+status: verified
+evidenceLevel: offline-benchmark
+canonicalFor: yolo26n-pose
 ---
 
 ## 1. 목적

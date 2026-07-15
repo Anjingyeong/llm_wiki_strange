@@ -1,20 +1,34 @@
 ---
-title: Tracking Association Stabilization
-navTitle: "Track Association"
-shortTitle: "Track Assoc"
+title: "Track ID 파편화 완화: Offline 성공·Live Canary 부분 성공"
+navTitle: "Track ID 파편화"
+shortTitle: "Tracking Canary"
 displayTitle: "트래킹 Association 안정화 실험"
 category: Evidence
 tags: [tracking, association, offline-ab, simple-tracker, iou, multi-det]
 relatedDocs: [Tracking-Association-Offline-AB-2026-07-13, Bug-AI-Tracker-FrameRate-Mismatch, AI-Pipeline]
 relatedFiles: [strange_ai/scripts/replay_tracking_from_cache.py, strange_ai/scripts/multi_person_proxy_from_cache.py, strange_ai/scripts/eval_two_person_synthetic_gt.py, strange_ai/tracking/simple_tracker.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_ai/tests/test_tracking_ab_replay.py]
-updatedAt: 2026-07-14
+updatedAt: 2026-07-15
 project: smart-safety-ai
 type: experiment-report
+status: partial
+evidenceLevel: live-canary
+productionStatus: rollback
+canonicalFor: tracking-association
 portfolio_use: true
 order: 261
 ---
 
-# 트래킹 Association 및 Incident Recovery 안정화 실험
+> **한 줄 결과:** Offline A/B에서 near-duplicate mint 억제로 new/lost=0·retention≈0.999를 달성했으나, cam_03 live canary는 new/lost 목표 미달 → **PARTIAL**, rollback 후 **전역 rollout HOLD**.
+
+## 현재 상태 (읽기 순서)
+
+| 항목 | 값 |
+|------|-----|
+| `status` | **partial** |
+| `evidenceLevel` | live-canary |
+| `productionRollout` | **held** (global default none) |
+| Offline A/B | PASS (hybrid_kp M) |
+| Live cam_03 canary | FAIL new/min·lost/min 목표 → rollback 실행 |
 
 ## 1. 문제 정의
 
@@ -35,7 +49,7 @@ order: 261
 
 ## 4. 구현 및 검증
 
-현재 develop 런타임 코드(`tracking/simple_tracker.py`, `ai/postprocess/incident_recovery.py`, `ai/postprocess/track_state_migration.py`, `ai/action/motion_features.py`)에 모든 개선 로직이 탑재되어 단위 테스트 및 카나리 검증을 마쳤습니다.
+develop 런타임에 개선 로직이 탑재되어 있으며, **Offline replay A/B**와 **단위 테스트**는 통과했다. **전역 운영 배포는 live canary 결과에 따라 보류 중**이다.
 
 ### 4.1 일반 Tracker Relink 매개변수 사양
 - `tracking_relink_iou_threshold`: 0.10 ~ 0.45 (일반 IoU 및 중심 거리에 따른 재연결 지원)

@@ -1,13 +1,15 @@
 ---
-title: Plan - WebRTC DataChannel based Video-Overlay Synchronization
-navTitle: DataChannel Sync
-shortTitle: DataChannel Sync
+title: "WebRTC DataChannel으로 영상·Overlay 초정밀 동기화 (계획)"
+navTitle: "DataChannel Sync"
+shortTitle: "DC Sync Plan"
 category: Architecture
-relatedDocs: [ADR-001-WebRTC, WebRTC-vs-HLS, Bug-AI-Tracker-FrameRate-Mismatch]
-relatedFiles: [strange_ai/scripts/serve_ai_overlay.py, strange_front/src/features/dashboard/pages/UserDashboard.tsx]
-updatedAt: 2026-07-03
-project: smart-safety-ai
+status: planned
+evidenceLevel: code-only
 type: architecture-plan
+relatedDocs: [Frame-Sync-Canonical, mjpeg-display-rollback, WebRTC-vs-HLS]
+relatedFiles: [strange_ai/scripts/serve_ai_overlay.py, strange_front/src/features/dashboard/pages/UserDashboard.tsx]
+updatedAt: 2026-07-15
+project: smart-safety-ai
 portfolio_use: true
 ---
 

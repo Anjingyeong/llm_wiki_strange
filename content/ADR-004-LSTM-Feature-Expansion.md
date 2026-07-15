@@ -1,12 +1,18 @@
 ---
-title: ADR-004 LSTM Feature Expansion
-navTitle: ADR-004
-shortTitle: ADR-004
+title: "LSTM 입력 54D 확장: 벤치 채택·운영 승격 보류"
+navTitle: "54D 확장 ADR"
+shortTitle: "ADR-004"
 category: ADR
 relatedDocs: [Feature-Vector-51D-vs-54D, LSTM, AI-Pipeline]
 relatedFiles: [strange_ai/ai/action/motion_features.py, strange_ai/ai/action/classifier.py]
-updatedAt: 2026-07-14
+updatedAt: 2026-07-15
+type: decision
+status: partial
+evidenceLevel: offline-benchmark
+canonicalFor: lstm-feature-54d
 ---
+
+> **결정:** 런타임·학습 파이프라인은 54D 스키마를 **목표 규격**으로 채택했으나, Zero Padding fallback·스키마 혼용 리스크로 **production 승격은 보류**합니다. 수치 근거는 [Feature-Vector-51D-vs-54D](Feature-Vector-51D-vs-54D.md)가 Canonical입니다.
 
 ## 1. 목적
 
@@ -18,9 +24,9 @@ LSTM keypoint input을 순수 51D에서 54D로 확장한 구조를 의사결정 
 
 ## 3. 핵심 내용
 
-*   **Decision**: 기본 LSTM 입력은 54차원(`KEYPOINT_MOTION54_SCHEMA_VERSION` 및 `KEYPOINT_BBOX54_SCHEMA_VERSION`)을 기본 스키마 규격으로 사용합니다.
-*   **상태**: **검증 완료 (Verified)**. 54D 확장을 통하여 F1-score가 89.29%에서 93.49%로 향상되었으며, FP 및 FN이 각각 약 38% 수준 대폭 감소했음을 확인하였습니다.
-*   **성능 세부 지표**: 상세 성능 비교와 54D의 세부 수치(center_drop, velocity, torso_angle 등)는 Canonical 문서인 **[Feature-Vector-51D-vs-54D](Feature-Vector-51D-vs-54D.md)**를 참고해 주시기 바랍니다.
+*   **Decision**: 기본 LSTM 입력 목표는 54차원(`KEYPOINT_MOTION54_SCHEMA_VERSION` / `KEYPOINT_BBOX54_SCHEMA_VERSION`)이다.
+*   **상태**: **부분 검증 (partial)** — 오프라인 벤치에서 F1·FP/FN 개선은 확인했으나, 캐시·학습 파이프라인 정리 전까지 **실운영 단일 모델로 승격하지 않는다**.
+*   **성능 세부 지표**: [Feature-Vector-51D-vs-54D](Feature-Vector-51D-vs-54D.md) 참고.
 
 ## 4. 후속 작업
 

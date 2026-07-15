@@ -1,14 +1,19 @@
 ---
-title: MJPEG Streaming Rollback Report
-navTitle: "MJPEG 롤백"
-shortTitle: "MJPEG 롤백"
+title: "MJPEG Streaming Rollback Report (흡수됨)"
+navTitle: "MJPEG Report"
+shortTitle: "MJPEG Report"
 category: Infra
+status: archived
 tags: [mjpeg, streaming, cameraLoginId, rollback]
-updatedAt: 2026-07-08
-relatedDocs: [mjpeg-display-rollback, webrtc-vs-hls]
-relatedFiles: [strange_front/src/features/dashboard/data/cameras.ts, strange_front/src/features/dashboard/components/CameraStreamFrame.tsx, strange_ai/scripts/run_registered_cameras.py, strange_ai/ai/overlay_ports.py, strange_ai/ai/registered_camera_workers.py, strange_ai/scripts/serve_ai_overlay.py, strange_back/src/main/java/com/strange/safety/camera/controller/CameraController.java, strange_back/src/main/java/com/strange/safety/camera/overlay/AiOverlayController.java]
+updatedAt: 2026-07-15
+relatedDocs: [mjpeg-display-rollback, Realtime-Camera-Runtime-Stabilization, WebRTC-vs-HLS]
+relatedFiles: []
 ---
 
+
+> **Canonical 결정·전략:** [mjpeg-display-rollback](mjpeg-display-rollback.md)  
+> **포트·URL·운영 Runbook:** [Realtime-Camera-Runtime-Stabilization](Realtime-Camera-Runtime-Stabilization.md) §4.2  
+> 아래 Before/After·검증 표는 **구현 체크리스트**로만 보존합니다. 실행 로그·수동 QA 경로는 Obsidian export에 두세요.
 # MJPEG Streaming Rollback Report
 
 ## Summary

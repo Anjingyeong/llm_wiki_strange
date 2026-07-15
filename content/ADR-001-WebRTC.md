@@ -1,12 +1,18 @@
 ---
-title: ADR-001 WebRTC
-navTitle: ADR-001
-shortTitle: ADR-001
+title: "WebRTC 우선 재생 결정 (폐기됨)"
+navTitle: "WebRTC ADR (폐기)"
+shortTitle: "ADR-001 폐기"
 category: ADR
-relatedDocs: [WebRTC-vs-HLS, Architecture, Bug-RTSP-Stream-404]
+relatedDocs: [WebRTC-vs-HLS, mjpeg-display-rollback, Architecture, Bug-RTSP-Stream-404]
 relatedFiles: [docs/webrtc_smoke.md, docker-compose.webrtc-smoke.yml]
-updatedAt: 2026-06-26
+updatedAt: 2026-07-15
+type: decision
+status: superseded
+supersededBy: mjpeg-display-rollback
+evidenceLevel: unit-test
 ---
+
+> **현재 기본 브라우저 표시 경로는 MJPEG입니다.** 본 ADR은 2026-06-26 시점 결정의 기록이며, [mjpeg-display-rollback](mjpeg-display-rollback.md)에 의해 대체되었습니다.
 
 ## 목적
 

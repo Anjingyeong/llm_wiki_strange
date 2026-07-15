@@ -1,13 +1,18 @@
 ---
-title: "MJPEG Display Rollback Decision"
-navTitle: "MJPEG 원복"
+title: "시연 안정성을 위해 WebRTC/HLS에서 MJPEG로 원복한 이유"
+navTitle: "MJPEG 표시 원복"
 shortTitle: "MJPEG 원복"
 slug: "mjpeg-display-rollback"
 category: Infra
 tags: [MJPEG, WebRTC, HLS, MediaMTX, RTSP, ffmpeg, cameraLoginId, overlay, stale-stream, network-latency, engineering-tradeoff, VLM, RAG]
-updatedAt: "2026-07-08"
+updatedAt: 2026-07-15
+type: decision
+status: verified
+evidenceLevel: production
+canonicalFor: browser-display-transport
+supersedes: ADR-001-WebRTC
 order: 470
-relatedSlugs: [WebRTC-vs-HLS, MJPEG-Display-Port-Normalization, Frame-Matching-Report, Realtime-Camera-Runtime-Stabilization]
+relatedSlugs: [WebRTC-vs-HLS, MJPEG-Display-Port-Normalization, Frame-Matching-Report, Realtime-Camera-Runtime-Stabilization, ADR-001-WebRTC, Frame-Sync-Canonical, ED-Latest-Frame-Queue-Policy, ED-Snapshot-VLM-Side-Channel]
 ---
 
 # MJPEG Display Rollback Decision
@@ -30,6 +35,13 @@ relatedSlugs: [WebRTC-vs-HLS, MJPEG-Display-Port-Normalization, Frame-Matching-R
 > [!IMPORTANT]
 > **핵심 원칙**: “이번 변경은 AI 추론 구조 변경이 아니라, 시연과 운영 중 브라우저 영상 표시를 안정화하기 위한 display transport decision이다.”
 
+
+### Frame sync·지연·VLM 경계 (흡수 요약)
+
+- **표시만 MJPEG**로 단순화; AI·MQTT·`frameId` 계약은 유지.
+- 오래된 RTSP 프레임 폐기: [ED-Latest-Frame-Queue-Policy](ED-Latest-Frame-Queue-Policy.md).
+- Overlay·frameId: [Frame-Sync-Canonical](Frame-Sync-Canonical.md).
+- VLM/RAG는 실시간 영상 루프가 아닌 사고 후처리: [ED-Snapshot-VLM-Side-Channel](ED-Snapshot-VLM-Side-Channel.md).
 ---
 
 ## 2. 원복 배경
