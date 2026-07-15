@@ -1,8 +1,13 @@
----
+﻿---
 title: 면접·이력서 정리
 navTitle: "면접 노트"
 shortTitle: "면접 노트"
 category: 면접·이력서 정리
+status: archived
+wikiVisibility: internal
+type:
+ meta
+portfolio_use: false
 updatedAt: 2026-06-30
 relatedDocs: [2026-06-30-Overlay-Tracking-Evidence-Log, AI-Pipeline, Architecture, Frame-Matching-Report]
 relatedFiles: [docs/tracking_validation_report.md, docs/overlay_bbox_diagnosis_report.md, docs/event_clip_hls_s3_mqtt_plan.md, docs/self_improving_ai_synthetic_vlm_architecture.md]

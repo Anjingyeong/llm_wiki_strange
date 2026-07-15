@@ -1,4 +1,4 @@
----
+﻿---
 title: Evidence Wiki - Portfolio Resume Usage
 navTitle: "포트폴리오 활용"
 shortTitle: "포트폴리오 활용"
@@ -8,6 +8,10 @@ relatedDocs: [Evidence-Smart-Safety-System, Evidence-LLM-Wiki-RAG, Interview-Res
 relatedFiles: [portfolio/project-evidence-map.md, portfolio/resume-bullets.md, portfolio/interview-answers.md]
 updatedAt: 2026-06-30
 project: portfolio
+status: archived
+wikiVisibility:
+ internal
+portfolio_use: false
 type: evidence
 portfolio_use: true
 evidence_type: resume

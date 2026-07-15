@@ -1,11 +1,11 @@
----
+﻿---
 title: MQTT Event Schema
 navTitle: MQTT Schema
 shortTitle: MQTT Schema
 category: Backend
 relatedDocs: [Architecture, AI-Pipeline, AI-Output-JSON, ADR-002-MQTT-Metadata-Separation, Graphify-Semantic-Map]
 relatedFiles: [PROJECT_CONTRACT.md, docs/MQTT_TOPIC_SPEC.md, strange_ai/messaging/event_schema.py, strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java, strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java, strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java]
-updatedAt: 2026-07-11
+updatedAt: 2026-07-15
 ---
 
 ## 목적

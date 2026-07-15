@@ -29,7 +29,7 @@ content/*.md
   -> server.mjs /api/rag/ask
   -> scripts/lib/rag/search.mjs
   -> scripts/lib/rag/answer.mjs
-  -> src/components/RagPanel.tsx
+  -> src/components/WikiToolsPanel.tsx (탭: 문서 검색 | RAG 질의 | RAG 구성·수치)
 ```
 
 주요 파일은 다음 역할을 가진다.
@@ -44,7 +44,7 @@ content/*.md
 | `scripts/lib/rag/answer.mjs` | 근거 부족 처리, local extractive answer, 선택적 외부 LLM 호출 |
 | `data/ragVectorIndex.json` | 생성된 파일 기반 vector store |
 | `server.mjs` | 서버 측 RAG API 제공 |
-| `src/components/RagPanel.tsx` | Wiki 화면의 질문 입력 및 출처 표시 UI |
+| `src/components/WikiToolsPanel.tsx` | Wiki 상단 통합 패널 (검색·RAG·시스템 메타) |
 
 ## 데이터 흐름
 
@@ -111,7 +111,7 @@ RAG_LLM_MODEL=gpt-4o-mini
 
 ## 보안 고려사항
 
-- API Key는 frontend bundle이나 `RagPanel`로 전달하지 않는다.
+- API Key는 frontend bundle이나 `WikiToolsPanel`로 전달하지 않는다.
 - 외부 LLM 호출은 서버 측에서만 수행한다.
 - 외부 LLM에는 전체 Markdown 원문이 아니라 검색된 관련 chunk만 전달한다.
 - 문서에는 실제 RTSP 계정, token, password 같은 민감정보를 넣지 않는다는 Wiki 작성 원칙을 유지한다.

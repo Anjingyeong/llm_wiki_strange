@@ -1,11 +1,11 @@
----
+﻿---
 title: Bug Codeblock Visibility
 navTitle: "코드블록 표시"
 shortTitle: "코드블록 표시"
 category: Bugs
 relatedDocs: [AI-Output-JSON, MQTT-Event-Schema]
-relatedFiles: [docs/wiki/src/styles.css, docs/wiki/src/components/MarkdownRenderer.tsx]
-updatedAt: 2026-06-26
+relatedFiles: [src/styles.css, src/components/MarkdownRenderer.tsx]
+updatedAt: 2026-07-15
 ---
 
 ## 목적
@@ -58,8 +58,8 @@ Markdown fenced code
 
 ## 관련 파일
 
-- `docs/wiki/src/styles.css`
-- `docs/wiki/src/components/MarkdownRenderer.tsx`
+- `src/styles.css`
+- `src/components/MarkdownRenderer.tsx`
 
 ## 관련 문서
 

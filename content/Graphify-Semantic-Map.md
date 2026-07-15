@@ -1,11 +1,13 @@
----
+﻿---
 title: Graphify Semantic Map
 navTitle: Graphify 맵
 shortTitle: Graphify
 category: Project
 relatedDocs: [ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG]
 relatedFiles: [strange_ai/messaging/event_schema.py, strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java]
-updatedAt: 2026-07-11
+updatedAt: 2026-07-15
+wikiVisibility: internal
+status: partial
 project: smart-safety-wiki
 type: evidence
 portfolio_use: true
