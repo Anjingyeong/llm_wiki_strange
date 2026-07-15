@@ -5,11 +5,11 @@
   "embeddingDimensions": 256,
   "documentCount": 49,
   "chunkCount": 679,
-  "generatedAt": "2026-07-15T12:46:43.959Z",
-  "sourceCommit": "0c092e3",
+  "generatedAt": "2026-07-15T12:56:22.510Z",
+  "sourceCommit": "e70fe90",
   "indexPath": "data/rag/indexes/structure-aware-v1.json",
   "meanChunkChars": 275,
   "duplicateDocRatio": 1,
-  "manifestHash": "a4f6e6e1f4a2c168",
-  "corpusHash": "f15d08f41fe27d2aa984bcf07ab543d71346cbec2257447af82c13c73f88b4d9"
+  "manifestHash": "925882a91b22c255",
+  "corpusHash": "2604c7965e7a4b9baf20966a80d2f1b3a30d6f845f0c4255869ff079195dcec8"
 }
