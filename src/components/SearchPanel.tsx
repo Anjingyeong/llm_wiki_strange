@@ -47,7 +47,7 @@ export function SearchPanel({ query, onQueryChange, onSelect }: SearchPanelProps
           {results.length ? (
             <>
               {results.map((result) => {
-                const short = result.shortTitle || getDisplayTitle(result);
+                const short = getDisplayTitle(result);
                 const reasons = result.matchReasons?.length
                   ? result.matchReasons.join(' · ')
                   : null;

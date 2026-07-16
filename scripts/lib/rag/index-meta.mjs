@@ -63,6 +63,9 @@ export function detectStaleIndex(index, opts = {}) {
  * @param {{ expectedCorpusHash?: string|null }} [opts]
  */
 export function buildHealthPayload(index, opts = {}) {
+  const env = (typeof process !== 'undefined' ? process.env : undefined) ?? {};
+  const llmAnswerMode = env.ENABLE_LLM_ANSWER === 'true' ? 'llm' : 'rag_only';
+
   const stale = detectStaleIndex(index, {
     expectedCorpusHash: opts.expectedCorpusHash ?? index?.corpusHash ?? null,
     expectedSlugs: opts.expectedSlugs,
@@ -77,6 +80,7 @@ export function buildHealthPayload(index, opts = {}) {
       stale: soft.stale,
       staleReasons: soft.reasons,
       operationalSource: OPERATIONAL_INDEX_REL,
+      llmAnswerMode,
     };
   }
   return {
@@ -85,5 +89,6 @@ export function buildHealthPayload(index, opts = {}) {
     stale: stale.stale,
     staleReasons: stale.reasons,
     operationalSource: OPERATIONAL_INDEX_REL,
+    llmAnswerMode,
   };
 }

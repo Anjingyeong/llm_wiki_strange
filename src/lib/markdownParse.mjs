@@ -11,7 +11,7 @@
  *   { kind: 'paragraph', lines: ParagraphLine[] } |
  *   { kind: 'list', items: string[] } |
  *   { kind: 'code', language: string, code: string } |
- *   { kind: 'table', rows: string[][] } |
+ *   { kind: 'table', rows: string[][], alignments: (null | 'left' | 'center' | 'right')[] } |
  *   { kind: 'quote', lines: string[] }
  * } MarkdownBlock
  */
@@ -59,6 +59,61 @@ export function isDuplicateDocumentH1(headingText, documentTitle = '', displayTi
 }
 
 /**
+ * @param {string} line
+ * @param {number} index
+ */
+function isEscapedPipe(line, index) {
+  let backslashes = 0;
+  for (let i = index - 1; i >= 0 && line[i] === '\\'; i -= 1) {
+    backslashes += 1;
+  }
+  return backslashes % 2 === 1;
+}
+
+/**
+ * Split a pipe-table line while preserving escaped literal pipes.
+ * @param {string} line
+ * @returns {string[] | null}
+ */
+function parseTableRow(line) {
+  if (!line.startsWith('|') || !line.endsWith('|') || isEscapedPipe(line, line.length - 1)) return null;
+  /** @type {string[]} */
+  const cells = [];
+  let cell = '';
+  for (let i = 1; i < line.length - 1; i += 1) {
+    const char = line[i] ?? '';
+    if (char === '|' && isEscapedPipe(line, i)) {
+      cell = `${cell.slice(0, -1)}|`;
+    } else if (char === '|') {
+      cells.push(cell.trim());
+      cell = '';
+    } else {
+      cell += char;
+    }
+  }
+  cells.push(cell.trim());
+  return cells;
+}
+
+/**
+ * @param {string[]} cells
+ * @returns {(null | 'left' | 'center' | 'right')[] | null}
+ */
+function parseTableAlignments(cells) {
+  /** @type {(null | 'left' | 'center' | 'right')[]} */
+  const alignments = [];
+  for (const cell of cells) {
+    if (!/^:?-{3,}:?$/u.test(cell)) return null;
+    if (cell.startsWith(':') && cell.endsWith(':')) {
+      alignments.push('center');
+    } else {
+      alignments.push(cell.endsWith(':') ? 'right' : cell.startsWith(':') ? 'left' : null);
+    }
+  }
+  return alignments;
+}
+
+/**
  * @param {string} markdown
  * @returns {MarkdownBlock[]}
  */
@@ -93,19 +148,36 @@ export function parseMarkdownBlocks(markdown) {
       continue;
     }
     if (line.startsWith('|')) {
-      /** @type {string[][]} */
-      const rows = [];
+      const tableLines = [];
       while (index < lines.length && (lines[index] ?? '').startsWith('|')) {
-        const cells = (lines[index] ?? '')
-          .split('|')
-          .slice(1, -1)
-          .map((cell) => cell.trim());
-        if (!cells.every((cell) => /^:?-{3,}:?$/u.test(cell))) {
-          rows.push(cells);
-        }
+        tableLines.push(lines[index] ?? '');
         index += 1;
       }
-      blocks.push({ kind: 'table', rows });
+      const parsedRows = tableLines.map(parseTableRow);
+      const header = parsedRows[0];
+      const separator = parsedRows[1];
+      const alignments = separator ? parseTableAlignments(separator) : null;
+      const width = header?.length ?? 0;
+      const valid = Boolean(
+        header
+        && separator
+        && alignments
+        && width > 0
+        && header.every((cell) => cell.trim().length > 0)
+        && parsedRows.every((row) => row?.length === width)
+        && alignments.length === width,
+      );
+
+      if (!valid) {
+        blocks.push({ kind: 'code', language: 'text', code: tableLines.join('\n') });
+        continue;
+      }
+
+      blocks.push({
+        kind: 'table',
+        rows: /** @type {string[][]} */ ([header, ...parsedRows.slice(2)]),
+        alignments,
+      });
       continue;
     }
     if (/^[-*]\s+/u.test(line)) {

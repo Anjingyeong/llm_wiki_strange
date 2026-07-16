@@ -239,12 +239,23 @@ export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: Wiki
           </form>
           {ragError ? <p className="errorMessage">{ragError}</p> : null}
           {ragResult ? (
-            <div className={`ragAnswer ${ragResult.status === 'insufficient_context' ? 'insufficient' : ''}`}>
+            <div className={`ragAnswer llm22-answer-card ${ragResult.status === 'insufficient_context' ? 'insufficient' : ''}`}>
+              <div className="ragAnswerQuestion">
+                <strong>질문</strong>
+                <span className="qtext">{ragQuestion || '(직전 질문)'}</span>
+              </div>
               <div className="ragAnswerMeta">
                 <span className="badge badge-neutral">{ragResult.status}</span>
                 {ragResult.answerMode ? (
                   <span className="badge badge-blue">{ANSWER_MODE_LABELS[ragResult.answerMode] ?? ragResult.answerMode}</span>
                 ) : null}
+              </div>
+              <div className="ragAnswerSummary">
+                {(() => { const first = (ragResult.answer || '').split(/[.\n]/)[0] || ''; return first.length > 120 ? first.slice(0, 117) + '...' : first; })()}
+              </div>
+              <div className="ragAnswerActions">
+                <button type="button" className="btn-secondary btn-copy" onClick={() => { navigator.clipboard?.writeText(ragResult.answer || ''); }}>복사</button>
+                <button type="button" className="btn-secondary btn-newq" onClick={() => { setRagResult(null); setRagQuestion(''); }}>새 질문</button>
               </div>
               <div className="ragAnswerBody">
                 <MarkdownRenderer markdown={ragResult.answer} />
