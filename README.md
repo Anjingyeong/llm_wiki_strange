@@ -1,5 +1,7 @@
 # Smart Safety AI Wiki
 
+실시간 영상관제 시스템의 설계·실험·운영 근거
+
 Smart Safety Monitoring 프로젝트 문서를 정적 Wiki와 서버 측 RAG 질의응답으로 제공한다.
 
 Hybrid RRF + local hash embedding. WIKI_ACCESS_KEY 미설정 시 공개(open).

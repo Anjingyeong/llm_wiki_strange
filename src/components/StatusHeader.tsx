@@ -63,6 +63,7 @@ export function StatusHeader({ onMenuClick, title = 'Smart Safety AI Wiki' }: St
         ☰
       </button>
       <div className="statusHeaderTitle">{title}</div>
+      <div className="statusHeaderSubtitle" style={{ fontSize: '0.85em', opacity: 0.85, marginTop: '-2px' }}>실시간 영상관제 시스템의 설계·실험·운영 근거</div>
       <div className="statusHeaderStatus">
         {healthError ? (
           <span className="badge badge-danger" aria-label="server status unknown">서버 상태 확인 불가</span>

@@ -1,7 +1,8 @@
 ---
 title: VLM RAG Event Search Decision Evidence
-navTitle: VLM Event Search
+navTitle: VLM·RAG 사고 검색 결정 근거
 shortTitle: VLM Search
+category: Project
 category: Project
 tags: [portfolio, evidence, ai, vlm, rag, semantic-search, alert, ux, decision]
 relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, Evidence-LLM-Wiki-RAG, Evidence-TensorRT-Adoption-Decision, Realtime-Camera-Runtime-Stabilization, VLM-RAG-DBless-Mock-MVP]

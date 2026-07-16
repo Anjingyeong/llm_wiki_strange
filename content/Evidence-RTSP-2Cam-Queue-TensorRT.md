@@ -1,7 +1,8 @@
 ---
 title: Two-Camera RTSP Queue and TensorRT Latency Evidence
-navTitle: 2-cam RTSP·큐
+navTitle: 2채널 RTSP·큐·TensorRT 지연 검증
 shortTitle: 2-cam RTSP
+category: Evidence
 category: Evidence
 tags: [portfolio, evidence, rtsp, tensorrt, queue, latest-frame, multi-camera]
 relatedDocs:

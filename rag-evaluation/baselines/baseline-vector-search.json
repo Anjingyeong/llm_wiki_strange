@@ -1,7 +1,7 @@
 {
-  "runId": "20260716-164310969_773ba1d_baseline-vector-search",
-  "timestamp": "2026-07-16T16:43:10.970Z",
-  "gitCommit": "773ba1d",
+  "runId": "20260716-164915402_1bb3d74_baseline-vector-search",
+  "timestamp": "2026-07-16T16:49:15.403Z",
+  "gitCommit": "1bb3d74",
   "gitBranch": "fix/wiki-ui-post-merge-regressions",
   "dirtyWorkingTree": true,
   "experimentName": "baseline-vector-search",
@@ -34,8 +34,8 @@
     "metadataFilterAccuracy": 0,
     "duplicateIncidentOrDocumentCount": 151,
     "noResultAccuracy": 0,
-    "p50LatencyMs": 0.6714999999999804,
-    "p95LatencyMs": 1.580600000000004,
+    "p50LatencyMs": 1.0996999999999844,
+    "p95LatencyMs": 1.9325000000000045,
     "meanRetrievedChunks": 5,
     "failureTaxonomy": {
       "EXPECTED_DOC_NOT_RETRIEVED": 22,
@@ -57,5 +57,5 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260716-164310969_773ba1d_baseline-vector-search"
+  "runDir": "rag-evaluation/runs/20260716-164915402_1bb3d74_baseline-vector-search"
 }

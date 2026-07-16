@@ -1,7 +1,8 @@
 ---
 title: MQTT End-to-End Alert Latency Evidence
-navTitle: MQTT E2E 지연
+navTitle: MQTT E2E 알림 지연 검증
 shortTitle: MQTT E2E
+category: Evidence
 category: Evidence
 tags: [portfolio, evidence, mqtt, latency, e2e, tensorrt, alert]
 relatedDocs:

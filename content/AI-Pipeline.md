@@ -62,11 +62,16 @@ flowchart TD
 ### 한계
 - 다단계 파이프라인의 특성상 앞단(YOLO/Tracker)의 누락이 뒷단(LSTM)의 판단 누락으로 이어지는 연쇄 에러 전파(Cascade Error Propagation) 위험이 존재합니다.
 - 모션 스파이크 방어가 완벽하지 않아 일시적인 프레임 스킵 상황에서 이상행동 확률 변동이 존재합니다.
-
 ### 후속 작업
 - **E2E 연계 학습**: Extractor의 confidence 가중치와 LSTM을 end-to-end로 미세조정하는 연계 훈련 파이프라인 설계 (미완료).
 - **consecutive-Faint Cooldown 튜닝**: 알림 전송을 제어하기 위해 프론트엔드 및 백엔드 Cooldown 시간 정합성 튜닝.
 - **Faint/Exit/Hazard cooldown (develop)**: `ai/action/faint_post_processing.py` — exit·hazard cooldown **60s** on `origin/develop` (`27093423`, 2026-07-15). 로컬이 `vlm-home-draft-hardening`이면 15s일 수 있음 → [Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md).
+
+## 7. 검증 범위
+- 벤치 수치와 증거는 [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md)를 따른다.
+- develop 기준선의 cooldown은 60s ([Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md)).
+- VLM mock은 `VLM-RAG-DBless-Mock-MVP.md`에 정의; 운영은 `INTEGRATION_PENDING`.
+- 데이터셋 간 수치 직접 비교 금지.
 
 ---
 #ai-pipeline #yolo26n #tensorrt #tracking #lstm #architecture

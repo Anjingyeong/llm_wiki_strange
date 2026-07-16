@@ -114,3 +114,8 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260716-145957761_7166edc_baseline-vector-search,2026-07-16T14:59:57.761Z,baseline-vector-search,baseline,7166edc,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.6959,false
 20260716-150017744_7166edc_baseline-vector-search,2026-07-16T15:00:17.744Z,baseline-vector-search,baseline,7166edc,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.1893,false
 20260716-164310969_773ba1d_baseline-vector-search,2026-07-16T16:43:10.970Z,baseline-vector-search,baseline,773ba1d,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.5806,false
+20260716-164525196_1bb3d74_baseline-vector-search,2026-07-16T16:45:25.197Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,2.0535,false
+20260716-164533088_1bb3d74_baseline-vector-search,2026-07-16T16:45:33.089Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.8592,false
+20260716-164547490_1bb3d74_baseline-vector-search,2026-07-16T16:45:47.491Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,2.0856,false
+20260716-164657685_1bb3d74_baseline-vector-search,2026-07-16T16:46:57.686Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,2.2268,false
+20260716-164915402_1bb3d74_baseline-vector-search,2026-07-16T16:49:15.403Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.9325,false

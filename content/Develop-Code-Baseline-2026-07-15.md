@@ -1,7 +1,8 @@
 ---
 title: Develop 코드 기준선 (2026-07-15)
-navTitle: Develop 기준선
+navTitle: 2026-07-15 구현 기준선
 shortTitle: Develop 기준선
+displayTitle: 2026-07-15 구현 기준선 및 검증 범위
 category: Project
 tags: [develop, sync, ai, back, front, vlm, faint, baseline]
 relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-Snapshot-VLM-Side-Channel, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Realtime-Camera-Runtime-Stabilization]
@@ -26,24 +27,6 @@ audience: [maintainer, llm]
 | strangeRookies/ai | `27093423` | fix: 알림 시간 수정 (`faint_post_processing` cooldown 60s) |
 | strangeRookies/back | `762e4ff4` | fix: 빌드 오류 해결 |
 | strangeRookies/front | `ab5fda5b` | Merge `origin/feature/admin` into `feature/admin` |
-
-로컬 nested clone은 2026-07-16 기준 **`develop` = origin/develop** 로 맞춤 완료. 이전에 `vlm-home-draft-hardening` 에 있었다면 동기화 스크립트가 checkout·pull 한다.
-
-동기화 스크립트: `이상행동/.agents/wiki-goal/sync-develop-and-wiki.ps1`
-
-### 로컬 develop 재확인 (2026-07-16)
-
-`sync-develop-and-wiki.ps1` 실행 후 `이상행동/ai|back|front` 모두 **`develop` = origin/develop** (변경 없음):
-
-| 저장소 | `git rev-parse --short HEAD` |
-| --- | --- |
-| ai | `2709342` |
-| back | `762e4ff` |
-| front | `ab5fda5` |
-
-- **ai**: 동기화 전 로컬 수정이 있어 **stash** `pre-develop-sync-20260716000826` 생성됨. VLM 문서 작업 복구 시 `cd ai; git stash pop` (충돌 시 수동 병합).
-- **Wiki 원격**: `push-and-phase3.ps1` 완료 → https://github.com/Anjingyeong/llm_wiki_strange
-- **Wiki 로컬 잔여**: `rag-evaluation/*` 갱신, `public/_redirects`, 미추적 `public/wiki-ux-meta.json` — `npm run generate:index` 시 생성물; 커밋 여부는 팀 정책(배포에 JSON 필요 시 `git add public/wiki-ux-meta.json` 후 push).
 
 ## ai-pipeline-stabilization-source.md 역할 (재확인)
 
@@ -73,10 +56,7 @@ audience: [maintainer, llm]
 `vlm-home-draft-hardening` 브랜치 문서(`SMART_SAFETY_VLM.md`)는 develop에 아직 전부 머지되지 않았을 수 있다. Wiki는 **develop에 실제로 있는 경로**와 **draft hardening 문서**를 구분해 표기한다.
 
 ## Wiki 갱신 체크리스트 (이번 패스)
-
 자세한 갱신 절차는 `content/_internal/Wiki-Ops-Sync.md`를 참조하십시오.
 
 ## 한계
-
-- 이 Composer 세션에서는 nested repo `git pull`이 bash 정책으로 차단될 수 있음 → PowerShell 스크립트로 동기화.
 - develop HEAD는 API 시점 스냅샷; pull 후 `git rev-parse HEAD`로 재확인.

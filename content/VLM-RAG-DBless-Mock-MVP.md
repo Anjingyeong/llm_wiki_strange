@@ -1,7 +1,8 @@
 ---
 title: DB 없이 검증한 VLM·RAG 사고 검색 Mock MVP
-navTitle: VLM Mock MVP
+navTitle: VLM·RAG Mock MVP (DB-less)
 shortTitle: VLM Mock MVP
+category: Architecture
 category: Architecture
 tags: [portfolio, architecture, vlm, rag, mock, semantic-search, incident, embedding, db-less]
 relatedDocs: [Benchmark-Evidence-Hub, Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema, Develop-Code-Baseline-2026-07-15, ED-Snapshot-VLM-Side-Channel]
