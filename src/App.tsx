@@ -177,7 +177,7 @@ export function App() {
           aria-label="Wiki navigation"
         />
         <main className="content" role="main">
-          <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} />
+          <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} onAuthRequired={() => { clearWikiAccessKey(); setAuthed(false); }} />
           {contentView === 'doc' && activeDocument ? (
             <article className="docCard">
               <header className="docHeader">

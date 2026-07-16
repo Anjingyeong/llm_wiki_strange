@@ -31,7 +31,7 @@ export function AccessGate({ onAuthed }: AccessGateProps) {
         return;
       }
       if (res.status === 401) {
-        setError('잘못된 접근 키입니다.');
+        setError('접근 키가 올바르지 않습니다.');
         clearWikiAccessKey();
         return;
       }
@@ -47,20 +47,20 @@ export function AccessGate({ onAuthed }: AccessGateProps) {
   return (
     <div className="accessGate" role="dialog" aria-modal="true" aria-label="접근 키 입력">
       <div className="accessGateCard">
-        <h2>Wiki 접근</h2>
-        <p className="hint">이 Wiki는 보호되어 있습니다. 접근 키를 입력하세요.</p>
+        <h2>Smart Safety AI Wiki 접근 인증</h2>
+        <p className="hint">보호된 Wiki입니다. 발급받은 접근 키를 입력해 주세요.</p>
         <form onSubmit={submit}>
           <input
             type="password"
             value={key}
             onChange={(e) => setKey(e.target.value)}
-            placeholder="WIKI_ACCESS_KEY"
+            placeholder="접근 키 입력"
             aria-label="접근 키"
             autoFocus
             disabled={loading}
           />
           <button type="submit" disabled={loading || !key.trim()}>
-            {loading ? '확인 중…' : '접속'}
+            {loading ? '확인 중…' : '접근하기'}
           </button>
         </form>
         {error ? <p className="error" role="alert">{error}</p> : null}

@@ -6,7 +6,7 @@ import { wikiUxMeta } from '../generated/wikiUxMeta';
 import { SEARCH_RESULT_LIMIT_MAX, searchDocuments } from '../lib/search';
 import { getDisplayTitle } from '../lib/types';
 import { writeViewHash } from '../lib/wikiHash';
-
+import { clearWikiAccessKey } from '../lib/wikiAccessKey';
 type TabId = 'search' | 'ask' | 'system';
 
 type RagSource = {
@@ -65,10 +65,9 @@ const PAGE_SIZE = 12;
 type WikiToolsPanelProps = {
   readonly initialTab?: TabId;
   readonly onSelectDocument: (slug: string, sectionId?: string | null) => void;
+  readonly onAuthRequired?: () => void;
 };
-
-export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: WikiToolsPanelProps) {
-  const [tab, setTab] = useState<TabId>(initialTab);
+export function WikiToolsPanel({ initialTab = 'search', onSelectDocument, onAuthRequired }: WikiToolsPanelProps) {
 
   useEffect(() => {
     setTab(initialTab);
@@ -102,10 +101,9 @@ export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: Wiki
         body: JSON.stringify({ question: trimmed }),
       });
       if (res.status === 401) {
-        // clear key and bubble up
-        try { window.sessionStorage.removeItem('wiki_access_key'); } catch {}
+        clearWikiAccessKey();
         setRagError('인증이 필요합니다. 접근 키를 다시 입력하세요.');
-        if ((window as any).__onWikiAuthRequired) (window as any).__onWikiAuthRequired();
+        onAuthRequired?.();
         return;
       }
       const json: unknown = await res.json();

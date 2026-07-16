@@ -13,7 +13,7 @@ type HealthInfo = {
   readonly llmAnswerMode?: string;
 };
 
-export function StatusHeader({ onMenuClick, title = 'LLM Wiki' }: StatusHeaderProps) {
+export function StatusHeader({ onMenuClick, title = 'Smart Safety AI Wiki' }: StatusHeaderProps) {
   const [health, setHealth] = useState<HealthInfo | null>(null);
   const [healthError, setHealthError] = useState<boolean>(false);
 
