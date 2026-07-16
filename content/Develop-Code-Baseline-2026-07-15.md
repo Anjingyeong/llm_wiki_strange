@@ -4,9 +4,9 @@ navTitle: Develop 기준선
 shortTitle: Develop 기준선
 category: Project
 tags: [develop, sync, ai, back, front, vlm, faint, baseline]
-relatedDocs: [AI-Pipeline, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-Snapshot-VLM-Side-Channel, Realtime-Camera-Runtime-Stabilization]
+relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-Snapshot-VLM-Side-Channel, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Realtime-Camera-Runtime-Stabilization]
 relatedFiles: [ai/ai/action/faint_post_processing.py, back/SMART_SAFETY_VLM.md, ai/docs/SMART_SAFETY_VLM.md, ai-pipeline-stabilization-source.md]
-updatedAt: 2026-07-15
+updatedAt: 2026-07-16
 project: smart-safety
 type: baseline
 portfolio_use: true
@@ -24,9 +24,23 @@ portfolio_use: true
 | strangeRookies/back | `762e4ff4` | fix: 빌드 오류 해결 |
 | strangeRookies/front | `ab5fda5b` | Merge `origin/feature/admin` into `feature/admin` |
 
-로컬 nested clone (`이상행동/ai|back|front`)은 동기화 전 **`vlm-home-draft-hardening`** 에 있을 수 있다. develop 기준으로 읽을 때는 `git fetch` 후 `develop` checkout·pull을 먼저 수행한다.
+로컬 nested clone은 2026-07-16 기준 **`develop` = origin/develop** 로 맞춤 완료. 이전에 `vlm-home-draft-hardening` 에 있었다면 동기화 스크립트가 checkout·pull 한다.
 
 동기화 스크립트: `이상행동/.agents/wiki-goal/sync-develop-and-wiki.ps1`
+
+### 로컬 develop 재확인 (2026-07-16)
+
+`sync-develop-and-wiki.ps1` 실행 후 `이상행동/ai|back|front` 모두 **`develop` = origin/develop** (변경 없음):
+
+| 저장소 | `git rev-parse --short HEAD` |
+| --- | --- |
+| ai | `2709342` |
+| back | `762e4ff` |
+| front | `ab5fda5` |
+
+- **ai**: 동기화 전 로컬 수정이 있어 **stash** `pre-develop-sync-20260716000826` 생성됨. VLM 문서 작업 복구 시 `cd ai; git stash pop` (충돌 시 수동 병합).
+- **Wiki 원격**: `push-and-phase3.ps1` 완료 → https://github.com/Anjingyeong/llm_wiki_strange
+- **Wiki 로컬 잔여**: `rag-evaluation/*` 갱신, `public/_redirects`, 미추적 `public/wiki-ux-meta.json` — `npm run generate:index` 시 생성물; 커밋 여부는 팀 정책(배포에 JSON 필요 시 `git add public/wiki-ux-meta.json` 후 push).
 
 ## ai-pipeline-stabilization-source.md 역할 (재확인)
 
@@ -61,7 +75,8 @@ portfolio_use: true
 2. `AI-Pipeline.md` — faint cooldown·develop SHA footnote
 3. `VLM-RAG-DBless-Mock-MVP.md` / `ED-Snapshot-VLM-Side-Channel.md` — hardening·baseline 링크
 4. `ai-pipeline-stabilization-source.md` frontmatter `updatedAt` 유지 (실험 원문 날짜 2026-07-14)
-5. `npm run generate:index` → `npm run rag:index` → `npm test`
+5. `Benchmark-Evidence-Hub.md`, MQTT/RTSP Evidence — **2026-07-16** `rag:spotcheck` 4/4 PASS (48 docs, 614 chunks)
+6. `npm run generate:index` → `npm run rag:index` → `npm run rag:spotcheck` → `npm test`
 
 ## 한계
 

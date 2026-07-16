@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { computeCorpusHash } from './lib/corpus-hash.mjs';
 import { extractHeadingsFromBody } from './lib/heading-utils.mjs';
 import { isExcludedFromPublicIndex } from './lib/indexable-content.mjs';
+import { resolveDisplayTitle } from '../src/lib/wikiTitle.mjs';
 
 const wikiRoot = fileURLToPath(new URL('..', import.meta.url));
 const contentDir = join(wikiRoot, 'content');
@@ -62,6 +63,12 @@ const slugOrder = new Map([
   ['LSTM-Experiment-Results', 610],
   ['LSTM-Sequence-Length-Comparison', 620],
   ['Feature-Vector-51D-vs-54D', 630],
+  ['Benchmark-Evidence-Hub', 625],
+  ['Evidence-TensorRT-Adoption-Decision', 626],
+  ['Evidence-RTSP-2Cam-Queue-TensorRT', 627],
+  ['Evidence-MQTT-E2E-Alert-Latency', 628],
+  ['Tracking-Association-Stabilization', 629],
+  ['Tracking-Association-Offline-AB-2026-07-13', 629],
   ['ADR-004-LSTM-Feature-Expansion', 640],
 
   // 7. 버그 해결 기록
@@ -173,9 +180,6 @@ function parseListField(block, key) {
 }
 
 
-function displayTitle(data, slug) {
-  return data.navTitle || data.shortTitle || data.title || slug;
-}
 
 function excerptFrom(body) {
   const EXCERPT_MAX = 220;
@@ -229,7 +233,7 @@ for (const file of files) {
     title: parsed.data.title,
     navTitle: parsed.data.navTitle,
     shortTitle: parsed.data.shortTitle,
-    displayTitle: displayTitle(parsed.data, slug),
+    displayTitle: resolveDisplayTitle({ ...parsed.data, slug }),
     category: parsed.data.category,
     tags: parsed.data.tags ?? [],
     relatedDocs: parsed.data.relatedDocs ?? [],

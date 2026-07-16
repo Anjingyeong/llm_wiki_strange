@@ -2,10 +2,10 @@
   "chunkSchemaVersion": "structure-aware-v1",
   "indexPath": "data/ragVectorIndex.json",
   "versionedPath": "data/rag/indexes/structure-aware-v1.json",
-  "chunkCount": 597,
-  "documentCount": 45,
-  "corpusHash": "c9f2f939d117cc68179bd158c62dcf6c689e0b5e9e2d630b2c24598e88362f18",
-  "generatedAt": "2026-07-15T15:08:14.600Z",
-  "updatedAt": "2026-07-15T15:08:14.749Z",
+  "chunkCount": 661,
+  "documentCount": 48,
+  "corpusHash": "c57089ce0f98fb23afa7ac577c42bb47f90617a126b2b2428b3a1bdc5b2f8d0f",
+  "generatedAt": "2026-07-16T15:00:08.033Z",
+  "updatedAt": "2026-07-16T15:00:08.193Z",
   "note": "Operational index is data/ragVectorIndex.json (Node + Cloudflare)."
 }

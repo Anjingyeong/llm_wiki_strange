@@ -9,8 +9,9 @@ import { answerQuestionFromIndex } from './scripts/lib/rag/answer.mjs';
 const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');
 const indexPath = join(root, 'data', 'ragVectorIndex.json');
+const searchIndexPath = join(root, 'src', 'generated', 'searchIndex.json');
 const port = Number.parseInt(process.env.PORT ?? '4173', 10);
-const wikiAccessKey = process.env.WIKI_ACCESS_KEY ?? 'smart-safety-2026';
+const WIKI_ACCESS_KEY = process.env.WIKI_ACCESS_KEY || '';
 
 const contentTypes = new Map([
   ['.html', 'text/html; charset=utf-8'],
@@ -45,34 +46,25 @@ async function loadRagIndex() {
 async function buildHealthPayloadForRequest() {
   const { buildHealthPayload } = await import('./scripts/lib/rag/index-meta.mjs');
   const index = await loadRagIndex();
-  return buildHealthPayload(index);
+  let searchCorpusHash = null;
+  try {
+    const sraw = await readFile(searchIndexPath, 'utf8');
+    const sidx = JSON.parse(sraw);
+    searchCorpusHash = sidx?.meta?.corpusHash || null;
+  } catch {}
+  return buildHealthPayload(index, { expectedCorpusHash: searchCorpusHash, env: process.env });
 }
 
-async function handleVerify(request, response) {
-  try {
-    const body = await readJsonBody(request);
-    const key = typeof body.key === 'string' ? body.key : '';
-    if (key === wikiAccessKey) {
-      sendJson(response, 200, { ok: true });
-    } else {
-      sendJson(response, 400, { ok: false, message: '잘못된 접근 키입니다.' });
-    }
-  } catch (error) {
-    sendJson(response, 500, { ok: false, message: '서버 내부 오류가 발생했습니다.' });
-  }
-}
 
 async function handleAsk(request, response) {
-  try {
-    const keyHeader = request.headers['x-wiki-key'];
-    if (keyHeader !== wikiAccessKey) {
-      sendJson(response, 401, {
-        status: 'error',
-        answer: '유효하지 않은 접근 키입니다. 로그인 후 다시 시도해 주세요.',
-        sources: [],
-      });
+  if (WIKI_ACCESS_KEY) {
+    const header = (request.headers['x-wiki-key'] || request.headers['X-Wiki-Key'] || '').toString();
+    if (header !== WIKI_ACCESS_KEY) {
+      sendJson(response, 401, { error: 'unauthorized' });
       return;
     }
+  }
+  try {
     const body = await readJsonBody(request);
     const question = typeof body.question === 'string' ? body.question : '';
     const debug = body.debug === true || process.env.RAG_DEBUG === 'true';
@@ -117,7 +109,12 @@ async function serveStatic(request, response) {
 }
 
 const server = createServer((request, response) => {
-  if (request.method === 'GET' && (request.url === '/api/rag/health' || request.url?.startsWith('/api/rag/health?'))) {
+  const { pathname } = new URL(
+    request.url ?? '/',
+    `http://${request.headers.host ?? 'localhost'}`,
+  );
+
+  if (request.method === 'GET' && pathname === '/api/rag/health') {
     void buildHealthPayloadForRequest()
       .then((payload) => sendJson(response, 200, payload))
       .catch((error) => {
@@ -125,22 +122,51 @@ const server = createServer((request, response) => {
       });
     return;
   }
-  if (request.method === 'POST' && request.url === '/api/auth/verify') {
-    void handleVerify(request, response);
-    return;
-  }
-  if (request.method === 'POST' && request.url === '/api/rag/ask') {
+  if (request.method === 'POST' && pathname === '/api/rag/ask') {
     void handleAsk(request, response);
     return;
   }
-  if (request.method === 'POST' && request.url === '/api/rag/reindex') {
+  if (request.method === 'POST' && pathname === '/api/rag/reindex') {
     sendJson(response, 405, {
       error: 'run npm run rag:index on the server to refresh embeddings after document edits',
     });
     return;
   }
+  if (request.method === "POST" && pathname === "/api/auth/verify") {
+    void handleVerify(request, response);
+    return;
+  }
+  if (request.method === "GET" && pathname === "/api/rag/config") {
+    handleConfig(request, response);
+    return;
+  }
+  if (pathname.startsWith('/api/')) {
+    sendJson(response, 404, { error: 'not_found' });
+    return;
+  }
   void serveStatic(request, response);
 });
+
+
+async function handleVerify(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const provided = typeof body.key === "string" ? body.key : "";
+    if (!WIKI_ACCESS_KEY) {
+      return sendJson(response, 200, { ok: true, accessKeyRequired: false });
+    }
+    if (provided && provided === WIKI_ACCESS_KEY) {
+      return sendJson(response, 200, { ok: true });
+    }
+    return sendJson(response, 401, { error: "unauthorized" });
+  } catch {
+    return sendJson(response, 400, { error: "bad_request" });
+  }
+}
+
+function handleConfig(request, response) {
+  sendJson(response, 200, { accessKeyRequired: !!WIKI_ACCESS_KEY });
+}
 
 server.listen(port, () => {
   console.log(`LLM Wiki server listening on http://localhost:${port}`);

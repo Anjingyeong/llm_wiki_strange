@@ -4,7 +4,7 @@ navTitle: 스냅샷 VLM 보조 설명
 shortTitle: Snapshot VLM
 category: Experiments
 tags: [engineering-decision, vlm-rag, snapshot, side-channel, partial, portfolio]
-relatedDocs: [VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-MQTT-Backend-Event-Path, AI-Pipeline, Develop-Code-Baseline-2026-07-15]
+relatedDocs: [Benchmark-Evidence-Hub, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-MQTT-Backend-Event-Path, AI-Pipeline, Develop-Code-Baseline-2026-07-15]
 relatedFiles: [ai/ai/snapshot_assist_upload.py, ai/tests/test_snapshot_assist_upload.py, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistController.java, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistService.java, front/scripts/verify-vlm-snapshot-assist.mjs]
 updatedAt: 2026-07-15
 project: smart-safety
@@ -18,6 +18,7 @@ portfolio_use: true
 >
 > VLM은 사고를 **만드는** 주체가 아니라, 확정 이벤트에 대한 **설명 채널**이다.  
 > 동기 VLM 호출로 알림 SLA를 막지 않도록 **JPEG side-channel**을 택했다.
+> 원문 §8: 모달 우선순위 클립 VLM → 스냅샷 Gemini → 규칙 사유; Snapshot Assist 처리 중 **2초 폴링**; 라벨 **「AI 감지 근거」**.
 
 | 항목 | 내용 |
 | --- | --- |

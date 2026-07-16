@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { isExcludedFromPublicIndex } from '../indexable-content.mjs';
+import { resolveDisplayTitle } from '../../../src/lib/wikiTitle.mjs';
 
 const categoryOrder = new Map([
   ['Project', 100],
@@ -42,9 +43,6 @@ function stripOuterQuotes(value) {
   return normalized;
 }
 
-function displayTitle(data, slug) {
-  return data.navTitle || data.shortTitle || data.title || slug;
-}
 
 function stripMarkdownText(value) {
   return value
@@ -101,7 +99,7 @@ export async function loadWikiDocuments(contentDir) {
       title: parsed.data.title,
       navTitle: parsed.data.navTitle,
       shortTitle: parsed.data.shortTitle,
-      displayTitle: displayTitle(parsed.data, slug),
+      displayTitle: resolveDisplayTitle({ ...parsed.data, slug }),
       category: parsed.data.category,
       updatedAt: parsed.data.updatedAt,
       summary: makeSummary(parsed.body, parsed.data.summary ?? parsed.data.description),

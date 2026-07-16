@@ -4,7 +4,7 @@ navTitle: VLM Mock MVP
 shortTitle: VLM Mock MVP
 category: Architecture
 tags: [portfolio, architecture, vlm, rag, mock, semantic-search, incident, embedding, db-less]
-relatedDocs: [Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema, Develop-Code-Baseline-2026-07-15]
+relatedDocs: [Benchmark-Evidence-Hub, Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema, Develop-Code-Baseline-2026-07-15, ED-Snapshot-VLM-Side-Channel]
 relatedFiles: [ai/scripts/process_vlm_mock.py, ai/ai/vlm_mock.py, ai/fixtures/vlm/demo_job.json, ai/tests/test_vlm_mock_worker.py, back/src/main/java/com/strange/safety/vlm/mock/MockIncidentFixture.java, back/src/main/java/com/strange/safety/vlm/mock/InMemoryIncidentRepository.java, back/src/main/java/com/strange/safety/vlm/mock/MockVlmClient.java, back/src/main/java/com/strange/safety/vlm/mock/MockEmbeddingRepository.java, back/src/main/java/com/strange/safety/vlm/mock/IncidentSearchDocumentBuilder.java, back/src/main/java/com/strange/safety/vlm/mock/MockSemanticSearchService.java, back/src/test/java/com/strange/safety/vlm/mock/MockVlmRagServiceTest.java, back/DB_LESS_VLM_RAG_MOCK.md, front/src/features/dashboard/api/alertEventsApi.ts, front/src/features/dashboard/data/mockVlmIncidents.json]
 updatedAt: 2026-07-15
 project: smart-safety
@@ -32,6 +32,15 @@ GPU PC, 운영 PostgreSQL, S3, 외부 Vision API 없이도 **실제 `ai` / `back
 - **코드 기준선**: [Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md)
 - **골격 문서**: `back/SMART_SAFETY_VLM.md`, `ai/docs/SMART_SAFETY_VLM.md` (draft hardening; develop 머지 범위는 기준선 참고)
 - **실험 원문**: `ai-pipeline-stabilization-source.md` (벤치·판단; Wiki canonical 페이지로 추출)
+## Stabilization source crosswalk (2026-07-16)
+
+`ai-pipeline-stabilization-source.md` §1–7·9와 develop 구현의 Wiki 분담:
+
+- **클립 VLM:** S3 GET → AI 8프레임 메모리 비식별 → Gemini; 키프레임 S3 PUT 8장 제거. `POST /internal/vlm/jobs`, `X-Service-Token`, `clipObjectKey` 우선·로컬경로 거부.
+- **큐:** Claim / Completion / `AiVlmWorkerClient` HTTP 분리.
+- **이벤트:** 동일 MQTT `eventId` → PostgreSQL transaction advisory lock.
+- **검색:** 성공 VLM 설명 **LIKE**; semantic에 첫 스냅샷 presigned URL. 임베딩 `gemini-embedding-001` 768d.
+- **벤치 수치:** [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md). 스냅샷 UI: [ED-Snapshot-VLM-Side-Channel](ED-Snapshot-VLM-Side-Channel.md).
 
 ## 1. 문제 정의
 

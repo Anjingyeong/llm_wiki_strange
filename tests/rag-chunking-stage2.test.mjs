@@ -71,6 +71,22 @@ test('structure-aware keeps heading path and does not split table rows', () => {
   assert.ok(index.chunks.every((chunk) => chunk.headingPath && chunk.contentHash && chunk.chunkHash));
 });
 
+test('structure-aware chunks persist occurrence-aware section ids', () => {
+  const doc = {
+    ...sampleDoc,
+    body: 'Preamble\n\n## 결과\n\nFirst.\n\n#### 세부\n\nNested.\n\n## 결과\n\nSecond.',
+  };
+  const units = parseMarkdownUnits(doc.body);
+  assert.equal(units[0]?.sectionId, null);
+  assert.ok(units.some((unit) => unit.sectionId === '결과' && unit.text.includes('First')));
+  assert.ok(units.some((unit) => unit.sectionId === '결과' && unit.text.includes('Nested')));
+  assert.ok(units.some((unit) => unit.sectionId === '결과-2' && unit.text.includes('Second')));
+
+  const index = buildRagIndexStructured([doc], { contextualPrefix: false });
+  assert.ok(index.chunks.some((chunk) => chunk.sectionId === '결과'));
+  assert.ok(index.chunks.some((chunk) => chunk.sectionId === '결과-2'));
+});
+
 test('contextual prefix is prepended to searchable text', () => {
   const index = buildRagIndexStructured([sampleDoc], { contextualPrefix: true });
   assert.equal(index.chunkSchemaVersion, 'structure-aware-contextual-v1');

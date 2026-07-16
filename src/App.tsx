@@ -4,15 +4,15 @@ import { Sidebar } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { WikiToolsPanel } from './components/WikiToolsPanel';
+import { AccessGate } from './components/AccessGate';
 import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
 import { isExcerptDuplicate } from './lib/frontmatter';
 import { getDisplayTitle } from './lib/types';
 import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
 import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
+import { clearWikiAccessKey, getWikiAccessKey, hasWikiAccessKey } from './lib/wikiAccessKey';
 
 export function App() {
-
-
   const initial = getInitialDocument();
   const initialHash = parseLocationHash();
   const [contentView, setContentView] = useState<WikiView>(() => initialHash.view);
@@ -27,7 +27,56 @@ export function App() {
   );
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
+  // Access gate state
+  const [accessKeyRequired, setAccessKeyRequired] = useState<boolean>(false);
+  const [authed, setAuthed] = useState<boolean>(() => hasWikiAccessKey());
+
   const activeDocument = useMemo(() => documentsBySlug.get(activeSlug), [activeSlug]);
+
+  // Determine if gate is required
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/rag/config', { method: 'GET' })
+      .then((r) => (r.ok ? r.json() : { accessKeyRequired: false }))
+      .then((data) => {
+        if (cancelled) return;
+        const req = !!(data && data.accessKeyRequired);
+        setAccessKeyRequired(req);
+        if (req && !hasWikiAccessKey()) {
+          setAuthed(false);
+        } else {
+          setAuthed(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAccessKeyRequired(false);
+          setAuthed(true);
+        }
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  // Mobile: Escape closes drawer, lock body scroll when open, aria on sidebar
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileNavOpen) {
+        setMobileNavOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    if (mobileNavOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileNavOpen]);
 
   useEffect(() => {
     if (!pendingSectionId || !activeDocument) return;
@@ -81,62 +130,87 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  const onAuthed = () => {
+    setAuthed(true);
+  };
+
+  // Gate when required and no key
+  if (accessKeyRequired && !authed) {
+    return (
+      <div className="appRoot">
+        <AccessGate onAuthed={onAuthed} />
+      </div>
+    );
+  }
+
   if (!activeDocument && contentView === 'doc') {
     return (
-      <div className="appShell">
+      <div className="appRoot">
         <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
-        <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-        <main className="notFound">
-          <h1>문서를 찾을 수 없습니다</h1>
-          <p>
-            경로 <code>#{activeSlug}</code> 에 해당하는 문서가 없습니다. archived slug이거나 잘못된 링크일 수 있습니다.
-          </p>
-          <button onClick={() => selectDocument(initial.slug)} type="button">
-            Overview로 이동
-          </button>
-        </main>
+        <div className="appShell">
+          <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
+          <main className="notFound">
+            <h1>문서를 찾을 수 없습니다</h1>
+            <p>
+              경로 <code>#{activeSlug}</code> 에 해당하는 문서가 없습니다. archived slug이거나 잘못된 링크일 수 있습니다.
+            </p>
+            <button onClick={() => selectDocument(initial.slug)} type="button">
+              Overview로 이동
+            </button>
+          </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="appShell">
+    <div className="appRoot">
       <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
-      <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-      <main className="content">
-        <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} />
+      <div className="appShell">
+        <Sidebar
+          activeSlug={activeSlug}
+          groups={documentsByCategory}
+          onSelect={selectDocument}
+          mobileOpen={mobileNavOpen}
+          onClose={() => setMobileNavOpen(false)}
+          aria-label="Wiki navigation"
+        />
+        <main className="content" role="main">
+          <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} />
+          {contentView === 'doc' && activeDocument ? (
+            <article className="docCard">
+              <header className="docHeader">
+                <span>{activeDocument.category}</span>
+                <h1>{getDisplayTitle(activeDocument)}</h1>
+                {getDisplayTitle(activeDocument) !== activeDocument.title ? (
+                  <p className="formalTitle">정식 제목: {activeDocument.title}</p>
+                ) : null}
+                {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
+                  <p>{activeDocument.excerpt}</p>
+                )}
+                <div className="tagRow">
+                  {(activeDocument.tags ?? []).map((tag) => (
+                    <small key={tag}>{tag}</small>
+                  ))}
+                </div>
+              </header>
+              <MarkdownRenderer
+                markdown={activeDocument.body}
+                documentTitle={activeDocument.title}
+                displayTitle={getDisplayTitle(activeDocument)}
+                documentSlug={activeDocument.slug}
+              />
+            </article>
+          ) : null}
+        </main>
+        {mobileNavOpen && (
+          <div className="sidebar-backdrop" onClick={() => setMobileNavOpen(false)} aria-hidden="true" />
+        )}
         {contentView === 'doc' && activeDocument ? (
-          <article className="docCard">
-            <header className="docHeader">
-              <span>{activeDocument.category}</span>
-              <h1>{getDisplayTitle(activeDocument)}</h1>
-              {getDisplayTitle(activeDocument) !== activeDocument.title ? (
-                <p className="formalTitle">정식 제목: {activeDocument.title}</p>
-              ) : null}
-              {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
-                <p>{activeDocument.excerpt}</p>
-              )}
-              <div className="tagRow">
-                {(activeDocument.tags ?? []).map((tag) => (
-                  <small key={tag}>{tag}</small>
-                ))}
-              </div>
-            </header>
-            <MarkdownRenderer
-              markdown={activeDocument.body}
-              documentTitle={activeDocument.title}
-              displayTitle={getDisplayTitle(activeDocument)}
-              documentSlug={activeDocument.slug}
-            />
-          </article>
+          <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
         ) : null}
-      </main>
-      {mobileNavOpen && (
-        <div className="sidebar-backdrop" onClick={() => setMobileNavOpen(false)} aria-hidden="true" />
-      )}
-      {contentView === 'doc' && activeDocument ? (
-        <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
-      ) : null}
+      </div>
     </div>
   );
 }

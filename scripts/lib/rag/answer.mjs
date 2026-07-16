@@ -17,6 +17,7 @@ function makeSource(chunk) {
     documentId: chunk.documentId,
     section: chunk.sectionTitle ?? chunk.section,
     sectionTitle: chunk.sectionTitle ?? chunk.section,
+    sectionId: chunk.sectionId ?? null,
     slug: chunk.slug,
     displayTitle: chunk.displayTitle ?? chunk.title,
     title: chunk.title,
@@ -26,7 +27,7 @@ function makeSource(chunk) {
     score: chunk.score,
     matchedBy: chunk.matchedBy ?? [],
     reason: chunk.reason ?? '',
-    sourceLink: `#/${chunk.slug}`,
+    sourceLink: chunk.sectionId ? `#/${chunk.slug}/${encodeURIComponent(chunk.sectionId)}` : `#/${chunk.slug}`,
   };
 }
 

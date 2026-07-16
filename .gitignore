@@ -12,3 +12,4 @@ mcps/
 
 # Raw RAG evaluation runs
 rag-evaluation/runs/
+.gjc/

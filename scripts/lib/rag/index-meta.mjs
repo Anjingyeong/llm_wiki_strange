@@ -60,19 +60,18 @@ export function detectStaleIndex(index, opts = {}) {
 /**
  * Health payload shared by Node server and Cloudflare Function.
  * @param {object} index
- * @param {{ expectedCorpusHash?: string|null }} [opts]
+ * @param {{ expectedCorpusHash?: string|null, expectedSlugs?: string[], searchCorpusHash?: string|null, env?: any }} [opts]
  */
 export function buildHealthPayload(index, opts = {}) {
-  const env = (typeof process !== 'undefined' ? process.env : undefined) ?? {};
+  const env = (opts && opts.env) || (typeof process !== 'undefined' ? process.env : undefined) || {};
   const llmAnswerMode = env.ENABLE_LLM_ANSWER === 'true' ? 'llm' : 'rag_only';
 
+  const corpusForStale = opts.searchCorpusHash ?? opts.expectedCorpusHash ?? index?.corpusHash ?? null;
   const stale = detectStaleIndex(index, {
-    expectedCorpusHash: opts.expectedCorpusHash ?? index?.corpusHash ?? null,
+    expectedCorpusHash: corpusForStale,
     expectedSlugs: opts.expectedSlugs,
   });
-  // If no external expected hash, treat missing hash as stale only when empty.
-  if (!opts.expectedCorpusHash && index?.corpusHash && !stale.reasons.includes('empty_chunks')) {
-    // Health without live FS: report meta; stale only if empty or missing generatedAt
+  if (!corpusForStale && index?.corpusHash && !stale.reasons.includes('empty_chunks')) {
     const soft = detectStaleIndex(index, {});
     return {
       ok: true,

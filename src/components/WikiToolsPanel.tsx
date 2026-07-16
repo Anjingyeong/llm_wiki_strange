@@ -93,11 +93,21 @@ export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: Wiki
     setRagError(null);
     setRagResult(null);
     try {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const key = (typeof window !== 'undefined' && window.sessionStorage.getItem('wiki_access_key')) || '';
+      if (key) headers['x-wiki-key'] = key;
       const res = await fetch('/api/rag/ask', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ question: trimmed }),
       });
+      if (res.status === 401) {
+        // clear key and bubble up
+        try { window.sessionStorage.removeItem('wiki_access_key'); } catch {}
+        setRagError('인증이 필요합니다. 접근 키를 다시 입력하세요.');
+        if ((window as any).__onWikiAuthRequired) (window as any).__onWikiAuthRequired();
+        return;
+      }
       const json: unknown = await res.json();
       if (!res.ok) {
         const msg = isRecord(json) && typeof json.error === 'string' ? json.error : res.statusText;

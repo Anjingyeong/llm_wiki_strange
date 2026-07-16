@@ -3,7 +3,7 @@ title: AI Pipeline Overview
 navTitle: "AI 파이프라인"
 shortTitle: "AI 파이프라인"
 category: Architecture
-relatedDocs: [Model-Comparison, Feature-Vector-51D-vs-54D, Evidence-TensorRT-Adoption-Decision, Tracking-Association-Stabilization, Realtime-Camera-Runtime-Stabilization]
+relatedDocs: [Benchmark-Evidence-Hub, Model-Comparison, Feature-Vector-51D-vs-54D, Evidence-TensorRT-Adoption-Decision, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Tracking-Association-Stabilization, Realtime-Camera-Runtime-Stabilization]
 updatedAt: 2026-07-15
 ---
 
@@ -48,6 +48,7 @@ flowchart TD
 ```
 
 ### 4.1 핵심 구성 요소 및 상세 링크
+- **벤치·근거 허브:** 조건별 TensorRT / 54D / MQTT E2E / 2-cam RTSP — [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md).
 - **Pose Extractor (YOLO26n-pose)**: Faint Recall 및 다운스트림 LSTM 성능 극대화를 위해 선택된 기본 모델입니다. 상세 비교 지표는 **[Model-Comparison](Model-Comparison.md)**을 참고하십시오.
 - **TensorRT 가속 런타임**: YOLO 추론 지연을 약 40.8% 단축하여 GPU 마진을 확보하는 런타임 엔진입니다. 자세한 검증 결과와 하드웨어 제약은 **[Evidence-TensorRT-Adoption-Decision](Evidence-TensorRT-Adoption-Decision.md)**을 참고하십시오.
 - **안정화된 트래커 및 자가 복구 (Tracking & Incident Recovery)**: ID Fragmentation을 방지하기 위한 NMS suppression(`hybrid_kp`), ROI 가속 복구 및 velocity spike 방어용 discontinuity mask 장치입니다. 상세 벤치마크는 **[Tracking-Association-Stabilization](Tracking-Association-Stabilization.md)**을 참고하십시오.

@@ -15,9 +15,11 @@ type HealthInfo = {
 
 export function StatusHeader({ onMenuClick, title = 'LLM Wiki' }: StatusHeaderProps) {
   const [health, setHealth] = useState<HealthInfo | null>(null);
+  const [healthError, setHealthError] = useState<boolean>(false);
 
   useEffect(() => {
     let cancelled = false;
+    setHealthError(false);
     fetch('/api/rag/health', { method: 'GET' })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
@@ -27,10 +29,14 @@ export function StatusHeader({ onMenuClick, title = 'LLM Wiki' }: StatusHeaderPr
             staleReasons: Array.isArray(data.staleReasons) ? data.staleReasons : undefined,
             llmAnswerMode: typeof data.llmAnswerMode === 'string' ? data.llmAnswerMode : undefined,
           });
+        } else if (!cancelled) {
+          setHealthError(true);
         }
       })
       .catch(() => {
-        /* ignore fetch errors; keep static meta */
+        if (!cancelled) {
+          setHealthError(true);
+        }
       });
     return () => {
       cancelled = true;
@@ -44,7 +50,7 @@ export function StatusHeader({ onMenuClick, title = 'LLM Wiki' }: StatusHeaderPr
 
   const isStale = health?.stale === true;
   const llmMode = health?.llmAnswerMode ?? 'rag_only';
-  const modeLabel = llmMode === 'llm' ? 'llm' : 'rag';
+  const modeLabel = llmMode === 'llm' ? 'LLM Answer' : 'RAG-only';
 
   return (
     <header className="statusHeader header-h" role="banner">
@@ -58,13 +64,17 @@ export function StatusHeader({ onMenuClick, title = 'LLM Wiki' }: StatusHeaderPr
       </button>
       <div className="statusHeaderTitle">{title}</div>
       <div className="statusHeaderStatus">
-        <span
-          className={`badge ${isStale ? 'badge-warning' : 'badge-accent'}`}
-          aria-label={isStale ? 'stale index' : 'system status'}
-          title={isStale ? (health?.staleReasons ?? []).join(', ') : undefined}
-        >
-          {searchDocCount}/{ragDocCount}/{ragChunkCount} · {modeLabel}
-        </span>
+        {healthError ? (
+          <span className="badge badge-danger" aria-label="server status unknown">서버 상태 확인 불가</span>
+        ) : (
+          <span
+            className={`badge ${isStale ? 'badge-warning' : 'badge-accent'}`}
+            aria-label={isStale ? 'stale index' : 'system status'}
+            title={isStale ? (health?.staleReasons ?? []).join(', ') : undefined}
+          >
+            검색 {searchDocCount} · RAG {ragDocCount} · 청크 {ragChunkCount} · {modeLabel}
+          </span>
+        )}
       </div>
     </header>
   );
