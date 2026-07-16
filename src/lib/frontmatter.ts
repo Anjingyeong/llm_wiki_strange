@@ -1,18 +1,13 @@
-import type { Frontmatter, Heading, WikiCategory, WikiDocument } from './types';
-
-const categories = [
-  'Project',
-  '면접·이력서 정리',
-  'Architecture',
-  'AI Pipeline',
-  'Backend',
-  'Frontend',
-  'Infra',
-  'Experiments',
-  'Bugs',
-  'ADR',
-  'Glossary',
-] as const;
+import {
+  parseWikiFrontmatterFields,
+  parseWikiFrontmatterList,
+  splitWikiFrontmatter,
+  stripWikiFrontmatterQuotes,
+} from './wikiFrontmatterCore.mjs';
+import type { Frontmatter, Heading, WikiDocument } from './types';
+import type { WikiCategory } from './types';
+import { isWikiFrontmatterCategory } from './wikiCategories';
+import { allocateHeadingIds } from './wikiHeadings.mjs';
 
 class FrontmatterError extends Error {
   constructor(readonly filePath: string, message: string) {
@@ -22,48 +17,15 @@ class FrontmatterError extends Error {
 }
 
 function parseCategory(value: string, filePath: string): WikiCategory {
-  const normalized = stripOuterQuotes(value);
-  for (const category of categories) {
-    if (category === normalized) {
-      return category;
-    }
+  const normalized = stripWikiFrontmatterQuotes(value);
+  if (isWikiFrontmatterCategory(normalized)) {
+    return normalized;
   }
   throw new FrontmatterError(filePath, `unknown category "${normalized}"`);
 }
 
-function stripOuterQuotes(value: string): string {
-  let normalized = value.trim();
-  while (
-    normalized.length >= 2 &&
-    ((normalized.startsWith('"') && normalized.endsWith('"')) ||
-      (normalized.startsWith("'") && normalized.endsWith("'")))
-  ) {
-    normalized = normalized.slice(1, -1).trim();
-  }
-  return normalized;
-}
-
-function parseList(value: string): readonly string[] {
-  if (!value.startsWith('[') || !value.endsWith(']')) {
-    return value ? [stripOuterQuotes(value)] : [];
-  }
-  return value
-    .slice(1, -1)
-    .split(',')
-    .map((item) => stripOuterQuotes(item))
-    .filter(Boolean);
-}
-
 function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
-  const values = new Map<string, string>();
-  for (const line of block.split(/\r?\n/)) {
-    const separator = line.indexOf(':');
-    if (separator < 0) {
-      continue;
-    }
-    values.set(line.slice(0, separator).trim(), line.slice(separator + 1).trim());
-  }
-
+  const values = parseWikiFrontmatterFields(block);
   const title = values.get('title');
   const category = values.get('category');
   const updatedAt = values.get('updatedAt');
@@ -76,46 +38,44 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
   const order = values.get('order');
   const navTitle = values.get('navTitle');
   const shortTitle = values.get('shortTitle');
+  const displayTitle = values.get('displayTitle');
 
   return {
-    title: stripOuterQuotes(title),
-    ...(navTitle ? { navTitle: stripOuterQuotes(navTitle) } : {}),
-    ...(shortTitle ? { shortTitle: stripOuterQuotes(shortTitle) } : {}),
+    title: stripWikiFrontmatterQuotes(title),
+    ...(navTitle ? { navTitle: stripWikiFrontmatterQuotes(navTitle) } : {}),
+    ...(shortTitle ? { shortTitle: stripWikiFrontmatterQuotes(shortTitle) } : {}),
+    ...(displayTitle ? { displayTitle: stripWikiFrontmatterQuotes(displayTitle) } : {}),
     category: parseCategory(category, filePath),
-    tags: parseList(values.get('tags') ?? ''),
-    relatedDocs: parseList(values.get('relatedDocs') ?? ''),
-    relatedFiles: parseList(values.get('relatedFiles') ?? ''),
-    updatedAt: stripOuterQuotes(updatedAt),
-    ...(summary ? { summary: stripOuterQuotes(summary) } : {}),
+    tags: parseWikiFrontmatterList(values.get('tags') ?? ''),
+    relatedDocs: parseWikiFrontmatterList(values.get('relatedDocs') ?? ''),
+    relatedFiles: parseWikiFrontmatterList(values.get('relatedFiles') ?? ''),
+    updatedAt: stripWikiFrontmatterQuotes(updatedAt),
+    ...(summary ? { summary: stripWikiFrontmatterQuotes(summary) } : {}),
     ...(order ? { order: Number.parseInt(order, 10) } : {}),
-    relatedSlugs: parseList(values.get('relatedSlugs') ?? ''),
-    entities: parseList(values.get('entities') ?? ''),
-    ...(desc ? { description: stripOuterQuotes(desc) } : {}),
+    relatedSlugs: parseWikiFrontmatterList(values.get('relatedSlugs') ?? ''),
+    entities: parseWikiFrontmatterList(values.get('entities') ?? ''),
+    ...(desc ? { description: stripWikiFrontmatterQuotes(desc) } : {}),
   };
 }
 
 export function slugify(text: string): string {
-  const normalized = text
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9가-힣]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-  return normalized || 'section';
+  return allocateHeadingIds([{ text, level: 2 }])[0]?.id ?? 'section';
 }
 
 function collectHeadings(body: string): readonly Heading[] {
-  return body
+  const headings = body
     .split(/\r?\n/)
-    .map((line): Heading | null => {
+    .map((line) => {
       const match = /^(#{2,3})\s+(.+)$/.exec(line);
-      const marks = match?.[1];
-      const text = match?.[2];
-      if (!marks || !text) {
-        return null;
-      }
-      return { id: slugify(text), text, level: marks.length === 2 ? 2 : 3 };
+      if (!match?.[1] || !match[2]) return null;
+      return {
+        text: match[2],
+        level: match[1].length === 2 ? 2 : 3,
+      };
     })
-    .filter((heading): heading is Heading => heading !== null);
+    .filter((heading): heading is { text: string; level: 2 | 3 } => heading !== null);
+
+  return allocateHeadingIds(headings);
 }
 
 function makeExcerpt(body: string): string {
@@ -156,12 +116,11 @@ export function isExcerptDuplicate(body: string, excerpt: string): boolean {
 }
 
 export function parseWikiDocument(filePath: string, raw: string): WikiDocument {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/.exec(raw);
-  const frontmatter = match?.[1];
-  const body = match?.[2];
-  if (!frontmatter || !body) {
+  const split = splitWikiFrontmatter(raw);
+  if (!split) {
     throw new FrontmatterError(filePath, 'document must start with YAML frontmatter');
   }
+  const { frontmatter, body } = split;
 
   const frontmatterData = parseFrontmatterBlock(frontmatter, filePath);
   const slug = filePath.split('/').pop()?.replace(/\.md$/, '') ?? filePath;

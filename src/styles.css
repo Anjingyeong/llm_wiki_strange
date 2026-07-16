@@ -141,6 +141,41 @@ a:hover {
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--toc-w);
   min-height: 100vh;
 }
+/* ── StatusHeader (llm22) ─────────────────────────────────────── */
+.statusHeader {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.statusHeaderTitle { font-weight: 700; font-size: 14px; letter-spacing: -0.2px; }
+.statusHeaderStatus { justify-self: end; }
+.mobileMenuBtn {
+  display: none;
+  width: 36px; height: 36px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.header-h { min-height: 48px; }
+
+/* ── Mobile sidebar + backdrop ───────────────────────────────── */
+@media (max-width: 720px) {
+  .mobileMenuBtn { display: inline-flex; align-items: center; justify-content: center; }
+  .sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 40; transform: translateX(0); transition: transform .2s ease; }
+  .sidebar.sidebar-closed { transform: translateX(-100%); }
+  .sidebar-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 35; }
+}
+
 
 /* ── 4. Sidebar ──────────────────────────────────────────────── */
 .sidebar {
@@ -750,11 +785,15 @@ a:hover {
 .markdown .tableWrap {
   overflow-x: auto;
   margin: 0 0 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
   -webkit-overflow-scrolling: touch;
 }
 
 .markdown table {
   width: 100%;
+  min-width: max-content;
   border-collapse: collapse;
   font-size: 0.92em;
 }
@@ -764,6 +803,7 @@ a:hover {
   padding: 10px 12px;
   border: 1px solid var(--line);
   vertical-align: top;
+  line-height: 1.5;
   word-break: break-word;
   overflow-wrap: anywhere;
 }
@@ -772,6 +812,7 @@ a:hover {
   background: var(--panel-strong);
   font-weight: 700;
   text-align: left;
+  white-space: normal;
 }
 
 .searchMeta {
@@ -1051,6 +1092,12 @@ blockquote {
 .toc a:hover {
   color: var(--text);
   background: var(--panel-strong);
+}
+
+.toc a[aria-current='location'] {
+  color: var(--accent);
+  background: var(--accent-light);
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -1216,6 +1263,8 @@ blockquote {
     flex-direction: column;
   }
 
+.sidebar-closed { display: none; }
+
   .sidebar {
     position: relative;
     height: auto;
@@ -1251,67 +1300,6 @@ blockquote {
   }
 }
 
-/* ================================================================
-   13. Lock Screen (Access Key Verification Gating)
-   ================================================================ */
-.lockScreenContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  background: radial-gradient(circle at top right, var(--accent-light) 0%, transparent 40%),
-              radial-gradient(circle at bottom left, var(--blue-light) 0%, transparent 40%),
-              var(--bg);
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-.lockCard {
-  background: var(--panel);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  width: 100%;
-  max-width: 420px;
-  padding: 40px 32px;
-  text-align: center;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
-}
-
-.lockCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-}
-
-.lockIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-lg);
-  background: var(--accent-light);
-  color: var(--accent);
-  margin-bottom: 24px;
-}
-
-.lockCard h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0 0 12px;
-  letter-spacing: -0.025em;
-}
-
-.lockSubtitle {
-  font-size: 0.92rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin: 0 0 28px;
-}
 
 .inputGroup {
   margin-bottom: 16px;
@@ -1378,18 +1366,14 @@ blockquote {
   cursor: not-allowed;
 }
 
-/* Shake Animation for Auth Failure */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-6px); }
-  40%, 80% { transform: translateX(6px); }
-}
-
-.lockCard.shake {
-  animation: shake 0.4s ease-in-out;
-}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* llm22 answer card */
+.llm22-answer-card .ragAnswerQuestion { margin-bottom: 6px; }
+.llm22-answer-card .ragAnswerQuestion .qtext { margin-left: 6px; color: var(--text-sub); }
+.llm22-answer-card .ragAnswerSummary { font-size: 13px; color: var(--text-sub); margin: 4px 0 8px; }
+.llm22-answer-card .ragAnswerActions { display: flex; gap: 8px; margin-bottom: 8px; }

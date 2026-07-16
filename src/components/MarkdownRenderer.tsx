@@ -1,6 +1,7 @@
-import { headingId, inlineMarkdown, isDuplicateDocumentH1, parseMarkdownBlocks, renderParagraphLines } from '../lib/markdown';
+import { inlineMarkdown, isDuplicateDocumentH1, parseMarkdownBlocks, renderParagraphLines } from '../lib/markdown';
 import { wikiLink } from '../lib/wikiHash';
 import { MermaidDiagram } from './MermaidDiagram';
+import { allocateHeadingIds } from '../lib/wikiHeadings.mjs';
 
 type MarkdownRendererProps = {
   readonly markdown: string;
@@ -23,6 +24,12 @@ export function MarkdownRenderer({
   documentSlug = '',
 }: MarkdownRendererProps) {
   const blocks = parseMarkdownBlocks(markdown);
+  const headingIds = allocateHeadingIds(
+    blocks
+      .filter((block): block is Extract<(typeof blocks)[number], { kind: 'heading' }> => block.kind === 'heading')
+      .map((block) => ({ text: block.text, level: block.level })),
+  );
+  let headingIndex = 0;
   let skippedDuplicateH1 = false;
 
   return (
@@ -30,6 +37,7 @@ export function MarkdownRenderer({
       {blocks.map((block, index) => {
         switch (block.kind) {
           case 'heading': {
+            const id = headingIds[headingIndex++]?.id ?? `section-${index}`;
             // Only the first body H1 that duplicates the page title is suppressed.
             if (
               block.level === 1
@@ -39,7 +47,6 @@ export function MarkdownRenderer({
               skippedDuplicateH1 = true;
               return null;
             }
-            const id = headingId(block.text);
             if (block.level === 1) {
               return <h1 key={`${id}-${index}`}>{inlineMarkdown(block.text)}</h1>;
             }
@@ -88,16 +95,27 @@ export function MarkdownRenderer({
                 <table>
                   <thead>
                     <tr>
-                      {firstRow.map((cell) => (
-                        <th key={cell}>{inlineMarkdown(cell)}</th>
+                      {firstRow.map((cell, columnIndex) => (
+                        <th
+                          key={`table-${index}-header-${columnIndex}`}
+                          scope="col"
+                          style={{ textAlign: block.alignments[columnIndex] ?? undefined }}
+                        >
+                          {inlineMarkdown(cell)}
+                        </th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {bodyRows.map((row) => (
-                      <tr key={row.join('|')}>
-                        {row.map((cell) => (
-                          <td key={cell}>{inlineMarkdown(cell)}</td>
+                    {bodyRows.map((row, rowIndex) => (
+                      <tr key={`table-${index}-row-${rowIndex}`}>
+                        {row.map((cell, columnIndex) => (
+                          <td
+                            key={`table-${index}-row-${rowIndex}-cell-${columnIndex}`}
+                            style={{ textAlign: block.alignments[columnIndex] ?? undefined }}
+                          >
+                            {inlineMarkdown(cell)}
+                          </td>
                         ))}
                       </tr>
                     ))}

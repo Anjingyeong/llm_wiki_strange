@@ -1,16 +1,11 @@
-export type WikiCategory =
-  | 'Project'
-  | '면접·이력서 정리'
-  | 'Architecture'
-  | 'AI Pipeline'
-  | 'Backend'
-  | 'Frontend'
-  | 'Infra'
-  | 'Experiments'
-  | 'Bugs'
-  | 'ADR'
-  | 'Glossary'
-  | 'Evidence'
+import { resolveDisplayTitle } from './wikiTitle.mjs';
+import type { WikiFrontmatterCategory } from './wikiCategories';
+
+/** YAML `category:` on each wiki page (see wikiCategories.ts). */
+export type WikiCategory = WikiFrontmatterCategory;
+
+/** Sidebar / MOC section labels (not written in frontmatter). */
+export type WikiSidebarMocCategory =
   | '01. Project Overview (프로젝트 개요)'
   | '02. AI & Data Pipeline (AI 및 데이터 처리)'
   | '03. Streaming & Sync (스트리밍 및 동기화)'
@@ -22,6 +17,7 @@ export type Frontmatter = {
   readonly title: string;
   readonly navTitle?: string;
   readonly shortTitle?: string;
+  readonly displayTitle?: string;
   readonly category: WikiCategory;
   readonly tags?: readonly string[];
   readonly relatedDocs?: readonly string[];
@@ -71,10 +67,11 @@ export type SearchResult = SearchDocument & {
 };
 
 export function getDisplayTitle(document: {
+  readonly displayTitle?: string;
   readonly navTitle?: string;
   readonly shortTitle?: string;
   readonly title?: string;
   readonly slug?: string;
 }): string {
-  return document.navTitle ?? document.shortTitle ?? document.title ?? document.slug ?? '';
+  return resolveDisplayTitle(document);
 }

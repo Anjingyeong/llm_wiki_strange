@@ -1,21 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
 import { Sidebar } from './components/Sidebar';
+import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { WikiToolsPanel } from './components/WikiToolsPanel';
 import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
 import { isExcerptDuplicate } from './lib/frontmatter';
 import { getDisplayTitle } from './lib/types';
+import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
 import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
 
 export function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return !!sessionStorage.getItem('wiki_access_key');
-  });
-  const [keyInput, setKeyInput] = useState('');
-  const [authError, setAuthError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [shake, setShake] = useState(false);
+
 
   const initial = getInitialDocument();
   const initialHash = parseLocationHash();
@@ -29,6 +25,7 @@ export function App() {
   const [toolsTab, setToolsTab] = useState<'search' | 'ask' | 'system'>(() =>
     initialHash.view === 'rag' ? 'ask' : 'search',
   );
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const activeDocument = useMemo(() => documentsBySlug.get(activeSlug), [activeSlug]);
 
@@ -39,7 +36,10 @@ export function App() {
       if (cancelled) return;
       const el = document.getElementById(pendingSectionId);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.scrollTo({
+          top: scrollTopForTocAnchor(el.getBoundingClientRect().top, window.scrollY),
+          behavior: 'smooth',
+        });
         setPendingSectionId(null);
         return;
       }
@@ -81,77 +81,11 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
-
-  const handleAuthSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!keyInput.trim()) {
-      setAuthError('접근 키를 입력해 주세요.');
-      triggerShake();
-      return;
-    }
-    setIsSubmitting(true);
-    setAuthError('');
-    try {
-      const response = await fetch('/api/auth/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: keyInput }),
-      });
-      const data = await response.json();
-      if (response.ok && data.ok) {
-        sessionStorage.setItem('wiki_access_key', keyInput);
-        setIsAuthenticated(true);
-      } else {
-        setAuthError(data.message || '인증에 실패했습니다.');
-        triggerShake();
-      }
-    } catch {
-      setAuthError('서버 통신 중 오류가 발생했습니다.');
-      triggerShake();
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const triggerShake = () => {
-    setShake(true);
-    setTimeout(() => setShake(false), 500);
-  };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="lockScreenContainer">
-        <div className={`lockCard ${shake ? 'shake' : ''}`}>
-          <div className="lockBrand">
-            <span className="brandMark" aria-hidden="true">SS</span>
-            <strong>LLM Wiki</strong>
-          </div>
-          <h1>접근 키가 필요합니다</h1>
-          <p>Wiki 및 RAG 질의는 접근 키 인증 후 이용할 수 있습니다.</p>
-          <form onSubmit={handleAuthSubmit} className="lockForm">
-            <label htmlFor="wiki-key">접근 키</label>
-            <input
-              id="wiki-key"
-              type="password"
-              value={keyInput}
-              onChange={(e) => setKeyInput(e.target.value)}
-              placeholder="접근 키 입력"
-              autoFocus
-            />
-            {authError && <p className="errorMessage">{authError}</p>}
-            <button type="submit" className="submitBtn" disabled={isSubmitting}>
-              {isSubmitting ? '인증 중...' : '접근하기'}
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
   if (!activeDocument && contentView === 'doc') {
     return (
       <div className="appShell">
-        <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
+        <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
+        <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
         <main className="notFound">
           <h1>문서를 찾을 수 없습니다</h1>
           <p>
@@ -167,7 +101,8 @@ export function App() {
 
   return (
     <div className="appShell">
-      <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} />
+      <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
+      <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
       <main className="content">
         <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} />
         {contentView === 'doc' && activeDocument ? (
@@ -196,6 +131,9 @@ export function App() {
           </article>
         ) : null}
       </main>
+      {mobileNavOpen && (
+        <div className="sidebar-backdrop" onClick={() => setMobileNavOpen(false)} aria-hidden="true" />
+      )}
       {contentView === 'doc' && activeDocument ? (
         <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
       ) : null}

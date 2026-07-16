@@ -11,9 +11,11 @@ type SidebarProps = {
   readonly groups: readonly CategoryGroup[];
   readonly activeSlug: string;
   readonly onSelect: (slug: string) => void;
+  readonly mobileOpen?: boolean;
+  readonly onClose?: () => void;
 };
 
-export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
+export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClose }: SidebarProps) {
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
     groups.forEach((group) => {
@@ -42,22 +44,17 @@ export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
     }));
   };
 
-  return (
-    <aside className="sidebar" aria-label="Wiki navigation">
-      {/* Brand / Logo */}
-      <div className="brand">
-        <span className="brandMark" aria-hidden="true">SS</span>
-        <div className="brandText">
-          <strong>LLM Wiki</strong>
-          <small>Evidence&nbsp;·&nbsp;Portfolio&nbsp;·&nbsp;AI</small>
-          <span className="brandStatus">
-            <span className="brandStatusDot" />
-            Live
-          </span>
-        </div>
-      </div>
+  const handleSelect = (slug: string) => {
+    onSelect(slug);
+    if (onClose) onClose();
+  };
 
-      {/* Navigation */}
+  return (
+    <aside
+      className={"sidebar" + (mobileOpen === false ? " sidebar-closed" : "")}
+      aria-label="Wiki navigation"
+    >
+      {/* Navigation (no brand per spec) */}
       <div className="sidebarNav">
         <nav aria-label="Document categories">
           {groups.map((group) => {
@@ -81,7 +78,7 @@ export function Sidebar({ groups, activeSlug, onSelect }: SidebarProps) {
                       <button
                         className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
                         key={document.slug}
-                        onClick={() => onSelect(document.slug)}
+                        onClick={() => handleSelect(document.slug)}
                         type="button"
                         aria-current={document.slug === activeSlug ? 'page' : undefined}
                       >
