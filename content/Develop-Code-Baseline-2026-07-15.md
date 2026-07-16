@@ -10,6 +10,9 @@ updatedAt: 2026-07-16
 project: smart-safety
 type: baseline
 portfolio_use: true
+implementationStatus: reference
+verificationLevel: baseline
+audience: [maintainer, llm]
 ---
 
 ## 한 줄 요약
@@ -71,12 +74,7 @@ portfolio_use: true
 
 ## Wiki 갱신 체크리스트 (이번 패스)
 
-1. `Develop-Code-Baseline-2026-07-15.md` (본 문서) 추가
-2. `AI-Pipeline.md` — faint cooldown·develop SHA footnote
-3. `VLM-RAG-DBless-Mock-MVP.md` / `ED-Snapshot-VLM-Side-Channel.md` — hardening·baseline 링크
-4. `ai-pipeline-stabilization-source.md` frontmatter `updatedAt` 유지 (실험 원문 날짜 2026-07-14)
-5. `Benchmark-Evidence-Hub.md`, MQTT/RTSP Evidence — **2026-07-16** `rag:spotcheck` 4/4 PASS (48 docs, 614 chunks)
-6. `npm run generate:index` → `npm run rag:index` → `npm run rag:spotcheck` → `npm test`
+자세한 갱신 절차는 `content/_internal/Wiki-Ops-Sync.md`를 참조하십시오.
 
 ## 한계
 

@@ -9,6 +9,9 @@ updatedAt: 2026-06-26
 project: smart-safety-ai
 type: overview
 portfolio_use: true
+implementationStatus: stable
+verificationLevel: canonical
+audience: [human, llm, codex]
 ---
 
 ## 목적

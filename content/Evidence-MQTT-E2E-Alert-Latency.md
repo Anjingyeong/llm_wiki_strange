@@ -17,6 +17,9 @@ project: smart-safety-ai
 type: evidence
 portfolio_use: true
 evidence_type: benchmark
+implementationStatus: canonical
+verificationLevel: benchmark
+audience: [human, llm, codex]
 ---
 
 > **RAG 한 줄:** 2-cam TensorRT에서 AI 프레임 수신부터 MQTT Subscriber까지 E2E p95 26ms, 29건 전부 1초 이내.
