@@ -1,10 +1,11 @@
 ---
 title: VLM RAG Event Search Decision Evidence
-navTitle: VLM Event Search
+navTitle: VLM·RAG 사고 검색 결정 근거
 shortTitle: VLM Search
 category: Project
+category: Project
 tags: [portfolio, evidence, ai, vlm, rag, semantic-search, alert, ux, decision]
-relatedDocs: [AI-Pipeline, Evidence-LLM-Wiki-RAG, Evidence-TensorRT-Adoption-Decision, Realtime-Camera-Runtime-Stabilization]
+relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, Evidence-LLM-Wiki-RAG, Evidence-TensorRT-Adoption-Decision, Realtime-Camera-Runtime-Stabilization, VLM-RAG-DBless-Mock-MVP]
 relatedFiles: [plans/vlm-rag-event-search.md, strange_ai/docs/vlm-rag, strange_ai/ai/vlm/mock_adapter.py]
 updatedAt: 2026-07-09
 project: smart-safety-ai
@@ -14,6 +15,12 @@ evidence_type: decision
 ---
 
 # VLM-RAG 알림 검색 도입 판단 기록
+## Stabilization 구현 수치 (2026-07-16)
+
+- 키워드 검색: 성공한 VLM 설명 필드에 **LIKE** (원문 §7).
+- Semantic: 결과에 첫 이벤트 스냅샷 **presigned URL** (원문 §7).
+- 임베딩: `text-embedding-004` → **`gemini-embedding-001`**, 차원 **768** (원문 §9).
+- 클립 worker·8프레임 메모리·advisory lock: [VLM-RAG-DBless-Mock-MVP](VLM-RAG-DBless-Mock-MVP.md) stabilization §, [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md).
 
 ## 문제 정의
 

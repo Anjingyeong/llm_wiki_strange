@@ -1,59 +1,46 @@
 import { answerQuestionFromIndex } from '../../../scripts/lib/rag/answer.mjs';
-import index from '../../../data/ragVectorIndex.json';
+import { json, methodDispatcher } from '../../../src/lib/pagesApiDispatch.mjs';
+
+export function onRequest(context) {
+  const env = (context && context.env) || {};
+  return methodDispatcher(context.request, {
+    method: 'POST',
+    onKnownMethod: (req) => onRequestPost({ ...context, request: req, env }),
+  });
+}
 
 export async function onRequestPost(context) {
-  try {
-    const wikiAccessKey = context.env?.WIKI_ACCESS_KEY || 'smart-safety-2026';
-    const keyHeader = context.request.headers.get('x-wiki-key');
-    if (keyHeader !== wikiAccessKey) {
-      return new Response(
-        JSON.stringify({
-          status: 'error',
-          answer: '유효하지 않은 접근 키입니다. 로그인 후 다시 시도해 주세요.',
-          sources: [],
-        }),
-        {
-          status: 401,
-          headers: {
-            'content-type': 'application/json; charset=utf-8',
-            'cache-control': 'no-store',
-          },
-        }
-      );
+  const env = context.env || {};
+  const accessKey = env.WIKI_ACCESS_KEY;
+  if (accessKey) {
+    const headerKey = context.request.headers.get('x-wiki-key') || '';
+    if (headerKey !== accessKey) {
+      return json({ error: 'unauthorized' }, 401);
     }
-    const body = await context.request.json();
-    const question = typeof body.question === 'string' ? body.question : '';
-    const debug = body.debug === true || context.env?.RAG_DEBUG === 'true';
+  }
+  try {
+    const body = await context.request.json().catch(() => ({}));
+    const question = typeof body?.question === 'string' ? body.question : '';
+    const debug = body?.debug === true || env.RAG_DEBUG === 'true';
+    const index = await loadIndex(env);
+    const result = await answerQuestionFromIndex(index, question, { debug, env });
+    return json(result, 200);
+  } catch (e) {
+    return json({ status: 'error', answer: 'RAG 처리 중 오류', sources: [] }, 500);
+  }
+}
 
-    const result = await answerQuestionFromIndex(index, question, {
-      env: context.env,
-      debug,
-    });
-
-    return new Response(JSON.stringify(result), {
-      headers: {
-        'content-type': 'application/json; charset=utf-8',
-        'cache-control': 'no-store',
-      },
-    });
-  } catch (error) {
-    const isDebug = context.env?.RAG_DEBUG === 'true';
-    const displayMessage = isDebug
-      ? 'RAG API 처리 중 오류가 발생했습니다: ' + error.message
-      : 'RAG API 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
-    return new Response(
-      JSON.stringify({
-        status: 'error',
-        answer: displayMessage,
-        sources: [],
-      }),
-      {
-        status: 500,
-        headers: {
-          'content-type': 'application/json; charset=utf-8',
-          'cache-control': 'no-store',
-        },
-      }
-    );
+async function loadIndex(env) {
+  // In Pages the index is bundled or fetched from static; for contract use dynamic import when possible
+  // Fallback to import from data path if available in build
+  try {
+    // @ts-ignore - runtime
+    const mod = await import('../../../data/ragVectorIndex.json', { assert: { type: 'json' } });
+    return mod.default || mod;
+  } catch {
+    // Pages functions can read from static asset in some runtimes; try fetch relative
+    const res = await fetch('/data/ragVectorIndex.json');
+    if (res.ok) return res.json();
+    throw new Error('index not available');
   }
 }

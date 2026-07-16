@@ -6,6 +6,12 @@ category: Glossary
 relatedDocs: [Overview, Architecture, AI-Pipeline]
 relatedFiles: [PROJECT_CONTRACT.md]
 updatedAt: 2026-06-26
+project: smart-safety-ai
+type: reference
+portfolio_use: true
+implementationStatus: stable
+verificationLevel: canonical
+audience: [human, llm, codex]
 ---
 
 ## 목적
@@ -34,6 +40,22 @@ updatedAt: 2026-06-26
 | FN | False Negative. 실제 Faint인데 놓친 수 |
 | threshold | Faint probability를 이벤트 후보로 볼 기준값 |
 | hard-negative | 모델이 Faint로 오판한 Normal sample. 오탐 감소 학습에 사용 |
+| Event | 안전 이벤트 기본 단위. RTSP 프레임에서 YOLO/LSTM이 Faint로 분류하면 발생 |
+| Alert | MQTT `safety/events`로 발행되어 Backend/Frontend에 전달되는 알림 |
+| Incident | Backend에 영속화되는 사고 기록. Alert와 1:1 또는 다대일 매핑 |
+| Notification | FCM/WebSocket 등 채널로 사용자에게 도달하는 최종 알림 |
+| Faint class | LSTM 출력 라벨. Normal vs Faint 이진 분류 |
+| Latest Frame Queue | RTSP 프레임 큐 정책. 오래된 프레임은 drop하고 최신만 유지하여 실시간성 보호 |
+| E2E Alert Latency | AI 추론 시작부터 MQTT Subscriber 수신까지의 End-to-End 지연 (p50/p95) |
+| p50 | 50 백분위수 지연 (중앙값) |
+| p95 | 95 백분위수 지연. SLA 준수 지표로 주로 사용 |
+| Hybrid RRF | Vector + BM25를 RRF(Reciprocal Rank Fusion)로 결합한 검색 전략 |
+| BM25 | 키워드 기반 sparse 검색. Hybrid RRF의 lexical 컴포넌트 |
+| insufficient_context | RAG가 근거 부족을 명시적으로 반환하는 상태. hallucination 방지 |
+| clipObjectKey | VLM 스냅샷 S3 객체 키. eventId 기반 |
+| Corpus Hash | 인덱스 생성 시 전체 문서 집합의 해시. staleness 검출에 사용 |
+| Stale Index | Corpus Hash 불일치 또는 생성 시각이 오래된 인덱스 |
+| Index | 검색/ RAG에 사용되는 구조화된 문서·청크 집합 |
 
 ## 입력
 

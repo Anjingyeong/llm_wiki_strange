@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-07-16T16:49:22.855Z",
+  "search": {
+    "corpusHash": "d884a83e2aaa82f9124fd0da47c5ac98ca1e339f973c705a9c958977e5c06a7f",
+    "documentCount": 48,
+    "generatedAt": "2026-07-16T16:49:22.753Z",
+    "source": "content/*.md"
+  },
+  "searchDocCount": 48,
+  "rag": {
+    "chunkCount": 661,
+    "documentCount": 48,
+    "corpusHash": "6a7a1b1d4901371c91994644f45e423bcacfb3ccddb8fda866ce40c83a391cdd",
+    "meanChunkChars": 240,
+    "indexGeneratedAt": "2026-07-16T16:44:07.969Z"
+  },
+  "benchmark": {
+    "operationalRetrieval": "Hybrid RRF (BM25 + local hash vector), k=60, lex=1, vec=1",
+    "diversify": "max 2 chunks per document in production answer path",
+    "embedding": "256-d local hash embedding (no paid API)",
+    "chunking": "structure-aware-v1 (heading-aware sections)",
+    "abstention": "insufficient_context when evidence weak; source dedupe by slug",
+    "stage3Eval": {
+      "note": "Offline golden set (55 queries); Stage-3 did not promote over vector-only under policy",
+      "hybridRrf": {
+        "hitAt5": 0.8,
+        "recallAt5": 0.55,
+        "mrr": 0.6967,
+        "duplicateResult": 50,
+        "wrongTop1": 9
+      },
+      "hybridDiversifyMax2": {
+        "hitAt5": 0.86,
+        "recallAt5": 0.6233,
+        "mrr": 0.7167,
+        "duplicateResult": 91
+      },
+      "diversifyMax1": {
+        "hitAt5": 0.86,
+        "recallAt5": 0.6767,
+        "duplicateChunkDup": 29
+      }
+    },
+    "clientSearch": {
+      "threshold": 18,
+      "goldenQueries": 21,
+      "features": [
+        "slug dedupe",
+        "Korean aliases",
+        "develop baseline query"
+      ]
+    }
+  }
+}

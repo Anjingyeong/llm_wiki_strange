@@ -1,15 +1,19 @@
 ---
 title: Develop 코드 기준선 (2026-07-15)
-navTitle: Develop 기준선
+navTitle: 2026-07-15 구현 기준선
 shortTitle: Develop 기준선
+displayTitle: 2026-07-15 구현 기준선 및 검증 범위
 category: Project
 tags: [develop, sync, ai, back, front, vlm, faint, baseline]
-relatedDocs: [AI-Pipeline, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-Snapshot-VLM-Side-Channel, Realtime-Camera-Runtime-Stabilization]
+relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-Event-Search-Decision, ED-Snapshot-VLM-Side-Channel, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Realtime-Camera-Runtime-Stabilization]
 relatedFiles: [ai/ai/action/faint_post_processing.py, back/SMART_SAFETY_VLM.md, ai/docs/SMART_SAFETY_VLM.md, ai-pipeline-stabilization-source.md]
-updatedAt: 2026-07-15
+updatedAt: 2026-07-16
 project: smart-safety
 type: baseline
 portfolio_use: true
+implementationStatus: reference
+verificationLevel: baseline
+audience: [maintainer, llm]
 ---
 
 ## 한 줄 요약
@@ -23,10 +27,6 @@ portfolio_use: true
 | strangeRookies/ai | `27093423` | fix: 알림 시간 수정 (`faint_post_processing` cooldown 60s) |
 | strangeRookies/back | `762e4ff4` | fix: 빌드 오류 해결 |
 | strangeRookies/front | `ab5fda5b` | Merge `origin/feature/admin` into `feature/admin` |
-
-로컬 nested clone (`이상행동/ai|back|front`)은 동기화 전 **`vlm-home-draft-hardening`** 에 있을 수 있다. develop 기준으로 읽을 때는 `git fetch` 후 `develop` checkout·pull을 먼저 수행한다.
-
-동기화 스크립트: `이상행동/.agents/wiki-goal/sync-develop-and-wiki.ps1`
 
 ## ai-pipeline-stabilization-source.md 역할 (재확인)
 
@@ -56,14 +56,7 @@ portfolio_use: true
 `vlm-home-draft-hardening` 브랜치 문서(`SMART_SAFETY_VLM.md`)는 develop에 아직 전부 머지되지 않았을 수 있다. Wiki는 **develop에 실제로 있는 경로**와 **draft hardening 문서**를 구분해 표기한다.
 
 ## Wiki 갱신 체크리스트 (이번 패스)
-
-1. `Develop-Code-Baseline-2026-07-15.md` (본 문서) 추가
-2. `AI-Pipeline.md` — faint cooldown·develop SHA footnote
-3. `VLM-RAG-DBless-Mock-MVP.md` / `ED-Snapshot-VLM-Side-Channel.md` — hardening·baseline 링크
-4. `ai-pipeline-stabilization-source.md` frontmatter `updatedAt` 유지 (실험 원문 날짜 2026-07-14)
-5. `npm run generate:index` → `npm run rag:index` → `npm test`
+자세한 갱신 절차는 `content/_internal/Wiki-Ops-Sync.md`를 참조하십시오.
 
 ## 한계
-
-- 이 Composer 세션에서는 nested repo `git pull`이 bash 정책으로 차단될 수 있음 → PowerShell 스크립트로 동기화.
 - develop HEAD는 API 시점 스냅샷; pull 후 `git rev-parse HEAD`로 재확인.

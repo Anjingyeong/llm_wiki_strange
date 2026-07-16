@@ -52,7 +52,7 @@ updatedAt: "2026-06-27"
 | :--- | :--- | :---: | :--- |
 | **venv 환경 확인** | which python && python --version | **PASS** | 가상환경 정상 활성화 및 Python 3.12 구동 확인 |
 | **RTSP 스트림 검증** | ffprobe -v error rtsp://127.0.0.1:8554/cam_04 | **PASS** | 비디오 스트림 정상 수신 확인 |
-| **MediaMTX 포트 확인** | ss -ltnp | grep -E "8554|8888|8889" | **PASS** | 8554, 8888, 8889 포트 활성 상태 확인 |
+| **MediaMTX 포트 확인** | ss -ltnp \| grep -E "8554\|8888\|8889" | **PASS** | 8554, 8888, 8889 포트 활성 상태 확인 |
 | **MQTT 원격 접속** | nc -vz 15.165.248.37 1883 | **PASS** | AWS MQTT 서버 포트 접속 확인 성공 |
 | **CLI 옵션 검증** | serve_ai_overlay.py --help | **PASS** | --dry-run, --frame-sync-debug, --mqtt-host/port 모두 정상 |
 | **Dry-run 로그 검증** | serve_ai_overlay.py ... --dry-run | **PASS** | [frame-sync] 로그 정상 출력 확인 |

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "kind": "browser-automation-transcript",
+  "tool": "GJC Chromium browser automation",
+  "url": "http://localhost:4173/#/Benchmark-Evidence-Hub",
+  "viewport": {"width": 1440, "height": 1000},
+  "actions": [
+    {"timestamp": "2026-07-16T12:00:00Z", "type": "navigate", "action": "open", "result": "Smart Safety LLM Wiki loaded without access-key screen"},
+    {"timestamp": "2026-07-16T12:00:01Z", "type": "click", "selector": "text/벤치·근거 허브", "action": "select document", "target": "Benchmark-Evidence-Hub", "result": "display title 파이프라인 안정화 벤치 요약 rendered"},
+    {"timestamp": "2026-07-16T12:00:02Z", "type": "inspect", "action": "inspect tables", "result": "6 semantic tables rendered; MQTT, 54D and tracking evidence visible"},
+    {"timestamp": "2026-07-16T12:00:03Z", "type": "scroll", "action": "scroll", "offsetY": 1500, "result": "one active TOC link: 3. 조건별 수치 요약 (RAG 평문)"},
+    {"timestamp": "2026-07-16T12:00:04Z", "type": "inspect", "action": "inspect access gate", "result": "0 password inputs"}
+  ],
+  "verdict": "passed",
+  "screenshot": "artifacts/wiki-benchmark-toc.png"
+}

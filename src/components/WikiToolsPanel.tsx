@@ -6,7 +6,7 @@ import { wikiUxMeta } from '../generated/wikiUxMeta';
 import { SEARCH_RESULT_LIMIT_MAX, searchDocuments } from '../lib/search';
 import { getDisplayTitle } from '../lib/types';
 import { writeViewHash } from '../lib/wikiHash';
-
+import { clearWikiAccessKey } from '../lib/wikiAccessKey';
 type TabId = 'search' | 'ask' | 'system';
 
 type RagSource = {
@@ -65,11 +65,11 @@ const PAGE_SIZE = 12;
 type WikiToolsPanelProps = {
   readonly initialTab?: TabId;
   readonly onSelectDocument: (slug: string, sectionId?: string | null) => void;
+  readonly onAuthRequired?: () => void;
 };
+export function WikiToolsPanel({ initialTab = 'search', onSelectDocument, onAuthRequired }: WikiToolsPanelProps) {
 
-export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: WikiToolsPanelProps) {
   const [tab, setTab] = useState<TabId>(initialTab);
-
   useEffect(() => {
     setTab(initialTab);
   }, [initialTab]);
@@ -93,11 +93,20 @@ export function WikiToolsPanel({ initialTab = 'search', onSelectDocument }: Wiki
     setRagError(null);
     setRagResult(null);
     try {
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const key = (typeof window !== 'undefined' && window.sessionStorage.getItem('wiki_access_key')) || '';
+      if (key) headers['x-wiki-key'] = key;
       const res = await fetch('/api/rag/ask', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({ question: trimmed }),
       });
+      if (res.status === 401) {
+        clearWikiAccessKey();
+        setRagError('인증이 필요합니다. 접근 키를 다시 입력하세요.');
+        onAuthRequired?.();
+        return;
+      }
       const json: unknown = await res.json();
       if (!res.ok) {
         const msg = isRecord(json) && typeof json.error === 'string' ? json.error : res.statusText;

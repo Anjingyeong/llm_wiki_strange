@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { embedText, stableHash, VECTOR_SIZE } from './embedding.mjs';
+import { allocateHeadingIds } from '../../../src/lib/wikiHeadings.mjs';
 
 export const STRUCTURE_SCHEMA_VERSION = 'structure-aware-v1';
 export const STRUCTURE_CONTEXTUAL_SCHEMA_VERSION = 'structure-aware-contextual-v1';
@@ -96,6 +97,14 @@ function extractTechTerms(text, tags = []) {
 export function parseMarkdownUnits(body) {
   const lines = body.split(/\r?\n/);
   const units = [];
+  const allocatedSectionIds = allocateHeadingIds(
+    lines
+      .map((line) => /^(#{2,3})\s+(.+)$/.exec(line))
+      .filter(Boolean)
+      .map((match) => ({ text: stripInlineMarkdown(match[2]), level: match[1].length })),
+  );
+  let allocatedSectionIndex = 0;
+  let currentSectionId = null;
   let headingStack = [];
   let buffer = [];
   let mode = 'prose'; // prose | table | code
@@ -108,6 +117,7 @@ export function parseMarkdownUnits(body) {
     units.push({
       kind: 'prose',
       headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+      sectionId: currentSectionId,
       text,
     });
   };
@@ -122,6 +132,7 @@ export function parseMarkdownUnits(body) {
         units.push({
           kind: 'code',
           headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+          sectionId: currentSectionId,
           text: code,
           lang: codeLang,
         });
@@ -131,6 +142,7 @@ export function parseMarkdownUnits(body) {
           units.push({
             kind: 'table',
             headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+            sectionId: currentSectionId,
             text: buffer.join('\n'),
           });
           buffer = [];
@@ -155,6 +167,7 @@ export function parseMarkdownUnits(body) {
         units.push({
           kind: 'table',
           headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+          sectionId: currentSectionId,
           text: buffer.join('\n'),
         });
         buffer = [];
@@ -166,6 +179,10 @@ export function parseMarkdownUnits(body) {
       const text = stripInlineMarkdown(heading[2]);
       headingStack = headingStack.filter((item) => item.level < level);
       headingStack.push({ level, text });
+      if (level === 1) currentSectionId = null;
+      if (level === 2 || level === 3) {
+        currentSectionId = allocatedSectionIds[allocatedSectionIndex++]?.id ?? null;
+      }
       continue;
     }
 
@@ -185,6 +202,7 @@ export function parseMarkdownUnits(body) {
       units.push({
         kind: 'table',
         headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+        sectionId: currentSectionId,
         text: buffer.join('\n'),
       });
       buffer = [];
@@ -197,6 +215,7 @@ export function parseMarkdownUnits(body) {
     units.push({
       kind: 'code',
       headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+      sectionId: currentSectionId,
       text: buffer.join('\n'),
       lang: codeLang,
     });
@@ -204,6 +223,7 @@ export function parseMarkdownUnits(body) {
     units.push({
       kind: 'table',
       headingPath: headingStack.map((item) => item.text).join(' > ') || '문서 개요',
+      sectionId: currentSectionId,
       text: buffer.join('\n'),
     });
   } else {
@@ -222,6 +242,7 @@ function mergeShortUnits(units) {
       && unit.text.length < MIN_SECTION_CHARS
       && merged[merged.length - 1].kind === 'prose'
       && merged[merged.length - 1].headingPath === unit.headingPath
+      && merged[merged.length - 1].sectionId === unit.sectionId
     ) {
       merged[merged.length - 1] = {
         ...merged[merged.length - 1],
@@ -234,6 +255,7 @@ function mergeShortUnits(units) {
       && unit.text.length < MIN_SECTION_CHARS
       && merged.length > 0
       && merged[merged.length - 1].kind === 'prose'
+      && merged[merged.length - 1].sectionId === unit.sectionId
     ) {
       // attach tiny orphan section to previous prose with path note
       const prev = merged[merged.length - 1];
@@ -332,6 +354,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     updatedAt: document.updatedAt,
     headingPath: unit.headingPath,
     section: unit.headingPath,
+    sectionId: unit.sectionId ?? null,
     sectionTitle: unit.headingPath,
     relatedDocs,
     relatedSlugs: relatedDocs,
@@ -362,6 +385,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
       title: document.title,
       displayTitle,
       sectionTitle: unit.headingPath,
+      sectionId: unit.sectionId ?? null,
       chunkType,
       chunkSchemaVersion: schemaVersion,
       relatedSlugs: relatedDocs,

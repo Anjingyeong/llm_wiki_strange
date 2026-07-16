@@ -3,7 +3,7 @@ title: AI Pipeline Overview
 navTitle: "AI 파이프라인"
 shortTitle: "AI 파이프라인"
 category: Architecture
-relatedDocs: [Model-Comparison, Feature-Vector-51D-vs-54D, Evidence-TensorRT-Adoption-Decision, Tracking-Association-Stabilization, Realtime-Camera-Runtime-Stabilization]
+relatedDocs: [Benchmark-Evidence-Hub, Model-Comparison, Feature-Vector-51D-vs-54D, Evidence-TensorRT-Adoption-Decision, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Tracking-Association-Stabilization, Realtime-Camera-Runtime-Stabilization]
 updatedAt: 2026-07-15
 ---
 
@@ -48,6 +48,7 @@ flowchart TD
 ```
 
 ### 4.1 핵심 구성 요소 및 상세 링크
+- **벤치·근거 허브:** 조건별 TensorRT / 54D / MQTT E2E / 2-cam RTSP — [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md).
 - **Pose Extractor (YOLO26n-pose)**: Faint Recall 및 다운스트림 LSTM 성능 극대화를 위해 선택된 기본 모델입니다. 상세 비교 지표는 **[Model-Comparison](Model-Comparison.md)**을 참고하십시오.
 - **TensorRT 가속 런타임**: YOLO 추론 지연을 약 40.8% 단축하여 GPU 마진을 확보하는 런타임 엔진입니다. 자세한 검증 결과와 하드웨어 제약은 **[Evidence-TensorRT-Adoption-Decision](Evidence-TensorRT-Adoption-Decision.md)**을 참고하십시오.
 - **안정화된 트래커 및 자가 복구 (Tracking & Incident Recovery)**: ID Fragmentation을 방지하기 위한 NMS suppression(`hybrid_kp`), ROI 가속 복구 및 velocity spike 방어용 discontinuity mask 장치입니다. 상세 벤치마크는 **[Tracking-Association-Stabilization](Tracking-Association-Stabilization.md)**을 참고하십시오.
@@ -61,11 +62,16 @@ flowchart TD
 ### 한계
 - 다단계 파이프라인의 특성상 앞단(YOLO/Tracker)의 누락이 뒷단(LSTM)의 판단 누락으로 이어지는 연쇄 에러 전파(Cascade Error Propagation) 위험이 존재합니다.
 - 모션 스파이크 방어가 완벽하지 않아 일시적인 프레임 스킵 상황에서 이상행동 확률 변동이 존재합니다.
-
 ### 후속 작업
 - **E2E 연계 학습**: Extractor의 confidence 가중치와 LSTM을 end-to-end로 미세조정하는 연계 훈련 파이프라인 설계 (미완료).
 - **consecutive-Faint Cooldown 튜닝**: 알림 전송을 제어하기 위해 프론트엔드 및 백엔드 Cooldown 시간 정합성 튜닝.
 - **Faint/Exit/Hazard cooldown (develop)**: `ai/action/faint_post_processing.py` — exit·hazard cooldown **60s** on `origin/develop` (`27093423`, 2026-07-15). 로컬이 `vlm-home-draft-hardening`이면 15s일 수 있음 → [Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md).
+
+## 7. 검증 범위
+- 벤치 수치와 증거는 [Benchmark-Evidence-Hub](Benchmark-Evidence-Hub.md)를 따른다.
+- develop 기준선의 cooldown은 60s ([Develop-Code-Baseline-2026-07-15](Develop-Code-Baseline-2026-07-15.md)).
+- VLM mock은 `VLM-RAG-DBless-Mock-MVP.md`에 정의; 운영은 `INTEGRATION_PENDING`.
+- 데이터셋 간 수치 직접 비교 금지.
 
 ---
 #ai-pipeline #yolo26n #tensorrt #tracking #lstm #architecture
