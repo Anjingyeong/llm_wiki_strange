@@ -69,6 +69,7 @@ type WikiToolsPanelProps = {
 };
 export function WikiToolsPanel({ initialTab = 'search', onSelectDocument, onAuthRequired }: WikiToolsPanelProps) {
 
+  const [tab, setTab] = useState<TabId>(initialTab);
   useEffect(() => {
     setTab(initialTab);
   }, [initialTab]);
