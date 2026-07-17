@@ -1,4 +1,3 @@
-import { createReadStream } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
@@ -93,19 +92,29 @@ async function serveStatic(request, response) {
     if (!fileStat.isFile()) {
       throw new Error('Not a file');
     }
-    const stream = createReadStream(filePath);
+    const content = await readFile(filePath);
     response.writeHead(200, { 'content-type': contentType });
-    stream.pipe(response);
-  } catch (error) {
+    response.end(content);
+  } catch {
+    await serveIndexHtml(response);
+  }
+}
+
+async function serveIndexHtml(response) {
+  // Try dist/index.html first, then fall back to root index.html (for dev/test environments)
+  const candidates = [join(distDir, 'index.html'), join(root, 'index.html')];
+  for (const htmlPath of candidates) {
     try {
-      const indexHtmlPath = join(distDir, 'index.html');
-      const stream = createReadStream(indexHtmlPath);
+      const content = await readFile(htmlPath);
       response.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
-      stream.pipe(response);
-    } catch (e) {
-      sendJson(response, 404, { error: 'not_found' });
+      response.end(content);
+      return;
+    } catch {
+      // try next candidate
     }
   }
+  // No index.html found anywhere
+  sendJson(response, 404, { error: 'not_found' });
 }
 
 const server = createServer((request, response) => {
