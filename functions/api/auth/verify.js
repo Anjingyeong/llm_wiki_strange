@@ -1,4 +1,4 @@
-import { json } from '../../src/lib/pagesApiDispatch.mjs';
+import { json } from '../../../src/lib/pagesApiDispatch.mjs';
 
 export async function onRequestPost(context) {
   try {
