@@ -4,8 +4,8 @@
   "versionedPath": "data/rag/indexes/structure-aware-v1.json",
   "chunkCount": 658,
   "documentCount": 48,
-  "corpusHash": "b3c064c1a1b8dc58168108cad3635ef656bb77a4f6a19fb4e9f0857bc2d60577",
-  "generatedAt": "2026-07-18T03:50:32.220Z",
-  "updatedAt": "2026-07-18T03:50:32.389Z",
+  "corpusHash": "411c0c4b5a3d2ddd5edbe2e2bc4b67e3370d9c185e6884086d821b7141e6946d",
+  "generatedAt": "2026-07-18T05:23:52.267Z",
+  "updatedAt": "2026-07-18T05:23:52.844Z",
   "note": "Operational index is data/ragVectorIndex.json (Node + Cloudflare)."
 }
