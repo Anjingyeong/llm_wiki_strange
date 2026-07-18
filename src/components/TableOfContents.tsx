@@ -61,18 +61,34 @@ export function TableOfContents({ headings, documentSlug }: TableOfContentsProps
   }
 
   return (
-    <aside className="toc" aria-label="Table of contents">
-      <strong>On this page</strong>
-      {headings.map((heading) => (
-        <a
-          aria-current={heading.id === activeId ? 'location' : undefined}
-          className={`level${heading.level}`}
-          href={wikiLink(documentSlug, heading.id)}
-          key={heading.id}
-        >
-          {heading.text}
-        </a>
-      ))}
-    </aside>
+    <>
+      <details className="inlineToc">
+        <summary>On this page</summary>
+        <nav aria-label="Inline table of contents">
+          {headings.map((heading) => (
+            <a
+              className={`level${heading.level}`}
+              href={wikiLink(documentSlug, heading.id)}
+              key={heading.id}
+            >
+              {heading.text}
+            </a>
+          ))}
+        </nav>
+      </details>
+      <aside className="toc" aria-label="Table of contents">
+        <strong>On this page</strong>
+        {headings.map((heading) => (
+          <a
+            aria-current={heading.id === activeId ? 'location' : undefined}
+            className={`level${heading.level}`}
+            href={wikiLink(documentSlug, heading.id)}
+            key={heading.id}
+          >
+            {heading.text}
+          </a>
+        ))}
+      </aside>
+    </>
   );
 }
