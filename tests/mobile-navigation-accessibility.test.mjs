@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const app = readFileSync(join(root, 'src/App.tsx'), 'utf8');
+const mobileNavigation = `${app}\n${readFileSync(join(root, 'src/components/useMobileWikiNavigation.ts'), 'utf8')}`;
 const header = readFileSync(join(root, 'src/components/StatusHeader.tsx'), 'utf8');
 const sidebar = readFileSync(join(root, 'src/components/Sidebar.tsx'), 'utf8');
 const css = readFileSync(join(root, 'src/styles.css'), 'utf8');
@@ -34,11 +35,11 @@ test('drawer focus enters on open and returns to the menu button on Escape', () 
   // When: the drawer opens and then receives Escape.
   // Then: focus enters the drawer and is restored to the trigger when it closes.
   assert.match(
-    app,
+    mobileNavigation,
     /querySelector<HTMLElement>\('button:not\(\[disabled\]\)'\)[\s\S]*?\.focus\(\)/,
   );
-  assert.match(app, /e\.key === 'Escape'[\s\S]*closeMobileNav\(\)/);
-  assert.match(app, /mobileMenuButtonRef\.current\?\.focus\(\)/);
+  assert.match(mobileNavigation, /e\.key === 'Escape'[\s\S]*closeMobileNav\(\)/);
+  assert.match(mobileNavigation, /mobileMenuButtonRef\.current\?\.focus\(\)/);
   assert.match(header, /ref=\{menuButtonRef\}/);
 });
 
@@ -46,9 +47,9 @@ test('open drawer wraps Tab focus at both boundaries', () => {
   // Given: focus is on either edge of the open drawer's focusable controls.
   // When: the user presses Tab or Shift+Tab toward the outside of the drawer.
   // Then: focus wraps to the opposite edge instead of escaping the drawer.
-  assert.match(app, /e\.key\s*[!=]==\s*'Tab'/);
-  assert.match(app, /e\.shiftKey[\s\S]*lastFocusable\.focus\(\)/);
-  assert.match(app, /activeElement === lastFocusable[\s\S]*firstFocusable\.focus\(\)/);
+  assert.match(mobileNavigation, /e\.key\s*[!=]==\s*'Tab'/);
+  assert.match(mobileNavigation, /e\.shiftKey[\s\S]*lastFocusable\.focus\(\)/);
+  assert.match(mobileNavigation, /activeElement === lastFocusable[\s\S]*firstFocusable\.focus\(\)/);
 });
 
 test('shell provides skip navigation, visible keyboard focus, and reduced motion', () => {

@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
-import type { WikiDocument } from '../lib/types';
+import type { WikiTaskNavigationGroup } from '../lib/types';
 import { getDisplayTitle } from '../lib/types';
+import { WikiNavIcon } from './WikiNavIcon';
 
 export const WIKI_SIDEBAR_ID = 'wiki-sidebar';
 
 const MOBILE_VIEWPORT_QUERY = '(max-width: 720px)';
 
-type CategoryGroup = {
-  readonly category: string;
-  readonly documents: readonly WikiDocument[];
-};
-
 type SidebarProps = {
-  readonly groups: readonly CategoryGroup[];
+  readonly groups: readonly WikiTaskNavigationGroup[];
   readonly activeSlug: string;
   readonly onSelect: (slug: string) => void;
   readonly mobileOpen?: boolean;
@@ -27,7 +23,7 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
     const initial: Record<string, boolean> = {};
     groups.forEach((group) => {
       const hasActive = group.documents.some((doc) => doc.slug === activeSlug);
-      initial[group.category] = !hasActive;
+      initial[group.id] = !hasActive;
     });
     return initial;
   });
@@ -47,16 +43,16 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
       if (hasActive) {
         setCollapsedGroups((prev) => ({
           ...prev,
-          [group.category]: false,
+          [group.id]: false,
         }));
       }
     });
   }, [activeSlug, groups]);
 
-  const toggleGroup = (category: string) => {
+  const toggleGroup = (groupId: string) => {
     setCollapsedGroups((prev) => ({
       ...prev,
-      [category]: !prev[category],
+      [groupId]: !prev[groupId],
     }));
   };
 
@@ -77,24 +73,26 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
     >
       {/* Navigation (no brand per spec) */}
       <div className="sidebarNav">
-        <nav aria-label="Document categories">
+        <nav aria-label="Browse wiki by task">
           {groups.map((group) => {
-            const isCollapsed = collapsedGroups[group.category] ?? true;
+            const isCollapsed = collapsedGroups[group.id] ?? true;
+            const itemsId = `wiki-task-${group.id}`;
             return (
-              <section className="navGroup" key={group.category}>
+              <section className="navGroup" key={group.id}>
                 <button
                   className="navGroupHeader"
-                  onClick={() => toggleGroup(group.category)}
+                  onClick={() => toggleGroup(group.id)}
                   aria-expanded={!isCollapsed}
+                  aria-controls={itemsId}
                   type="button"
                 >
-                  <span className="folderIcon">{isCollapsed ? '📁' : '📂'}</span>
-                  <span className="categoryTitle">{group.category}</span>
-                  <span className="arrowIcon">{isCollapsed ? '▶' : '▼'}</span>
+                  <span className="folderIcon"><WikiNavIcon name="task" /></span>
+                  <span className="categoryTitle">{group.label}</span>
+                  <span className="arrowIcon"><WikiNavIcon name="chevron" expanded={!isCollapsed} /></span>
                 </button>
                 
                 {!isCollapsed && (
-                  <div className="navGroupItems">
+                  <div className="navGroupItems" id={itemsId}>
                     {group.documents.map((document) => (
                       <button
                         className={document.slug === activeSlug ? 'navItem active' : 'navItem'}
@@ -103,7 +101,7 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
                         type="button"
                         aria-current={document.slug === activeSlug ? 'page' : undefined}
                       >
-                        <span className="docIcon">📄</span>
+                        <span className="docIcon"><WikiNavIcon name="document" /></span>
                         <span className="docTitle">{getDisplayTitle(document)}</span>
                       </button>
                     ))}

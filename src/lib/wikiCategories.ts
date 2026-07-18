@@ -1,6 +1,6 @@
 /**
  * Single source of truth for `category:` values allowed in content/*.md frontmatter.
- * Sidebar MOC groups (01. Project Overview …) live in documents.ts as `sidebarMocCategories`.
+ * Sidebar reader-task groups live in wikiTaskNavigation.ts and are separate from this field.
  */
 export const WIKI_FRONTMATTER_CATEGORIES = [
   'Project',

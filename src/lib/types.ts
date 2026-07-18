@@ -64,14 +64,18 @@ export type WikiRelationshipGraphEntry = {
   readonly backlinks: readonly WikiBacklink[];
 };
 
-/** Sidebar / MOC section labels (not written in frontmatter). */
-export type WikiSidebarMocCategory =
-  | '01. Project Overview (프로젝트 개요)'
-  | '02. AI & Data Pipeline (AI 및 데이터 처리)'
-  | '03. Streaming & Sync (스트리밍 및 동기화)'
-  | '04. Knowledge Base (위키 및 검색)'
-  | '05. Management & Retrospective (운영 및 회고)'
-  | '06. 설계 판단 (Engineering Decisions)';
+export type WikiTaskNavigationId =
+  | 'understand-system'
+  | 'trace-ai-decisions'
+  | 'debug-runtime'
+  | 'inspect-evidence'
+  | 'operate-and-reflect';
+
+export type WikiTaskNavigationGroup = {
+  readonly id: WikiTaskNavigationId;
+  readonly label: string;
+  readonly documents: readonly WikiDocument[];
+};
 
 export type Frontmatter = {
   readonly title: string;

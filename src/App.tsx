@@ -1,16 +1,17 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
 import { Sidebar, WIKI_SIDEBAR_ID } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { WikiToolsPanel } from './components/WikiToolsPanel';
 import { AccessGate } from './components/AccessGate';
-import { documentsByCategory, documentsBySlug, getInitialDocument } from './lib/documents';
+import { documentsBySlug, documentsByTask, getInitialDocument } from './lib/documents';
 import { isExcerptDuplicate } from './lib/frontmatter';
 import { getDisplayTitle } from './lib/types';
 import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
 import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
 import { clearWikiAccessKey, getWikiAccessKey, hasWikiAccessKey } from './lib/wikiAccessKey';
+import { useMobileWikiNavigation } from './components/useMobileWikiNavigation';
 
 export function App() {
   const initial = getInitialDocument();
@@ -25,8 +26,8 @@ export function App() {
   const [toolsTab, setToolsTab] = useState<'search' | 'ask' | 'system'>(() =>
     initialHash.view === 'rag' ? 'ask' : 'search',
   );
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const { closeMobileNav, mobileMenuButtonRef, mobileNavOpen, openMobileNav } =
+    useMobileWikiNavigation(WIKI_SIDEBAR_ID);
 
   // Access gate state
   const [accessKeyRequired, setAccessKeyRequired] = useState<boolean>(false);
@@ -57,71 +58,6 @@ export function App() {
       });
     return () => { cancelled = true; };
   }, []);
-
-  const closeMobileNav = useCallback(() => {
-    if (!mobileNavOpen) return;
-    setMobileNavOpen(false);
-    window.requestAnimationFrame(() => mobileMenuButtonRef.current?.focus());
-  }, [mobileNavOpen]);
-
-  const openMobileNav = () => setMobileNavOpen(true);
-
-  useEffect(() => {
-    if (!mobileNavOpen) return;
-    const frame = window.requestAnimationFrame(() => {
-      document
-        .getElementById(WIKI_SIDEBAR_ID)
-        ?.querySelector<HTMLElement>('button:not([disabled])')
-        ?.focus();
-    });
-    return () => window.cancelAnimationFrame(frame);
-  }, [mobileNavOpen]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileNavOpen) {
-        closeMobileNav();
-        return;
-      }
-
-      if (e.key !== 'Tab' || !mobileNavOpen) return;
-      const sidebar = document.getElementById(WIKI_SIDEBAR_ID);
-      if (!sidebar) return;
-
-      const focusableElements = Array.from(
-        sidebar.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]'),
-      ).filter((element) => element.offsetParent !== null);
-      const firstFocusable = focusableElements.at(0);
-      const lastFocusable = focusableElements.at(-1);
-      if (!firstFocusable || !lastFocusable) return;
-
-      const activeElement = document.activeElement;
-      if (e.shiftKey) {
-        if (activeElement === firstFocusable || !sidebar.contains(activeElement)) {
-          e.preventDefault();
-          lastFocusable.focus();
-        }
-        return;
-      }
-
-      if (activeElement === lastFocusable || !sidebar.contains(activeElement)) {
-        e.preventDefault();
-        firstFocusable.focus();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [closeMobileNav, mobileNavOpen]);
-
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    if (mobileNavOpen) {
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [mobileNavOpen]);
 
   useEffect(() => {
     if (!pendingSectionId || !activeDocument) return;
@@ -200,7 +136,7 @@ export function App() {
           sidebarId={WIKI_SIDEBAR_ID}
         />
         <div className="appShell">
-          <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={closeMobileNav} />
+          <Sidebar activeSlug={activeSlug} groups={documentsByTask} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={closeMobileNav} />
           <main className="notFound" id="wiki-main-content">
             <h1>문서를 찾을 수 없습니다</h1>
             <p>
@@ -227,7 +163,7 @@ export function App() {
       <div className="appShell">
         <Sidebar
           activeSlug={activeSlug}
-          groups={documentsByCategory}
+          groups={documentsByTask}
           onSelect={selectDocument}
           mobileOpen={mobileNavOpen}
           onClose={closeMobileNav}
