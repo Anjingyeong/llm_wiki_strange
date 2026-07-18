@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { MarkdownRenderer } from './components/MarkdownRenderer';
+import { DocumentArticle } from './components/DocumentArticle';
 import { Sidebar, WIKI_SIDEBAR_ID } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { WikiToolsPanel } from './components/WikiToolsPanel';
 import { AccessGate } from './components/AccessGate';
 import { documentsBySlug, documentsByTask, getInitialDocument } from './lib/documents';
-import { isExcerptDuplicate } from './lib/frontmatter';
-import { getDisplayTitle } from './lib/types';
 import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
 import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
 import { clearWikiAccessKey, getWikiAccessKey, hasWikiAccessKey } from './lib/wikiAccessKey';
@@ -172,29 +170,7 @@ export function App() {
         <main className="content" id="wiki-main-content" role="main">
           <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} onAuthRequired={() => { clearWikiAccessKey(); setAuthed(false); }} />
           {contentView === 'doc' && activeDocument ? (
-            <article className="docCard">
-              <header className="docHeader">
-                <span>{activeDocument.category}</span>
-                <h1>{getDisplayTitle(activeDocument)}</h1>
-                {getDisplayTitle(activeDocument) !== activeDocument.title ? (
-                  <p className="formalTitle">정식 제목: {activeDocument.title}</p>
-                ) : null}
-                {!isExcerptDuplicate(activeDocument.body, activeDocument.excerpt) && (
-                  <p>{activeDocument.excerpt}</p>
-                )}
-                <div className="tagRow">
-                  {(activeDocument.tags ?? []).map((tag) => (
-                    <small key={tag}>{tag}</small>
-                  ))}
-                </div>
-              </header>
-              <MarkdownRenderer
-                markdown={activeDocument.body}
-                documentTitle={activeDocument.title}
-                displayTitle={getDisplayTitle(activeDocument)}
-                documentSlug={activeDocument.slug}
-              />
-            </article>
+            <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
           ) : null}
         </main>
         {mobileNavOpen && (

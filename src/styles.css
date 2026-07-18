@@ -763,6 +763,114 @@ a:hover {
   padding: 3px 9px;
 }
 
+.documentEvidence {
+  margin-bottom: 34px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.documentAnswer {
+  margin-bottom: 20px;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent);
+}
+
+.documentAnswer h2 {
+  margin: 0 0 6px;
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.documentAnswer p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.documentFacts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  border-block: 1px solid var(--line);
+}
+
+.documentFacts > div {
+  min-width: 0;
+  padding: 12px 14px 12px 0;
+}
+
+.documentFacts dt {
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.documentFacts dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.documentReplacement {
+  margin: 16px 0 0;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  color: var(--text-sub);
+}
+
+.documentReplacement strong {
+  margin-right: 8px;
+}
+
+.documentRelationships {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.documentRelationships h3 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.documentRelationships ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.documentRelationItem {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  min-width: 0;
+  line-height: 1.45;
+}
+
+.documentRelationDirection {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.documentRelationItem a {
+  min-width: 0;
+  font-size: 0.86rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+  text-underline-offset: 3px;
+}
+
 /* ── 8. Markdown Viewer ──────────────────────────────────────── */
 .markdown {
   font-size: 15.5px;
@@ -1349,6 +1457,15 @@ blockquote {
 
   .docHeader h1 {
     font-size: 1.5rem;
+  }
+
+  .documentFacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .documentRelationships {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .tableWrap {
