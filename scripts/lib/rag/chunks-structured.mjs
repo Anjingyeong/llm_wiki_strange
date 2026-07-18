@@ -11,18 +11,28 @@ const MAX_CHUNK_CHARS = 1400;
 
 function asStringList(value) {
   if (Array.isArray(value)) {
-    return value.map((item) => String(item)).filter(Boolean);
+    const items = [];
+    for (const item of value) {
+      const normalized = String(item);
+      if (normalized) {
+        items.push(normalized);
+      }
+    }
+    return items;
   }
   if (typeof value !== 'string' || !value.trim()) {
     return [];
   }
   const trimmed = value.trim();
   if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
-    return trimmed
-      .slice(1, -1)
-      .split(',')
-      .map((item) => item.trim().replace(/^["']|["']$/g, ''))
-      .filter(Boolean);
+    const items = [];
+    for (const item of trimmed.slice(1, -1).split(',')) {
+      const normalized = item.trim().replace(/^["']|["']$/g, '');
+      if (normalized) {
+        items.push(normalized);
+      }
+    }
+    return items;
   }
   return [trimmed];
 }
@@ -98,12 +108,14 @@ function extractTechTerms(text, tags = []) {
 export function parseMarkdownUnits(body) {
   const lines = body.split(/\r?\n/);
   const units = [];
-  const allocatedSectionIds = allocateHeadingIds(
-    lines
-      .map((line) => /^(#{2,3})\s+(.+)$/.exec(line))
-      .filter(Boolean)
-      .map((match) => ({ text: stripInlineMarkdown(match[2]), level: match[1].length })),
-  );
+  const sectionHeadings = [];
+  for (const line of lines) {
+    const match = /^(#{2,3})\s+(.+)$/.exec(line);
+    if (match) {
+      sectionHeadings.push({ text: stripInlineMarkdown(match[2]), level: match[1].length });
+    }
+  }
+  const allocatedSectionIds = allocateHeadingIds(sectionHeadings);
   let allocatedSectionIndex = 0;
   let currentSectionId = null;
   let headingStack = [];

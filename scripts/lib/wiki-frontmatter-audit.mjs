@@ -91,20 +91,30 @@ export async function auditWikiContent(contentDir) {
   const violations = [];
   const records = [];
 
-  for (const file of files) {
+  const parsedFiles = await Promise.all(files.map(async (file) => {
     const slug = file.replace(/\.md$/, '');
     const raw = await readFile(join(contentDir, file), 'utf8');
-    let parsed;
     try {
-      parsed = parseWikiSourceDocument(raw, file);
+      const parsed = parseWikiSourceDocument(raw, file);
+      return {
+        record: { slug, data: parsed.data, isPublic: !isExcludedFromPublicIndex(parsed.data) },
+      };
     } catch (error) {
       if (!(error instanceof Error)) {
         throw error;
       }
-      violations.push({ slug, field: 'frontmatter', message: `${slug}.frontmatter: ${error.message}` });
-      continue;
+      return {
+        violation: { slug, field: 'frontmatter', message: `${slug}.frontmatter: ${error.message}` },
+      };
     }
-    records.push({ slug, data: parsed.data, isPublic: !isExcludedFromPublicIndex(parsed.data) });
+  }));
+
+  for (const parsedFile of parsedFiles) {
+    if (parsedFile.violation) {
+      violations.push(parsedFile.violation);
+    } else if (parsedFile.record) {
+      records.push(parsedFile.record);
+    }
   }
 
   const allSlugs = new Set(records.map((record) => record.slug));

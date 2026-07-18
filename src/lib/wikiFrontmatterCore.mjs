@@ -47,11 +47,14 @@ export function stripWikiFrontmatterQuotes(value) {
  */
 export function parseWikiFrontmatterList(value) {
   if (/^\s*-\s+/m.test(value)) {
-    return value
-      .split(/\r?\n/)
-      .map((item) => item.replace(/^\s*-\s*/, ''))
-      .map((item) => stripWikiFrontmatterQuotes(item))
-      .filter(Boolean);
+    const items = [];
+    for (const line of value.split(/\r?\n/)) {
+      const item = stripWikiFrontmatterQuotes(line.replace(/^\s*-\s*/, ''));
+      if (item) {
+        items.push(item);
+      }
+    }
+    return items;
   }
 
   if (!value.startsWith('[') || !value.endsWith(']')) {
