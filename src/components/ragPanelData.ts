@@ -1,11 +1,3 @@
-export const ANSWER_MODE_LABELS: Record<string, string> = {
-  flow_mode: '⚙️ 동작 흐름',
-  evidence_template: '✅ 검증 근거',
-  portfolio_mode: '💼 포트폴리오',
-  troubleshooting_mode: '🔧 문제 해결',
-  general: '📄 일반',
-};
-
 export const QUICK_QUESTIONS = [
   { label: 'YOLO26n-pose 선정', query: 'YOLO26n-pose를 선택한 근거는?' },
   { label: 'PyTorch vs TensorRT', query: 'PyTorch와 TensorRT 성능 차이는 무엇인가요?' },

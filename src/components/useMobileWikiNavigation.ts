@@ -37,8 +37,8 @@ export function useMobileWikiNavigation(sidebarId: string) {
       const focusableElements = Array.from(
         sidebar.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]'),
       ).filter((element) => element.offsetParent !== null);
-      const firstFocusable = focusableElements.at(0);
-      const lastFocusable = focusableElements.at(-1);
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
       if (!firstFocusable || !lastFocusable) return;
 
       const activeElement = document.activeElement;

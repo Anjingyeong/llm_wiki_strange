@@ -115,8 +115,9 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Pretendard', 'Inter', ui-sans-serif, system-ui,
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR',
+    'Malgun Gothic', 'Segoe UI', sans-serif;
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -762,6 +763,108 @@ a:hover {
   border-radius: var(--radius-pill);
   padding: 3px 9px;
 }
+
+.wikiCommandBar {
+  max-width: var(--content-max);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.wikiCommandBar button,
+.wikiSystemStatus summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-sub);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wikiCommandBar button:hover,
+.wikiSystemStatus summary:hover { background: var(--panel-strong); color: var(--text); }
+.wikiCommandBar svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.wikiSystemStatus { position: relative; }
+.wikiSystemStatus summary { list-style: none; }
+.wikiSystemStatus summary::-webkit-details-marker { display: none; }
+.wikiSystemStatus[open] { z-index: 10; }
+.wikiSystemStatus dl {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(420px, calc(100vw - 32px));
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  box-shadow: var(--shadow-md);
+}
+.wikiSystemStatus dl div { display: grid; grid-template-columns: 104px 1fr; gap: 10px; padding: 5px 0; }
+.wikiSystemStatus dt { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+.wikiSystemStatus dd { color: var(--text-sub); font-size: 0.8rem; }
+.wikiSystemStatus p { position: absolute; top: calc(100% + 78px); right: 14px; z-index: 1; width: min(390px, calc(100vw - 60px)); color: var(--muted); font-size: 0.72rem; }
+
+.wikiWorkspace {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+}
+.wikiWorkspaceHeader { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.wikiWorkspaceHeader h1 { margin-top: 3px; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+.workspaceEyebrow { color: var(--accent-text); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.workspaceBack { min-height: 36px; padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: transparent; color: var(--blue); cursor: pointer; }
+.wikiWorkspace > label,
+.wikiAskWorkspace form label { display: block; margin-bottom: 7px; color: var(--text-sub); font-size: 0.875rem; font-weight: 700; }
+.wikiSearchWorkspace > input,
+.wikiAskWorkspace textarea { width: 100%; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: var(--bg); padding: 11px 13px; color: var(--text); }
+.wikiSearchWorkspace .searchMeta { margin: 8px 0 18px; padding: 0; }
+.searchResultList { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.searchResultList li { border-bottom: 1px solid var(--line); }
+.searchResultList a { display: grid; gap: 5px; padding: 16px 4px; color: var(--text); }
+.searchResultList a:hover { background: var(--panel-strong); text-decoration: none; }
+.searchResultContext,
+.searchResultEvidence,
+.searchResultSection { color: var(--muted); font-size: 0.75rem; }
+.searchResultSection { color: var(--blue-text); }
+.searchResultExcerpt { color: var(--text-sub); font-size: 0.875rem; line-height: 1.6; }
+.searchResultList .searchResultReason { width: fit-content; }
+
+.workspaceHint,
+.workspaceLiveStatus { color: var(--muted); font-size: 0.875rem; }
+.ragQuickButtons { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0; }
+.ragQuickButtons button { padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: transparent; color: var(--text-sub); cursor: pointer; }
+.wikiAskWorkspace form { display: grid; gap: 8px; }
+.wikiAskWorkspace form button { justify-self: start; min-height: 40px; padding: 8px 16px; border: 0; border-radius: var(--radius-sm); background: var(--accent); color: white; font-weight: 700; cursor: pointer; }
+.wikiAskWorkspace form button:disabled { opacity: 0.55; cursor: not-allowed; }
+.workspaceLiveStatus { min-height: 1.5em; margin: 10px 0; }
+.ragAnswer { margin-top: 18px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--bg); }
+.ragAnswer.insufficient_context { border-color: var(--warning); }
+.ragAnswer.error { border-color: var(--danger); }
+.ragAnswer > header { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+.ragAnswer > header span { padding: 3px 7px; border-radius: var(--radius-sm); background: var(--panel-strong); color: var(--text-sub); font-size: 0.75rem; }
+.ragQuestion,
+.ragFallbackReason { color: var(--muted); font-size: 0.8rem; }
+.ragSources { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.ragSources h2 { font-size: 0.95rem; }
+.ragSources ul { display: grid; gap: 8px; margin-top: 8px; padding: 0; list-style: none; }
+.ragSources a { display: grid; gap: 2px; padding: 9px 10px; border-left: 2px solid var(--blue); background: var(--panel); }
+.ragSources a span,
+.ragSources a small { color: var(--muted); font-size: 0.75rem; }
+.ragDebugDetails { margin-top: 16px; font-size: 0.8rem; }
+.ragDebugDetails pre { max-height: 320px; margin-top: 8px; padding: 12px; overflow: auto; border-radius: var(--radius-sm); background: var(--code-bg); color: var(--code-text); }
 
 .documentEvidence {
   margin-bottom: 34px;
@@ -1445,6 +1548,14 @@ blockquote {
   .content {
     padding: 16px 16px 40px;
   }
+
+  .wikiCommandBar { overflow-x: auto; }
+  .wikiCommandBar button,
+  .wikiSystemStatus summary { min-height: 44px; white-space: nowrap; }
+  .wikiWorkspace { padding: 18px 16px 24px; }
+  .wikiWorkspaceHeader { align-items: stretch; flex-direction: column; margin-bottom: 20px; }
+  .workspaceBack { min-height: 44px; }
+  .wikiAskWorkspace form button { width: 100%; min-height: 44px; }
 
   .searchPanel {
     position: relative;

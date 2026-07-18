@@ -23,7 +23,7 @@
     "preview:dist": "node server.mjs",
     "build": "npm run generate:index && npm run check:index && tsc -b && vite build",
     "benchmark:rag": "node scripts/run-benchmark.mjs",
-    "lint": "tsc --noEmit"
+    "lint": "tsc -b --pretty false"
   },
   "dependencies": {
     "@vitejs/plugin-react": "4.7.0",

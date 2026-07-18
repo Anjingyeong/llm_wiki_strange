@@ -91,7 +91,10 @@ export const WIKI_TASK_NAVIGATION = [
   },
 ] as const satisfies readonly WikiTaskDefinition[];
 
-const taskPositionBySlug = new Map(
+const taskPositionBySlug = new Map<string, {
+  readonly taskIndex: number;
+  readonly documentIndex: number;
+}>(
   WIKI_TASK_NAVIGATION.flatMap((task, taskIndex) =>
     task.slugs.map((slug, documentIndex) => [slug, { taskIndex, documentIndex }] as const),
   ),

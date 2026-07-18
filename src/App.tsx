@@ -3,11 +3,13 @@ import { DocumentArticle } from './components/DocumentArticle';
 import { Sidebar, WIKI_SIDEBAR_ID } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
-import { WikiToolsPanel } from './components/WikiToolsPanel';
+import { WikiAskWorkspace } from './components/WikiAskWorkspace';
+import { WikiCommandBar } from './components/WikiCommandBar';
+import { WikiSearchWorkspace } from './components/WikiSearchWorkspace';
 import { AccessGate } from './components/AccessGate';
 import { documentsBySlug, documentsByTask, getInitialDocument } from './lib/documents';
 import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
-import { parseLocationHash, writeDocumentHash, type WikiView } from './lib/wikiHash';
+import { parseLocationHash, writeDocumentHash, writeViewHash, type WikiView } from './lib/wikiHash';
 import { clearWikiAccessKey, getWikiAccessKey, hasWikiAccessKey } from './lib/wikiAccessKey';
 import { useMobileWikiNavigation } from './components/useMobileWikiNavigation';
 
@@ -20,9 +22,6 @@ export function App() {
   );
   const [pendingSectionId, setPendingSectionId] = useState<string | null>(() =>
     initialHash.view === 'doc' ? initialHash.sectionId : null,
-  );
-  const [toolsTab, setToolsTab] = useState<'search' | 'ask' | 'system'>(() =>
-    initialHash.view === 'rag' ? 'ask' : 'search',
   );
   const { closeMobileNav, mobileMenuButtonRef, mobileNavOpen, openMobileNav } =
     useMobileWikiNavigation(WIKI_SIDEBAR_ID);
@@ -87,8 +86,6 @@ export function App() {
     const onHash = () => {
       const parsed = parseLocationHash();
       setContentView(parsed.view);
-      if (parsed.view === 'search') setToolsTab('search');
-      if (parsed.view === 'rag') setToolsTab('ask');
       if (parsed.view === 'doc' && parsed.slug) {
         setActiveSlug(parsed.slug);
         setPendingSectionId(parsed.sectionId);
@@ -109,6 +106,14 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  const openWorkspace = (view: Exclude<WikiView, 'doc'>) => {
+    setContentView(view);
+    writeViewHash(view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const returnToDocument = () => selectDocument(activeSlug);
 
   const onAuthed = () => {
     setAuthed(true);
@@ -168,9 +173,21 @@ export function App() {
           aria-label="Wiki navigation"
         />
         <main className="content" id="wiki-main-content" role="main">
-          <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} onAuthRequired={() => { clearWikiAccessKey(); setAuthed(false); }} />
           {contentView === 'doc' && activeDocument ? (
-            <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
+            <>
+              <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} />
+              <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
+            </>
+          ) : null}
+          {contentView === 'search' ? (
+            <WikiSearchWorkspace onReturnToDocument={returnToDocument} onSelectDocument={selectDocument} />
+          ) : null}
+          {contentView === 'rag' ? (
+            <WikiAskWorkspace
+              onAuthRequired={() => { clearWikiAccessKey(); setAuthed(false); }}
+              onReturnToDocument={returnToDocument}
+              onSelectDocument={selectDocument}
+            />
           ) : null}
         </main>
         {mobileNavOpen && (
