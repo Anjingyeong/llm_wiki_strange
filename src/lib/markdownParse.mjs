@@ -4,6 +4,8 @@
  * Soft breaks: join with a single space.
  */
 
+export { resolveWikiMarkdownHref } from './wikiMarkdownLinks.mjs';
+
 /**
  * @typedef {{ text: string, hardBreak: boolean }} ParagraphLine
  * @typedef {|

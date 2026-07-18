@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { describe, it } from 'node:test';
 
 import {
@@ -6,7 +7,9 @@ import {
   isDuplicateDocumentH1,
   parseMarkdownBlocks,
   parseParagraphLine,
+  resolveWikiMarkdownHref,
 } from '../src/lib/markdownParse.mjs';
+import { parseWikiInlineMarkdown } from '../src/lib/wikiMarkdownLinks.mjs';
 
 describe('parseParagraphLine hard/soft breaks', () => {
   it('soft line has no hardBreak', () => {
@@ -98,6 +101,93 @@ describe('duplicate H1 detection', () => {
     assert.equal(
       isDuplicateDocumentH1('별도 섹션 제목 아님', '정식 문서 제목', '내비 제목'),
       false,
+    );
+  });
+});
+
+describe('wiki Markdown links', () => {
+  it('resolves document and encoded section routes', () => {
+    assert.equal(resolveWikiMarkdownHref('Architecture.md'), '#/Architecture');
+    assert.equal(resolveWikiMarkdownHref('./Architecture.md'), '#/Architecture');
+    assert.equal(
+      resolveWikiMarkdownHref('./AI-Pipeline.md#벤치마크'),
+      '#/AI-Pipeline/%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC',
+    );
+  });
+
+  it('rejects external, unsafe, malformed, and unsupported hrefs', () => {
+    for (const href of [
+      'https://example.com/reference',
+      'mailto:team@example.com',
+      '#local-section',
+      'javascript:alert(1)',
+      'javascript:Architecture.md',
+      'data:text/html,unsafe',
+      'data:Architecture.md',
+      './Architecture.txt',
+      '../Architecture.md',
+      './Architecture.md#',
+      ' ./Architecture.md',
+      `./Architecture.md#${String.fromCharCode(0xd800)}`,
+    ]) {
+      assert.equal(resolveWikiMarkdownHref(href), null, href);
+    }
+  });
+
+  it('renders the shared inline path across every prose block without click interception', () => {
+    const renderer = fs.readFileSync(
+      new URL('../src/components/MarkdownRenderer.tsx', import.meta.url),
+      'utf8',
+    );
+    const inlineCalls = renderer.match(/inlineMarkdown\(/gu) ?? [];
+
+    assert.ok(inlineCalls.length >= 5, 'headings, lists, quotes, and table cells use inline rendering');
+    assert.match(renderer, /renderParagraphLines\(block\.lines\)/u);
+
+    const inlineRenderer = fs.readFileSync(
+      new URL('../src/lib/markdown.tsx', import.meta.url),
+      'utf8',
+    );
+    assert.match(inlineRenderer, /<a href=\{token\.href\}/u);
+    assert.doesNotMatch(inlineRenderer, /onClick=/u);
+  });
+
+  it('scopes muted heading link styles to section permalinks', () => {
+    const styles = fs.readFileSync(
+      new URL('../src/styles.css', import.meta.url),
+      'utf8',
+    );
+
+    assert.match(styles, /\.markdown h2 a\.headingPermalink,/u);
+    assert.match(styles, /\.markdown h3 a\.headingPermalink:hover/u);
+    assert.doesNotMatch(styles, /\.markdown h2 a,\s*\.markdown h3 a\s*\{/u);
+    assert.doesNotMatch(styles, /\.markdown h2 a:hover,\s*\.markdown h3 a:hover\s*\{/u);
+    assert.match(styles, /:focus-visible\s*\{/u);
+  });
+
+  it('keeps code and strong rendering tokens around genuine wiki links', () => {
+    assert.deepEqual(
+      parseWikiInlineMarkdown('읽기 **[설계](Architecture.md)** 및 `[가짜](AI-Pipeline.md)`.'),
+      [
+        { kind: 'text', value: '읽기 ' },
+        {
+          kind: 'strong',
+          children: [{ kind: 'wiki-link', href: '#/Architecture', label: '설계' }],
+        },
+        { kind: 'text', value: ' 및 ' },
+        { kind: 'code', value: '[가짜](AI-Pipeline.md)' },
+        { kind: 'text', value: '.' },
+      ],
+    );
+  });
+
+  it('leaves unsafe Markdown links as literal text', () => {
+    assert.deepEqual(
+      parseWikiInlineMarkdown('[위험](javascript:alert) [외부](https://example.com)'),
+      [{
+        kind: 'text',
+        value: '[위험](javascript:alert) [외부](https://example.com)',
+      }],
     );
   });
 });

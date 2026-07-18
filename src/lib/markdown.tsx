@@ -8,6 +8,7 @@ import {
   parseMarkdownBlocks as parseBlocksCore,
   parseParagraphLine,
 } from './markdownParse.mjs';
+import { parseWikiInlineMarkdown } from './wikiMarkdownLinks.mjs';
 
 export {
   flattenParagraphLines,
@@ -20,15 +21,23 @@ export const parseMarkdownBlocks = parseBlocksCore;
 type ParagraphLine = { readonly text: string; readonly hardBreak: boolean };
 
 export function inlineMarkdown(text: string): ReactNode {
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
-  return parts.map((part, index) => {
-    if (part.startsWith('`') && part.endsWith('`')) {
-      return <code key={`${part}-${index}`}>{part.slice(1, -1)}</code>;
+  return renderInlineTokens(parseWikiInlineMarkdown(text));
+}
+
+type InlineToken = ReturnType<typeof parseWikiInlineMarkdown>[number];
+
+function renderInlineTokens(tokens: readonly InlineToken[]): ReactNode {
+  return tokens.map((token, index) => {
+    switch (token.kind) {
+      case 'code':
+        return <code key={`nested-code-${index}`}>{token.value}</code>;
+      case 'strong':
+        return <strong key={`nested-strong-${index}`}>{renderInlineTokens(token.children)}</strong>;
+      case 'wiki-link':
+        return <a href={token.href} key={`nested-link-${token.href}-${index}`}>{inlineMarkdown(token.label)}</a>;
+      case 'text':
+        return <Fragment key={`nested-text-${index}`}>{token.value}</Fragment>;
     }
-    if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong key={`${part}-${index}`}>{part.slice(2, -2)}</strong>;
-    }
-    return <Fragment key={`${index}-${part.slice(0, 12)}`}>{part}</Fragment>;
   });
 }
 

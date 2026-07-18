@@ -53,13 +53,27 @@ export function MarkdownRenderer({
             if (block.level === 2) {
               return (
                 <h2 id={id} key={`${id}-${index}`}>
-                  <a href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}>{inlineMarkdown(block.text)}</a>
+                  {inlineMarkdown(block.text)}{' '}
+                  <a
+                    aria-label={`${block.text} 섹션 링크`}
+                    className="headingPermalink"
+                    href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}
+                  >
+                    #
+                  </a>
                 </h2>
               );
             }
             return (
               <h3 id={id} key={`${id}-${index}`}>
-                <a href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}>{inlineMarkdown(block.text)}</a>
+                {inlineMarkdown(block.text)}{' '}
+                <a
+                  aria-label={`${block.text} 섹션 링크`}
+                  className="headingPermalink"
+                  href={documentSlug ? wikiLink(documentSlug, id) : `#${id}`}
+                >
+                  #
+                </a>
               </h3>
             );
           }

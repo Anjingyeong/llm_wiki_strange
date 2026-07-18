@@ -906,14 +906,14 @@ a:hover {
   color: var(--text-sub);
 }
 
-.markdown h2 a,
-.markdown h3 a {
+.markdown h2 a.headingPermalink,
+.markdown h3 a.headingPermalink {
   color: inherit;
   text-decoration: none;
 }
 
-.markdown h2 a:hover,
-.markdown h3 a:hover {
+.markdown h2 a.headingPermalink:hover,
+.markdown h3 a.headingPermalink:hover {
   color: var(--accent);
 }
 
