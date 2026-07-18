@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { describe, it } from 'node:test';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { createServer } from 'vite';
 
 import {
   flattenParagraphLines,
@@ -106,6 +109,37 @@ describe('duplicate H1 detection', () => {
 });
 
 describe('wiki Markdown links', () => {
+  it('Given duplicate inline tokens When rendered Then stable keys preserve exact markup and links', async () => {
+    const inlineRenderer = fs.readFileSync(
+      new URL('../src/lib/markdown.tsx', import.meta.url),
+      'utf8',
+    );
+
+    assert.doesNotMatch(inlineRenderer, /\.map\(\(token,\s*(?:index|i)\)/u);
+    assert.doesNotMatch(inlineRenderer, /key=\{`[^`]*\$\{(?:index|i)\}/u);
+
+    const server = await createServer({ appType: 'custom', server: { middlewareMode: true } });
+    try {
+      const markdown = await server.ssrLoadModule('/src/lib/markdown.tsx');
+      const rendered = renderToStaticMarkup(
+        React.createElement(
+          'p',
+          null,
+          markdown.inlineMarkdown(
+            '같음 같음 **굵게** **굵게** [설계](Architecture.md) [설계](Architecture.md)',
+          ),
+        ),
+      );
+
+      assert.equal(
+        rendered,
+        '<p>같음 같음 <strong>굵게</strong> <strong>굵게</strong> <a href="#/Architecture">설계</a> <a href="#/Architecture">설계</a></p>',
+      );
+    } finally {
+      await server.close();
+    }
+  });
+
   it('resolves document and encoded section routes', () => {
     assert.equal(resolveWikiMarkdownHref('Architecture.md'), '#/Architecture');
     assert.equal(resolveWikiMarkdownHref('./Architecture.md'), '#/Architecture');

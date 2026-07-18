@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import type { Ref } from 'react';
 
 import { wikiUxMeta } from '../generated/wikiUxMeta';
@@ -18,6 +18,43 @@ type HealthPayload = {
   readonly staleReasons: readonly string[];
   readonly llmAnswerMode: string | null;
 };
+
+type RuntimeHealthResponse = {
+  readonly ok: boolean;
+  readonly status: number;
+  readonly data: unknown;
+};
+
+type HealthStatus = {
+  readonly state: HealthState;
+  readonly staleReasons: readonly string[];
+  readonly statusReason: string;
+  readonly checkedAt: string | null;
+  readonly llmMode: string;
+};
+
+type HealthAction = {
+  readonly type: 'replace';
+  readonly status: HealthStatus;
+};
+
+const INITIAL_HEALTH_STATUS: HealthStatus = {
+  state: 'checking',
+  staleReasons: [],
+  statusReason: '런타임 상태를 확인하고 있습니다.',
+  checkedAt: null,
+  llmMode: 'rag_only',
+};
+
+function healthReducer(_current: HealthStatus, action: HealthAction): HealthStatus {
+  return action.status;
+}
+
+async function requestRuntimeHealth(signal: AbortSignal): Promise<RuntimeHealthResponse> {
+  const response = await fetch('/api/rag/health', { method: 'GET', signal });
+  const data: unknown = await response.json();
+  return { ok: response.ok, status: response.status, data };
+}
 
 function parseHealthPayload(value: unknown): HealthPayload | null {
   if (typeof value !== 'object' || value === null) return null;
@@ -49,67 +86,101 @@ export function StatusHeader({
   sidebarId,
   title = 'Smart Safety AI Wiki',
 }: StatusHeaderProps) {
-  const [healthState, setHealthState] = useState<HealthState>('checking');
-  const [staleReasons, setStaleReasons] = useState<readonly string[]>([]);
-  const [statusReason, setStatusReason] = useState('런타임 상태를 확인하고 있습니다.');
-  const [checkedAt, setCheckedAt] = useState<string | null>(null);
-  const [llmMode, setLlmMode] = useState('rag_only');
+  const [health, dispatchHealth] = useReducer(healthReducer, INITIAL_HEALTH_STATUS);
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/rag/health', { method: 'GET' })
-      .then(async (response) => ({ ok: response.ok, status: response.status, data: await response.json() }))
+    const controller = new AbortController();
+    requestRuntimeHealth(controller.signal)
       .then(({ ok, status, data }) => {
         if (cancelled) return;
-        setCheckedAt(new Date().toISOString());
+        const checkedAt = new Date().toISOString();
         if (!ok) {
-          setHealthState('error');
-          setStatusReason(`상태 엔드포인트가 HTTP ${status}로 응답했습니다.`);
+          dispatchHealth({
+            type: 'replace',
+            status: {
+              state: 'error',
+              staleReasons: [],
+              statusReason: `상태 엔드포인트가 HTTP ${status}로 응답했습니다.`,
+              checkedAt,
+              llmMode: 'rag_only',
+            },
+          });
           return;
         }
 
         const health = parseHealthPayload(data);
         if (health === null || health.stale === null) {
-          setHealthState('unknown');
-          setStatusReason('응답에 stale 불리언 값이 없어 상태를 판정할 수 없습니다.');
+          dispatchHealth({
+            type: 'replace',
+            status: {
+              state: 'unknown',
+              staleReasons: [],
+              statusReason: '응답에 stale 불리언 값이 없어 상태를 판정할 수 없습니다.',
+              checkedAt,
+              llmMode: 'rag_only',
+            },
+          });
           return;
         }
 
-        setStaleReasons(health.staleReasons);
-        setLlmMode(health.llmAnswerMode ?? 'rag_only');
         if (health.stale === false) {
-          setHealthState('healthy');
-          setStatusReason('런타임 인덱스가 최신 상태라고 응답했습니다.');
+          dispatchHealth({
+            type: 'replace',
+            status: {
+              state: 'healthy',
+              staleReasons: health.staleReasons,
+              statusReason: '런타임 인덱스가 최신 상태라고 응답했습니다.',
+              checkedAt,
+              llmMode: health.llmAnswerMode ?? 'rag_only',
+            },
+          });
           return;
         }
-        setHealthState('stale');
-        setStatusReason('런타임 인덱스에 갱신이 필요합니다.');
+        dispatchHealth({
+          type: 'replace',
+          status: {
+            state: 'stale',
+            staleReasons: health.staleReasons,
+            statusReason: '런타임 인덱스에 갱신이 필요합니다.',
+            checkedAt,
+            llmMode: health.llmAnswerMode ?? 'rag_only',
+          },
+        });
       })
       .catch((error: unknown) => {
         if (cancelled) return;
-        setCheckedAt(new Date().toISOString());
-        setHealthState('error');
-        setStatusReason(error instanceof Error ? error.message : '상태 확인 중 알 수 없는 오류가 발생했습니다.');
+        dispatchHealth({
+          type: 'replace',
+          status: {
+            state: 'error',
+            staleReasons: [],
+            statusReason: error instanceof Error ? error.message : '상태 확인 중 알 수 없는 오류가 발생했습니다.',
+            checkedAt: new Date().toISOString(),
+            llmMode: 'rag_only',
+          },
+        });
       });
     return () => {
       cancelled = true;
+      controller.abort();
     };
   }, []);
 
   const meta = wikiUxMeta;
-  const modeLabel = llmMode === 'llm' ? 'LLM Answer' : 'RAG-only';
+  const modeLabel = health.llmMode === 'llm' ? 'LLM Answer' : 'RAG-only';
   const searchGeneratedDate = meta.search.generatedAt.slice(0, 10);
   const ragGeneratedDate = meta.rag.indexGeneratedAt.slice(0, 10);
-  const badgeClass = healthState === 'healthy'
+  const badgeClass = health.state === 'healthy'
     ? 'badge-accent'
-    : healthState === 'stale'
+    : health.state === 'stale'
       ? 'badge-warning'
-      : healthState === 'error'
+      : health.state === 'error'
         ? 'badge-danger'
         : 'badge-neutral';
 
   return (
-    <header className="statusHeader header-h" role="banner">
+    <header className="statusHeader header-h">
       <button
         ref={menuButtonRef}
         type="button"
@@ -127,11 +198,11 @@ export function StatusHeader({
       <div className="statusHeaderSubtitle">실시간 영상관제 시스템의 설계·실험·운영 근거</div>
       <div className="statusHeaderStatus">
         <div className="runtimeHealth" aria-live="polite">
-          <span className={`badge ${badgeClass}`}>런타임 · {HEALTH_LABELS[healthState]} · {modeLabel}</span>
-          {checkedAt ? <time dateTime={checkedAt}>{new Date(checkedAt).toLocaleTimeString('ko-KR')} 확인</time> : null}
-          <p className="statusReason">{statusReason}</p>
-          {staleReasons.length > 0 ? (
-            <ul className="staleReasons">{staleReasons.map((reason) => <li key={reason}>{reason}</li>)}</ul>
+          <span className={`badge ${badgeClass}`}>런타임 · {HEALTH_LABELS[health.state]} · {modeLabel}</span>
+          {health.checkedAt ? <time dateTime={health.checkedAt}>{new Date(health.checkedAt).toLocaleTimeString('ko-KR')} 확인</time> : null}
+          <p className="statusReason">{health.statusReason}</p>
+          {health.staleReasons.length > 0 ? (
+            <ul className="staleReasons">{health.staleReasons.map((reason) => <li key={reason}>{reason}</li>)}</ul>
           ) : null}
         </div>
         <p className="buildFacts">

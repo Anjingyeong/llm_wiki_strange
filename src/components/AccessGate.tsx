@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
 import { clearWikiAccessKey, setWikiAccessKey } from '../lib/wikiAccessKey';
 
 type AccessGateProps = {
@@ -6,11 +7,25 @@ type AccessGateProps = {
 };
 
 export function AccessGate({ onAuthed }: AccessGateProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [key, setKey] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const submit = async (e?: React.FormEvent) => {
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog === null) return;
+
+    if (!dialog.open) dialog.showModal();
+    inputRef.current?.focus();
+
+    return () => {
+      if (dialog.open) dialog.close();
+    };
+  }, []);
+
+  const submit = async (e?: FormEvent) => {
     if (e) e.preventDefault();
     const trimmed = key.trim();
     if (!trimmed) {
@@ -45,18 +60,23 @@ export function AccessGate({ onAuthed }: AccessGateProps) {
   };
 
   return (
-    <div className="accessGate" role="dialog" aria-modal="true" aria-label="접근 키 입력">
+    <dialog
+      ref={dialogRef}
+      className="accessGate"
+      aria-labelledby="access-gate-title"
+      onCancel={(event) => event.preventDefault()}
+    >
       <div className="accessGateCard">
-        <h2>Smart Safety AI Wiki 접근 인증</h2>
+        <h2 id="access-gate-title">Smart Safety AI Wiki 접근 인증</h2>
         <p className="hint">보호된 Wiki입니다. 발급받은 접근 키를 입력해 주세요.</p>
         <form onSubmit={submit}>
           <input
+            ref={inputRef}
             type="password"
             value={key}
             onChange={(e) => setKey(e.target.value)}
             placeholder="접근 키 입력"
             aria-label="접근 키"
-            autoFocus
             disabled={loading}
           />
           <button type="submit" disabled={loading || !key.trim()}>
@@ -65,6 +85,6 @@ export function AccessGate({ onAuthed }: AccessGateProps) {
         </form>
         {error ? <p className="error" role="alert">{error}</p> : null}
       </div>
-    </div>
+    </dialog>
   );
 }

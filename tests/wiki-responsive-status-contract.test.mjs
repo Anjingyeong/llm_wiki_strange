@@ -33,9 +33,18 @@ test('runtime health starts in checking and distinguishes every truthful termina
 
   assert.match(
     header,
-    /useState<HealthState>\(['"]checking['"]\)/u,
-    'runtime health must begin as checking, never as an optimistic healthy badge',
+    /INITIAL_HEALTH_STATUS[\s\S]*?state:\s*['"]checking['"]/u,
+    'the atomic runtime-health model must begin as checking, never as an optimistic healthy badge',
   );
+  assert.match(header, /useReducer\(healthReducer,\s*INITIAL_HEALTH_STATUS\)/u, 'related health fields must update atomically');
+  assert.match(
+    header,
+    /async function requestRuntimeHealth\(signal:\s*AbortSignal\):\s*Promise<RuntimeHealthResponse>/u,
+    'the typed network boundary must live outside the component effect',
+  );
+  const healthEffect = header.match(/useEffect\(\(\)\s*=>\s*\{[\s\S]*?\n\s*\},\s*\[\]\);/u)?.[0] ?? '';
+  assert.doesNotMatch(healthEffect, /\bfetch\(/u, 'the effect must orchestrate the health request rather than own fetch');
+  assert.match(healthEffect, /AbortController[\s\S]*?controller\.abort\(\)/u, 'unmount must cancel the in-flight health request');
   assert.match(
     header,
     /stale\s*===\s*false[\s\S]*?['"]healthy['"]/u,
@@ -43,6 +52,7 @@ test('runtime health starts in checking and distinguishes every truthful termina
   );
   assert.match(header, /<svg\b[^>]*aria-hidden=['"]true['"]/u, 'header icons must use the shared SVG language');
   assert.doesNotMatch(header, /[☰✅❌⚠️🟢🟡🔴]/u, 'header controls and states must not use emoji glyphs');
+  assert.doesNotMatch(header, /<header\b[^>]*role=['"]banner['"]/u, 'native header semantics must not repeat a redundant banner role');
 });
 
 test('runtime status exposes visible reasons and separates build-time index facts', () => {

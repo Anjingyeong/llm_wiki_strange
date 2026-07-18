@@ -172,7 +172,7 @@ export function App() {
           onClose={closeMobileNav}
           aria-label="Wiki navigation"
         />
-        <main className="content" id="wiki-main-content" role="main">
+        <main className="content" id="wiki-main-content">
           {contentView === 'doc' && activeDocument ? (
             <>
               <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} />
