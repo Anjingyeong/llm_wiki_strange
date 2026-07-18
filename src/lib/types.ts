@@ -39,6 +39,31 @@ export const WIKI_EVIDENCE_LEVELS = [
 ] as const;
 export type WikiEvidenceLevel = (typeof WIKI_EVIDENCE_LEVELS)[number];
 
+export const WIKI_RELATION_KINDS = [
+  'related',
+  'supports',
+  'depends-on',
+  'implements',
+  'supersedes',
+  'contrasts',
+] as const;
+export type WikiRelationKind = (typeof WIKI_RELATION_KINDS)[number];
+
+export type WikiRelation = {
+  readonly kind: WikiRelationKind;
+  readonly targetSlug: string;
+};
+
+export type WikiBacklink = {
+  readonly kind: WikiRelationKind;
+  readonly sourceSlug: string;
+};
+
+export type WikiRelationshipGraphEntry = {
+  readonly outgoing: readonly WikiRelation[];
+  readonly backlinks: readonly WikiBacklink[];
+};
+
 /** Sidebar / MOC section labels (not written in frontmatter). */
 export type WikiSidebarMocCategory =
   | '01. Project Overview (프로젝트 개요)'

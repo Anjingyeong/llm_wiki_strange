@@ -3,6 +3,12 @@ import { join } from 'node:path';
 
 import { isExcludedFromPublicIndex } from './indexable-content.mjs';
 import { parseWikiSourceDocument } from './wiki-source-document.mjs';
+import {
+  auditWikiRelations,
+  buildWikiRelationshipGraph,
+} from '../../src/lib/wikiRelationships.mjs';
+
+export { buildWikiRelationshipGraph };
 
 const DOCUMENT_TYPES = new Set([
   'architecture',
@@ -41,7 +47,7 @@ function enumViolation(slug, field, value, allowed) {
   };
 }
 
-export function auditWikiFrontmatterRecord(slug, data) {
+export function auditWikiFrontmatterRecord(slug, data, context) {
   const violations = [
     enumViolation(slug, 'type', data.type, DOCUMENT_TYPES),
     enumViolation(slug, 'status', data.status, DOCUMENT_STATUSES),
@@ -71,13 +77,19 @@ export function auditWikiFrontmatterRecord(slug, data) {
     });
   }
 
+  violations.push(...auditWikiRelations(slug, data.relations, context).map((message) => ({
+    slug,
+    field: 'relations',
+    message,
+  })));
+
   return violations;
 }
 
 export async function auditWikiContent(contentDir) {
   const files = (await readdir(contentDir)).filter((file) => file.endsWith('.md')).sort();
   const violations = [];
-  let publicDocumentCount = 0;
+  const records = [];
 
   for (const file of files) {
     const slug = file.replace(/\.md$/, '');
@@ -92,12 +104,16 @@ export async function auditWikiContent(contentDir) {
       violations.push({ slug, field: 'frontmatter', message: `${slug}.frontmatter: ${error.message}` });
       continue;
     }
-    if (isExcludedFromPublicIndex(parsed.data)) {
-      continue;
-    }
-    publicDocumentCount += 1;
-    violations.push(...auditWikiFrontmatterRecord(slug, parsed.data));
+    records.push({ slug, data: parsed.data, isPublic: !isExcludedFromPublicIndex(parsed.data) });
   }
 
-  return { fileCount: files.length, publicDocumentCount, violations };
+  const allSlugs = new Set(records.map((record) => record.slug));
+  const publicRecords = records.filter((record) => record.isPublic);
+  const publicSlugs = new Set(publicRecords.map((record) => record.slug));
+  const context = { allSlugs, publicSlugs };
+  for (const record of publicRecords) {
+    violations.push(...auditWikiFrontmatterRecord(record.slug, record.data, context));
+  }
+
+  return { fileCount: files.length, publicDocumentCount: publicRecords.length, violations };
 }
