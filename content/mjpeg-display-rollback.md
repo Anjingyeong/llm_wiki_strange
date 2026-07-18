@@ -10,6 +10,8 @@ type: decision
 status: verified
 verifiedAt: 2026-07-15
 evidenceLevel: production
+summary: "AI·MQTT·frameId 계약은 유지하면서 브라우저 표시만 MJPEG로 원복해 시연 안정성을 확보하고, WebRTC/HLS는 후속 재검토 대상으로 남긴 운영 결정이다."
+relations: [supersedes:ADR-001-WebRTC, related:Frame-Sync-Canonical]
 canonicalFor: browser-display-transport
 supersedes: ADR-001-WebRTC
 order: 470

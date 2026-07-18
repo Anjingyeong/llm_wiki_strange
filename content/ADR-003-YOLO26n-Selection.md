@@ -10,6 +10,8 @@ type: decision
 status: verified
 verifiedAt: 2026-07-15
 evidenceLevel: offline-benchmark
+summary: "오프라인 벤치의 Faint Recall·F1·시드 안정성을 근거로 YOLO26n-pose와 PyTorch fallback을 기본 선택으로 확정한 결정 기록이다."
+relations: [depends-on:Model-Comparison, related:LSTM-Experiment-Results]
 canonicalFor: yolo26n-pose
 ---
 

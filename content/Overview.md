@@ -11,6 +11,8 @@ project: smart-safety-ai
 type: overview
 status: partial
 evidenceLevel: code-only
+summary: "카메라 입력부터 AI 감지, MQTT, Backend, 관제 화면까지의 전체 계약을 안내하는 시작 문서이며, 현재 근거는 코드 기준의 부분 검증이다."
+relations: [related:Architecture, related:AI-Pipeline]
 portfolio_use: true
 implementationStatus: stable
 verificationLevel: canonical

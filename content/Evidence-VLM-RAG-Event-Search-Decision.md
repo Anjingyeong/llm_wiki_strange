@@ -3,7 +3,6 @@ title: VLM RAG Event Search Decision Evidence
 navTitle: VLM·RAG 사고 검색 결정 근거
 shortTitle: VLM Search
 category: Project
-category: Project
 tags: [portfolio, evidence, ai, vlm, rag, semantic-search, alert, ux, decision]
 relatedDocs: [Benchmark-Evidence-Hub, AI-Pipeline, Evidence-LLM-Wiki-RAG, Evidence-TensorRT-Adoption-Decision, Realtime-Camera-Runtime-Stabilization, VLM-RAG-DBless-Mock-MVP]
 relatedFiles: [plans/vlm-rag-event-search.md, strange_ai/docs/vlm-rag, strange_ai/ai/vlm/mock_adapter.py]
@@ -12,6 +11,8 @@ project: smart-safety-ai
 type: evidence
 status: partial
 evidenceLevel: code-only
+summary: "VLM을 실시간 감지와 분리된 비동기 사고 설명·검색 경로로 설계한 결정 근거이며, 현재는 코드 기준의 부분 검증으로 운영 통합을 주장하지 않는다."
+relations: [supports:VLM-RAG-DBless-Mock-MVP, related:Benchmark-Evidence-Hub]
 portfolio_use: true
 evidence_type: decision
 ---

@@ -9,6 +9,8 @@ updatedAt: 2026-07-14
 type: experiment
 status: partial
 evidenceLevel: offline-benchmark
+summary: "51D 관절 입력에 하강·속도·몸통 각도 3개 모션 특징을 더한 54D가 오프라인 벤치에서 개선됐지만, 운영 일반화는 아직 부분 검증이다."
+relations: [supports:ADR-004-LSTM-Feature-Expansion, related:LSTM]
 ---
 
 ## 1. 문제 정의

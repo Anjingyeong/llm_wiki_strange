@@ -6,6 +6,8 @@ category: Architecture
 type: experiment
 status: partial
 evidenceLevel: unit-test
+summary: "frameId 우선과 streamRunId·evidence 키로 영상과 메타데이터를 맞추는 계약은 단위·contract 테스트를 통과했지만, 다중 카메라 브라우저 E2E는 미검증이다."
+relations: [implements:ED-FrameId-Evidence-Overlay-Sync, related:Frame-Matching-Report]
 canonicalFor: frame-overlay-sync
 relatedDocs:
   - ED-FrameId-Evidence-Overlay-Sync

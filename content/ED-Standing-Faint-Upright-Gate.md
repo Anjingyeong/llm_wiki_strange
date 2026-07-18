@@ -6,6 +6,8 @@ category: AI Pipeline
 type: decision
 status: partial
 evidenceLevel: unit-test
+summary: "upright에서 자세 전이 없이 발생한 Faint 신호의 NEW_FALL 승격을 차단하는 경로는 단위 테스트로 검증했지만, 영상셋 FP 감소와 Recall 손실은 미검증이다."
+relations: [implements:ED-Fall-Faint-Lifecycle, depends-on:Feature-Vector-51D-vs-54D]
 canonicalFor: standing-faint-fp
 relatedDocs:
   - ED-Fall-Faint-Lifecycle

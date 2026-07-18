@@ -10,6 +10,8 @@ project: smart-safety-ai
 type: architecture
 status: partial
 evidenceLevel: code-only
+summary: "cameraLoginId를 공통 식별자로 삼아 영상·이벤트·저장·화면 경계를 연결한 아키텍처이며, 운영 E2E가 아닌 코드 기준의 부분 검증 상태다."
+relations: [implements:Overview, depends-on:MQTT-Event-Schema, related:AI-Pipeline]
 portfolio_use: true
 ---
 

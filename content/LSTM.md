@@ -9,6 +9,8 @@ updatedAt: 2026-06-26
 type: architecture
 status: partial
 evidenceLevel: code-only
+summary: "YOLO keypoint를 track별 54D 시퀀스로 묶어 Normal/Faint를 분류하는 LSTM 계약을 설명하며, 이 문서 자체의 근거 수준은 코드 기준이다."
+relations: [depends-on:Feature-Vector-51D-vs-54D, related:AI-Pipeline]
 ---
 
 ## 목적

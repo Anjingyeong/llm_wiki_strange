@@ -25,6 +25,8 @@ project: smart-safety-ai
 type: evidence
 status: partial
 evidenceLevel: offline-benchmark
+summary: "TensorRT·RTSP·MQTT·LSTM·Tracking·VLM/RAG 근거를 조건별 canonical 문서로 연결하며, 서로 다른 실험 조건의 수치는 직접 비교하지 않는 벤치 허브다."
+relations: [supports:Tracking-Association-Stabilization, supports:Evidence-VLM-RAG-Event-Search-Decision]
 portfolio_use: true
 evidence_type: hub
 canonicalFor: stabilization-benchmark-index

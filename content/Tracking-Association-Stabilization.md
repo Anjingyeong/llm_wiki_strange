@@ -12,6 +12,8 @@ project: smart-safety-ai
 type: experiment
 status: partial
 evidenceLevel: live-canary
+summary: "offline A/B에서는 Track ID 파편화를 줄였지만 live canary 목표를 충족하지 못해 rollback했고, 전역 rollout은 HOLD 상태다."
+relations: [depends-on:Tracking-Association-Offline-AB-2026-07-13, related:AI-Pipeline]
 productionStatus: rollback
 canonicalFor: tracking-association
 portfolio_use: true

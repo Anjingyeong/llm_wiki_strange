@@ -6,6 +6,13 @@ import { fileURLToPath } from 'node:url';
 
 import * as frontmatterAudit from '../scripts/lib/wiki-frontmatter-audit.mjs';
 import * as markdownParse from '../src/lib/markdownParse.mjs';
+import {
+  parseWikiFrontmatterFields,
+  parseWikiFrontmatterList,
+  splitWikiFrontmatter,
+  stripWikiFrontmatterQuotes,
+} from '../src/lib/wikiFrontmatterCore.mjs';
+import { parseWikiRelation } from '../src/lib/wikiRelationships.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -29,6 +36,51 @@ const validRecord = {
   status: 'partial',
   evidenceLevel: 'unit-test',
 };
+
+const canonicalReadingSlugs = [
+  'Overview',
+  'Architecture',
+  'Model-Comparison',
+  'ADR-003-YOLO26n-Selection',
+  'Frame-Sync-Canonical',
+  'mjpeg-display-rollback',
+  'Feature-Vector-51D-vs-54D',
+  'LSTM',
+  'ED-Standing-Faint-Upright-Gate',
+  'Benchmark-Evidence-Hub',
+  'Tracking-Association-Stabilization',
+  'VLM-RAG-DBless-Mock-MVP',
+  'Evidence-VLM-RAG-Event-Search-Decision',
+];
+
+test('canonical reading set exposes concise summaries and typed relations', () => {
+  // Given: the front-door documents that define the recommended reading path.
+  const violations = [];
+
+  // When: their answer summaries and relationship edges cross the shared parser boundary.
+  for (const slug of canonicalReadingSlugs) {
+    const parsed = splitWikiFrontmatter(readSource(`content/${slug}.md`));
+    assert.ok(parsed, `${slug} must have parseable frontmatter`);
+    const fields = parseWikiFrontmatterFields(parsed.frontmatter);
+    const summary = fields.get('summary');
+    const relations = parseWikiFrontmatterList(fields.get('relations') ?? '');
+
+    if (typeof summary !== 'string' || !stripWikiFrontmatterQuotes(summary).trim()) {
+      violations.push(`${slug}.summary must be a non-empty scalar`);
+    }
+    if (relations.length === 0) {
+      violations.push(`${slug}.relations must contain at least one typed edge`);
+    }
+    for (const relation of relations) {
+      if (!parseWikiRelation(relation)) {
+        violations.push(`${slug}.relations contains invalid edge ${JSON.stringify(relation)}`);
+      }
+    }
+  }
+
+  // Then: every canonical page can render a concise answer and graph connections.
+  assert.deepEqual(violations, [], `canonical content violations (${violations.length}):\n${violations.join('\n')}`);
+});
 
 test('relation kinds are a closed six-value machine contract', () => {
   const typesSource = readSource('src/lib/types.ts');

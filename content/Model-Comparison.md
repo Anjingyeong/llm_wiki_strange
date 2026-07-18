@@ -10,6 +10,8 @@ type: experiment
 status: verified
 verifiedAt: 2026-07-15
 evidenceLevel: offline-benchmark
+summary: "동일 조건의 오프라인 비교에서 Faint Recall과 시퀀스 연속성을 우선해 YOLO26n-pose를 기본 후보로 선택한 검증 문서다."
+relations: [supports:ADR-003-YOLO26n-Selection, related:LSTM]
 canonicalFor: yolo26n-pose
 ---
 

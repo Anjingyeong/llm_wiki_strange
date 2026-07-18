@@ -3,7 +3,6 @@ title: DB 없이 검증한 VLM·RAG 사고 검색 Mock MVP
 navTitle: VLM·RAG Mock MVP (DB-less)
 shortTitle: VLM Mock MVP
 category: Architecture
-category: Architecture
 tags: [portfolio, architecture, vlm, rag, mock, semantic-search, incident, embedding, db-less]
 relatedDocs: [Benchmark-Evidence-Hub, Evidence-VLM-RAG-Event-Search-Decision, AI-Pipeline, Architecture, Evidence-LLM-Wiki-RAG, MQTT-Event-Schema, Develop-Code-Baseline-2026-07-15, ED-Snapshot-VLM-Side-Channel]
 relatedFiles: [ai/scripts/process_vlm_mock.py, ai/ai/vlm_mock.py, ai/fixtures/vlm/demo_job.json, ai/tests/test_vlm_mock_worker.py, back/src/main/java/com/strange/safety/vlm/mock/MockIncidentFixture.java, back/src/main/java/com/strange/safety/vlm/mock/InMemoryIncidentRepository.java, back/src/main/java/com/strange/safety/vlm/mock/MockVlmClient.java, back/src/main/java/com/strange/safety/vlm/mock/MockEmbeddingRepository.java, back/src/main/java/com/strange/safety/vlm/mock/IncidentSearchDocumentBuilder.java, back/src/main/java/com/strange/safety/vlm/mock/MockSemanticSearchService.java, back/src/test/java/com/strange/safety/vlm/mock/MockVlmRagServiceTest.java, back/DB_LESS_VLM_RAG_MOCK.md, front/src/features/dashboard/api/alertEventsApi.ts, front/src/features/dashboard/data/mockVlmIncidents.json]
@@ -12,6 +11,8 @@ project: smart-safety
 type: architecture
 status: partial
 evidenceLevel: unit-test
+summary: "운영 DB·S3·GPU·외부 Vision API 없이 VLM 설명부터 cosine 검색과 UI 계약까지 검증한 DB-less mock이며, 실서비스 통합 완료를 뜻하지 않는다."
+relations: [implements:Evidence-VLM-RAG-Event-Search-Decision, depends-on:Architecture]
 portfolio_use: true
 evidence_type: mock-mvp
 status_split: "완료 / Mock 검증 / 미검증·후속"
