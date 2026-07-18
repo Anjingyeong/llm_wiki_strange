@@ -1,18 +1,50 @@
+function explanatorySentences(text) {
+  const implementationNoise = /(?:BUILD SUCCESSFUL|Gradle|Production|pruning|Report|VITE|env:|py_compile)/iu;
+
+  return text
+    .split(/(?<=[.!?])\s+|\n+|\s+[—-]\s+(?=[가-힣A-Z])|\b(?:subgraph|end)\b|--?>|==>|\benv:/iu)
+    .map((sentence) => sentence.replace(/^[^가-힣]*(?=[가-힣])/u, '').trim())
+    .filter((sentence) => (sentence.match(/[가-힣]/gu) ?? []).length >= 6)
+    .filter((sentence) => !implementationNoise.test(sentence))
+    .slice(0, 3)
+    .join(' ');
+}
+
 export function buildLocalTemplateAnswer(chunks, answerMode) {
   let tableText = '';
   const textLines = [];
 
   for (const chunk of chunks) {
-    if (chunk.text.includes('|') && chunk.text.includes('\n')) {
-      tableText = chunk.text;
+    const readableText = chunk.text
+      .replace(/<br\s*\/?\s*>/giu, ' ')
+      .replace(/file:\/\/\/[^\s)]+/giu, '')
+      .replace(/\b(?:graph|flowchart)\s+(?:TD|TB|BT|RL|LR)\b/iu, ' ')
+      .replace(/\s+#{1,6}\s+/gu, '. ')
+      .replace(/[ \t]+/gu, ' ')
+      .replace(/\n{3,}/gu, '\n\n')
+      .trim();
+    const tableLines = readableText
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => /^\|.*\|$/u.test(line));
+    const hasMarkdownTableSeparator = tableLines.some((line) =>
+      /^\|\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?$/u.test(line),
+    );
+    if (tableLines.length >= 2 && hasMarkdownTableSeparator) {
+      tableText = tableLines.join('\n');
     } else {
-      textLines.push(chunk.text);
+      const explanation = explanatorySentences(readableText);
+      if (explanation) textLines.push(explanation);
     }
   }
 
   const rawContent = textLines.join(' ');
-  const cleanSummary = rawContent ? `${rawContent.slice(0, 500).trim()}...` : '관련 내용 요약이 본문에 수록되어 있습니다.';
-  const references = [...new Set(chunks.map((chunk) => `- [${chunk.displayTitle ?? chunk.title}] ${chunk.title !== (chunk.displayTitle ?? chunk.title) ? `(정식 제목: ${chunk.title}) ` : ''}(file:///c:/llm_wiki_strange/content/${chunk.slug}.md)`))].join('\n');
+  const cleanSummary = rawContent || '검색된 근거 문서에서 검증 기준과 결과를 확인할 수 있습니다.';
+  const references = [...new Set(chunks.map((chunk) => {
+    const displayTitle = chunk.displayTitle ?? chunk.title;
+    const formalTitle = chunk.title !== displayTitle ? ` · 정식 제목: ${chunk.title}` : '';
+    return `- [${displayTitle}](./${chunk.slug}.md)${formalTitle}`;
+  }))].join('\n');
 
   if (answerMode === 'flow_mode') {
     return `### 핵심 요약
@@ -35,7 +67,7 @@ ${references}`;
     return `### 핵심 요약
 검색된 문서 기반의 핵심 검증 로그 및 PASS/FAIL 결과입니다.
 
-### 상세 검증 내용
+### 검증 포인트
 ${cleanSummary}
 
 ### 검증 근거 표
@@ -85,6 +117,6 @@ ${cleanSummary}
   }
 
   return tableText
-    ? `검색된 문서 기반 답변입니다.\n\n${tableText}\n\n${cleanSummary}\n\n### 참고 문서\n${references}`
-    : `검색된 문서 기반 답변입니다.\n\n${cleanSummary}\n\n### 참고 문서\n${references}`;
+    ? `검색된 문서 기반 답변입니다.\n\n### 검증 포인트\n${cleanSummary}\n\n${tableText}\n\n### 참고 문서\n${references}`
+    : `검색된 문서 기반 답변입니다.\n\n### 검증 포인트\n${cleanSummary}\n\n### 참고 문서\n${references}`;
 }

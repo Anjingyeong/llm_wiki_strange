@@ -80,6 +80,3 @@ Camera or sample video
 ## 후속 작업
 
 실험 로그와 운영 장애 기록을 같은 frontmatter 형식으로 계속 추가해 검색 가능한 LLM 지식베이스로 확장한다.
-
----
-#project #users #data-flow #llm-context

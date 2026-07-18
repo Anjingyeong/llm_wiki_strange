@@ -10,6 +10,8 @@ const tableOfContents = readFileSync(join(root, 'src/components/TableOfContents.
 const documentArticle = readFileSync(join(root, 'src/components/DocumentArticle.tsx'), 'utf8');
 const app = readFileSync(join(root, 'src/App.tsx'), 'utf8');
 const css = readFileSync(join(root, 'src/styles.css'), 'utf8');
+const ragCss = readFileSync(join(root, 'src/rag.css'), 'utf8');
+const overview = readFileSync(join(root, 'content/Overview.md'), 'utf8');
 const outlineSource = `${tableOfContents}\n${documentArticle}\n${app}`;
 
 function readRuleBlock(source, startIndex) {
@@ -80,7 +82,7 @@ test('runtime status exposes visible reasons and separates build-time index fact
 
 test('the responsive article exposes a native inline outline with genuine hash links', () => {
   assert.match(outlineSource, /<details\b[^>]*className=['"][^'"]*inlineToc/u);
-  assert.match(outlineSource, /<summary>\s*On this page\s*<\/summary>/u);
+  assert.match(outlineSource, /<summary>\s*문서 목차\s*<\/summary>/u);
   assert.match(
     outlineSource,
     /className=['"][^'"]*inlineToc[\s\S]*?href=\{wikiLink\(documentSlug,\s*heading\.id\)\}/u,
@@ -91,6 +93,39 @@ test('the responsive article exposes a native inline outline with genuine hash l
     /onClick=/u,
     'inline outline navigation must not replace native link behavior',
   );
+});
+
+test('the responsive outline precedes the article in the reading flow', () => {
+  const inlineOutlineIndex = app.indexOf('<InlineTableOfContents');
+  const articleIndex = app.indexOf('<DocumentArticle');
+
+  assert.notEqual(inlineOutlineIndex, -1, 'App must render the responsive inline outline');
+  assert.notEqual(articleIndex, -1, 'App must render the document article');
+  assert.ok(
+    inlineOutlineIndex < articleIndex,
+    'the inline outline must appear before the article instead of after the full document',
+  );
+});
+
+test('Korean prose keeps words intact while machine tokens retain safe overflow fallbacks', () => {
+  assert.match(css, /\.markdown\s*\{[^}]*word-break:\s*keep-all\s*;/su);
+  assert.match(css, /\.markdown\s*\{[^}]*overflow-wrap:\s*normal\s*;/su);
+  assert.match(css, /\.documentAnswer\s+p\s*\{[^}]*word-break:\s*keep-all\s*;/su);
+  assert.match(css, /\.docTitle\s*\{[^}]*word-break:\s*keep-all\s*;/su);
+  assert.match(css, /\.documentFactDate\s*\{[^}]*white-space:\s*nowrap\s*;/su);
+});
+
+test('meaningful runtime metadata stays at the 12px design minimum', () => {
+  assert.match(css, /\.runtimeHealth\s+time\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+  assert.match(css, /\.buildFacts\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+  assert.match(css, /\.statusReason\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+  assert.match(css, /\.staleReasons\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+  assert.match(ragCss, /\.ragAnswerBody\s+table\s+th\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+  assert.match(ragCss, /\.ragSourcesLabel\s*\{[^}]*font-size:\s*0\.75rem\s*;/su);
+});
+
+test('reader-facing Markdown does not expose a raw tag footer', () => {
+  assert.doesNotMatch(overview, /\n---\s*\n(?:#[\w-]+\s*)+$/u);
 });
 
 test('desktop and inline outlines are mutually exclusive and narrow layouts resist overflow', () => {

@@ -94,7 +94,7 @@ export function DocumentEvidencePanel({
         </div>
         <div>
           <dt>마지막 업데이트</dt>
-          <dd>{document.updatedAt || '미기재'}</dd>
+          <dd className="documentFactDate">{document.updatedAt || '미기재'}</dd>
         </div>
       </dl>
 

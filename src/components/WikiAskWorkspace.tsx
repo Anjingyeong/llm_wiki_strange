@@ -18,6 +18,12 @@ const ANSWER_MODE_LABELS: Readonly<Record<string, string>> = {
   general: '일반',
 };
 
+const RESPONSE_STATUS_LABELS: Readonly<Record<RagResponse['status'], string>> = {
+  answered: '답변 완료',
+  insufficient_context: '근거 부족',
+  error: '요청 실패',
+};
+
 function isUnmodifiedPrimaryClick(event: React.MouseEvent<HTMLAnchorElement>): boolean {
   return event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
 }
@@ -104,12 +110,11 @@ export function WikiAskWorkspace({ onAuthRequired, onReturnToDocument, onSelectD
       {response ? (
         <section className={`ragAnswer ${response.status}`} aria-label="Wiki 답변">
           <header>
-            <span className="ragStatusLabel">{response.status}</span>
+            <span className="ragStatusLabel">{RESPONSE_STATUS_LABELS[response.status]}</span>
             {response.answerMode ? <span>{ANSWER_MODE_LABELS[response.answerMode] ?? response.answerMode}</span> : null}
-            {response.fallback ? <span>로컬 검색 답변</span> : null}
+            {response.fallback ? <span>문서 검색 기반</span> : null}
           </header>
           <p className="ragQuestion">질문: {lastSubmittedQuestion}</p>
-          {response.fallbackReason ? <p className="ragFallbackReason">대체 답변 사유: {response.fallbackReason}</p> : null}
           <div className="ragAnswerBody"><MarkdownRenderer markdown={response.answer} /></div>
           {response.sources.length ? (
             <section aria-labelledby="rag-sources-title" className="ragSources">
@@ -127,15 +132,14 @@ export function WikiAskWorkspace({ onAuthRequired, onReturnToDocument, onSelectD
                       }}
                     >
                       <strong>{source.displayTitle ?? source.title}</strong><span>{source.section}</span>
-                      {source.score === undefined ? null : <small>relevance {source.score.toFixed(3)}</small>}
                     </a>
                   </li>
                 ))}
               </ul>
             </section>
           ) : null}
-          {response.debugInfo === undefined ? null : (
-            <details className="ragDebugDetails"><summary>검색 진단 정보</summary><pre>{JSON.stringify(response.debugInfo, null, 2)}</pre></details>
+          {response.debugInfo === undefined && response.fallbackReason === undefined ? null : (
+            <details className="ragDebugDetails"><summary>검색 진단 정보</summary><pre>{JSON.stringify({ debugInfo: response.debugInfo, fallbackReason: response.fallbackReason }, null, 2)}</pre></details>
           )}
         </section>
       ) : null}

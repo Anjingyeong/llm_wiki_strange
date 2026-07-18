@@ -8,6 +8,23 @@ type TableOfContentsProps = {
   readonly documentSlug: string;
 };
 
+export function InlineTableOfContents({ headings, documentSlug }: TableOfContentsProps) {
+  if (!headings.length) return null;
+
+  return (
+    <details className="inlineToc">
+      <summary>문서 목차</summary>
+      <nav aria-label="문서 내 목차">
+        {headings.map((heading) => (
+          <a className={`level${heading.level}`} href={wikiLink(documentSlug, heading.id)} key={heading.id}>
+            {heading.text}
+          </a>
+        ))}
+      </nav>
+    </details>
+  );
+}
+
 export function TableOfContents({ headings, documentSlug }: TableOfContentsProps) {
   const headingIds = useMemo(() => headings.map((heading) => heading.id), [headings]);
   const headingSignature = headingIds.join('\u001f');
@@ -61,34 +78,18 @@ export function TableOfContents({ headings, documentSlug }: TableOfContentsProps
   }
 
   return (
-    <>
-      <details className="inlineToc">
-        <summary>On this page</summary>
-        <nav aria-label="Inline table of contents">
-          {headings.map((heading) => (
-            <a
-              className={`level${heading.level}`}
-              href={wikiLink(documentSlug, heading.id)}
-              key={heading.id}
-            >
-              {heading.text}
-            </a>
-          ))}
-        </nav>
-      </details>
-      <aside className="toc" aria-label="Table of contents">
-        <strong>On this page</strong>
-        {headings.map((heading) => (
-          <a
-            aria-current={heading.id === activeId ? 'location' : undefined}
-            className={`level${heading.level}`}
-            href={wikiLink(documentSlug, heading.id)}
-            key={heading.id}
-          >
-            {heading.text}
-          </a>
-        ))}
-      </aside>
-    </>
+    <aside className="toc" aria-label="문서 목차">
+      <strong>문서 목차</strong>
+      {headings.map((heading) => (
+        <a
+          aria-current={heading.id === activeId ? 'location' : undefined}
+          className={`level${heading.level}`}
+          href={wikiLink(documentSlug, heading.id)}
+          key={heading.id}
+        >
+          {heading.text}
+        </a>
+      ))}
+    </aside>
   );
 }

@@ -267,11 +267,11 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
       fallbackReason = err.message || String(err);
 
       const localAnswer = buildLocalTemplateAnswer(chunks, answerMode);
-      finalAnswer = `[LLM 답변 생성 중 오류가 발생하여, RAG 기반 검색 결과를 먼저 제공해 드립니다.]\n\n${localAnswer}`;
+      finalAnswer = localAnswer;
     }
   } else {
     const localAnswer = buildLocalTemplateAnswer(chunks, answerMode);
-    finalAnswer = `[현재 LLM 답변 생성은 비활성화되어 있어 관련 문서 검색 결과를 먼저 보여드립니다.]\n\n${localAnswer}`;
+    finalAnswer = localAnswer;
     fallbackReason = 'LLM Answer mode disabled';
   }
 

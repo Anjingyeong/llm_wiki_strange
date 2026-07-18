@@ -5,6 +5,7 @@ import {
   expandQuery,
   hasSufficientContext,
 } from '../scripts/lib/rag/answer.mjs';
+import { buildLocalTemplateAnswer } from '../scripts/lib/rag/templates.mjs';
 
 describe('expandQuery topic scope', () => {
   it('does not dump full stack for bare 흐름 questions without topic', () => {
@@ -104,5 +105,41 @@ describe('hasSufficientContext hybrid', () => {
       }),
       false,
     );
+  });
+});
+
+describe('local fallback answer readability', () => {
+  it('uses wiki links and omits raw Mermaid and local file URLs', () => {
+    // Given: retrieved text contains implementation details that are useful for indexing but noisy to read.
+    const chunks = [{
+      displayTitle: '프레임 동기화',
+      slug: 'Frame-Sync-Canonical',
+      text: '검증 근거 ## graph TD\nsubgraph AI[AI Engine]\nA -->|frameId| B\nend\n중요한 결론은 반드시 유지되어야 합니다. file:///c:/private/source.md',
+      title: 'Frame Sync Canonical',
+    }];
+
+    // When: the local evidence answer is composed.
+    const answer = buildLocalTemplateAnswer(chunks, 'evidence_template');
+
+    // Then: the reader gets a wiki-native reference without raw diagram syntax or machine-local paths.
+    assert.match(answer, /\[프레임 동기화\]\(\.\/Frame-Sync-Canonical\.md\)/u);
+    assert.doesNotMatch(answer, /\bgraph\s+TD\b/iu);
+    assert.doesNotMatch(answer, /\bsubgraph\b|--?>/iu);
+    assert.doesNotMatch(answer, /file:\/\//iu);
+    assert.match(answer, /중요한 결론은 반드시 유지되어야 합니다/u);
+  });
+
+  it('prefers explanatory Korean sentences over code-heavy retrieval fragments', () => {
+    const chunks = [{
+      slug: 'Frame-Sync-Canonical',
+      text: 'OverlaySyncBuffer.push :: frameId_eventId -> SessionIdentity. 프레임 식별자를 기준으로 동기화를 검증합니다.',
+      title: 'Frame Sync Canonical',
+    }];
+
+    const answer = buildLocalTemplateAnswer(chunks, 'general');
+
+    assert.match(answer, /프레임 식별자를 기준으로 동기화를 검증합니다/u);
+    assert.doesNotMatch(answer, /OverlaySyncBuffer\.push/u);
+    assert.match(answer, /### 검증 포인트/u);
   });
 });

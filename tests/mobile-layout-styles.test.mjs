@@ -5,6 +5,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const app = readFileSync(join(root, 'src/App.tsx'), 'utf8');
 const css = readFileSync(join(root, 'src/styles.css'), 'utf8');
 
 function readRuleBlock(source, startIndex) {
@@ -39,4 +40,14 @@ test('mobile sidebar stays fixed and out of flow after the base sticky sidebar r
     /\.sidebar\s*\{[^}]*position:\s*fixed\s*;[^}]*height:\s*calc\(100dvh\s*-\s*var\(--header-h\)\)\s*;/s,
     'The final 720px media query must redeclare .sidebar as fixed with viewport-relative height so the closed drawer cannot consume the first screen',
   );
+});
+
+test('mobile drawer close transition keeps the backdrop mounted and declares a bounded width', () => {
+  assert.match(app, /sidebar-backdrop-closed/u, 'the backdrop needs a closed state instead of immediate unmount');
+  assert.doesNotMatch(app, /\{mobileNavOpen\s*&&\s*\([\s\S]*sidebar-backdrop/u);
+  assert.match(
+    css,
+    /\.sidebar\s*\{[^}]*width:\s*min\(var\(--sidebar-w\),\s*calc\(100vw\s*-\s*48px\)\)\s*;/su,
+  );
+  assert.match(css, /\.sidebar-backdrop-closed\s*\{[^}]*transition:[^}]*visibility\s+0s\s+\.2s/su);
 });

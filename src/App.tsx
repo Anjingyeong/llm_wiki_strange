@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { DocumentArticle } from './components/DocumentArticle';
 import { Sidebar, WIKI_SIDEBAR_ID } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
-import { TableOfContents } from './components/TableOfContents';
+import { InlineTableOfContents, TableOfContents } from './components/TableOfContents';
 import { WikiAskWorkspace } from './components/WikiAskWorkspace';
 import { WikiCommandBar } from './components/WikiCommandBar';
 import { WikiSearchWorkspace } from './components/WikiSearchWorkspace';
@@ -176,6 +176,7 @@ export function App() {
           {contentView === 'doc' && activeDocument ? (
             <>
               <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} />
+              <InlineTableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
               <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
             </>
           ) : null}
@@ -190,9 +191,11 @@ export function App() {
             />
           ) : null}
         </main>
-        {mobileNavOpen && (
-          <div className="sidebar-backdrop" onClick={closeMobileNav} aria-hidden="true" />
-        )}
+        <div
+          className={`sidebar-backdrop${mobileNavOpen ? '' : ' sidebar-backdrop-closed'}`}
+          onClick={closeMobileNav}
+          aria-hidden="true"
+        />
         {contentView === 'doc' && activeDocument ? (
           <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
         ) : null}

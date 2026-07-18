@@ -72,9 +72,11 @@ test('dedicated Ask workspace announces progress and preserves truthful response
   assert.match(askSource, /insufficient_context/u);
   assert.match(askSource, /status:\s*'error'|status === 'error'/u);
   assert.match(askSource, /<details\b[\s\S]*?JSON\.stringify/u, 'raw diagnostics belong in details');
+  assert.match(askSource, /답변 완료|근거 부족|요청 실패/u, 'machine response states need reader-facing labels');
+  assert.doesNotMatch(askSource, /<p[^>]*ragFallbackReason/u, 'fallback diagnostics must not precede the answer');
   assert.match(askSource, /<a\b[\s\S]*?href=/u, 'sources must remain genuine links');
   assert.match(askSource, /displayTitle[\s\S]*?section|section[\s\S]*?displayTitle/u);
-  assert.match(askSource, /score/u, 'source relevance score must be available when returned');
+  assert.doesNotMatch(askSource, /<small>\s*relevance/u, 'raw retrieval scores belong in diagnostics, not source cards');
 });
 
 test('tool workspaces can return to the active document and avoid incomplete composite widgets', () => {
