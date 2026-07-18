@@ -136,6 +136,28 @@ a:hover {
   text-decoration: underline;
 }
 
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.skipLink {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--text);
+  color: var(--panel);
+  transform: translateY(calc(-100% - 16px));
+  transition: transform 0.15s var(--ease);
+}
+
+.skipLink:focus-visible {
+  transform: translateY(0);
+}
+
 /* ── 3. App Shell ────────────────────────────────────────────── */
 
 .appRoot { display:flex; flex-direction:column; min-height:100vh; }
@@ -150,6 +172,9 @@ a:hover {
   z-index: 30;
   display: grid;
   grid-template-columns: 44px 1fr auto;
+  grid-template-areas:
+    "menu title status"
+    "menu subtitle status";
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
@@ -157,9 +182,11 @@ a:hover {
   border-bottom: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
 }
-.statusHeaderTitle { font-weight: 700; font-size: 14px; letter-spacing: -0.2px; }
-.statusHeaderStatus { justify-self: end; }
+.statusHeaderTitle { grid-area: title; font-weight: 700; font-size: 14px; letter-spacing: -0.2px; }
+.statusHeaderSubtitle { grid-area: subtitle; min-width: 0; margin-top: -2px; font-size: 0.85em; opacity: 0.85; }
+.statusHeaderStatus { grid-area: status; min-width: 0; max-width: 100%; justify-self: end; }
 .mobileMenuBtn {
+  grid-area: menu;
   display: none;
   width: 36px; height: 36px;
   border: 1px solid var(--line);
@@ -172,6 +199,15 @@ a:hover {
 
 /* ── Mobile sidebar + backdrop ───────────────────────────────── */
 @media (max-width: 720px) {
+  .statusHeader {
+    grid-template-columns: 36px minmax(0, 1fr);
+    grid-template-areas:
+      "menu title"
+      "subtitle subtitle"
+      "status status";
+  }
+  .statusHeaderStatus { width: 100%; justify-self: stretch; }
+  .statusHeaderStatus .badge { max-width: 100%; white-space: normal; }
   .mobileMenuBtn { display: inline-flex; align-items: center; justify-content: center; }
   .sidebar { position: fixed; top: var(--header-h); left: 0; height: calc(100dvh - var(--header-h)); z-index: 40; transform: translateX(0); transition: transform .2s ease; }
   .sidebar.sidebar-closed { transform: translateX(-100%); }
@@ -1265,6 +1301,14 @@ blockquote {
     flex-direction: column;
   }
 
+  .sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    height: calc(100dvh - var(--header-h));
+    z-index: 40;
+  }
+
   /* sidebar-closed uses transform in mobile drawer only */
 
   .sidebarNav {
@@ -1290,6 +1334,18 @@ blockquote {
 
   .tableWrap {
     margin: 12px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

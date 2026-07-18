@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import type { Ref } from 'react';
 
 import { wikiUxMeta } from '../generated/wikiUxMeta';
 
 type StatusHeaderProps = {
   readonly onMenuClick?: () => void;
+  readonly menuOpen: boolean;
+  readonly menuButtonRef: Ref<HTMLButtonElement>;
+  readonly sidebarId: string;
   readonly title?: string;
 };
 
@@ -13,7 +17,13 @@ type HealthInfo = {
   readonly llmAnswerMode?: string;
 };
 
-export function StatusHeader({ onMenuClick, title = 'Smart Safety AI Wiki' }: StatusHeaderProps) {
+export function StatusHeader({
+  onMenuClick,
+  menuOpen,
+  menuButtonRef,
+  sidebarId,
+  title = 'Smart Safety AI Wiki',
+}: StatusHeaderProps) {
   const [health, setHealth] = useState<HealthInfo | null>(null);
   const [healthError, setHealthError] = useState<boolean>(false);
 
@@ -55,15 +65,18 @@ export function StatusHeader({ onMenuClick, title = 'Smart Safety AI Wiki' }: St
   return (
     <header className="statusHeader header-h" role="banner">
       <button
+        ref={menuButtonRef}
         type="button"
         className="mobileMenuBtn"
         onClick={onMenuClick}
-        aria-label="사이드바 메뉴 열기"
+        aria-label={menuOpen ? '사이드바 메뉴 닫기' : '사이드바 메뉴 열기'}
+        aria-expanded={menuOpen}
+        aria-controls={sidebarId}
       >
         ☰
       </button>
       <div className="statusHeaderTitle">{title}</div>
-      <div className="statusHeaderSubtitle" style={{ fontSize: '0.85em', opacity: 0.85, marginTop: '-2px' }}>실시간 영상관제 시스템의 설계·실험·운영 근거</div>
+      <div className="statusHeaderSubtitle">실시간 영상관제 시스템의 설계·실험·운영 근거</div>
       <div className="statusHeaderStatus">
         {healthError ? (
           <span className="badge badge-danger" aria-label="server status unknown">서버 상태 확인 불가</span>

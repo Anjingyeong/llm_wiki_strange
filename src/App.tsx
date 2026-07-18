@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MarkdownRenderer } from './components/MarkdownRenderer';
-import { Sidebar } from './components/Sidebar';
+import { Sidebar, WIKI_SIDEBAR_ID } from './components/Sidebar';
 import { StatusHeader } from './components/StatusHeader';
 import { TableOfContents } from './components/TableOfContents';
 import { WikiToolsPanel } from './components/WikiToolsPanel';
@@ -26,6 +26,7 @@ export function App() {
     initialHash.view === 'rag' ? 'ask' : 'search',
   );
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
 
   // Access gate state
   const [accessKeyRequired, setAccessKeyRequired] = useState<boolean>(false);
@@ -57,16 +58,60 @@ export function App() {
     return () => { cancelled = true; };
   }, []);
 
-  // Mobile: Escape closes drawer, lock body scroll when open, aria on sidebar
+  const closeMobileNav = useCallback(() => {
+    if (!mobileNavOpen) return;
+    setMobileNavOpen(false);
+    window.requestAnimationFrame(() => mobileMenuButtonRef.current?.focus());
+  }, [mobileNavOpen]);
+
+  const openMobileNav = () => setMobileNavOpen(true);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const frame = window.requestAnimationFrame(() => {
+      document
+        .getElementById(WIKI_SIDEBAR_ID)
+        ?.querySelector<HTMLElement>('button:not([disabled])')
+        ?.focus();
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [mobileNavOpen]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileNavOpen) {
-        setMobileNavOpen(false);
+        closeMobileNav();
+        return;
+      }
+
+      if (e.key !== 'Tab' || !mobileNavOpen) return;
+      const sidebar = document.getElementById(WIKI_SIDEBAR_ID);
+      if (!sidebar) return;
+
+      const focusableElements = Array.from(
+        sidebar.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]'),
+      ).filter((element) => element.offsetParent !== null);
+      const firstFocusable = focusableElements.at(0);
+      const lastFocusable = focusableElements.at(-1);
+      if (!firstFocusable || !lastFocusable) return;
+
+      const activeElement = document.activeElement;
+      if (e.shiftKey) {
+        if (activeElement === firstFocusable || !sidebar.contains(activeElement)) {
+          e.preventDefault();
+          lastFocusable.focus();
+        }
+        return;
+      }
+
+      if (activeElement === lastFocusable || !sidebar.contains(activeElement)) {
+        e.preventDefault();
+        firstFocusable.focus();
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [mobileNavOpen]);
+  }, [closeMobileNav, mobileNavOpen]);
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -147,10 +192,16 @@ export function App() {
   if (!activeDocument && contentView === 'doc') {
     return (
       <div className="appRoot">
-        <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
+        <a className="skipLink" href="#wiki-main-content">본문으로 건너뛰기</a>
+        <StatusHeader
+          menuButtonRef={mobileMenuButtonRef}
+          menuOpen={mobileNavOpen}
+          onMenuClick={openMobileNav}
+          sidebarId={WIKI_SIDEBAR_ID}
+        />
         <div className="appShell">
-          <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-          <main className="notFound">
+          <Sidebar activeSlug={activeSlug} groups={documentsByCategory} onSelect={selectDocument} mobileOpen={mobileNavOpen} onClose={closeMobileNav} />
+          <main className="notFound" id="wiki-main-content">
             <h1>문서를 찾을 수 없습니다</h1>
             <p>
               경로 <code>#{activeSlug}</code> 에 해당하는 문서가 없습니다. archived slug이거나 잘못된 링크일 수 있습니다.
@@ -166,17 +217,23 @@ export function App() {
 
   return (
     <div className="appRoot">
-      <StatusHeader onMenuClick={() => setMobileNavOpen(true)} />
+      <a className="skipLink" href="#wiki-main-content">본문으로 건너뛰기</a>
+      <StatusHeader
+        menuButtonRef={mobileMenuButtonRef}
+        menuOpen={mobileNavOpen}
+        onMenuClick={openMobileNav}
+        sidebarId={WIKI_SIDEBAR_ID}
+      />
       <div className="appShell">
         <Sidebar
           activeSlug={activeSlug}
           groups={documentsByCategory}
           onSelect={selectDocument}
           mobileOpen={mobileNavOpen}
-          onClose={() => setMobileNavOpen(false)}
+          onClose={closeMobileNav}
           aria-label="Wiki navigation"
         />
-        <main className="content" role="main">
+        <main className="content" id="wiki-main-content" role="main">
           <WikiToolsPanel initialTab={toolsTab} onSelectDocument={selectDocument} onAuthRequired={() => { clearWikiAccessKey(); setAuthed(false); }} />
           {contentView === 'doc' && activeDocument ? (
             <article className="docCard">
@@ -205,7 +262,7 @@ export function App() {
           ) : null}
         </main>
         {mobileNavOpen && (
-          <div className="sidebar-backdrop" onClick={() => setMobileNavOpen(false)} aria-hidden="true" />
+          <div className="sidebar-backdrop" onClick={closeMobileNav} aria-hidden="true" />
         )}
         {contentView === 'doc' && activeDocument ? (
           <TableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
