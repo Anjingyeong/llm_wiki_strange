@@ -119,3 +119,15 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260716-164547490_1bb3d74_baseline-vector-search,2026-07-16T16:45:47.491Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,2.0856,false
 20260716-164657685_1bb3d74_baseline-vector-search,2026-07-16T16:46:57.686Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,2.2268,false
 20260716-164915402_1bb3d74_baseline-vector-search,2026-07-16T16:49:15.403Z,baseline-vector-search,baseline,1bb3d74,0.3929,0.6071,0.4048,0.4881,0.3961,0,1.9325,false
+20260718-024942471_9ba4610_baseline-vector-search,2026-07-18T02:49:42.472Z,baseline-vector-search,baseline,9ba4610,0.3929,0.625,0.4107,0.497,0.4014,0,2.2276,false
+20260718-032047204_a03516f_baseline-vector-search,2026-07-18T03:20:47.205Z,baseline-vector-search,baseline,a03516f,0.3929,0.625,0.4107,0.497,0.4014,0,7.5042,false
+20260718-035047833_10b5cc5_baseline-vector-search,2026-07-18T03:50:47.835Z,baseline-vector-search,baseline,10b5cc5,0.5,0.6071,0.4077,0.5402,0.4208,0,1.7416,false
+20260718-052512708_7cf6b2a_baseline-vector-search,2026-07-18T05:25:12.713Z,baseline-vector-search,baseline,7cf6b2a,0.5179,0.625,0.4167,0.558,0.427,0,10.519,false
+20260718-054258543_a93e4ef_baseline-vector-search,2026-07-18T05:42:58.544Z,baseline-vector-search,baseline,a93e4ef,0.5179,0.625,0.4167,0.558,0.427,0,2.2419,false
+20260718-060945272_933bfda_baseline-vector-search,2026-07-18T06:09:45.273Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,4.3371,false
+20260718-061736696_933bfda_baseline-vector-search,2026-07-18T06:17:36.698Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,3.2313,false
+20260718-061948124_933bfda_baseline-vector-search,2026-07-18T06:19:48.125Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,4.3432,false
+20260718-063009251_933bfda_baseline-vector-search,2026-07-18T06:30:09.252Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,1.9945,false
+20260718-063352247_933bfda_baseline-vector-search,2026-07-18T06:33:52.249Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,2.1854,false
+20260718-064054199_933bfda_baseline-vector-search,2026-07-18T06:40:54.201Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,2.2684,false
+20260718-104807338_bb5602a_baseline-vector-search,2026-07-18T10:48:07.338Z,baseline-vector-search,baseline,bb5602a,0.5179,0.625,0.4167,0.558,0.427,0,2.7052,false
