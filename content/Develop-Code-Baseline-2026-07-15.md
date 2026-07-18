@@ -10,6 +10,8 @@ relatedFiles: [ai/ai/action/faint_post_processing.py, back/SMART_SAFETY_VLM.md, 
 updatedAt: 2026-07-16
 project: smart-safety
 type: baseline
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 implementationStatus: reference
 verificationLevel: baseline

@@ -6,6 +6,9 @@ category: Bugs
 relatedDocs: [Architecture, WebRTC-vs-HLS, AI-Output-JSON]
 relatedFiles: [PROJECT_CONTRACT.md, strange_ai/.env.example, strange_front/src/features/dashboard/data/cameras.ts]
 updatedAt: 2026-06-26
+type: incident
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적

@@ -8,9 +8,10 @@ relatedDocs: [Benchmark-Evidence-Hub, VLM-RAG-DBless-Mock-MVP, Evidence-VLM-RAG-
 relatedFiles: [ai/ai/snapshot_assist_upload.py, ai/tests/test_snapshot_assist_upload.py, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistController.java, back/src/main/java/com/strange/safety/vlm/snapshotassist/SnapshotAssistService.java, front/scripts/verify-vlm-snapshot-assist.mjs]
 updatedAt: 2026-07-15
 project: smart-safety
-type: engineering-decision
+type: decision
 decision_domain: VLM & RAG
-status: 부분 구현
+status: partial
+evidenceLevel: unit-test
 portfolio_use: true
 ---
 

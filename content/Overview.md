@@ -9,6 +9,8 @@ relatedFiles: [README.md, PROJECT_CONTRACT.md, MULTI_AGENT_PLAN.md]
 updatedAt: 2026-06-26
 project: smart-safety-ai
 type: overview
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 implementationStatus: stable
 verificationLevel: canonical

@@ -4,8 +4,15 @@ import {
   splitWikiFrontmatter,
   stripWikiFrontmatterQuotes,
 } from './wikiFrontmatterCore.mjs';
-import type { Frontmatter, Heading, WikiDocument } from './types';
-import type { WikiCategory } from './types';
+import {
+  WIKI_DOCUMENT_STATUSES,
+  WIKI_DOCUMENT_TYPES,
+  WIKI_EVIDENCE_LEVELS,
+  type Frontmatter,
+  type Heading,
+  type WikiCategory,
+  type WikiDocument,
+} from './types';
 import { isWikiFrontmatterCategory } from './wikiCategories';
 import { allocateHeadingIds } from './wikiHeadings.mjs';
 
@@ -24,6 +31,25 @@ function parseCategory(value: string, filePath: string): WikiCategory {
   throw new FrontmatterError(filePath, `unknown category "${normalized}"`);
 }
 
+function parseKnownValue<const T extends readonly string[]>(
+  value: string | null | undefined,
+  allowed: T,
+): T[number] | undefined {
+  if (typeof value !== 'string') return undefined;
+  const normalized = stripWikiFrontmatterQuotes(value);
+  return allowed.find((candidate) => candidate === normalized);
+}
+
+function parseOptionalScalar(value: string | null | undefined): string | undefined {
+  if (typeof value !== 'string') return undefined;
+  const normalized = stripWikiFrontmatterQuotes(value);
+  return normalized || undefined;
+}
+
+function parseCanonicalFor(value: string | null | undefined): string | null | undefined {
+  return value === null ? null : parseOptionalScalar(value);
+}
+
 function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
   const values = parseWikiFrontmatterFields(block);
   const title = values.get('title');
@@ -39,9 +65,23 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
   const navTitle = values.get('navTitle');
   const shortTitle = values.get('shortTitle');
   const displayTitle = values.get('displayTitle');
+  const type = parseKnownValue(values.get('type'), WIKI_DOCUMENT_TYPES);
+  const status = parseKnownValue(values.get('status'), WIKI_DOCUMENT_STATUSES);
+  const evidenceLevel = parseKnownValue(values.get('evidenceLevel'), WIKI_EVIDENCE_LEVELS);
+  const verifiedAt = parseOptionalScalar(values.get('verifiedAt'));
+  const canonicalFor = parseCanonicalFor(values.get('canonicalFor'));
+  const supersededBy = parseOptionalScalar(values.get('supersededBy'));
 
   return {
     title: stripWikiFrontmatterQuotes(title),
+    ...(type ? { type } : {}),
+    ...(status ? { status } : {}),
+    ...(evidenceLevel ? { evidenceLevel } : {}),
+    ...(verifiedAt ? { verifiedAt } : {}),
+    ...(canonicalFor !== undefined ? { canonicalFor } : {}),
+    supersedes: parseWikiFrontmatterList(values.get('supersedes') ?? ''),
+    ...(supersededBy ? { supersededBy } : {}),
+    relations: parseWikiFrontmatterList(values.get('relations') ?? ''),
     ...(navTitle ? { navTitle: stripWikiFrontmatterQuotes(navTitle) } : {}),
     ...(shortTitle ? { shortTitle: stripWikiFrontmatterQuotes(shortTitle) } : {}),
     ...(displayTitle ? { displayTitle: stripWikiFrontmatterQuotes(displayTitle) } : {}),

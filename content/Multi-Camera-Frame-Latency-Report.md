@@ -4,6 +4,9 @@ navTitle: "카메라 지연"
 shortTitle: "카메라 지연"
 category: Architecture
 updatedAt: "2026-06-27"
+type: architecture
+status: partial
+evidenceLevel: unit-test
 ---
 
 본 보고서는 다중 카메라 환경에서 실시간 RTSP 입력 프레임 지연을 해소하고, `cameraLoginId`와 `frameId` 기반의 지연 방지 및 overlay 동기화 구조를 안정화한 구현 내역을 요약합니다.

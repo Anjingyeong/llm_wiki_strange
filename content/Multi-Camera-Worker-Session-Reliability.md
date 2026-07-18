@@ -10,7 +10,9 @@ relatedDocs: [Architecture, AI-Pipeline, MQTT-Event-Schema, Evidence-TensorRT-Ad
 relatedFiles: [ai/ai/analysis_session.py, ai/ai/worker_session.py, ai/ai/frame_sync.py, ai/ai/supervisor_policy.py, ai/ai/event_idempotency.py, ai/ai/registered_camera_workers.py, ai/ai/evidence.py, ai/ai/publishers/event_publisher.py, ai/ai/vlm/incident_pipeline.py, ai/scripts/serve_ai_overlay.py, ai/scripts/run_rtsp_inference.py, ai/docs/WORKER_SESSION_WIRING.md, ai/docs/MULTI_CAMERA_SUPERVISOR.md, ai/tests/test_multi_camera_isolation.py, ai/tests/test_session_stale_guards.py, ai/tests/test_worker_analysis_session_wiring.py]
 updatedAt: 2026-07-11
 project: smart-safety
-type: architecture-case
+type: architecture
+status: partial
+evidenceLevel: unit-test
 portfolio_use: true
 evidence_type: offline-code-and-tests
 status_split: "코드상 검증 완료 / Mock·Synthetic·오프라인 테스트 / GPU PC 실환경 미검증"

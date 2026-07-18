@@ -6,6 +6,9 @@ category: AI Pipeline
 relatedDocs: [AI-Pipeline, Model-Decision-YOLO26n, Feature-Vector-51D-vs-54D, LSTM-Sequence-Length-Comparison]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]
 updatedAt: 2026-06-26
+type: architecture
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적

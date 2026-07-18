@@ -8,6 +8,8 @@ relatedFiles: [PROJECT_CONTRACT.md, strange_infra/docker-compose.yml, strange_fr
 updatedAt: 2026-06-26
 project: smart-safety-ai
 type: architecture
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 ---
 

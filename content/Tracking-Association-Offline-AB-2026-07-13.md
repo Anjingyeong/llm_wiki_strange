@@ -9,7 +9,9 @@ relatedDocs: [Tracking-Association-Stabilization, Bug-AI-Tracker-FrameRate-Misma
 relatedFiles: [strange_ai/scripts/replay_tracking_from_cache.py, strange_ai/scripts/multi_person_proxy_from_cache.py, strange_ai/tracking/simple_tracker.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_ai/ai/simulated_rtsp_publisher.py, strange_ai/tests/test_tracking_ab_replay.py]
 updatedAt: 2026-07-13
 project: smart-safety-ai
-type: experiment-report
+type: experiment
+status: partial
+evidenceLevel: offline-benchmark
 portfolio_use: true
 order: 260
 ---

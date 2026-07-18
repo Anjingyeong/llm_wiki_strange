@@ -5,6 +5,9 @@ shortTitle: "AI 파이프라인"
 category: Architecture
 relatedDocs: [Benchmark-Evidence-Hub, Model-Comparison, Feature-Vector-51D-vs-54D, Evidence-TensorRT-Adoption-Decision, Evidence-MQTT-E2E-Alert-Latency, Evidence-RTSP-2Cam-Queue-TensorRT, Tracking-Association-Stabilization, Realtime-Camera-Runtime-Stabilization]
 updatedAt: 2026-07-15
+type: architecture
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 1. 문제 정의

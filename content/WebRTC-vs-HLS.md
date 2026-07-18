@@ -6,6 +6,9 @@ category: Frontend
 relatedDocs: [ADR-001-WebRTC, Architecture, Bug-RTSP-Stream-404, mjpeg-display-rollback]
 relatedFiles: [docs/webrtc_smoke.md, strange_front/src/features/dashboard/components/WebRtcCameraPlayer.tsx]
 updatedAt: 2026-07-08
+type: decision
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적

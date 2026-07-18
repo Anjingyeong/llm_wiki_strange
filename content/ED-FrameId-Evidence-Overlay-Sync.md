@@ -8,7 +8,9 @@ relatedDocs: [ED-Latest-Frame-Queue-Policy, Frame-Matching-Report, Frame-Sync-De
 relatedFiles: [ai/ai/frame_sync.py, ai/ai/evidence.py, ai/ai/worker_session.py, front/src/shared/utils/overlaySync.ts, front/src/hooks/useAiEvents.ts, front/scripts/verify-overlay-sync-contract.mjs]
 updatedAt: 2026-07-11
 project: smart-safety
-type: engineering-decision
+type: decision
+status: partial
+evidenceLevel: unit-test
 decision_domain: Frontend Synchronization
 portfolio_use: true
 ---

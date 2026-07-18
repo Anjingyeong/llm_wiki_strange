@@ -4,6 +4,9 @@ navTitle: "Frame Sync"
 shortTitle: "Frame Sync"
 category: AI Pipeline
 updatedAt: "2026-06-27"
+type: incident
+status: partial
+evidenceLevel: live-canary
 ---
 
 > **최종 갱신**: 2026-06-27 (세션 3 변경 내역 반영)

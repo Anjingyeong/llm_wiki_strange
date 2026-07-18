@@ -5,7 +5,7 @@ shortTitle: "DC Sync Plan"
 category: Architecture
 status: planned
 evidenceLevel: code-only
-type: architecture-plan
+type: plan
 relatedDocs: [Frame-Sync-Canonical, mjpeg-display-rollback, WebRTC-vs-HLS]
 relatedFiles: [strange_ai/scripts/serve_ai_overlay.py, strange_front/src/features/dashboard/pages/UserDashboard.tsx]
 updatedAt: 2026-07-15

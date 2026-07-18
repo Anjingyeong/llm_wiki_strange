@@ -6,6 +6,9 @@ category: ADR
 relatedDocs: [MQTT-Event-Schema, AI-Output-JSON, Bug-Notification-Scope]
 relatedFiles: [PROJECT_CONTRACT.md, strange_back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java, strange_back/src/main/java/com/strange/safety/event/AlertBroadcastService.java, strange_back/src/main/java/com/strange/safety/event/SafetyEventDto.java, strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java, strange_ai/messaging/event_schema.py]
 updatedAt: 2026-07-11
+type: decision
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적

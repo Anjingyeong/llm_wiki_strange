@@ -23,6 +23,8 @@ relatedFiles:
 updatedAt: 2026-07-16
 project: smart-safety-ai
 type: evidence
+status: partial
+evidenceLevel: offline-benchmark
 portfolio_use: true
 evidence_type: hub
 canonicalFor: stabilization-benchmark-index

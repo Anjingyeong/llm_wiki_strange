@@ -6,6 +6,9 @@ category: AI Pipeline
 relatedDocs: [LSTM, AI-Pipeline, ADR-004-LSTM-Feature-Expansion]
 relatedFiles: [strange_ai/ai/action/classifier.py, strange_ai/ai/action/motion_features.py, strange_ai/benchmark/compare_lstm_extractors.py]
 updatedAt: 2026-07-14
+type: experiment
+status: partial
+evidenceLevel: offline-benchmark
 ---
 
 ## 1. 문제 정의

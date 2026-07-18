@@ -8,6 +8,8 @@ relatedFiles: [PROJECT_CONTRACT.md]
 updatedAt: 2026-06-26
 project: smart-safety-ai
 type: reference
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 implementationStatus: stable
 verificationLevel: canonical

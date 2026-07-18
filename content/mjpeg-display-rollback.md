@@ -8,6 +8,7 @@ tags: [MJPEG, WebRTC, HLS, MediaMTX, RTSP, ffmpeg, cameraLoginId, overlay, stale
 updatedAt: 2026-07-15
 type: decision
 status: verified
+verifiedAt: 2026-07-15
 evidenceLevel: production
 canonicalFor: browser-display-transport
 supersedes: ADR-001-WebRTC

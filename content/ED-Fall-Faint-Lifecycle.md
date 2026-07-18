@@ -8,7 +8,9 @@ relatedDocs: [AI-Pipeline, AI-Output-JSON, MQTT-Event-Schema, LSTM, Feature-Vect
 relatedFiles: [ai/ai/action/fall_event_state.py, ai/ai/action/faint_post_processing.py, ai/rules/fall_rule.py, ai/docs/FALL_EVENT_LIFECYCLE_MQTT_CONTRACT.md, ai/tests/test_fall_event_state_machine.py, ai/tests/test_unrecovered_event_payload.py]
 updatedAt: 2026-07-11
 project: smart-safety
-type: engineering-decision
+type: decision
+status: partial
+evidenceLevel: unit-test
 decision_domain: Event Lifecycle
 portfolio_use: true
 ---

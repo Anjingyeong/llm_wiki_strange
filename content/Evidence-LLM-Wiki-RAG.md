@@ -9,6 +9,8 @@ relatedFiles: [docs/rag-portfolio.md, scripts/generate-rag-index.mjs, scripts/li
 updatedAt: 2026-06-30
 project: llm-wiki
 type: evidence
+status: partial
+evidenceLevel: unit-test
 portfolio_use: true
 evidence_type: RAG
 ---

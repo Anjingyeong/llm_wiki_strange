@@ -6,6 +6,9 @@ category: Bugs
 relatedDocs: [AI-Output-JSON, MQTT-Event-Schema]
 relatedFiles: [src/styles.css, src/components/MarkdownRenderer.tsx]
 updatedAt: 2026-07-15
+type: incident
+status: partial
+evidenceLevel: unit-test
 ---
 
 ## 목적

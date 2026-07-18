@@ -6,6 +6,9 @@ category: AI Pipeline
 relatedDocs: [AI-Pipeline, MQTT-Event-Schema, Architecture]
 relatedFiles: [strange_ai/.env.example, PROJECT_CONTRACT.md, docs/wiki/data/modelMetrics.json]
 updatedAt: 2026-06-26
+type: contract
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적

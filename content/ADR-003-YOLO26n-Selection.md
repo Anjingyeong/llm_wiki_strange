@@ -8,6 +8,7 @@ relatedFiles: []
 updatedAt: 2026-07-15
 type: decision
 status: verified
+verifiedAt: 2026-07-15
 evidenceLevel: offline-benchmark
 canonicalFor: yolo26n-pose
 ---

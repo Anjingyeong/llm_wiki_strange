@@ -6,6 +6,9 @@ category: AI Pipeline
 relatedDocs: [LSTM, Model-Comparison, Benchmark-History]
 relatedFiles: [.tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv, docs/wiki/data/modelMetrics.json, gpu_results_import/benchmark/results/lstm_yolo26n_final_split_test_audit/YOLO26n-pose/summary.json]
 updatedAt: 2026-07-14
+type: experiment
+status: partial
+evidenceLevel: offline-benchmark
 ---
 
 ## 1. 문제 정의

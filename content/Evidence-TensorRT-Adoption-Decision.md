@@ -9,6 +9,8 @@ relatedFiles: [strange_ai/docs/tensorrt_adoption_evidence.md, strange_ai/scripts
 updatedAt: 2026-07-14
 project: smart-safety-ai
 type: evidence
+status: partial
+evidenceLevel: offline-benchmark
 portfolio_use: true
 evidence_type: decision
 ---

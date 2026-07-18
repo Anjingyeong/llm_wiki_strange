@@ -9,7 +9,7 @@ relatedDocs: [Tracking-Association-Offline-AB-2026-07-13, Bug-AI-Tracker-FrameRa
 relatedFiles: [strange_ai/scripts/replay_tracking_from_cache.py, strange_ai/scripts/multi_person_proxy_from_cache.py, strange_ai/scripts/eval_two_person_synthetic_gt.py, strange_ai/tracking/simple_tracker.py, strange_ai/ai/postprocess/supervision_postprocessor.py, strange_ai/tests/test_tracking_ab_replay.py]
 updatedAt: 2026-07-15
 project: smart-safety-ai
-type: experiment-report
+type: experiment
 status: partial
 evidenceLevel: live-canary
 productionStatus: rollback

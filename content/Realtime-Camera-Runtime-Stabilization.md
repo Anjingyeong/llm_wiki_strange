@@ -9,6 +9,9 @@ entities: [cameraLoginId, active camera, allowlist, cam_01, cam_04, MediaMTX]
 relatedDocs: [Architecture, WebRTC-vs-HLS, Bug-RTSP-Stream-404, Bug-Duplicate-Stream-Binding, AI-Pipeline, Multi-Camera-Worker-Session-Reliability]
 relatedFiles: [strange_ai/scripts/start_simulated_rtsp_from_folder.py, strange_ai/scripts/run_registered_cameras.py, strange_ai/scripts/start_ai_stable.sh, AI_실행_딸깍.bat]
 updatedAt: 2026-07-14
+type: incident
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 1. 문제 정의

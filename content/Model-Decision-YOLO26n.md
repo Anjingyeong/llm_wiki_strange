@@ -4,7 +4,6 @@ navTitle: "YOLO26n 결정 (이동)"
 shortTitle: "YOLO26n redirect"
 category: Experiments
 status: archived
-canonicalFor: null
 redirectTo:
   - Model-Comparison
   - ADR-003-YOLO26n-Selection

@@ -4,6 +4,41 @@ import type { WikiFrontmatterCategory } from './wikiCategories';
 /** YAML `category:` on each wiki page (see wikiCategories.ts). */
 export type WikiCategory = WikiFrontmatterCategory;
 
+export const WIKI_DOCUMENT_TYPES = [
+  'architecture',
+  'baseline',
+  'contract',
+  'daily-log',
+  'decision',
+  'evidence',
+  'experiment',
+  'incident',
+  'meta',
+  'overview',
+  'plan',
+  'reference',
+  'runbook',
+] as const;
+export type WikiDocumentType = (typeof WIKI_DOCUMENT_TYPES)[number];
+
+export const WIKI_DOCUMENT_STATUSES = [
+  'archived',
+  'partial',
+  'planned',
+  'superseded',
+  'verified',
+] as const;
+export type WikiDocumentStatus = (typeof WIKI_DOCUMENT_STATUSES)[number];
+
+export const WIKI_EVIDENCE_LEVELS = [
+  'code-only',
+  'unit-test',
+  'offline-benchmark',
+  'live-canary',
+  'production',
+] as const;
+export type WikiEvidenceLevel = (typeof WIKI_EVIDENCE_LEVELS)[number];
+
 /** Sidebar / MOC section labels (not written in frontmatter). */
 export type WikiSidebarMocCategory =
   | '01. Project Overview (프로젝트 개요)'
@@ -15,6 +50,14 @@ export type WikiSidebarMocCategory =
 
 export type Frontmatter = {
   readonly title: string;
+  readonly type?: WikiDocumentType;
+  readonly status?: WikiDocumentStatus;
+  readonly evidenceLevel?: WikiEvidenceLevel;
+  readonly verifiedAt?: string;
+  readonly canonicalFor?: string | null;
+  readonly supersedes?: readonly string[];
+  readonly supersededBy?: string;
+  readonly relations?: readonly string[];
   readonly navTitle?: string;
   readonly shortTitle?: string;
   readonly displayTitle?: string;

@@ -3,7 +3,7 @@ title: "AI Metadata와 영상 프레임을 frameId로 동기화한 방법"
 navTitle: "frameId 동기화"
 shortTitle: "Frame Sync"
 category: Architecture
-type: experiment-report
+type: experiment
 status: partial
 evidenceLevel: unit-test
 canonicalFor: frame-overlay-sync

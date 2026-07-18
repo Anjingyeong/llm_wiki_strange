@@ -6,6 +6,9 @@ category: Experiments
 relatedDocs: [Model-Comparison, Model-Decision-YOLO26n, LSTM-Experiment-Results]
 relatedFiles: [gpu_results_import/PROJECT_SUMMARY.md, gpu_results_import/lstm_eval_digest.txt, gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30_full_v2/summary.csv]
 updatedAt: 2026-06-26
+type: evidence
+status: partial
+evidenceLevel: offline-benchmark
 ---
 
 ## 목적

@@ -9,6 +9,8 @@ relatedFiles: [portfolio/project-evidence-map.md, portfolio/resume-bullets.md, p
 updatedAt: 2026-06-30
 project: smart-safety-ai
 type: evidence
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 evidence_type: STAR
 ---

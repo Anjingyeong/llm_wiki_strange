@@ -13,6 +13,9 @@ relatedFiles:
   - strange_front/src/features/dashboard/data/cameras.ts
   - strange_front/src/features/dashboard/components/CameraStreamFrame.tsx
 updatedAt: 2026-07-15
+type: incident
+status: partial
+evidenceLevel: unit-test
 portfolio_use: true
 prRefs:
   - strangeRookies/front#16

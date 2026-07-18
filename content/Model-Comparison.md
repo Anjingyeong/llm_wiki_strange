@@ -6,8 +6,9 @@ category: Experiments
 relatedDocs: [ADR-003-YOLO26n-Selection, Benchmark-History, LSTM-Experiment-Results]
 relatedFiles: [docs/wiki/data/modelMetrics.json, .tmp/gpu_benchmark/lstm_extractor_comparison_fast/summary.csv]
 updatedAt: 2026-07-15
-type: experiment-report
+type: experiment
 status: verified
+verifiedAt: 2026-07-15
 evidenceLevel: offline-benchmark
 canonicalFor: yolo26n-pose
 ---

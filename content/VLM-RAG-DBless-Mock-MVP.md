@@ -9,7 +9,9 @@ relatedDocs: [Benchmark-Evidence-Hub, Evidence-VLM-RAG-Event-Search-Decision, AI
 relatedFiles: [ai/scripts/process_vlm_mock.py, ai/ai/vlm_mock.py, ai/fixtures/vlm/demo_job.json, ai/tests/test_vlm_mock_worker.py, back/src/main/java/com/strange/safety/vlm/mock/MockIncidentFixture.java, back/src/main/java/com/strange/safety/vlm/mock/InMemoryIncidentRepository.java, back/src/main/java/com/strange/safety/vlm/mock/MockVlmClient.java, back/src/main/java/com/strange/safety/vlm/mock/MockEmbeddingRepository.java, back/src/main/java/com/strange/safety/vlm/mock/IncidentSearchDocumentBuilder.java, back/src/main/java/com/strange/safety/vlm/mock/MockSemanticSearchService.java, back/src/test/java/com/strange/safety/vlm/mock/MockVlmRagServiceTest.java, back/DB_LESS_VLM_RAG_MOCK.md, front/src/features/dashboard/api/alertEventsApi.ts, front/src/features/dashboard/data/mockVlmIncidents.json]
 updatedAt: 2026-07-15
 project: smart-safety
-type: architecture-case
+type: architecture
+status: partial
+evidenceLevel: unit-test
 portfolio_use: true
 evidence_type: mock-mvp
 status_split: "완료 / Mock 검증 / 미검증·후속"

@@ -3,7 +3,7 @@ title: "서 있는 사람을 쓰러짐으로 오판한 원인과 자세 전이 G
 navTitle: "Standing Faint Gate"
 shortTitle: "Upright Gate"
 category: AI Pipeline
-type: engineering-decision
+type: decision
 status: partial
 evidenceLevel: unit-test
 canonicalFor: standing-faint-fp

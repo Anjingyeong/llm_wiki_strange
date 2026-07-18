@@ -6,6 +6,9 @@ category: Experiments
 relatedDocs: [LSTM, LSTM-Experiment-Results, Benchmark-History]
 relatedFiles: [gpu_results_import/benchmark/results/lstm_sequence_length_8_16_30/summary.csv, strange_ai/scripts/run_lstm_sequence_length_comparison.py]
 updatedAt: 2026-06-26
+type: experiment
+status: partial
+evidenceLevel: offline-benchmark
 ---
 
 ## 목적

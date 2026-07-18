@@ -7,7 +7,9 @@ relatedDocs: [AI-Pipeline, WebRTC-vs-HLS]
 relatedFiles: [strange_ai/ai/postprocess/supervision_postprocessor.py, scripts/serve_ai_overlay.py, strange_ai/ai/registered_cameras.py]
 updatedAt: 2026-07-03
 project: smart-safety-ai
-type: bug-report
+type: incident
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 ---
 

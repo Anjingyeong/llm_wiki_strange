@@ -3,9 +3,10 @@ title: "AI Metadata와 영상 프레임 매칭 알고리즘"
 navTitle: "프레임 매칭"
 shortTitle: "프레임 매칭"
 category: Architecture
+type: architecture
 status: verified
+verifiedAt: 2026-07-15
 evidenceLevel: unit-test
-canonicalFor: null
 relatedDocs: [Frame-Sync-Canonical, ED-FrameId-Evidence-Overlay-Sync]
 updatedAt: 2026-07-15
 ---

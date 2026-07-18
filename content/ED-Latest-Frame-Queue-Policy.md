@@ -8,7 +8,9 @@ relatedDocs: [Multi-Camera-Worker-Session-Reliability, Frame-Sync-Debug-Report, 
 relatedFiles: [ai/ai/frame_sync.py, ai/stream/frame_queue.py, ai/stream/rtsp_reader.py, ai/scripts/run_rtsp_inference.py, ai/tests/test_frame_queue.py, ai/tests/test_frame_sync.py]
 updatedAt: 2026-07-11
 project: smart-safety
-type: engineering-decision
+type: decision
+status: partial
+evidenceLevel: unit-test
 decision_domain: Real-time Streaming
 portfolio_use: true
 ---

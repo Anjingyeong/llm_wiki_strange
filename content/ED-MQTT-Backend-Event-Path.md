@@ -8,7 +8,9 @@ relatedDocs: [ADR-002-MQTT-Metadata-Separation, MQTT-Event-Schema, AI-Output-JSO
 relatedFiles: [ai/messaging/event_schema.py, ai/ai/publishers/event_publisher.py, back/src/main/java/com/strange/safety/event/MqttSafetyEventSubscriber.java, back/src/main/java/com/strange/safety/alert/service/AlertEventService.java, back/docs/EVENT_SPEC.md]
 updatedAt: 2026-07-11
 project: smart-safety
-type: engineering-decision
+type: decision
+status: partial
+evidenceLevel: code-only
 decision_domain: Backend Integration
 portfolio_use: true
 ---

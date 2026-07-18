@@ -6,6 +6,9 @@ category: Bugs
 relatedDocs: [MQTT-Event-Schema, Architecture, ADR-002-MQTT-Metadata-Separation]
 relatedFiles: [strange_back/src/main/java/com/strange/safety/alert/service/AlertEventService.java, strange_front/src/features/dashboard]
 updatedAt: 2026-06-26
+type: incident
+status: partial
+evidenceLevel: code-only
 ---
 
 ## 목적
