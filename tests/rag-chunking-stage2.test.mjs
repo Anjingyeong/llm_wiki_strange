@@ -115,3 +115,16 @@ test('changed content rebuilds affected chunks only', () => {
   assert.ok(merged.reused >= 1);
   assert.ok(merged.rebuilt >= 1);
 });
+
+test('changed machine metadata rebuilds affected chunks', () => {
+  // Given: content-identical documents with a lifecycle state transition.
+  const first = buildRagIndexStructured([{ ...sampleDoc, status: 'partial' }], { contextualPrefix: false });
+  const second = buildRagIndexStructured([{ ...sampleDoc, status: 'verified' }], { contextualPrefix: false });
+
+  // When: the incremental merge compares metadata-aware chunk hashes.
+  const merged = mergeIncrementalIndex(first, second);
+
+  // Then: stale chunk metadata is never reused.
+  assert.equal(merged.reused, 0);
+  assert.ok(merged.rebuilt > 0);
+});

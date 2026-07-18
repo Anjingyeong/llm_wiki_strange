@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { computeCorpusHash } from './lib/corpus-hash.mjs';
 import { extractHeadingsFromBody } from './lib/heading-utils.mjs';
 import { isExcludedFromPublicIndex } from './lib/indexable-content.mjs';
+import { extractWikiMachineMetadata, parseWikiSourceDocument } from './lib/wiki-source-document.mjs';
 import { resolveDisplayTitle } from '../src/lib/wikiTitle.mjs';
 
 const wikiRoot = fileURLToPath(new URL('..', import.meta.url));
@@ -89,98 +90,6 @@ const slugOrder = new Map([
   ['Glossary', 930],
 ]);
 
-function parseFrontmatter(raw, fileName) {
-  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match || !match[1] || !match[2]) {
-    throw new Error(`${fileName} is missing frontmatter`);
-  }
-
-  const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const separator = line.indexOf(':');
-    if (separator < 0) {
-      continue;
-    }
-    const key = line.slice(0, separator).trim();
-    const value = line.slice(separator + 1).trim();
-    if (value.startsWith('[') && value.endsWith(']')) {
-      data[key] = value
-        .slice(1, -1)
-        .split(',')
-        .map((item) => stripOuterQuotes(item))
-        .filter(Boolean);
-    } else {
-      data[key] = stripOuterQuotes(value);
-    }
-  }
-
-  const frontmatterLines = match[1].split(/\r?\n/);
-  for (const key of ['tags', 'relatedDocs', 'relatedFiles', 'entities']) {
-    const start = frontmatterLines.findIndex((line) => line.split(':', 1)[0].trim() === key);
-    if (start < 0) {
-      continue;
-    }
-    let end = start + 1;
-    while (end < frontmatterLines.length && /^\s+-\s+/.test(frontmatterLines[end])) {
-      end += 1;
-    }
-    data[key] = parseListField(frontmatterLines.slice(start, end).join('\n'), key) ?? [];
-  }
-  for (const key of requiredKeys) {
-    if (!data[key]) {
-      throw new Error(`${fileName} is missing required frontmatter key: ${key}`);
-    }
-  }
-
-  return { data, body: match[2] };
-}
-
-function stripOuterQuotes(value) {
-  let normalized = String(value).trim();
-  while (
-    normalized.length >= 2
-    && ((normalized.startsWith('"') && normalized.endsWith('"'))
-      || (normalized.startsWith("'") && normalized.endsWith("'")))
-  ) {
-    normalized = normalized.slice(1, -1).trim();
-  }
-  return normalized;
-}
-
-function parseYamlListBlock(lines) {
-  const items = [];
-  for (const line of lines) {
-    const m = line.match(/^\s*-\s+(.+)$/);
-    if (m) {
-      items.push(stripOuterQuotes(m[1].trim()));
-    }
-  }
-  return items;
-}
-
-function parseListField(block, key) {
-  const lines = block.split(/\r?\n/);
-  const first = lines[0] ?? '';
-  const colon = first.indexOf(':');
-  if (colon < 0 || first.slice(0, colon).trim() !== key) {
-    return null;
-  }
-  const inline = first.slice(colon + 1).trim();
-  if (inline) {
-    if (inline.startsWith('[') && inline.endsWith(']')) {
-      return inline
-        .slice(1, -1)
-        .split(',')
-        .map((item) => stripOuterQuotes(item.trim()))
-        .filter(Boolean);
-    }
-    return inline ? [stripOuterQuotes(inline)] : [];
-  }
-  return parseYamlListBlock(lines.slice(1));
-}
-
-
-
 function excerptFrom(body) {
   const EXCERPT_MAX = 220;
   const plain = body
@@ -222,7 +131,12 @@ const files = (await readdir(contentDir)).filter((file) => file.endsWith('.md'))
 
 for (const file of files) {
   const raw = await readFile(join(contentDir, file), 'utf8');
-  const parsed = parseFrontmatter(raw, file);
+  const parsed = parseWikiSourceDocument(raw, file);
+  for (const key of requiredKeys) {
+    if (typeof parsed.data[key] !== 'string' || !parsed.data[key]) {
+      throw new Error(`${file} is missing required frontmatter key: ${key}`);
+    }
+  }
   if (isExcludedFromPublicIndex(parsed.data)) {
     continue;
   }
@@ -239,6 +153,7 @@ for (const file of files) {
     relatedDocs: parsed.data.relatedDocs ?? [],
     relatedFiles: parsed.data.relatedFiles ?? [],
     updatedAt: parsed.data.updatedAt,
+    ...extractWikiMachineMetadata(parsed.data),
     summary: parsed.data.summary ?? parsed.data.description ?? excerptFrom(parsed.body),
     order: inferOrder(slug, parsed.data),
     sourcePath: `content/${file}`,

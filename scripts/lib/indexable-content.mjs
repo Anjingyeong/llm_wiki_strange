@@ -4,35 +4,14 @@
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-
-function stripOuterQuotes(value) {
-  let normalized = String(value).trim();
-  while (
-    normalized.length >= 2
-    && ((normalized.startsWith('"') && normalized.endsWith('"'))
-      || (normalized.startsWith("'") && normalized.endsWith("'")))
-  ) {
-    normalized = normalized.slice(1, -1).trim();
-  }
-  return normalized;
-}
-
-function parseFrontmatterFlags(raw) {
-  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match?.[1]) return {};
-  const data = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const separator = line.indexOf(':');
-    if (separator < 0) continue;
-    const key = line.slice(0, separator).trim();
-    const value = line.slice(separator + 1).trim();
-    data[key] = stripOuterQuotes(value);
-  }
-  return data;
-}
+import { parseWikiSourceDocument } from './wiki-source-document.mjs';
 
 export function isExcludedFromPublicIndex(data) {
-  return data.status === 'archived' || data.wikiVisibility === 'internal';
+  const status = typeof data.status === 'string' ? data.status.trim().toLowerCase() : '';
+  const visibility = typeof data.wikiVisibility === 'string'
+    ? data.wikiVisibility.trim().toLowerCase()
+    : '';
+  return status === 'archived' || visibility === 'internal';
 }
 
 /**
@@ -44,7 +23,7 @@ export async function listIndexableContentSlugs(contentDir) {
   const slugs = [];
   for (const file of files) {
     const raw = await readFile(join(contentDir, file), 'utf8');
-    const data = parseFrontmatterFlags(raw);
+    const { data } = parseWikiSourceDocument(raw, file);
     if (isExcludedFromPublicIndex(data)) continue;
     slugs.push(file.replace(/\.md$/, ''));
   }

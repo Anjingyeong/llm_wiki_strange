@@ -1,4 +1,5 @@
 import { embedText, stableHash, VECTOR_SIZE } from './embedding.mjs';
+import { extractWikiMachineMetadata } from '../wiki-source-document.mjs';
 
 const DEFAULT_SECTION_TITLE = '문서 개요';
 
@@ -177,6 +178,7 @@ function makeChunk(document, section, text, chunkOrder = 0) {
   const entities = asStringList(document.entities);
   const sourcePath = document.sourcePath ?? `content/${document.slug}.md`;
   const displayTitle = document.displayTitle ?? document.navTitle ?? document.shortTitle ?? document.title;
+  const machineMetadata = extractWikiMachineMetadata(document);
   const metadata = {
     category: document.category,
     tags,
@@ -192,6 +194,7 @@ function makeChunk(document, section, text, chunkOrder = 0) {
     chunkOrder,
     relatedSlugs,
     entities,
+    ...machineMetadata,
   };
   return {
     id: `${document.slug}#${stableHash(`${section}:${text}`).toString(16)}`,
@@ -217,6 +220,7 @@ function makeChunk(document, section, text, chunkOrder = 0) {
     entities,
     portfolio_use: document.portfolio_use,
     evidence_type: document.evidence_type,
+    ...machineMetadata,
     metadata,
     embedding: embedText(`${displayTitle} ${document.title} ${document.navTitle ?? ''} ${document.shortTitle ?? ''} ${document.slug} ${section} ${text}`),
   };
@@ -244,8 +248,7 @@ export function buildRagIndexLegacy(documents, options = {}) {
         built.chunkType = 'legacy-text';
         built.content = built.text;
         built.contextualPrefix = '';
-        built.contentHash = stableHash(`${document.slug}:${chunk.section}:${chunk.text}`).toString(16);
-        built.chunkHash = built.contentHash;
+        built.chunkHash = built.contentHash = stableHash(`${document.slug}:${chunk.section}:${chunk.text}:${JSON.stringify(extractWikiMachineMetadata(document))}`).toString(16);
         chunks.push(built);
       }
     }

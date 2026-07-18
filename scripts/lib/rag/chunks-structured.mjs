@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { embedText, stableHash, VECTOR_SIZE } from './embedding.mjs';
 import { allocateHeadingIds } from '../../../src/lib/wikiHeadings.mjs';
+import { extractWikiMachineMetadata } from '../wiki-source-document.mjs';
 
 export const STRUCTURE_SCHEMA_VERSION = 'structure-aware-v1';
 export const STRUCTURE_CONTEXTUAL_SCHEMA_VERSION = 'structure-aware-contextual-v1';
@@ -324,6 +325,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     : '';
   const searchableText = contextualPrefix ? `${contextualPrefix}\n\n${content}` : content;
   const contentHash = sha1(content);
+  const machineMetadata = extractWikiMachineMetadata(document);
   const chunkHash = sha1(
     [
       document.slug,
@@ -332,13 +334,13 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
       contentHash,
       options.contextualPrefix ? 'ctx1' : 'ctx0',
       STRUCTURE_SCHEMA_VERSION,
+      JSON.stringify(machineMetadata),
     ].join('|'),
   );
   const displayTitle = document.displayTitle ?? document.navTitle ?? document.shortTitle ?? document.title;
   const schemaVersion = options.contextualPrefix
     ? STRUCTURE_CONTEXTUAL_SCHEMA_VERSION
     : STRUCTURE_SCHEMA_VERSION;
-
   return {
     id: `${document.slug}#${chunkHash}`,
     documentId: document.slug,
@@ -376,6 +378,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     type: document.type,
     portfolio_use: document.portfolio_use,
     evidence_type: document.evidence_type,
+    ...machineMetadata,
     metadata: {
       category: document.category,
       tags,
@@ -389,6 +392,7 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
       chunkType,
       chunkSchemaVersion: schemaVersion,
       relatedSlugs: relatedDocs,
+      ...machineMetadata,
     },
     embedding: embedText(
       `${displayTitle} ${document.title} ${document.slug} ${unit.headingPath} ${tags.join(' ')} ${entities.join(' ')} ${document.summary || ''} ${codeSymbols.join(' ')} ${searchableText}`,
@@ -446,6 +450,7 @@ export function documentContentHash(document) {
       tags: document.tags,
       updatedAt: document.updatedAt,
       relatedDocs: document.relatedDocs,
+      ...extractWikiMachineMetadata(document),
       body: document.body,
     }),
   );

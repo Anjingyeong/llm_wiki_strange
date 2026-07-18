@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { isExcludedFromPublicIndex } from '../indexable-content.mjs';
+import { extractWikiMachineMetadata, parseWikiSourceDocument } from '../wiki-source-document.mjs';
 import { resolveDisplayTitle } from '../../../src/lib/wikiTitle.mjs';
 
 const categoryOrder = new Map([
@@ -17,33 +18,6 @@ const categoryOrder = new Map([
   ['Glossary', 950],
 ]);
 
-function parseList(value) {
-  if (!value) return [];
-  if (Array.isArray(value)) return value;
-  const trimmed = String(value).trim();
-  if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
-    return trimmed
-      .slice(1, -1)
-      .split(',')
-      .map((item) => item.trim().replace(/^["']|["']$/g, ''))
-      .filter(Boolean);
-  }
-  return trimmed ? [trimmed.replace(/^["']|["']$/g, '')] : [];
-}
-
-function stripOuterQuotes(value) {
-  let normalized = String(value).trim();
-  while (
-    normalized.length >= 2
-    && ((normalized.startsWith('"') && normalized.endsWith('"'))
-      || (normalized.startsWith("'") && normalized.endsWith("'")))
-  ) {
-    normalized = normalized.slice(1, -1).trim();
-  }
-  return normalized;
-}
-
-
 function stripMarkdownText(value) {
   return value
     .replace(/```[\s\S]*?```/g, ' ')
@@ -59,39 +33,12 @@ function makeSummary(body, explicitSummary) {
   return plain.length <= 180 ? plain : `${plain.slice(0, 180).trim()}...`;
 }
 
-function parseFrontmatter(raw, fileName) {
-  const match = raw.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match || !match[1] || !match[2]) {
-    throw new Error(`${fileName} is missing frontmatter`);
-  }
-  const data = {};
-  const lines = match[1].split(/\r?\n/);
-  for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index];
-    const separator = line.indexOf(':');
-    if (separator < 0) continue;
-    const key = line.slice(0, separator).trim();
-    const value = line.slice(separator + 1).trim();
-    if (!value) {
-      const items = [];
-      while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
-        index += 1;
-        items.push(stripOuterQuotes(lines[index].replace(/^\s+-\s+/, '')));
-      }
-      data[key] = items;
-    } else {
-      data[key] = stripOuterQuotes(value);
-    }
-  }
-  return { data, body: match[2] };
-}
-
 export async function loadWikiDocuments(contentDir) {
   const documents = [];
   const files = (await readdir(contentDir)).filter((file) => file.endsWith('.md')).sort();
   for (const file of files) {
     const raw = await readFile(join(contentDir, file), 'utf8');
-    const parsed = parseFrontmatter(raw, file);
+    const parsed = parseWikiSourceDocument(raw, file);
     if (isExcludedFromPublicIndex(parsed.data)) continue;
     const slug = file.replace(/\.md$/, '');
     documents.push({
@@ -106,11 +53,11 @@ export async function loadWikiDocuments(contentDir) {
       order: parsed.data.order ? Number.parseInt(parsed.data.order, 10) : (categoryOrder.get(parsed.data.category) ?? 999),
       sourcePath: `content/${file}`,
       project: parsed.data.project,
-      type: parsed.data.type,
-      tags: parseList(parsed.data.tags),
-      relatedDocs: parseList(parsed.data.relatedDocs),
-      relatedSlugs: parseList(parsed.data.relatedSlugs),
-      entities: parseList(parsed.data.entities),
+      ...extractWikiMachineMetadata(parsed.data),
+      tags: parsed.data.tags ?? [],
+      relatedDocs: parsed.data.relatedDocs ?? [],
+      relatedSlugs: parsed.data.relatedSlugs ?? [],
+      entities: parsed.data.entities ?? [],
       portfolio_use: parsed.data.portfolio_use,
       evidence_type: parsed.data.evidence_type,
       body: parsed.body,

@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run generate:index && npm run rag:index && vite --host 0.0.0.0",
-    "generate:index": "node scripts/generate-search-index.mjs && node scripts/generate-wiki-ux-meta.mjs",
+    "dev": "npm run generate:index && vite --host 0.0.0.0",
+    "generate:index": "node scripts/generate-search-index.mjs && npm run rag:index && node scripts/generate-wiki-ux-meta.mjs",
     "generate:ux-meta": "node scripts/generate-wiki-ux-meta.mjs",
     "rag:index": "node scripts/generate-rag-index.mjs",
     "export:obsidian": "node scripts/export-to-obsidian.mjs",
@@ -21,7 +21,7 @@
     "start": "node server.mjs",
     "preview": "npm run build && node server.mjs",
     "preview:dist": "node server.mjs",
-    "build": "npm run generate:index && npm run rag:index && npm run check:index && tsc -b && vite build",
+    "build": "npm run generate:index && npm run check:index && tsc -b && vite build",
     "benchmark:rag": "node scripts/run-benchmark.mjs",
     "lint": "tsc --noEmit"
   },
