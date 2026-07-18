@@ -1,15 +1,15 @@
 {
-  "indexVersion": "structure-aware-v1-2",
-  "chunkSchemaVersion": "structure-aware-v1",
+  "indexVersion": "structure-aware-contextual-v1-2",
+  "chunkSchemaVersion": "structure-aware-contextual-v1",
   "embeddingVersion": "local-hash-tfidf-v1",
   "embeddingDimensions": 256,
   "documentCount": 48,
   "chunkCount": 658,
-  "generatedAt": "2026-07-18T10:37:24.551Z",
-  "sourceCommit": "bb5602a",
+  "generatedAt": "2026-07-18T11:05:47.275Z",
+  "sourceCommit": "b51ba68",
   "indexPath": "data/ragVectorIndex.json",
-  "meanChunkChars": 240,
+  "meanChunkChars": 469,
   "duplicateDocRatio": 1,
-  "manifestHash": "f987e4786f193786",
-  "corpusHash": "7227f443caa508528e5e0af445c1820fdf2bac7087971bdcc16e7641ea87b750"
+  "manifestHash": "94f6cbdc6fdac9c3",
+  "corpusHash": "a2e10c58cc340919b681b807b7de19e41a62ecdb1038941186f7d96b56734fb3"
 }

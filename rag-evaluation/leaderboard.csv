@@ -131,3 +131,12 @@ runId,timestamp,experimentName,retrievalMode,gitCommit,hitAt1,hitAt5,recallAt5,m
 20260718-063352247_933bfda_baseline-vector-search,2026-07-18T06:33:52.249Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,2.1854,false
 20260718-064054199_933bfda_baseline-vector-search,2026-07-18T06:40:54.201Z,baseline-vector-search,baseline,933bfda,0.5179,0.625,0.4167,0.558,0.427,0,2.2684,false
 20260718-104807338_bb5602a_baseline-vector-search,2026-07-18T10:48:07.338Z,baseline-vector-search,baseline,bb5602a,0.5179,0.625,0.4167,0.558,0.427,0,2.7052,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,vector-only-structure-aware,baseline,b51ba68,0.5179,0.625,0.4167,0.558,0.427,0,1.0541,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,lexical-only,lexical,b51ba68,0.4643,0.625,0.3988,0.5417,0.4033,0.4,148.1855,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,hybrid-rrf,hybrid-raw,b51ba68,0.5714,0.6429,0.4107,0.6071,0.4456,1,148.2192,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,hybrid-diversify-max1,hybrid-raw,b51ba68,0.5714,0.75,0.5238,0.6435,0.5143,1,136.8777,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,hybrid-diversify-max2,hybrid-raw,b51ba68,0.5714,0.7143,0.4792,0.6354,0.4922,1,151.0276,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,hybrid-contextual,hybrid-raw,b51ba68,0.6071,0.7321,0.4881,0.6622,0.5075,1,133.5529,false
+20260718-105710459_b51ba68_hybrid-stage3,2026-07-18T10:58:14.065Z,hybrid-contextual-diversify-max2,hybrid-raw,b51ba68,0.6071,0.8036,0.5774,0.6875,0.5701,1,148.0411,false
+20260718-110528693_b51ba68_baseline-vector-search,2026-07-18T11:05:28.694Z,baseline-vector-search,baseline,b51ba68,0.4821,0.6607,0.4226,0.558,0.4251,0,4.0915,false
+20260718-110559820_b51ba68_baseline-vector-search,2026-07-18T11:05:59.823Z,baseline-vector-search,baseline,b51ba68,0.4821,0.6607,0.4226,0.558,0.4251,0,2.5012,false

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-11T11:58:58.185Z",
+  "generatedAt": "2026-07-18T11:06:19.218Z",
   "mode": "hybrid",
   "related10": {
     "top1": 9,
@@ -23,12 +23,12 @@
         "top3": [
           "ED-Latest-Frame-Queue-Policy",
           "ED-Latest-Frame-Queue-Policy",
-          "2026-06-30-Overlay-Tracking-Evidence-Log"
+          "Multi-Camera-Frame-Latency-Report"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 288.08,
+        "latencyMs": 477.42,
         "abstentionReason": null
       },
       {
@@ -43,12 +43,12 @@
         "top3": [
           "ED-Fall-Faint-Lifecycle",
           "ED-Fall-Faint-Lifecycle",
-          "VLM-RAG-DBless-Mock-MVP"
+          "ED-Standing-Faint-Upright-Gate"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 278.173,
+        "latencyMs": 457.936,
         "abstentionReason": null
       },
       {
@@ -69,7 +69,7 @@
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 218.699,
+        "latencyMs": 395.142,
         "abstentionReason": null
       },
       {
@@ -85,12 +85,12 @@
         "top3": [
           "ED-FrameId-Evidence-Overlay-Sync",
           "ED-FrameId-Evidence-Overlay-Sync",
-          "2026-06-30-Overlay-Tracking-Evidence-Log"
+          "Frame-Sync-Canonical"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 218.41,
+        "latencyMs": 376.992,
         "abstentionReason": null
       },
       {
@@ -110,7 +110,7 @@
         "hitTop1": false,
         "hitTop3": true,
         "rank": 3,
-        "latencyMs": 277.574,
+        "latencyMs": 458.722,
         "abstentionReason": null
       },
       {
@@ -125,12 +125,12 @@
         "top3": [
           "Evidence-TensorRT-Adoption-Decision",
           "Evidence-TensorRT-Adoption-Decision",
-          "Multi-Camera-Worker-Session-Reliability"
+          "Evidence-RTSP-2Cam-Queue-TensorRT"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 278.117,
+        "latencyMs": 436.507,
         "abstentionReason": null
       },
       {
@@ -149,7 +149,7 @@
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 274.235,
+        "latencyMs": 457.966,
         "abstentionReason": null
       },
       {
@@ -164,12 +164,13 @@
         "top1": "Multi-Camera-Worker-Session-Reliability",
         "top3": [
           "Multi-Camera-Worker-Session-Reliability",
-          "Multi-Camera-Worker-Session-Reliability"
+          "Multi-Camera-Worker-Session-Reliability",
+          "Realtime-Camera-Runtime-Stabilization"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 237.802,
+        "latencyMs": 409.605,
         "abstentionReason": null
       },
       {
@@ -190,7 +191,7 @@
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 159.531,
+        "latencyMs": 278.211,
         "abstentionReason": null
       },
       {
@@ -206,13 +207,13 @@
         "top1": "VLM-RAG-DBless-Mock-MVP",
         "top3": [
           "VLM-RAG-DBless-Mock-MVP",
-          "Evidence-VLM-RAG-Event-Search-Decision",
+          "VLM-RAG-DBless-Mock-MVP",
           "Evidence-VLM-RAG-Event-Search-Decision"
         ],
         "hitTop1": true,
         "hitTop3": true,
         "rank": 1,
-        "latencyMs": 283.426,
+        "latencyMs": 485.275,
         "abstentionReason": null
       }
     ]
@@ -255,7 +256,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 134.85
+        "latencyMs": 231.624
       },
       {
         "id": "ua-a-02",
@@ -268,7 +269,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 134.774
+        "latencyMs": 217.86
       },
       {
         "id": "ua-a-03",
@@ -281,7 +282,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 131.442
+        "latencyMs": 211.765
       },
       {
         "id": "ua-a-04",
@@ -294,7 +295,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 132.606
+        "latencyMs": 208.31
       },
       {
         "id": "ua-a-05",
@@ -307,7 +308,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 131.061
+        "latencyMs": 228.683
       },
       {
         "id": "ua-a-06",
@@ -317,10 +318,10 @@
         "retrievalRelevant": false,
         "answerSupported": false,
         "sourcesCount": 0,
-        "abstentionReason": "lexical_generic_only",
+        "abstentionReason": "empty",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 125.621
+        "latencyMs": 300.413
       },
       {
         "id": "ua-a-07",
@@ -333,7 +334,7 @@
         "abstentionReason": "expansion_only_no_original",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 135.156
+        "latencyMs": 229.391
       },
       {
         "id": "ua-a-08",
@@ -346,7 +347,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 161.185
+        "latencyMs": 218.006
       },
       {
         "id": "ua-b-01",
@@ -359,7 +360,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 141.749
+        "latencyMs": 222.13
       },
       {
         "id": "ua-b-02",
@@ -368,11 +369,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 4,
         "abstentionReason": "high_stakes_token_missing",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 136.371
+        "latencyMs": 240.321
       },
       {
         "id": "ua-b-03",
@@ -381,11 +382,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 3,
         "abstentionReason": "metric_family_missing:cost_money",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 68.254
+        "latencyMs": 125.156
       },
       {
         "id": "ua-b-04",
@@ -398,7 +399,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 134.862
+        "latencyMs": 216.274
       },
       {
         "id": "ua-b-05",
@@ -407,11 +408,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 5,
         "abstentionReason": "high_stakes_token_missing",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 132.814
+        "latencyMs": 246.864
       },
       {
         "id": "ua-b-06",
@@ -424,7 +425,7 @@
         "abstentionReason": "empty",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 131.323
+        "latencyMs": 287.819
       },
       {
         "id": "ua-b-07",
@@ -437,7 +438,7 @@
         "abstentionReason": "lexical_generic_only",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 129.613
+        "latencyMs": 274.751
       },
       {
         "id": "ua-c-01",
@@ -446,11 +447,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 4,
         "abstentionReason": "high_stakes_token_missing",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 138.337
+        "latencyMs": 225.631
       },
       {
         "id": "ua-c-02",
@@ -459,11 +460,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 4,
         "abstentionReason": "metric_family_missing:accident_rate",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 140.301
+        "latencyMs": 236.617
       },
       {
         "id": "ua-c-03",
@@ -472,11 +473,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 5,
-        "abstentionReason": "high_stakes_token_missing",
+        "sourcesCount": 4,
+        "abstentionReason": "metric_family_missing:cost_money",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 69.223
+        "latencyMs": 120.35
       },
       {
         "id": "ua-c-04",
@@ -485,11 +486,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
-        "abstentionReason": "metric_key_tokens_missing",
+        "sourcesCount": 5,
+        "abstentionReason": "metric_family_missing:id_switch",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 140.229
+        "latencyMs": 203.149
       },
       {
         "id": "ua-c-05",
@@ -498,11 +499,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
-        "abstentionReason": "notification_latency_sla_missing",
+        "sourcesCount": 4,
+        "abstentionReason": "always_claim_unsupported",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 136.142
+        "latencyMs": 229.961
       },
       {
         "id": "ua-c-06",
@@ -511,11 +512,11 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
-        "abstentionReason": "metric_family_missing:always_claim",
+        "sourcesCount": 5,
+        "abstentionReason": "numeric_no_number_near_family",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 132.171
+        "latencyMs": 208.028
       },
       {
         "id": "ua-a-09",
@@ -525,10 +526,10 @@
         "retrievalRelevant": false,
         "answerSupported": false,
         "sourcesCount": 0,
-        "abstentionReason": "lexical_generic_only",
+        "abstentionReason": "empty",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 134.926
+        "latencyMs": 218.83
       },
       {
         "id": "ua-b-08",
@@ -537,17 +538,17 @@
         "status": "insufficient_context",
         "retrievalRelevant": true,
         "answerSupported": false,
-        "sourcesCount": 6,
+        "sourcesCount": 4,
         "abstentionReason": "high_stakes_token_missing",
         "falseAnswer": false,
         "pass": true,
-        "latencyMs": 132.878
+        "latencyMs": 229.833
       }
     ]
   },
   "latency": {
-    "p50": 136.142,
-    "p95": 278.173,
-    "mean": 166.665
+    "p50": 231.624,
+    "p95": 458.722,
+    "mean": 283.804
   }
 }

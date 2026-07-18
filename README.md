@@ -4,7 +4,7 @@
 
 Smart Safety Monitoring 프로젝트 문서를 정적 Wiki와 서버 측 RAG 질의응답으로 제공한다.
 
-Hybrid RRF + local hash embedding. WIKI_ACCESS_KEY 미설정 시 공개(open).
+Hybrid RRF + local hash embedding. 현재 운영 중인 인덱스는 48개 문서, 658개 청크(structure-aware-contextual-v1 스키마) 규모로 구성되어 있습니다. WIKI_ACCESS_KEY 미설정 시 공개(open)로 동작합니다.
 
 ## Portfolio Documentation
 
@@ -36,15 +36,16 @@ RAG API까지 확인하려면 `npm run build && npm start`로 Node 서버를 실
 
 ```text
 사용자 질문
--> 질문 embedding 생성
--> vector search
--> 관련 문서 chunk 검색
--> LLM prompt에 context로 주입
--> 근거 기반 답변 생성
--> 참고 문서 표시
+→ BM25 / Exact-term Lexical Retrieval
+→ Vector Retrieval (Local Hash Embedding & Cosine Similarity)
+→ Reciprocal Rank Fusion (RRF)
+→ 문서 중복 제거 및 결과 다양화 (문서별 최대 2개 청크 제한)
+→ Top-K Context 구성 (최종 6개 Context, 최대 4800자 제한)
+→ RAG-only 또는 선택적 LLM 답변 (외부 API 호출)
+→ 참고 문서와 Wiki 링크 표시
 ```
 
-현재 저장 구조는 기존 DB를 바꾸지 않는 파일 기반 vector store다.
+현재 저장 구조는 기존 DB를 바꾸지 않는 파일 기반 vector store(`data/ragVectorIndex.json`)입니다.
 
 ## 문서 제목 정책
 
@@ -95,18 +96,18 @@ Promotion updates `best.json` and the operational pointer only when policy passe
 ## Grounded Answer Policy
 
 - API key는 브라우저로 전달하지 않는다. LLM 호출은 `server.mjs` 내부에서만 수행한다.
-- 외부 LLM에는 전체 원문이 아니라 vector search로 선택된 관련 chunk만 전달한다.
-- 관련 chunk가 없으면 추측하지 않고 `관련 문서가 부족함. 문서에서 확인되지 않음.`을 반환한다.
-- LLM API가 설정되지 않았거나 실패하면 로컬 추출형 답변을 사용한다. 이 답변도 검색된 chunk 문장만 사용한다.
-- 답변에는 가능한 경우 문서 제목, 섹션명, 문서 ID, Wiki 링크를 `sources`로 반환한다.
+- 외부 LLM에는 전체 원문이 아니라 vector search 및 lexical search의 결합(RRF)으로 선택된 관련 chunk만 전달한다.
+- 관련 chunk가 없거나 매칭 점수가 최저 점수(minScore) 미만인 경우 추측하지 않고 `관련 문서가 부족함. 문서에서 확인되지 않음.`을 반환합니다(Abstention Policy).
+- LLM API가 설정되지 않았거나 실패하면 로컬 추출형 답변을 사용합니다. 이 답변도 검색된 chunk 문장만 사용합니다.
+- 답변에는 가능한 경우 문서 제목, 섹션명, 문서 ID, Wiki 링크를 `sources`로 반환하여 신뢰성과 투명성을 제공합니다.
 
 ## RAG-only Mode & LLM Answer Mode
 
 LLM Wiki는 Hybrid RAG 검색을 기본 기능으로 제공하고, LLM 답변 생성은 선택적 모드로 분리했습니다. 무료티어 API의 쿼터 제한이나 장애 상황에서도 검색 결과 기반 fallback이 동작하도록 설계해 데모 안정성과 운영성을 확보했습니다.
 
 - **RAG-only Mode (Default)**: 외부 LLM API 연결 없이 작동하는 기본 모드입니다. 로컬 정교화 템플릿(Local Heuristic Template)에 기반해 정확한 인덱스 출처 카드와 문맥 텍스트 요약을 사용자에게 표시합니다.
-- **LLM Answer Mode**: 환경변수를 활성화했을 때 동작하는 모드입니다. RRF 및 Re-ranking을 거친 고품질 Context (최대 8개 청크)를 외부 LLM에 전달하여 고품질의 자연어 답변을 완성합니다.
-- **Graceful Fallback**: API Key 미비, 네트워크 오류, Timeout(기본 10초), Rate Limit 등의 이슈로 LLM 호출이 실패할 경우, 에러 코드를 사용자에게 직접 노출하는 대신 **RAG-only Mode의 로컬 답변으로 자동 Fallback**하도록 처리하여 전체 서비스 가용성을 영구히 유지합니다.
+- **LLM Answer Mode**: 환경변수를 활성화했을 때 동작하는 모드입니다. RRF 및 Re-ranking을 거친 고품질 Context (최대 8개 청크, 최대 4,800자 범위 제한)를 외부 LLM에 전달하여 고품질의 자연어 답변을 완성합니다.
+- **Graceful Fallback**: API Key 미비, 네트워크 오류, Timeout(기본 10초), Rate Limit 등의 이슈로 LLM 호출이 실패할 경우, 에러 코드를 사용자에게 직접 노출하는 대신 **RAG-only Mode의 로컬 답변으로 자동 Fallback**하도록 처리하여 전체 서비스 가용성을 유지합니다.
 
 ## Environment Variables
 
@@ -143,7 +144,7 @@ OPENAI_API_KEY=
 > Wiki 문서와 RAG API는 WIKI_ACCESS_KEY 미설정 시 공개(open)입니다. 보호된 배포에서는 Cloudflare Access/WAF/rate limit 등 배포 경계에서 보호하세요.
 
 
-OpenAI 호환 chat-completions API를 쓰는 저비용 provider를 사용할 경우 `RAG_LLM_ENDPOINT`와 `RAG_LLM_MODEL`만 바꾸면 된다.
+OpenAI 호환 chat-completions API를 사용하는 경우, `OPENAI_API_KEY`(또는 레거시 호환용 `RAG_LLM_API_KEY`)를 설정하고 `LLM_MODEL` 환경변수를 설정해 원하는 모델(기본값: `gpt-4o-mini`)을 지정할 수 있습니다. (주: 코드베이스상 `RAG_LLM_ENDPOINT` 및 `RAG_LLM_MODEL`은 직접 파싱되지 않으며, `OPENAI_API_KEY`와 `LLM_MODEL`이 사용됩니다.)
 
 ## API Examples
 

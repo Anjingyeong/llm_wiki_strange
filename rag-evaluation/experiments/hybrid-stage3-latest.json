@@ -1,9 +1,14 @@
 {
-  "runId": "20260710-142041213_174e3f9_hybrid-stage3",
+  "runId": "20260718-105710459_b51ba68_hybrid-stage3",
   "promotionResult": {
-    "promoted": false,
-    "selected": null,
-    "note": "No Stage-3 candidate beat Stage-2 structure-aware vector-only under policy (incl. wrongTop1/duplicates)."
+    "promoted": true,
+    "selected": "hybrid-contextual-diversify-max2",
+    "profiles": {
+      "quality": "hybrid-contextual-diversify-max2",
+      "balanced": "hybrid-contextual-diversify-max2",
+      "fast": "vector-only-structure-aware"
+    },
+    "note": "best.json and retrieval-config updated; index pointer updated only if contextual index required."
   },
   "bestRrf": {
     "id": "rrf-0",
@@ -11,194 +16,101 @@
     "lexicalWeight": 1,
     "vectorWeight": 1,
     "metrics": {
-      "queryCount": 55,
-      "answerableCount": 50,
+      "queryCount": 61,
+      "answerableCount": 56,
       "unanswerableCount": 5,
-      "hitAt1": 0.62,
-      "hitAt3": 0.76,
-      "hitAt5": 0.8,
-      "recallAt5": 0.5499999999999999,
-      "mrr": 0.6966666666666668,
-      "ndcgAt5": 0.5559183529595951,
-      "exactTermHitAt5": 0.9090909090909091,
-      "semanticQueryRecallAt5": 0.5229885057471265,
+      "hitAt1": 0.5714285714285714,
+      "hitAt3": 0.6428571428571429,
+      "hitAt5": 0.6428571428571429,
+      "recallAt5": 0.4107142857142857,
+      "mrr": 0.6071428571428571,
+      "ndcgAt5": 0.44559540273812825,
+      "exactTermHitAt5": 0.8181818181818182,
+      "semanticQueryRecallAt5": 0.37142857142857144,
       "metadataFilterAccuracy": 0,
-      "duplicateIncidentOrDocumentCount": 140,
-      "wrongTop1Count": 9,
+      "duplicateIncidentOrDocumentCount": 161,
+      "wrongTop1Count": 4,
       "noResultAccuracy": 1,
-      "p50LatencyMs": 66.03929999999991,
-      "p95LatencyMs": 78.09900000000016,
+      "p50LatencyMs": 126.9408999999996,
+      "p95LatencyMs": 186.30629999999996,
       "meanRetrievedChunks": 5,
-      "lexicalVectorOverlap": 0.4003729603729604,
+      "lexicalVectorOverlap": 0.37341247409082357,
       "failureTaxonomy": {
-        "EXPECTED_DOC_NOT_RETRIEVED": 10,
-        "WRONG_TOP1": 9,
-        "LOW_SIMILARITY": 40,
-        "KEYWORD_MISS": 1,
+        "EXPECTED_DOC_NOT_RETRIEVED": 20,
+        "WRONG_TOP1": 4,
+        "LOW_SIMILARITY": 36,
+        "KEYWORD_MISS": 4,
         "SEMANTIC_MISS": 0,
         "FILTER_FAILURE": 3,
-        "DUPLICATE_RESULT": 50,
+        "DUPLICATE_RESULT": 58,
         "NO_ANSWER_FAILURE": 0,
-        "STALE_DOCUMENT_SELECTED": 2
+        "STALE_DOCUMENT_SELECTED": 0
       }
     },
-    "wrongTop1Count": 9
+    "wrongTop1Count": 4
   },
   "candidates": [
     {
       "id": "vector-only-structure-aware",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.56,
-        "hitAt3": 0.74,
-        "hitAt5": 0.78,
-        "recallAt5": 0.5266666666666666,
-        "mrr": 0.6456666666666666,
-        "ndcgAt5": 0.5219162383873163,
-        "exactTermHitAt5": 0.9090909090909091,
-        "semanticQueryRecallAt5": 0.4942528735632184,
+        "hitAt1": 0.5178571428571429,
+        "hitAt3": 0.6071428571428571,
+        "hitAt5": 0.625,
+        "recallAt5": 0.41666666666666663,
+        "mrr": 0.5580357142857143,
+        "ndcgAt5": 0.42696461663552693,
+        "exactTermHitAt5": 0.7272727272727273,
+        "semanticQueryRecallAt5": 0.3952380952380952,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 140,
-        "wrongTop1Count": 11,
+        "duplicateIncidentOrDocumentCount": 164,
+        "wrongTop1Count": 6,
         "noResultAccuracy": 0,
-        "p50LatencyMs": 0.3181000000004133,
-        "p95LatencyMs": 0.5425000000013824,
+        "p50LatencyMs": 0.6570000000028813,
+        "p95LatencyMs": 1.054100000001199,
         "meanRetrievedChunks": 5,
         "lexicalVectorOverlap": 0,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 11,
-          "WRONG_TOP1": 11,
-          "LOW_SIMILARITY": 0,
-          "KEYWORD_MISS": 6,
-          "SEMANTIC_MISS": 11,
-          "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 50,
-          "NO_ANSWER_FAILURE": 5,
-          "STALE_DOCUMENT_SELECTED": 0
-        }
-      },
-      "byCategory": {
-        "exact-term": {
-          "count": 11,
-          "hitAt5": 0.9090909090909091,
-          "recallAt5": 0.5909090909090909,
-          "mrr": 0.7954545454545454,
-          "wrongTop1Count": 2
-        },
-        "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.4444444444444444,
-          "recallAt5": 0.2962962962962963,
-          "mrr": 0.30000000000000004,
-          "wrongTop1Count": 2
-        },
-        "decision": {
-          "count": 6,
-          "hitAt5": 1,
-          "recallAt5": 0.5833333333333334,
-          "mrr": 0.7222222222222223,
-          "wrongTop1Count": 3
-        },
-        "multi-doc": {
-          "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.38095238095238093,
-          "mrr": 0.6904761904761905,
-          "wrongTop1Count": 2
-        },
-        "filter": {
-          "count": 6,
-          "hitAt5": 0.5,
-          "recallAt5": 0.5,
-          "mrr": 0.5,
-          "wrongTop1Count": 0
-        },
-        "unanswerable": {
-          "count": 5,
-          "hitAt5": 0,
-          "recallAt5": 0,
-          "mrr": 0,
-          "wrongTop1Count": 0
-        },
-        "conflict": {
-          "count": 4,
-          "hitAt5": 1,
-          "recallAt5": 0.625,
-          "mrr": 1,
-          "wrongTop1Count": 0
-        },
-        "mixed-lang": {
-          "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.7857142857142857,
-          "mrr": 0.6666666666666666,
-          "wrongTop1Count": 2
-        }
-      }
-    },
-    {
-      "id": "lexical-only",
-      "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
-        "unanswerableCount": 5,
-        "hitAt1": 0.64,
-        "hitAt3": 0.74,
-        "hitAt5": 0.76,
-        "recallAt5": 0.5133333333333333,
-        "mrr": 0.6916666666666668,
-        "ndcgAt5": 0.5289903660305627,
-        "exactTermHitAt5": 0.8181818181818182,
-        "semanticQueryRecallAt5": 0.5287356321839081,
-        "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 146,
-        "wrongTop1Count": 6,
-        "noResultAccuracy": 0.4,
-        "p50LatencyMs": 60.33860000000095,
-        "p95LatencyMs": 77.17950000000019,
-        "meanRetrievedChunks": 4.818181818181818,
-        "lexicalVectorOverlap": 0,
-        "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 12,
+          "EXPECTED_DOC_NOT_RETRIEVED": 21,
           "WRONG_TOP1": 6,
           "LOW_SIMILARITY": 0,
-          "KEYWORD_MISS": 3,
-          "SEMANTIC_MISS": 12,
+          "KEYWORD_MISS": 10,
+          "SEMANTIC_MISS": 21,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 49,
-          "NO_ANSWER_FAILURE": 3,
+          "DUPLICATE_RESULT": 56,
+          "NO_ANSWER_FAILURE": 5,
           "STALE_DOCUMENT_SELECTED": 1
         }
       },
       "byCategory": {
         "exact-term": {
           "count": 11,
-          "hitAt5": 0.8181818181818182,
-          "recallAt5": 0.5909090909090909,
-          "mrr": 0.7727272727272727,
+          "hitAt5": 0.7272727272727273,
+          "recallAt5": 0.5151515151515151,
+          "mrr": 0.6818181818181818,
           "wrongTop1Count": 1
         },
         "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.7777777777777778,
-          "recallAt5": 0.5,
-          "mrr": 0.6111111111111112,
-          "wrongTop1Count": 3
+          "count": 15,
+          "hitAt5": 0.4,
+          "recallAt5": 0.24444444444444444,
+          "mrr": 0.3055555555555555,
+          "wrongTop1Count": 2
         },
         "decision": {
           "count": 6,
-          "hitAt5": 0.6666666666666666,
-          "recallAt5": 0.5,
-          "mrr": 0.5555555555555555,
-          "wrongTop1Count": 1
+          "hitAt5": 0.8333333333333334,
+          "recallAt5": 0.5833333333333334,
+          "mrr": 0.6388888888888888,
+          "wrongTop1Count": 2
         },
         "multi-doc": {
           "count": 7,
           "hitAt5": 0.8571428571428571,
           "recallAt5": 0.3333333333333333,
-          "mrr": 0.75,
+          "mrr": 0.7619047619047619,
           "wrongTop1Count": 1
         },
         "filter": {
@@ -217,88 +129,88 @@
         },
         "conflict": {
           "count": 4,
-          "hitAt5": 1,
+          "hitAt5": 0.75,
           "recallAt5": 0.4583333333333333,
-          "mrr": 1,
+          "mrr": 0.75,
           "wrongTop1Count": 0
         },
         "mixed-lang": {
           "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.7857142857142857,
-          "mrr": 0.8571428571428571,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.619047619047619,
+          "mrr": 0.7142857142857143,
           "wrongTop1Count": 0
         }
       }
     },
     {
-      "id": "hybrid-rrf",
+      "id": "lexical-only",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.62,
-        "hitAt3": 0.76,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "ndcgAt5": 0.5559183529595951,
-        "exactTermHitAt5": 0.9090909090909091,
-        "semanticQueryRecallAt5": 0.5229885057471265,
+        "hitAt1": 0.4642857142857143,
+        "hitAt3": 0.625,
+        "hitAt5": 0.625,
+        "recallAt5": 0.3988095238095238,
+        "mrr": 0.5416666666666666,
+        "ndcgAt5": 0.4032600352789299,
+        "exactTermHitAt5": 0.6363636363636364,
+        "semanticQueryRecallAt5": 0.3904761904761905,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 140,
+        "duplicateIncidentOrDocumentCount": 167,
         "wrongTop1Count": 9,
-        "noResultAccuracy": 1,
-        "p50LatencyMs": 65.60759999999937,
-        "p95LatencyMs": 83.62829999999667,
-        "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4003729603729604,
+        "noResultAccuracy": 0.4,
+        "p50LatencyMs": 121.25610000000233,
+        "p95LatencyMs": 148.1854999999996,
+        "meanRetrievedChunks": 4.786885245901639,
+        "lexicalVectorOverlap": 0,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 10,
+          "EXPECTED_DOC_NOT_RETRIEVED": 21,
           "WRONG_TOP1": 9,
-          "LOW_SIMILARITY": 40,
-          "KEYWORD_MISS": 1,
-          "SEMANTIC_MISS": 0,
+          "LOW_SIMILARITY": 0,
+          "KEYWORD_MISS": 2,
+          "SEMANTIC_MISS": 21,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 50,
-          "NO_ANSWER_FAILURE": 0,
-          "STALE_DOCUMENT_SELECTED": 2
+          "DUPLICATE_RESULT": 55,
+          "NO_ANSWER_FAILURE": 3,
+          "STALE_DOCUMENT_SELECTED": 1
         }
       },
       "byCategory": {
         "exact-term": {
           "count": 11,
-          "hitAt5": 0.9090909090909091,
-          "recallAt5": 0.6212121212121212,
-          "mrr": 0.8030303030303031,
+          "hitAt5": 0.6363636363636364,
+          "recallAt5": 0.4848484848484848,
+          "mrr": 0.5454545454545454,
           "wrongTop1Count": 2
         },
         "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.5555555555555556,
-          "recallAt5": 0.3333333333333333,
-          "mrr": 0.3611111111111111,
+          "count": 15,
+          "hitAt5": 0.7333333333333333,
+          "recallAt5": 0.4111111111111111,
+          "mrr": 0.6222222222222221,
           "wrongTop1Count": 3
         },
         "decision": {
           "count": 6,
-          "hitAt5": 1,
-          "recallAt5": 0.6666666666666666,
-          "mrr": 0.8333333333333334,
-          "wrongTop1Count": 2
+          "hitAt5": 0.5,
+          "recallAt5": 0.25,
+          "mrr": 0.5,
+          "wrongTop1Count": 0
         },
         "multi-doc": {
           "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.380952380952381,
-          "mrr": 0.75,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.23809523809523808,
+          "mrr": 0.6428571428571429,
           "wrongTop1Count": 1
         },
         "filter": {
           "count": 6,
-          "hitAt5": 0.5,
-          "recallAt5": 0.5,
-          "mrr": 0.4166666666666667,
+          "hitAt5": 0.3333333333333333,
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.25,
           "wrongTop1Count": 1
         },
         "unanswerable": {
@@ -310,50 +222,50 @@
         },
         "conflict": {
           "count": 4,
-          "hitAt5": 1,
-          "recallAt5": 0.625,
-          "mrr": 1,
-          "wrongTop1Count": 0
+          "hitAt5": 0.5,
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.375,
+          "wrongTop1Count": 1
         },
         "mixed-lang": {
           "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.7857142857142857,
-          "mrr": 0.8571428571428571,
-          "wrongTop1Count": 0
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.619047619047619,
+          "mrr": 0.6428571428571429,
+          "wrongTop1Count": 1
         }
       }
     },
     {
-      "id": "hybrid-diversify-max1",
+      "id": "hybrid-rrf",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.62,
-        "hitAt3": 0.82,
-        "hitAt5": 0.86,
-        "recallAt5": 0.6766666666666667,
-        "mrr": 0.7166666666666666,
-        "ndcgAt5": 0.6383052583704337,
-        "exactTermHitAt5": 1,
-        "semanticQueryRecallAt5": 0.6551724137931034,
+        "hitAt1": 0.5714285714285714,
+        "hitAt3": 0.6428571428571429,
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "ndcgAt5": 0.44559540273812825,
+        "exactTermHitAt5": 0.8181818181818182,
+        "semanticQueryRecallAt5": 0.37142857142857144,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 29,
-        "wrongTop1Count": 12,
+        "duplicateIncidentOrDocumentCount": 161,
+        "wrongTop1Count": 4,
         "noResultAccuracy": 1,
-        "p50LatencyMs": 59.77779999999984,
-        "p95LatencyMs": 78.31819999999789,
+        "p50LatencyMs": 120.54999999999563,
+        "p95LatencyMs": 148.21919999999955,
         "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4003729603729604,
+        "lexicalVectorOverlap": 0.37341247409082357,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 7,
-          "WRONG_TOP1": 12,
-          "LOW_SIMILARITY": 43,
-          "KEYWORD_MISS": 2,
+          "EXPECTED_DOC_NOT_RETRIEVED": 20,
+          "WRONG_TOP1": 4,
+          "LOW_SIMILARITY": 36,
+          "KEYWORD_MISS": 4,
           "SEMANTIC_MISS": 0,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 10,
+          "DUPLICATE_RESULT": 58,
           "NO_ANSWER_FAILURE": 0,
           "STALE_DOCUMENT_SELECTED": 0
         }
@@ -361,38 +273,38 @@
       "byCategory": {
         "exact-term": {
           "count": 11,
-          "hitAt5": 1,
-          "recallAt5": 0.7575757575757577,
-          "mrr": 0.8333333333333333,
-          "wrongTop1Count": 3
+          "hitAt5": 0.8181818181818182,
+          "recallAt5": 0.5303030303030304,
+          "mrr": 0.7727272727272727,
+          "wrongTop1Count": 1
         },
         "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.6666666666666666,
-          "recallAt5": 0.48148148148148145,
-          "mrr": 0.39814814814814814,
-          "wrongTop1Count": 4
+          "count": 15,
+          "hitAt5": 0.5333333333333333,
+          "recallAt5": 0.3,
+          "mrr": 0.5333333333333333,
+          "wrongTop1Count": 0
         },
         "decision": {
           "count": 6,
-          "hitAt5": 1,
-          "recallAt5": 0.75,
-          "mrr": 0.8333333333333334,
-          "wrongTop1Count": 2
+          "hitAt5": 0.6666666666666666,
+          "recallAt5": 0.4166666666666667,
+          "mrr": 0.5833333333333334,
+          "wrongTop1Count": 1
         },
         "multi-doc": {
           "count": 7,
-          "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.5714285714285714,
-          "mrr": 0.75,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.23809523809523808,
+          "mrr": 0.6428571428571429,
           "wrongTop1Count": 1
         },
         "filter": {
           "count": 6,
-          "hitAt5": 0.5,
-          "recallAt5": 0.5,
-          "mrr": 0.4166666666666667,
-          "wrongTop1Count": 1
+          "hitAt5": 0.3333333333333333,
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "wrongTop1Count": 0
         },
         "unanswerable": {
           "count": 5,
@@ -403,16 +315,109 @@
         },
         "conflict": {
           "count": 4,
-          "hitAt5": 1,
-          "recallAt5": 0.875,
-          "mrr": 1,
-          "wrongTop1Count": 0
+          "hitAt5": 0.75,
+          "recallAt5": 0.5416666666666666,
+          "mrr": 0.625,
+          "wrongTop1Count": 1
         },
         "mixed-lang": {
           "count": 7,
-          "hitAt5": 1,
-          "recallAt5": 0.8809523809523808,
-          "mrr": 0.9047619047619048,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.619047619047619,
+          "mrr": 0.7142857142857143,
+          "wrongTop1Count": 0
+        }
+      }
+    },
+    {
+      "id": "hybrid-diversify-max1",
+      "metrics": {
+        "queryCount": 61,
+        "answerableCount": 56,
+        "unanswerableCount": 5,
+        "hitAt1": 0.5714285714285714,
+        "hitAt3": 0.6964285714285714,
+        "hitAt5": 0.75,
+        "recallAt5": 0.5238095238095238,
+        "mrr": 0.643452380952381,
+        "ndcgAt5": 0.514285242040212,
+        "exactTermHitAt5": 0.8181818181818182,
+        "semanticQueryRecallAt5": 0.538095238095238,
+        "metadataFilterAccuracy": 0,
+        "duplicateIncidentOrDocumentCount": 0,
+        "wrongTop1Count": 10,
+        "noResultAccuracy": 1,
+        "p50LatencyMs": 107.61819999999716,
+        "p95LatencyMs": 136.87769999999728,
+        "meanRetrievedChunks": 4.704918032786885,
+        "lexicalVectorOverlap": 0.37341247409082357,
+        "failureTaxonomy": {
+          "EXPECTED_DOC_NOT_RETRIEVED": 14,
+          "WRONG_TOP1": 10,
+          "LOW_SIMILARITY": 42,
+          "KEYWORD_MISS": 3,
+          "SEMANTIC_MISS": 0,
+          "FILTER_FAILURE": 3,
+          "DUPLICATE_RESULT": 0,
+          "NO_ANSWER_FAILURE": 0,
+          "STALE_DOCUMENT_SELECTED": 0
+        }
+      },
+      "byCategory": {
+        "exact-term": {
+          "count": 11,
+          "hitAt5": 0.8181818181818182,
+          "recallAt5": 0.5757575757575758,
+          "mrr": 0.7727272727272727,
+          "wrongTop1Count": 1
+        },
+        "paraphrase": {
+          "count": 15,
+          "hitAt5": 0.7333333333333333,
+          "recallAt5": 0.4444444444444444,
+          "mrr": 0.5966666666666666,
+          "wrongTop1Count": 3
+        },
+        "decision": {
+          "count": 6,
+          "hitAt5": 0.8333333333333334,
+          "recallAt5": 0.5833333333333334,
+          "mrr": 0.6666666666666666,
+          "wrongTop1Count": 2
+        },
+        "multi-doc": {
+          "count": 7,
+          "hitAt5": 0.8571428571428571,
+          "recallAt5": 0.42857142857142855,
+          "mrr": 0.6904761904761905,
+          "wrongTop1Count": 2
+        },
+        "filter": {
+          "count": 6,
+          "hitAt5": 0.3333333333333333,
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "wrongTop1Count": 0
+        },
+        "unanswerable": {
+          "count": 5,
+          "hitAt5": 0,
+          "recallAt5": 0,
+          "mrr": 0,
+          "wrongTop1Count": 0
+        },
+        "conflict": {
+          "count": 4,
+          "hitAt5": 0.75,
+          "recallAt5": 0.5416666666666666,
+          "mrr": 0.625,
+          "wrongTop1Count": 1
+        },
+        "mixed-lang": {
+          "count": 7,
+          "hitAt5": 0.8571428571428571,
+          "recallAt5": 0.8095238095238094,
+          "mrr": 0.75,
           "wrongTop1Count": 1
         }
       }
@@ -420,72 +425,72 @@
     {
       "id": "hybrid-diversify-max2",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.62,
-        "hitAt3": 0.82,
-        "hitAt5": 0.86,
-        "recallAt5": 0.6233333333333333,
-        "mrr": 0.7166666666666666,
-        "ndcgAt5": 0.609303140251333,
-        "exactTermHitAt5": 1,
-        "semanticQueryRecallAt5": 0.5919540229885056,
+        "hitAt1": 0.5714285714285714,
+        "hitAt3": 0.6964285714285714,
+        "hitAt5": 0.7142857142857143,
+        "recallAt5": 0.47916666666666663,
+        "mrr": 0.6354166666666667,
+        "ndcgAt5": 0.4921536338570327,
+        "exactTermHitAt5": 0.8181818181818182,
+        "semanticQueryRecallAt5": 0.4809523809523809,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 91,
-        "wrongTop1Count": 12,
+        "duplicateIncidentOrDocumentCount": 94,
+        "wrongTop1Count": 8,
         "noResultAccuracy": 1,
-        "p50LatencyMs": 60.5640999999996,
-        "p95LatencyMs": 81.21600000000035,
-        "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4003729603729604,
+        "p50LatencyMs": 124.64600000000064,
+        "p95LatencyMs": 151.02759999999398,
+        "meanRetrievedChunks": 4.852459016393443,
+        "lexicalVectorOverlap": 0.37341247409082357,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 7,
-          "WRONG_TOP1": 12,
-          "LOW_SIMILARITY": 43,
-          "KEYWORD_MISS": 1,
+          "EXPECTED_DOC_NOT_RETRIEVED": 16,
+          "WRONG_TOP1": 8,
+          "LOW_SIMILARITY": 40,
+          "KEYWORD_MISS": 3,
           "SEMANTIC_MISS": 0,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 50,
+          "DUPLICATE_RESULT": 58,
           "NO_ANSWER_FAILURE": 0,
-          "STALE_DOCUMENT_SELECTED": 2
+          "STALE_DOCUMENT_SELECTED": 0
         }
       },
       "byCategory": {
         "exact-term": {
           "count": 11,
-          "hitAt5": 1,
-          "recallAt5": 0.6818181818181818,
-          "mrr": 0.8333333333333333,
-          "wrongTop1Count": 3
+          "hitAt5": 0.8181818181818182,
+          "recallAt5": 0.5303030303030304,
+          "mrr": 0.7727272727272727,
+          "wrongTop1Count": 1
         },
         "paraphrase": {
-          "count": 9,
+          "count": 15,
           "hitAt5": 0.6666666666666666,
-          "recallAt5": 0.48148148148148145,
-          "mrr": 0.39814814814814814,
-          "wrongTop1Count": 4
+          "recallAt5": 0.4222222222222222,
+          "mrr": 0.5833333333333334,
+          "wrongTop1Count": 2
         },
         "decision": {
           "count": 6,
-          "hitAt5": 1,
-          "recallAt5": 0.6666666666666666,
-          "mrr": 0.8333333333333334,
+          "hitAt5": 0.8333333333333334,
+          "recallAt5": 0.5833333333333334,
+          "mrr": 0.6666666666666666,
           "wrongTop1Count": 2
         },
         "multi-doc": {
           "count": 7,
           "hitAt5": 0.8571428571428571,
-          "recallAt5": 0.42857142857142855,
-          "mrr": 0.75,
-          "wrongTop1Count": 1
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.6904761904761905,
+          "wrongTop1Count": 2
         },
         "filter": {
           "count": 6,
-          "hitAt5": 0.5,
-          "recallAt5": 0.5,
-          "mrr": 0.4166666666666667,
-          "wrongTop1Count": 1
+          "hitAt5": 0.3333333333333333,
+          "recallAt5": 0.3333333333333333,
+          "mrr": 0.3333333333333333,
+          "wrongTop1Count": 0
         },
         "unanswerable": {
           "count": 5,
@@ -496,52 +501,52 @@
         },
         "conflict": {
           "count": 4,
-          "hitAt5": 1,
-          "recallAt5": 0.875,
-          "mrr": 1,
-          "wrongTop1Count": 0
+          "hitAt5": 0.75,
+          "recallAt5": 0.5416666666666666,
+          "mrr": 0.625,
+          "wrongTop1Count": 1
         },
         "mixed-lang": {
           "count": 7,
-          "hitAt5": 1,
-          "recallAt5": 0.8333333333333333,
-          "mrr": 0.9047619047619048,
-          "wrongTop1Count": 1
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.6666666666666666,
+          "mrr": 0.7142857142857143,
+          "wrongTop1Count": 0
         }
       }
     },
     {
       "id": "hybrid-contextual",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.64,
-        "hitAt3": 0.78,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5133333333333333,
-        "mrr": 0.705,
-        "ndcgAt5": 0.5339551093014984,
+        "hitAt1": 0.6071428571428571,
+        "hitAt3": 0.7142857142857143,
+        "hitAt5": 0.7321428571428571,
+        "recallAt5": 0.48809523809523814,
+        "mrr": 0.662202380952381,
+        "ndcgAt5": 0.5075399840727187,
         "exactTermHitAt5": 0.9090909090909091,
-        "semanticQueryRecallAt5": 0.5114942528735632,
+        "semanticQueryRecallAt5": 0.4714285714285714,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 149,
-        "wrongTop1Count": 8,
+        "duplicateIncidentOrDocumentCount": 158,
+        "wrongTop1Count": 7,
         "noResultAccuracy": 1,
-        "p50LatencyMs": 68.84809999999925,
-        "p95LatencyMs": 90.0650999999998,
+        "p50LatencyMs": 104.60459999999875,
+        "p95LatencyMs": 133.5529000000024,
         "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4006526806526807,
+        "lexicalVectorOverlap": 0.3737442202606138,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 10,
-          "WRONG_TOP1": 8,
-          "LOW_SIMILARITY": 40,
-          "KEYWORD_MISS": 1,
+          "EXPECTED_DOC_NOT_RETRIEVED": 15,
+          "WRONG_TOP1": 7,
+          "LOW_SIMILARITY": 41,
+          "KEYWORD_MISS": 3,
           "SEMANTIC_MISS": 0,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 52,
+          "DUPLICATE_RESULT": 58,
           "NO_ANSWER_FAILURE": 0,
-          "STALE_DOCUMENT_SELECTED": 2
+          "STALE_DOCUMENT_SELECTED": 1
         }
       },
       "byCategory": {
@@ -549,22 +554,22 @@
           "count": 11,
           "hitAt5": 0.9090909090909091,
           "recallAt5": 0.5757575757575757,
-          "mrr": 0.9090909090909091,
-          "wrongTop1Count": 0
+          "mrr": 0.8636363636363636,
+          "wrongTop1Count": 1
         },
         "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.6666666666666666,
-          "recallAt5": 0.3333333333333333,
-          "mrr": 0.3796296296296296,
-          "wrongTop1Count": 4
+          "count": 15,
+          "hitAt5": 0.4666666666666667,
+          "recallAt5": 0.27777777777777773,
+          "mrr": 0.35,
+          "wrongTop1Count": 3
         },
         "decision": {
           "count": 6,
           "hitAt5": 1,
-          "recallAt5": 0.6666666666666666,
-          "mrr": 0.75,
-          "wrongTop1Count": 3
+          "recallAt5": 0.75,
+          "mrr": 0.8333333333333334,
+          "wrongTop1Count": 2
         },
         "multi-doc": {
           "count": 7,
@@ -606,35 +611,35 @@
     {
       "id": "hybrid-contextual-diversify-max2",
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.64,
-        "hitAt3": 0.84,
-        "hitAt5": 0.88,
-        "recallAt5": 0.6133333333333333,
-        "mrr": 0.7333333333333334,
-        "ndcgAt5": 0.6034244361907437,
+        "hitAt1": 0.6071428571428571,
+        "hitAt3": 0.7678571428571429,
+        "hitAt5": 0.8035714285714286,
+        "recallAt5": 0.5773809523809524,
+        "mrr": 0.6875,
+        "ndcgAt5": 0.570147097661524,
         "exactTermHitAt5": 1,
-        "semanticQueryRecallAt5": 0.5919540229885057,
+        "semanticQueryRecallAt5": 0.538095238095238,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 95,
-        "wrongTop1Count": 12,
+        "duplicateIncidentOrDocumentCount": 91,
+        "wrongTop1Count": 11,
         "noResultAccuracy": 1,
-        "p50LatencyMs": 69.03029999999853,
-        "p95LatencyMs": 88.85129999999845,
-        "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4006526806526807,
+        "p50LatencyMs": 101.69110000000364,
+        "p95LatencyMs": 148.0411000000022,
+        "meanRetrievedChunks": 4.786885245901639,
+        "lexicalVectorOverlap": 0.3737442202606138,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 6,
-          "WRONG_TOP1": 12,
-          "LOW_SIMILARITY": 44,
-          "KEYWORD_MISS": 1,
+          "EXPECTED_DOC_NOT_RETRIEVED": 11,
+          "WRONG_TOP1": 11,
+          "LOW_SIMILARITY": 45,
+          "KEYWORD_MISS": 3,
           "SEMANTIC_MISS": 0,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 52,
+          "DUPLICATE_RESULT": 58,
           "NO_ANSWER_FAILURE": 0,
-          "STALE_DOCUMENT_SELECTED": 2
+          "STALE_DOCUMENT_SELECTED": 1
         }
       },
       "byCategory": {
@@ -642,22 +647,22 @@
           "count": 11,
           "hitAt5": 1,
           "recallAt5": 0.6363636363636364,
-          "mrr": 0.9393939393939393,
-          "wrongTop1Count": 1
+          "mrr": 0.8939393939393938,
+          "wrongTop1Count": 2
         },
         "paraphrase": {
-          "count": 9,
-          "hitAt5": 0.7777777777777778,
-          "recallAt5": 0.4444444444444444,
-          "mrr": 0.4074074074074074,
-          "wrongTop1Count": 5
+          "count": 15,
+          "hitAt5": 0.5333333333333333,
+          "recallAt5": 0.3444444444444444,
+          "mrr": 0.36666666666666664,
+          "wrongTop1Count": 4
         },
         "decision": {
           "count": 6,
           "hitAt5": 1,
-          "recallAt5": 0.6666666666666666,
-          "mrr": 0.75,
-          "wrongTop1Count": 3
+          "recallAt5": 0.75,
+          "mrr": 0.8333333333333334,
+          "wrongTop1Count": 2
         },
         "multi-doc": {
           "count": 7,
@@ -699,47 +704,16 @@
   ],
   "comparison": {
     "stage2Best": {
-      "experimentName": "hybrid-rrf",
+      "experimentName": "baseline-vector-search",
       "metrics": {
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "ndcgAt5": 0.5559183529595951,
-        "wrongTop1Count": 9,
-        "duplicateIncidentOrDocumentCount": 140
+        "hitAt5": 0.78,
+        "recallAt5": 0.5366666666666666,
+        "mrr": 0.6456666666666666,
+        "ndcgAt5": 0.5280477103149708,
+        "wrongTop1Count": 11,
+        "duplicateIncidentOrDocumentCount": 136
       },
-      "failureSamples": {
-        "DUPLICATE_RESULT": {
-          "count": 46,
-          "sampleId": "q-001",
-          "sampleQuery": "cameraLoginId",
-          "detail": "duplicates=1"
-        },
-        "WRONG_TOP1": {
-          "count": 11,
-          "sampleId": "q-004",
-          "sampleQuery": "MediaMTX WHEP",
-          "detail": "top1=Frame-Sync-Debug-Report"
-        },
-        "KEYWORD_MISS": {
-          "count": 6,
-          "sampleId": "q-009",
-          "sampleQuery": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
-          "detail": "keywordHitRate=0"
-        },
-        "SEMANTIC_MISS": {
-          "count": 11,
-          "sampleId": "q-005",
-          "sampleQuery": "keypoint_bbox54",
-          "detail": "vector returned unrelated high scores"
-        },
-        "EXPECTED_DOC_NOT_RETRIEVED": {
-          "count": 11,
-          "sampleId": "q-005",
-          "sampleQuery": "keypoint_bbox54",
-          "detail": "expected one of 2026-07-02-AI-BBox54-HardNegative-Overlay-Debug-Log, Feature-Vector-51D-vs-54D, ADR-004-LSTM-Feature-Expansion"
-        }
-      }
+      "failureSamples": {}
     },
     "bestRrf": {
       "id": "rrf-0",
@@ -747,38 +721,38 @@
       "lexicalWeight": 1,
       "vectorWeight": 1,
       "metrics": {
-        "queryCount": 55,
-        "answerableCount": 50,
+        "queryCount": 61,
+        "answerableCount": 56,
         "unanswerableCount": 5,
-        "hitAt1": 0.62,
-        "hitAt3": 0.76,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "ndcgAt5": 0.5559183529595951,
-        "exactTermHitAt5": 0.9090909090909091,
-        "semanticQueryRecallAt5": 0.5229885057471265,
+        "hitAt1": 0.5714285714285714,
+        "hitAt3": 0.6428571428571429,
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "ndcgAt5": 0.44559540273812825,
+        "exactTermHitAt5": 0.8181818181818182,
+        "semanticQueryRecallAt5": 0.37142857142857144,
         "metadataFilterAccuracy": 0,
-        "duplicateIncidentOrDocumentCount": 140,
-        "wrongTop1Count": 9,
+        "duplicateIncidentOrDocumentCount": 161,
+        "wrongTop1Count": 4,
         "noResultAccuracy": 1,
-        "p50LatencyMs": 66.03929999999991,
-        "p95LatencyMs": 78.09900000000016,
+        "p50LatencyMs": 126.9408999999996,
+        "p95LatencyMs": 186.30629999999996,
         "meanRetrievedChunks": 5,
-        "lexicalVectorOverlap": 0.4003729603729604,
+        "lexicalVectorOverlap": 0.37341247409082357,
         "failureTaxonomy": {
-          "EXPECTED_DOC_NOT_RETRIEVED": 10,
-          "WRONG_TOP1": 9,
-          "LOW_SIMILARITY": 40,
-          "KEYWORD_MISS": 1,
+          "EXPECTED_DOC_NOT_RETRIEVED": 20,
+          "WRONG_TOP1": 4,
+          "LOW_SIMILARITY": 36,
+          "KEYWORD_MISS": 4,
           "SEMANTIC_MISS": 0,
           "FILTER_FAILURE": 3,
-          "DUPLICATE_RESULT": 50,
+          "DUPLICATE_RESULT": 58,
           "NO_ANSWER_FAILURE": 0,
-          "STALE_DOCUMENT_SELECTED": 2
+          "STALE_DOCUMENT_SELECTED": 0
         }
       },
-      "wrongTop1Count": 9
+      "wrongTop1Count": 4
     },
     "rrfSweep": [
       {
@@ -786,198 +760,104 @@
         "rrfK": 60,
         "lexicalWeight": 1,
         "vectorWeight": 1,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "wrongTop1Count": 9
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "wrongTop1Count": 4
       },
       {
         "id": "rrf-1",
         "rrfK": 60,
         "lexicalWeight": 1,
         "vectorWeight": 1,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "wrongTop1Count": 9
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "wrongTop1Count": 4
       },
       {
         "id": "rrf-2",
         "rrfK": 60,
         "lexicalWeight": 1,
         "vectorWeight": 1,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "wrongTop1Count": 9
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "wrongTop1Count": 4
       },
       {
         "id": "rrf-3",
         "rrfK": 60,
         "lexicalWeight": 1,
         "vectorWeight": 1,
-        "hitAt5": 0.8,
-        "recallAt5": 0.5499999999999999,
-        "mrr": 0.6966666666666668,
-        "wrongTop1Count": 9
+        "hitAt5": 0.6428571428571429,
+        "recallAt5": 0.4107142857142857,
+        "mrr": 0.6071428571428571,
+        "wrongTop1Count": 4
       }
     ],
     "candidates": [
       {
         "id": "vector-only-structure-aware",
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.56,
-          "hitAt3": 0.74,
-          "hitAt5": 0.78,
-          "recallAt5": 0.5266666666666666,
-          "mrr": 0.6456666666666666,
-          "ndcgAt5": 0.5219162383873163,
-          "exactTermHitAt5": 0.9090909090909091,
-          "semanticQueryRecallAt5": 0.4942528735632184,
+          "hitAt1": 0.5178571428571429,
+          "hitAt3": 0.6071428571428571,
+          "hitAt5": 0.625,
+          "recallAt5": 0.41666666666666663,
+          "mrr": 0.5580357142857143,
+          "ndcgAt5": 0.42696461663552693,
+          "exactTermHitAt5": 0.7272727272727273,
+          "semanticQueryRecallAt5": 0.3952380952380952,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 140,
-          "wrongTop1Count": 11,
+          "duplicateIncidentOrDocumentCount": 164,
+          "wrongTop1Count": 6,
           "noResultAccuracy": 0,
-          "p50LatencyMs": 0.3181000000004133,
-          "p95LatencyMs": 0.5425000000013824,
+          "p50LatencyMs": 0.6570000000028813,
+          "p95LatencyMs": 1.054100000001199,
           "meanRetrievedChunks": 5,
           "lexicalVectorOverlap": 0,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 11,
-            "WRONG_TOP1": 11,
-            "LOW_SIMILARITY": 0,
-            "KEYWORD_MISS": 6,
-            "SEMANTIC_MISS": 11,
-            "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 50,
-            "NO_ANSWER_FAILURE": 5,
-            "STALE_DOCUMENT_SELECTED": 0
-          }
-        },
-        "byCategory": {
-          "exact-term": {
-            "count": 11,
-            "hitAt5": 0.9090909090909091,
-            "recallAt5": 0.5909090909090909,
-            "mrr": 0.7954545454545454,
-            "wrongTop1Count": 2
-          },
-          "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.4444444444444444,
-            "recallAt5": 0.2962962962962963,
-            "mrr": 0.30000000000000004,
-            "wrongTop1Count": 2
-          },
-          "decision": {
-            "count": 6,
-            "hitAt5": 1,
-            "recallAt5": 0.5833333333333334,
-            "mrr": 0.7222222222222223,
-            "wrongTop1Count": 3
-          },
-          "multi-doc": {
-            "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.38095238095238093,
-            "mrr": 0.6904761904761905,
-            "wrongTop1Count": 2
-          },
-          "filter": {
-            "count": 6,
-            "hitAt5": 0.5,
-            "recallAt5": 0.5,
-            "mrr": 0.5,
-            "wrongTop1Count": 0
-          },
-          "unanswerable": {
-            "count": 5,
-            "hitAt5": 0,
-            "recallAt5": 0,
-            "mrr": 0,
-            "wrongTop1Count": 0
-          },
-          "conflict": {
-            "count": 4,
-            "hitAt5": 1,
-            "recallAt5": 0.625,
-            "mrr": 1,
-            "wrongTop1Count": 0
-          },
-          "mixed-lang": {
-            "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.7857142857142857,
-            "mrr": 0.6666666666666666,
-            "wrongTop1Count": 2
-          }
-        },
-        "overlapMean": 0
-      },
-      {
-        "id": "lexical-only",
-        "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
-          "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.74,
-          "hitAt5": 0.76,
-          "recallAt5": 0.5133333333333333,
-          "mrr": 0.6916666666666668,
-          "ndcgAt5": 0.5289903660305627,
-          "exactTermHitAt5": 0.8181818181818182,
-          "semanticQueryRecallAt5": 0.5287356321839081,
-          "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 146,
-          "wrongTop1Count": 6,
-          "noResultAccuracy": 0.4,
-          "p50LatencyMs": 60.33860000000095,
-          "p95LatencyMs": 77.17950000000019,
-          "meanRetrievedChunks": 4.818181818181818,
-          "lexicalVectorOverlap": 0,
-          "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 12,
+            "EXPECTED_DOC_NOT_RETRIEVED": 21,
             "WRONG_TOP1": 6,
             "LOW_SIMILARITY": 0,
-            "KEYWORD_MISS": 3,
-            "SEMANTIC_MISS": 12,
+            "KEYWORD_MISS": 10,
+            "SEMANTIC_MISS": 21,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 49,
-            "NO_ANSWER_FAILURE": 3,
+            "DUPLICATE_RESULT": 56,
+            "NO_ANSWER_FAILURE": 5,
             "STALE_DOCUMENT_SELECTED": 1
           }
         },
         "byCategory": {
           "exact-term": {
             "count": 11,
-            "hitAt5": 0.8181818181818182,
-            "recallAt5": 0.5909090909090909,
-            "mrr": 0.7727272727272727,
+            "hitAt5": 0.7272727272727273,
+            "recallAt5": 0.5151515151515151,
+            "mrr": 0.6818181818181818,
             "wrongTop1Count": 1
           },
           "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.7777777777777778,
-            "recallAt5": 0.5,
-            "mrr": 0.6111111111111112,
-            "wrongTop1Count": 3
+            "count": 15,
+            "hitAt5": 0.4,
+            "recallAt5": 0.24444444444444444,
+            "mrr": 0.3055555555555555,
+            "wrongTop1Count": 2
           },
           "decision": {
             "count": 6,
-            "hitAt5": 0.6666666666666666,
-            "recallAt5": 0.5,
-            "mrr": 0.5555555555555555,
-            "wrongTop1Count": 1
+            "hitAt5": 0.8333333333333334,
+            "recallAt5": 0.5833333333333334,
+            "mrr": 0.6388888888888888,
+            "wrongTop1Count": 2
           },
           "multi-doc": {
             "count": 7,
             "hitAt5": 0.8571428571428571,
             "recallAt5": 0.3333333333333333,
-            "mrr": 0.75,
+            "mrr": 0.7619047619047619,
             "wrongTop1Count": 1
           },
           "filter": {
@@ -996,17 +876,111 @@
           },
           "conflict": {
             "count": 4,
-            "hitAt5": 1,
+            "hitAt5": 0.75,
             "recallAt5": 0.4583333333333333,
-            "mrr": 1,
+            "mrr": 0.75,
             "wrongTop1Count": 0
           },
           "mixed-lang": {
             "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.7857142857142857,
-            "mrr": 0.8571428571428571,
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.619047619047619,
+            "mrr": 0.7142857142857143,
             "wrongTop1Count": 0
+          }
+        },
+        "overlapMean": 0
+      },
+      {
+        "id": "lexical-only",
+        "metrics": {
+          "queryCount": 61,
+          "answerableCount": 56,
+          "unanswerableCount": 5,
+          "hitAt1": 0.4642857142857143,
+          "hitAt3": 0.625,
+          "hitAt5": 0.625,
+          "recallAt5": 0.3988095238095238,
+          "mrr": 0.5416666666666666,
+          "ndcgAt5": 0.4032600352789299,
+          "exactTermHitAt5": 0.6363636363636364,
+          "semanticQueryRecallAt5": 0.3904761904761905,
+          "metadataFilterAccuracy": 0,
+          "duplicateIncidentOrDocumentCount": 167,
+          "wrongTop1Count": 9,
+          "noResultAccuracy": 0.4,
+          "p50LatencyMs": 121.25610000000233,
+          "p95LatencyMs": 148.1854999999996,
+          "meanRetrievedChunks": 4.786885245901639,
+          "lexicalVectorOverlap": 0,
+          "failureTaxonomy": {
+            "EXPECTED_DOC_NOT_RETRIEVED": 21,
+            "WRONG_TOP1": 9,
+            "LOW_SIMILARITY": 0,
+            "KEYWORD_MISS": 2,
+            "SEMANTIC_MISS": 21,
+            "FILTER_FAILURE": 3,
+            "DUPLICATE_RESULT": 55,
+            "NO_ANSWER_FAILURE": 3,
+            "STALE_DOCUMENT_SELECTED": 1
+          }
+        },
+        "byCategory": {
+          "exact-term": {
+            "count": 11,
+            "hitAt5": 0.6363636363636364,
+            "recallAt5": 0.4848484848484848,
+            "mrr": 0.5454545454545454,
+            "wrongTop1Count": 2
+          },
+          "paraphrase": {
+            "count": 15,
+            "hitAt5": 0.7333333333333333,
+            "recallAt5": 0.4111111111111111,
+            "mrr": 0.6222222222222221,
+            "wrongTop1Count": 3
+          },
+          "decision": {
+            "count": 6,
+            "hitAt5": 0.5,
+            "recallAt5": 0.25,
+            "mrr": 0.5,
+            "wrongTop1Count": 0
+          },
+          "multi-doc": {
+            "count": 7,
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.23809523809523808,
+            "mrr": 0.6428571428571429,
+            "wrongTop1Count": 1
+          },
+          "filter": {
+            "count": 6,
+            "hitAt5": 0.3333333333333333,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.25,
+            "wrongTop1Count": 1
+          },
+          "unanswerable": {
+            "count": 5,
+            "hitAt5": 0,
+            "recallAt5": 0,
+            "mrr": 0,
+            "wrongTop1Count": 0
+          },
+          "conflict": {
+            "count": 4,
+            "hitAt5": 0.5,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.375,
+            "wrongTop1Count": 1
+          },
+          "mixed-lang": {
+            "count": 7,
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.619047619047619,
+            "mrr": 0.6428571428571429,
+            "wrongTop1Count": 1
           }
         },
         "overlapMean": 0
@@ -1014,127 +988,33 @@
       {
         "id": "hybrid-rrf",
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.76,
-          "hitAt5": 0.8,
-          "recallAt5": 0.5499999999999999,
-          "mrr": 0.6966666666666668,
-          "ndcgAt5": 0.5559183529595951,
-          "exactTermHitAt5": 0.9090909090909091,
-          "semanticQueryRecallAt5": 0.5229885057471265,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6428571428571429,
+          "hitAt5": 0.6428571428571429,
+          "recallAt5": 0.4107142857142857,
+          "mrr": 0.6071428571428571,
+          "ndcgAt5": 0.44559540273812825,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.37142857142857144,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 140,
-          "wrongTop1Count": 9,
+          "duplicateIncidentOrDocumentCount": 161,
+          "wrongTop1Count": 4,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 65.60759999999937,
-          "p95LatencyMs": 83.62829999999667,
+          "p50LatencyMs": 120.54999999999563,
+          "p95LatencyMs": 148.21919999999955,
           "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
+          "lexicalVectorOverlap": 0.37341247409082357,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 10,
-            "WRONG_TOP1": 9,
-            "LOW_SIMILARITY": 40,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 20,
+            "WRONG_TOP1": 4,
+            "LOW_SIMILARITY": 36,
+            "KEYWORD_MISS": 4,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 50,
-            "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
-          }
-        },
-        "byCategory": {
-          "exact-term": {
-            "count": 11,
-            "hitAt5": 0.9090909090909091,
-            "recallAt5": 0.6212121212121212,
-            "mrr": 0.8030303030303031,
-            "wrongTop1Count": 2
-          },
-          "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.5555555555555556,
-            "recallAt5": 0.3333333333333333,
-            "mrr": 0.3611111111111111,
-            "wrongTop1Count": 3
-          },
-          "decision": {
-            "count": 6,
-            "hitAt5": 1,
-            "recallAt5": 0.6666666666666666,
-            "mrr": 0.8333333333333334,
-            "wrongTop1Count": 2
-          },
-          "multi-doc": {
-            "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.380952380952381,
-            "mrr": 0.75,
-            "wrongTop1Count": 1
-          },
-          "filter": {
-            "count": 6,
-            "hitAt5": 0.5,
-            "recallAt5": 0.5,
-            "mrr": 0.4166666666666667,
-            "wrongTop1Count": 1
-          },
-          "unanswerable": {
-            "count": 5,
-            "hitAt5": 0,
-            "recallAt5": 0,
-            "mrr": 0,
-            "wrongTop1Count": 0
-          },
-          "conflict": {
-            "count": 4,
-            "hitAt5": 1,
-            "recallAt5": 0.625,
-            "mrr": 1,
-            "wrongTop1Count": 0
-          },
-          "mixed-lang": {
-            "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.7857142857142857,
-            "mrr": 0.8571428571428571,
-            "wrongTop1Count": 0
-          }
-        },
-        "overlapMean": 0.4003729603729604
-      },
-      {
-        "id": "hybrid-diversify-max1",
-        "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
-          "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.82,
-          "hitAt5": 0.86,
-          "recallAt5": 0.6766666666666667,
-          "mrr": 0.7166666666666666,
-          "ndcgAt5": 0.6383052583704337,
-          "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.6551724137931034,
-          "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 29,
-          "wrongTop1Count": 12,
-          "noResultAccuracy": 1,
-          "p50LatencyMs": 59.77779999999984,
-          "p95LatencyMs": 78.31819999999789,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
-          "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 7,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 43,
-            "KEYWORD_MISS": 2,
-            "SEMANTIC_MISS": 0,
-            "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 10,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
             "STALE_DOCUMENT_SELECTED": 0
           }
@@ -1142,38 +1022,38 @@
         "byCategory": {
           "exact-term": {
             "count": 11,
-            "hitAt5": 1,
-            "recallAt5": 0.7575757575757577,
-            "mrr": 0.8333333333333333,
-            "wrongTop1Count": 3
+            "hitAt5": 0.8181818181818182,
+            "recallAt5": 0.5303030303030304,
+            "mrr": 0.7727272727272727,
+            "wrongTop1Count": 1
           },
           "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.6666666666666666,
-            "recallAt5": 0.48148148148148145,
-            "mrr": 0.39814814814814814,
-            "wrongTop1Count": 4
+            "count": 15,
+            "hitAt5": 0.5333333333333333,
+            "recallAt5": 0.3,
+            "mrr": 0.5333333333333333,
+            "wrongTop1Count": 0
           },
           "decision": {
             "count": 6,
-            "hitAt5": 1,
-            "recallAt5": 0.75,
-            "mrr": 0.8333333333333334,
-            "wrongTop1Count": 2
+            "hitAt5": 0.6666666666666666,
+            "recallAt5": 0.4166666666666667,
+            "mrr": 0.5833333333333334,
+            "wrongTop1Count": 1
           },
           "multi-doc": {
             "count": 7,
-            "hitAt5": 0.8571428571428571,
-            "recallAt5": 0.5714285714285714,
-            "mrr": 0.75,
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.23809523809523808,
+            "mrr": 0.6428571428571429,
             "wrongTop1Count": 1
           },
           "filter": {
             "count": 6,
-            "hitAt5": 0.5,
-            "recallAt5": 0.5,
-            "mrr": 0.4166666666666667,
-            "wrongTop1Count": 1
+            "hitAt5": 0.3333333333333333,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.3333333333333333,
+            "wrongTop1Count": 0
           },
           "unanswerable": {
             "count": 5,
@@ -1184,90 +1064,90 @@
           },
           "conflict": {
             "count": 4,
-            "hitAt5": 1,
-            "recallAt5": 0.875,
-            "mrr": 1,
-            "wrongTop1Count": 0
+            "hitAt5": 0.75,
+            "recallAt5": 0.5416666666666666,
+            "mrr": 0.625,
+            "wrongTop1Count": 1
           },
           "mixed-lang": {
             "count": 7,
-            "hitAt5": 1,
-            "recallAt5": 0.8809523809523808,
-            "mrr": 0.9047619047619048,
-            "wrongTop1Count": 1
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.619047619047619,
+            "mrr": 0.7142857142857143,
+            "wrongTop1Count": 0
           }
         },
-        "overlapMean": 0.4003729603729604
+        "overlapMean": 0.37341247409082357
       },
       {
-        "id": "hybrid-diversify-max2",
+        "id": "hybrid-diversify-max1",
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.82,
-          "hitAt5": 0.86,
-          "recallAt5": 0.6233333333333333,
-          "mrr": 0.7166666666666666,
-          "ndcgAt5": 0.609303140251333,
-          "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.5919540229885056,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6964285714285714,
+          "hitAt5": 0.75,
+          "recallAt5": 0.5238095238095238,
+          "mrr": 0.643452380952381,
+          "ndcgAt5": 0.514285242040212,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.538095238095238,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 91,
-          "wrongTop1Count": 12,
+          "duplicateIncidentOrDocumentCount": 0,
+          "wrongTop1Count": 10,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 60.5640999999996,
-          "p95LatencyMs": 81.21600000000035,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
+          "p50LatencyMs": 107.61819999999716,
+          "p95LatencyMs": 136.87769999999728,
+          "meanRetrievedChunks": 4.704918032786885,
+          "lexicalVectorOverlap": 0.37341247409082357,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 7,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 43,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 14,
+            "WRONG_TOP1": 10,
+            "LOW_SIMILARITY": 42,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 50,
+            "DUPLICATE_RESULT": 0,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 0
           }
         },
         "byCategory": {
           "exact-term": {
             "count": 11,
-            "hitAt5": 1,
-            "recallAt5": 0.6818181818181818,
-            "mrr": 0.8333333333333333,
-            "wrongTop1Count": 3
+            "hitAt5": 0.8181818181818182,
+            "recallAt5": 0.5757575757575758,
+            "mrr": 0.7727272727272727,
+            "wrongTop1Count": 1
           },
           "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.6666666666666666,
-            "recallAt5": 0.48148148148148145,
-            "mrr": 0.39814814814814814,
-            "wrongTop1Count": 4
+            "count": 15,
+            "hitAt5": 0.7333333333333333,
+            "recallAt5": 0.4444444444444444,
+            "mrr": 0.5966666666666666,
+            "wrongTop1Count": 3
           },
           "decision": {
             "count": 6,
-            "hitAt5": 1,
-            "recallAt5": 0.6666666666666666,
-            "mrr": 0.8333333333333334,
+            "hitAt5": 0.8333333333333334,
+            "recallAt5": 0.5833333333333334,
+            "mrr": 0.6666666666666666,
             "wrongTop1Count": 2
           },
           "multi-doc": {
             "count": 7,
             "hitAt5": 0.8571428571428571,
             "recallAt5": 0.42857142857142855,
-            "mrr": 0.75,
-            "wrongTop1Count": 1
+            "mrr": 0.6904761904761905,
+            "wrongTop1Count": 2
           },
           "filter": {
             "count": 6,
-            "hitAt5": 0.5,
-            "recallAt5": 0.5,
-            "mrr": 0.4166666666666667,
-            "wrongTop1Count": 1
+            "hitAt5": 0.3333333333333333,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.3333333333333333,
+            "wrongTop1Count": 0
           },
           "unanswerable": {
             "count": 5,
@@ -1278,53 +1158,147 @@
           },
           "conflict": {
             "count": 4,
-            "hitAt5": 1,
-            "recallAt5": 0.875,
-            "mrr": 1,
-            "wrongTop1Count": 0
+            "hitAt5": 0.75,
+            "recallAt5": 0.5416666666666666,
+            "mrr": 0.625,
+            "wrongTop1Count": 1
           },
           "mixed-lang": {
             "count": 7,
-            "hitAt5": 1,
-            "recallAt5": 0.8333333333333333,
-            "mrr": 0.9047619047619048,
+            "hitAt5": 0.8571428571428571,
+            "recallAt5": 0.8095238095238094,
+            "mrr": 0.75,
             "wrongTop1Count": 1
           }
         },
-        "overlapMean": 0.4003729603729604
+        "overlapMean": 0.37341247409082357
+      },
+      {
+        "id": "hybrid-diversify-max2",
+        "metrics": {
+          "queryCount": 61,
+          "answerableCount": 56,
+          "unanswerableCount": 5,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6964285714285714,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.47916666666666663,
+          "mrr": 0.6354166666666667,
+          "ndcgAt5": 0.4921536338570327,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.4809523809523809,
+          "metadataFilterAccuracy": 0,
+          "duplicateIncidentOrDocumentCount": 94,
+          "wrongTop1Count": 8,
+          "noResultAccuracy": 1,
+          "p50LatencyMs": 124.64600000000064,
+          "p95LatencyMs": 151.02759999999398,
+          "meanRetrievedChunks": 4.852459016393443,
+          "lexicalVectorOverlap": 0.37341247409082357,
+          "failureTaxonomy": {
+            "EXPECTED_DOC_NOT_RETRIEVED": 16,
+            "WRONG_TOP1": 8,
+            "LOW_SIMILARITY": 40,
+            "KEYWORD_MISS": 3,
+            "SEMANTIC_MISS": 0,
+            "FILTER_FAILURE": 3,
+            "DUPLICATE_RESULT": 58,
+            "NO_ANSWER_FAILURE": 0,
+            "STALE_DOCUMENT_SELECTED": 0
+          }
+        },
+        "byCategory": {
+          "exact-term": {
+            "count": 11,
+            "hitAt5": 0.8181818181818182,
+            "recallAt5": 0.5303030303030304,
+            "mrr": 0.7727272727272727,
+            "wrongTop1Count": 1
+          },
+          "paraphrase": {
+            "count": 15,
+            "hitAt5": 0.6666666666666666,
+            "recallAt5": 0.4222222222222222,
+            "mrr": 0.5833333333333334,
+            "wrongTop1Count": 2
+          },
+          "decision": {
+            "count": 6,
+            "hitAt5": 0.8333333333333334,
+            "recallAt5": 0.5833333333333334,
+            "mrr": 0.6666666666666666,
+            "wrongTop1Count": 2
+          },
+          "multi-doc": {
+            "count": 7,
+            "hitAt5": 0.8571428571428571,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.6904761904761905,
+            "wrongTop1Count": 2
+          },
+          "filter": {
+            "count": 6,
+            "hitAt5": 0.3333333333333333,
+            "recallAt5": 0.3333333333333333,
+            "mrr": 0.3333333333333333,
+            "wrongTop1Count": 0
+          },
+          "unanswerable": {
+            "count": 5,
+            "hitAt5": 0,
+            "recallAt5": 0,
+            "mrr": 0,
+            "wrongTop1Count": 0
+          },
+          "conflict": {
+            "count": 4,
+            "hitAt5": 0.75,
+            "recallAt5": 0.5416666666666666,
+            "mrr": 0.625,
+            "wrongTop1Count": 1
+          },
+          "mixed-lang": {
+            "count": 7,
+            "hitAt5": 0.7142857142857143,
+            "recallAt5": 0.6666666666666666,
+            "mrr": 0.7142857142857143,
+            "wrongTop1Count": 0
+          }
+        },
+        "overlapMean": 0.37341247409082357
       },
       {
         "id": "hybrid-contextual",
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.78,
-          "hitAt5": 0.8,
-          "recallAt5": 0.5133333333333333,
-          "mrr": 0.705,
-          "ndcgAt5": 0.5339551093014984,
+          "hitAt1": 0.6071428571428571,
+          "hitAt3": 0.7142857142857143,
+          "hitAt5": 0.7321428571428571,
+          "recallAt5": 0.48809523809523814,
+          "mrr": 0.662202380952381,
+          "ndcgAt5": 0.5075399840727187,
           "exactTermHitAt5": 0.9090909090909091,
-          "semanticQueryRecallAt5": 0.5114942528735632,
+          "semanticQueryRecallAt5": 0.4714285714285714,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 149,
-          "wrongTop1Count": 8,
+          "duplicateIncidentOrDocumentCount": 158,
+          "wrongTop1Count": 7,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 68.84809999999925,
-          "p95LatencyMs": 90.0650999999998,
+          "p50LatencyMs": 104.60459999999875,
+          "p95LatencyMs": 133.5529000000024,
           "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4006526806526807,
+          "lexicalVectorOverlap": 0.3737442202606138,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 10,
-            "WRONG_TOP1": 8,
-            "LOW_SIMILARITY": 40,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 15,
+            "WRONG_TOP1": 7,
+            "LOW_SIMILARITY": 41,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 52,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 1
           }
         },
         "byCategory": {
@@ -1332,22 +1306,22 @@
             "count": 11,
             "hitAt5": 0.9090909090909091,
             "recallAt5": 0.5757575757575757,
-            "mrr": 0.9090909090909091,
-            "wrongTop1Count": 0
+            "mrr": 0.8636363636363636,
+            "wrongTop1Count": 1
           },
           "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.6666666666666666,
-            "recallAt5": 0.3333333333333333,
-            "mrr": 0.3796296296296296,
-            "wrongTop1Count": 4
+            "count": 15,
+            "hitAt5": 0.4666666666666667,
+            "recallAt5": 0.27777777777777773,
+            "mrr": 0.35,
+            "wrongTop1Count": 3
           },
           "decision": {
             "count": 6,
             "hitAt5": 1,
-            "recallAt5": 0.6666666666666666,
-            "mrr": 0.75,
-            "wrongTop1Count": 3
+            "recallAt5": 0.75,
+            "mrr": 0.8333333333333334,
+            "wrongTop1Count": 2
           },
           "multi-doc": {
             "count": 7,
@@ -1385,40 +1359,40 @@
             "wrongTop1Count": 0
           }
         },
-        "overlapMean": 0.4006526806526807
+        "overlapMean": 0.3737442202606138
       },
       {
         "id": "hybrid-contextual-diversify-max2",
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.84,
-          "hitAt5": 0.88,
-          "recallAt5": 0.6133333333333333,
-          "mrr": 0.7333333333333334,
-          "ndcgAt5": 0.6034244361907437,
+          "hitAt1": 0.6071428571428571,
+          "hitAt3": 0.7678571428571429,
+          "hitAt5": 0.8035714285714286,
+          "recallAt5": 0.5773809523809524,
+          "mrr": 0.6875,
+          "ndcgAt5": 0.570147097661524,
           "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.5919540229885057,
+          "semanticQueryRecallAt5": 0.538095238095238,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 95,
-          "wrongTop1Count": 12,
+          "duplicateIncidentOrDocumentCount": 91,
+          "wrongTop1Count": 11,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 69.03029999999853,
-          "p95LatencyMs": 88.85129999999845,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4006526806526807,
+          "p50LatencyMs": 101.69110000000364,
+          "p95LatencyMs": 148.0411000000022,
+          "meanRetrievedChunks": 4.786885245901639,
+          "lexicalVectorOverlap": 0.3737442202606138,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 6,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 44,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 11,
+            "WRONG_TOP1": 11,
+            "LOW_SIMILARITY": 45,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 52,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 1
           }
         },
         "byCategory": {
@@ -1426,22 +1400,22 @@
             "count": 11,
             "hitAt5": 1,
             "recallAt5": 0.6363636363636364,
-            "mrr": 0.9393939393939393,
-            "wrongTop1Count": 1
+            "mrr": 0.8939393939393938,
+            "wrongTop1Count": 2
           },
           "paraphrase": {
-            "count": 9,
-            "hitAt5": 0.7777777777777778,
-            "recallAt5": 0.4444444444444444,
-            "mrr": 0.4074074074074074,
-            "wrongTop1Count": 5
+            "count": 15,
+            "hitAt5": 0.5333333333333333,
+            "recallAt5": 0.3444444444444444,
+            "mrr": 0.36666666666666664,
+            "wrongTop1Count": 4
           },
           "decision": {
             "count": 6,
             "hitAt5": 1,
-            "recallAt5": 0.6666666666666666,
-            "mrr": 0.75,
-            "wrongTop1Count": 3
+            "recallAt5": 0.75,
+            "mrr": 0.8333333333333334,
+            "wrongTop1Count": 2
           },
           "multi-doc": {
             "count": 7,
@@ -1479,7 +1453,7 @@
             "wrongTop1Count": 1
           }
         },
-        "overlapMean": 0.4006526806526807
+        "overlapMean": 0.3737442202606138
       }
     ],
     "promotions": [
@@ -1488,42 +1462,43 @@
         "promote": false,
         "reasons": [],
         "regressions": [
-          "no quality gain: recallΔ=-0.0367 mrrΔ=-0.0050 < 0.01",
-          "hitAt3 regressed by 0.0200 > 0.02",
-          "hitAt5 regressed by 0.0400 > 0.02",
-          "recallAt5 regressed by 0.0367 > 0.02",
-          "ndcgAt5 regressed by 0.0269 > 0.02",
-          "noResultAccuracy regressed by 0.6000 > 0.02",
-          "duplicates increased 140 -> 146"
+          "no quality gain: recallΔ=-0.1379 mrrΔ=-0.1040 < 0.01",
+          "hitAt1 regressed by 0.0957 > 0.02",
+          "hitAt3 regressed by 0.1150 > 0.02",
+          "hitAt5 regressed by 0.1550 > 0.02",
+          "recallAt5 regressed by 0.1379 > 0.02",
+          "mrr regressed by 0.1040 > 0.02",
+          "ndcgAt5 regressed by 0.1248 > 0.02",
+          "duplicates increased 136 -> 167"
         ],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.74,
-          "hitAt5": 0.76,
-          "recallAt5": 0.5133333333333333,
-          "mrr": 0.6916666666666668,
-          "ndcgAt5": 0.5289903660305627,
-          "exactTermHitAt5": 0.8181818181818182,
-          "semanticQueryRecallAt5": 0.5287356321839081,
+          "hitAt1": 0.4642857142857143,
+          "hitAt3": 0.625,
+          "hitAt5": 0.625,
+          "recallAt5": 0.3988095238095238,
+          "mrr": 0.5416666666666666,
+          "ndcgAt5": 0.4032600352789299,
+          "exactTermHitAt5": 0.6363636363636364,
+          "semanticQueryRecallAt5": 0.3904761904761905,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 146,
-          "wrongTop1Count": 6,
+          "duplicateIncidentOrDocumentCount": 167,
+          "wrongTop1Count": 9,
           "noResultAccuracy": 0.4,
-          "p50LatencyMs": 60.33860000000095,
-          "p95LatencyMs": 77.17950000000019,
-          "meanRetrievedChunks": 4.818181818181818,
+          "p50LatencyMs": 121.25610000000233,
+          "p95LatencyMs": 148.1854999999996,
+          "meanRetrievedChunks": 4.786885245901639,
           "lexicalVectorOverlap": 0,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 12,
-            "WRONG_TOP1": 6,
+            "EXPECTED_DOC_NOT_RETRIEVED": 21,
+            "WRONG_TOP1": 9,
             "LOW_SIMILARITY": 0,
-            "KEYWORD_MISS": 3,
-            "SEMANTIC_MISS": 12,
+            "KEYWORD_MISS": 2,
+            "SEMANTIC_MISS": 21,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 49,
+            "DUPLICATE_RESULT": 55,
             "NO_ANSWER_FAILURE": 3,
             "STALE_DOCUMENT_SELECTED": 1
           }
@@ -1534,78 +1509,84 @@
         "promote": false,
         "reasons": [],
         "regressions": [
-          "no quality gain: recallΔ=0.0000 mrrΔ=0.0000 < 0.01"
+          "no quality gain: recallΔ=-0.1260 mrrΔ=-0.0385 < 0.01",
+          "hitAt3 regressed by 0.0971 > 0.02",
+          "hitAt5 regressed by 0.1371 > 0.02",
+          "recallAt5 regressed by 0.1260 > 0.02",
+          "mrr regressed by 0.0385 > 0.02",
+          "ndcgAt5 regressed by 0.0825 > 0.02",
+          "duplicates increased 136 -> 161"
         ],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.76,
-          "hitAt5": 0.8,
-          "recallAt5": 0.5499999999999999,
-          "mrr": 0.6966666666666668,
-          "ndcgAt5": 0.5559183529595951,
-          "exactTermHitAt5": 0.9090909090909091,
-          "semanticQueryRecallAt5": 0.5229885057471265,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6428571428571429,
+          "hitAt5": 0.6428571428571429,
+          "recallAt5": 0.4107142857142857,
+          "mrr": 0.6071428571428571,
+          "ndcgAt5": 0.44559540273812825,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.37142857142857144,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 140,
-          "wrongTop1Count": 9,
+          "duplicateIncidentOrDocumentCount": 161,
+          "wrongTop1Count": 4,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 65.60759999999937,
-          "p95LatencyMs": 83.62829999999667,
+          "p50LatencyMs": 120.54999999999563,
+          "p95LatencyMs": 148.21919999999955,
           "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
+          "lexicalVectorOverlap": 0.37341247409082357,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 10,
-            "WRONG_TOP1": 9,
-            "LOW_SIMILARITY": 40,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 20,
+            "WRONG_TOP1": 4,
+            "LOW_SIMILARITY": 36,
+            "KEYWORD_MISS": 4,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 50,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 0
           }
         }
       },
       {
         "id": "hybrid-diversify-max1",
         "promote": false,
-        "reasons": [
-          "quality gain recallΔ=0.1267 mrrΔ=0.0200"
-        ],
+        "reasons": [],
         "regressions": [
-          "wrongTop1 increased 9 -> 12"
+          "no quality gain: recallΔ=-0.0129 mrrΔ=-0.0022 < 0.01",
+          "hitAt3 regressed by 0.0436 > 0.02",
+          "hitAt5 regressed by 0.0300 > 0.02"
         ],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.82,
-          "hitAt5": 0.86,
-          "recallAt5": 0.6766666666666667,
-          "mrr": 0.7166666666666666,
-          "ndcgAt5": 0.6383052583704337,
-          "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.6551724137931034,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6964285714285714,
+          "hitAt5": 0.75,
+          "recallAt5": 0.5238095238095238,
+          "mrr": 0.643452380952381,
+          "ndcgAt5": 0.514285242040212,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.538095238095238,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 29,
-          "wrongTop1Count": 12,
+          "duplicateIncidentOrDocumentCount": 0,
+          "wrongTop1Count": 10,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 59.77779999999984,
-          "p95LatencyMs": 78.31819999999789,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
+          "p50LatencyMs": 107.61819999999716,
+          "p95LatencyMs": 136.87769999999728,
+          "meanRetrievedChunks": 4.704918032786885,
+          "lexicalVectorOverlap": 0.37341247409082357,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 7,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 43,
-            "KEYWORD_MISS": 2,
+            "EXPECTED_DOC_NOT_RETRIEVED": 14,
+            "WRONG_TOP1": 10,
+            "LOW_SIMILARITY": 42,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 10,
+            "DUPLICATE_RESULT": 0,
             "NO_ANSWER_FAILURE": 0,
             "STALE_DOCUMENT_SELECTED": 0
           }
@@ -1614,165 +1595,145 @@
       {
         "id": "hybrid-diversify-max2",
         "promote": false,
-        "reasons": [
-          "quality gain recallΔ=0.0733 mrrΔ=0.0200"
-        ],
+        "reasons": [],
         "regressions": [
-          "wrongTop1 increased 9 -> 12"
+          "no quality gain: recallΔ=-0.0575 mrrΔ=-0.0102 < 0.01",
+          "hitAt3 regressed by 0.0436 > 0.02",
+          "hitAt5 regressed by 0.0657 > 0.02",
+          "recallAt5 regressed by 0.0575 > 0.02",
+          "ndcgAt5 regressed by 0.0359 > 0.02"
         ],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.62,
-          "hitAt3": 0.82,
-          "hitAt5": 0.86,
-          "recallAt5": 0.6233333333333333,
-          "mrr": 0.7166666666666666,
-          "ndcgAt5": 0.609303140251333,
-          "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.5919540229885056,
+          "hitAt1": 0.5714285714285714,
+          "hitAt3": 0.6964285714285714,
+          "hitAt5": 0.7142857142857143,
+          "recallAt5": 0.47916666666666663,
+          "mrr": 0.6354166666666667,
+          "ndcgAt5": 0.4921536338570327,
+          "exactTermHitAt5": 0.8181818181818182,
+          "semanticQueryRecallAt5": 0.4809523809523809,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 91,
-          "wrongTop1Count": 12,
+          "duplicateIncidentOrDocumentCount": 94,
+          "wrongTop1Count": 8,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 60.5640999999996,
-          "p95LatencyMs": 81.21600000000035,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4003729603729604,
+          "p50LatencyMs": 124.64600000000064,
+          "p95LatencyMs": 151.02759999999398,
+          "meanRetrievedChunks": 4.852459016393443,
+          "lexicalVectorOverlap": 0.37341247409082357,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 7,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 43,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 16,
+            "WRONG_TOP1": 8,
+            "LOW_SIMILARITY": 40,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 50,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 0
           }
         }
       },
       {
         "id": "hybrid-contextual",
         "promote": false,
-        "reasons": [],
+        "reasons": [
+          "quality gain recallΔ=-0.0486 mrrΔ=0.0165"
+        ],
         "regressions": [
-          "no quality gain: recallΔ=-0.0367 mrrΔ=0.0083 < 0.01",
-          "recallAt5 regressed by 0.0367 > 0.02",
-          "ndcgAt5 regressed by 0.0220 > 0.02",
-          "duplicates increased 140 -> 149"
+          "hitAt3 regressed by 0.0257 > 0.02",
+          "hitAt5 regressed by 0.0479 > 0.02",
+          "recallAt5 regressed by 0.0486 > 0.02",
+          "ndcgAt5 regressed by 0.0205 > 0.02",
+          "duplicates increased 136 -> 158"
         ],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.78,
-          "hitAt5": 0.8,
-          "recallAt5": 0.5133333333333333,
-          "mrr": 0.705,
-          "ndcgAt5": 0.5339551093014984,
+          "hitAt1": 0.6071428571428571,
+          "hitAt3": 0.7142857142857143,
+          "hitAt5": 0.7321428571428571,
+          "recallAt5": 0.48809523809523814,
+          "mrr": 0.662202380952381,
+          "ndcgAt5": 0.5075399840727187,
           "exactTermHitAt5": 0.9090909090909091,
-          "semanticQueryRecallAt5": 0.5114942528735632,
+          "semanticQueryRecallAt5": 0.4714285714285714,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 149,
-          "wrongTop1Count": 8,
+          "duplicateIncidentOrDocumentCount": 158,
+          "wrongTop1Count": 7,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 68.84809999999925,
-          "p95LatencyMs": 90.0650999999998,
+          "p50LatencyMs": 104.60459999999875,
+          "p95LatencyMs": 133.5529000000024,
           "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4006526806526807,
+          "lexicalVectorOverlap": 0.3737442202606138,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 10,
-            "WRONG_TOP1": 8,
-            "LOW_SIMILARITY": 40,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 15,
+            "WRONG_TOP1": 7,
+            "LOW_SIMILARITY": 41,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 52,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 1
           }
         }
       },
       {
         "id": "hybrid-contextual-diversify-max2",
-        "promote": false,
+        "promote": true,
         "reasons": [
-          "quality gain recallΔ=0.0633 mrrΔ=0.0367"
+          "quality gain recallΔ=0.0407 mrrΔ=0.0418"
         ],
-        "regressions": [
-          "wrongTop1 increased 9 -> 12"
-        ],
+        "regressions": [],
         "metrics": {
-          "queryCount": 55,
-          "answerableCount": 50,
+          "queryCount": 61,
+          "answerableCount": 56,
           "unanswerableCount": 5,
-          "hitAt1": 0.64,
-          "hitAt3": 0.84,
-          "hitAt5": 0.88,
-          "recallAt5": 0.6133333333333333,
-          "mrr": 0.7333333333333334,
-          "ndcgAt5": 0.6034244361907437,
+          "hitAt1": 0.6071428571428571,
+          "hitAt3": 0.7678571428571429,
+          "hitAt5": 0.8035714285714286,
+          "recallAt5": 0.5773809523809524,
+          "mrr": 0.6875,
+          "ndcgAt5": 0.570147097661524,
           "exactTermHitAt5": 1,
-          "semanticQueryRecallAt5": 0.5919540229885057,
+          "semanticQueryRecallAt5": 0.538095238095238,
           "metadataFilterAccuracy": 0,
-          "duplicateIncidentOrDocumentCount": 95,
-          "wrongTop1Count": 12,
+          "duplicateIncidentOrDocumentCount": 91,
+          "wrongTop1Count": 11,
           "noResultAccuracy": 1,
-          "p50LatencyMs": 69.03029999999853,
-          "p95LatencyMs": 88.85129999999845,
-          "meanRetrievedChunks": 5,
-          "lexicalVectorOverlap": 0.4006526806526807,
+          "p50LatencyMs": 101.69110000000364,
+          "p95LatencyMs": 148.0411000000022,
+          "meanRetrievedChunks": 4.786885245901639,
+          "lexicalVectorOverlap": 0.3737442202606138,
           "failureTaxonomy": {
-            "EXPECTED_DOC_NOT_RETRIEVED": 6,
-            "WRONG_TOP1": 12,
-            "LOW_SIMILARITY": 44,
-            "KEYWORD_MISS": 1,
+            "EXPECTED_DOC_NOT_RETRIEVED": 11,
+            "WRONG_TOP1": 11,
+            "LOW_SIMILARITY": 45,
+            "KEYWORD_MISS": 3,
             "SEMANTIC_MISS": 0,
             "FILTER_FAILURE": 3,
-            "DUPLICATE_RESULT": 52,
+            "DUPLICATE_RESULT": 58,
             "NO_ANSWER_FAILURE": 0,
-            "STALE_DOCUMENT_SELECTED": 2
+            "STALE_DOCUMENT_SELECTED": 1
           }
         }
       }
     ],
     "promotionResult": {
-      "promoted": false,
-      "selected": null,
-      "note": "No Stage-3 candidate beat Stage-2 structure-aware vector-only under policy (incl. wrongTop1/duplicates)."
+      "promoted": true,
+      "selected": "hybrid-contextual-diversify-max2",
+      "profiles": {
+        "quality": "hybrid-contextual-diversify-max2",
+        "balanced": "hybrid-contextual-diversify-max2",
+        "fast": "vector-only-structure-aware"
+      },
+      "note": "best.json and retrieval-config updated; index pointer updated only if contextual index required."
     },
     "topImproved": [
-      {
-        "id": "q-005",
-        "query": "keypoint_bbox54",
-        "candidate": "lexical-only",
-        "from": 0,
-        "to": 1
-      },
-      {
-        "id": "q-005",
-        "query": "keypoint_bbox54",
-        "candidate": "hybrid-rrf",
-        "from": 0,
-        "to": 1
-      },
-      {
-        "id": "q-005",
-        "query": "keypoint_bbox54",
-        "candidate": "hybrid-diversify-max1",
-        "from": 0,
-        "to": 1
-      },
-      {
-        "id": "q-005",
-        "query": "keypoint_bbox54",
-        "candidate": "hybrid-diversify-max2",
-        "from": 0,
-        "to": 1
-      },
       {
         "id": "q-005",
         "query": "keypoint_bbox54",
@@ -1788,30 +1749,58 @@
         "to": 1
       },
       {
-        "id": "q-009",
-        "query": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
+        "id": "q-006",
+        "query": "ByteTrack track_id",
         "candidate": "lexical-only",
         "from": 0,
         "to": 1
       },
       {
-        "id": "q-009",
-        "query": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
+        "id": "q-006",
+        "query": "ByteTrack track_id",
         "candidate": "hybrid-rrf",
         "from": 0,
         "to": 1
       },
       {
-        "id": "q-009",
-        "query": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
+        "id": "q-006",
+        "query": "ByteTrack track_id",
         "candidate": "hybrid-diversify-max1",
         "from": 0,
         "to": 1
       },
       {
-        "id": "q-009",
-        "query": "카메라는 어떤 아이디로 스트림과 이벤트를 맞춰야 하나요",
+        "id": "q-006",
+        "query": "ByteTrack track_id",
         "candidate": "hybrid-diversify-max2",
+        "from": 0,
+        "to": 1
+      },
+      {
+        "id": "q-006",
+        "query": "ByteTrack track_id",
+        "candidate": "hybrid-contextual",
+        "from": 0,
+        "to": 1
+      },
+      {
+        "id": "q-006",
+        "query": "ByteTrack track_id",
+        "candidate": "hybrid-contextual-diversify-max2",
+        "from": 0,
+        "to": 1
+      },
+      {
+        "id": "q-010",
+        "query": "실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요",
+        "candidate": "lexical-only",
+        "from": 0,
+        "to": 1
+      },
+      {
+        "id": "q-010",
+        "query": "실시간 관제 화면에서 왜 WebRTC를 기본으로 쓰나요",
+        "candidate": "hybrid-diversify-max1",
         "from": 0,
         "to": 1
       }
@@ -1826,17 +1815,6 @@
         "failures": [
           "EXPECTED_DOC_NOT_RETRIEVED",
           "SEMANTIC_MISS",
-          "DUPLICATE_RESULT"
-        ]
-      },
-      {
-        "id": "q-001",
-        "query": "cameraLoginId",
-        "candidate": "hybrid-rrf",
-        "from": 1,
-        "to": 0,
-        "failures": [
-          "EXPECTED_DOC_NOT_RETRIEVED",
           "DUPLICATE_RESULT"
         ]
       },
@@ -1864,36 +1842,6 @@
         ]
       },
       {
-        "id": "q-011",
-        "query": "쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는",
-        "candidate": "hybrid-rrf",
-        "from": 1,
-        "to": 0,
-        "failures": [
-          "EXPECTED_DOC_NOT_RETRIEVED"
-        ]
-      },
-      {
-        "id": "q-011",
-        "query": "쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는",
-        "candidate": "hybrid-diversify-max1",
-        "from": 1,
-        "to": 0,
-        "failures": [
-          "EXPECTED_DOC_NOT_RETRIEVED"
-        ]
-      },
-      {
-        "id": "q-011",
-        "query": "쓰러짐 감지를 잘 하려고 pose 모델을 고른 이유는",
-        "candidate": "hybrid-diversify-max2",
-        "from": 1,
-        "to": 0,
-        "failures": [
-          "EXPECTED_DOC_NOT_RETRIEVED"
-        ]
-      },
-      {
         "id": "q-018",
         "query": "Why separate MQTT event metadata from user authorization",
         "candidate": "lexical-only",
@@ -1901,7 +1849,6 @@
         "to": 0,
         "failures": [
           "EXPECTED_DOC_NOT_RETRIEVED",
-          "KEYWORD_MISS",
           "SEMANTIC_MISS",
           "DUPLICATE_RESULT"
         ]
@@ -1920,15 +1867,61 @@
         ]
       },
       {
-        "id": "q-030",
-        "query": "Bug RTSP stream 404 troubleshooting",
-        "candidate": "lexical-only",
+        "id": "q-019",
+        "query": "TensorRT 도입을 보류하거나 신중히 검증한 근거",
+        "candidate": "hybrid-rrf",
         "from": 1,
         "to": 0,
         "failures": [
           "EXPECTED_DOC_NOT_RETRIEVED",
           "KEYWORD_MISS",
+          "DUPLICATE_RESULT"
+        ]
+      },
+      {
+        "id": "q-023",
+        "query": "RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소",
+        "candidate": "hybrid-contextual",
+        "from": 1,
+        "to": 0,
+        "failures": [
+          "EXPECTED_DOC_NOT_RETRIEVED",
+          "KEYWORD_MISS",
+          "DUPLICATE_RESULT"
+        ]
+      },
+      {
+        "id": "q-023",
+        "query": "RTSP부터 대시보드 알림까지 end-to-end 파이프라인 구성요소",
+        "candidate": "hybrid-contextual-diversify-max2",
+        "from": 1,
+        "to": 0,
+        "failures": [
+          "EXPECTED_DOC_NOT_RETRIEVED",
+          "KEYWORD_MISS",
+          "DUPLICATE_RESULT"
+        ]
+      },
+      {
+        "id": "q-024",
+        "query": "pose extraction tracking and LSTM classification stages",
+        "candidate": "lexical-only",
+        "from": 1,
+        "to": 0,
+        "failures": [
+          "EXPECTED_DOC_NOT_RETRIEVED",
           "SEMANTIC_MISS",
+          "DUPLICATE_RESULT"
+        ]
+      },
+      {
+        "id": "q-024",
+        "query": "pose extraction tracking and LSTM classification stages",
+        "candidate": "hybrid-rrf",
+        "from": 1,
+        "to": 0,
+        "failures": [
+          "EXPECTED_DOC_NOT_RETRIEVED",
           "DUPLICATE_RESULT"
         ]
       }
