@@ -1,4 +1,4 @@
-import { getDisplayTitle, type WikiDocument } from '../lib/types';
+import { getPageTitle, type WikiDocument } from '../lib/types';
 import { DocumentEvidencePanel } from './DocumentEvidencePanel';
 import { MarkdownRenderer } from './MarkdownRenderer';
 
@@ -8,16 +8,13 @@ type DocumentArticleProps = {
 };
 
 export function DocumentArticle({ document, onSelectDocument }: DocumentArticleProps) {
-  const displayTitle = getDisplayTitle(document);
+  const pageTitle = getPageTitle(document);
 
   return (
     <article className="docCard">
       <header className="docHeader">
         <span>{document.category}</span>
-        <h1>{displayTitle}</h1>
-        {displayTitle !== document.title ? (
-          <p className="formalTitle">정식 제목: {document.title}</p>
-        ) : null}
+        <h1>{pageTitle}</h1>
         <div className="tagRow">
           {(document.tags ?? []).map((tag) => (
             <small key={tag}>{tag}</small>
@@ -28,7 +25,7 @@ export function DocumentArticle({ document, onSelectDocument }: DocumentArticleP
       <MarkdownRenderer
         markdown={document.body}
         documentTitle={document.title}
-        displayTitle={displayTitle}
+        displayTitle={pageTitle}
         documentSlug={document.slug}
       />
     </article>

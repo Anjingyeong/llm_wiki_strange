@@ -22,11 +22,11 @@ function parseTaskDefinitions() {
 test('task navigation defines exactly five stable reader tasks', () => {
   const definitions = parseTaskDefinitions();
   assert.deepEqual(definitions.map(({ id, label }) => ({ id, label })), [
-    { id: 'understand-system', label: 'Understand the system' },
-    { id: 'trace-ai-decisions', label: 'Trace AI decisions' },
-    { id: 'debug-runtime', label: 'Debug runtime behaviour' },
-    { id: 'inspect-evidence', label: 'Inspect evidence' },
-    { id: 'operate-and-reflect', label: 'Operate and reflect' },
+    { id: 'understand-system', label: '시스템 이해' },
+    { id: 'trace-ai-decisions', label: 'AI 판단과 결정' },
+    { id: 'debug-runtime', label: '런타임 문제 해결' },
+    { id: 'inspect-evidence', label: '검증과 근거' },
+    { id: 'operate-and-reflect', label: '운영과 회고' },
   ]);
 });
 

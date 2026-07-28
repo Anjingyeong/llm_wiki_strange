@@ -19,7 +19,7 @@ type WikiTaskPosition = {
 export const WIKI_TASK_NAVIGATION = [
   {
     id: 'understand-system',
-    label: 'Understand the system',
+    label: '시스템 이해',
     slugs: [
       'Overview',
       'Architecture',
@@ -33,7 +33,7 @@ export const WIKI_TASK_NAVIGATION = [
   },
   {
     id: 'trace-ai-decisions',
-    label: 'Trace AI decisions',
+    label: 'AI 판단과 결정',
     slugs: [
       'Model-Comparison',
       'ADR-003-YOLO26n-Selection',
@@ -54,7 +54,7 @@ export const WIKI_TASK_NAVIGATION = [
   },
   {
     id: 'debug-runtime',
-    label: 'Debug runtime behaviour',
+    label: '런타임 문제 해결',
     slugs: [
       'Realtime-Camera-Runtime-Stabilization',
       'Multi-Camera-Worker-Session-Reliability',
@@ -73,7 +73,7 @@ export const WIKI_TASK_NAVIGATION = [
   },
   {
     id: 'inspect-evidence',
-    label: 'Inspect evidence',
+    label: '검증과 근거',
     slugs: [
       'Benchmark-Evidence-Hub',
       'Benchmark-History',
@@ -88,7 +88,7 @@ export const WIKI_TASK_NAVIGATION = [
   },
   {
     id: 'operate-and-reflect',
-    label: 'Operate and reflect',
+    label: '운영과 회고',
     slugs: [
       'Develop-Code-Baseline-2026-07-15',
       'mjpeg-display-rollback',

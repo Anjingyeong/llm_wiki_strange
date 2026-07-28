@@ -8,6 +8,7 @@ import { WikiCommandBar } from './components/WikiCommandBar';
 import { WikiSearchWorkspace } from './components/WikiSearchWorkspace';
 import { AccessGate } from './components/AccessGate';
 import { documentsBySlug, documentsByTask, getInitialDocument } from './lib/documents';
+import { getPageTitle } from './lib/types';
 import { scrollTopForTocAnchor } from './lib/tocSelection.mjs';
 import { parseLocationHash, writeDocumentHash, writeViewHash, type WikiView } from './lib/wikiHash';
 import { clearWikiAccessKey, getWikiAccessKey, hasWikiAccessKey } from './lib/wikiAccessKey';
@@ -31,6 +32,15 @@ export function App() {
   const [authed, setAuthed] = useState<boolean>(() => hasWikiAccessKey());
 
   const activeDocument = useMemo(() => documentsBySlug.get(activeSlug), [activeSlug]);
+
+  useEffect(() => {
+    const pageName = contentView === 'doc' && activeDocument
+      ? getPageTitle(activeDocument)
+      : contentView === 'search'
+        ? '문서 검색'
+        : 'AI 질문';
+    document.title = `${pageName} | Smart Safety AI Wiki`;
+  }, [activeDocument, contentView]);
 
   // Determine if gate is required
   useEffect(() => {
@@ -146,7 +156,7 @@ export function App() {
               경로 <code>#{activeSlug}</code> 에 해당하는 문서가 없습니다. archived slug이거나 잘못된 링크일 수 있습니다.
             </p>
             <button onClick={() => selectDocument(initial.slug)} type="button">
-              Overview로 이동
+              개요로 이동
             </button>
           </main>
         </div>

@@ -11,7 +11,7 @@ import {
 } from '../lib/wikiEvidence';
 import { wikiLink } from '../lib/wikiHash';
 import { shouldHandleWikiLinkClick } from '../lib/wikiLinkActivation.mjs';
-import { getDisplayTitle, type WikiDocument, type WikiRelationKind } from '../lib/types';
+import { getReferenceTitle, type WikiDocument, type WikiRelationKind } from '../lib/types';
 
 type DocumentEvidencePanelProps = {
   readonly document: WikiDocument;
@@ -41,7 +41,7 @@ function DocumentRelationLink({
     <li className="documentRelationItem" data-relation-kind={kind}>
       <span className="documentRelationDirection">{directionLabel}</span>
       <a href={wikiLink(document.slug)} onClick={handleClick}>
-        {getDisplayTitle(document)}
+        {getReferenceTitle(document)}
       </a>
     </li>
   );
@@ -110,7 +110,7 @@ export function DocumentEvidencePanel({
                 onSelectDocument(replacement.slug);
               }}
             >
-              {getDisplayTitle(replacement)}
+              {getReferenceTitle(replacement)}
             </a>
           ) : (
             '미지정'

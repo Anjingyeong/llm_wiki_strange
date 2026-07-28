@@ -164,11 +164,11 @@ test('relationship graph derives exact backlinks from typed outgoing edges', () 
 test('task navigation exposes stable machine IDs with reader-facing labels', () => {
   const source = readTreeSource('src');
   const tasks = [
-    ['understand-system', 'Understand the system'],
-    ['trace-ai-decisions', 'Trace AI decisions'],
-    ['debug-runtime', 'Debug runtime behaviour'],
-    ['inspect-evidence', 'Inspect evidence'],
-    ['operate-and-reflect', 'Operate and reflect'],
+    ['understand-system', '시스템 이해'],
+    ['trace-ai-decisions', 'AI 판단과 결정'],
+    ['debug-runtime', '런타임 문제 해결'],
+    ['inspect-evidence', '검증과 근거'],
+    ['operate-and-reflect', '운영과 회고'],
   ];
 
   for (const [id, label] of tasks) {

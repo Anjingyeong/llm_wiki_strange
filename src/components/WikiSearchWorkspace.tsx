@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { SEARCH_RESULT_LIMIT_MAX, searchDocuments } from '../lib/search';
-import { getDisplayTitle } from '../lib/types';
+import { getPageTitle } from '../lib/types';
 import { wikiLink } from '../lib/wikiHash';
 
 type WikiSearchWorkspaceProps = {
@@ -60,7 +60,7 @@ export function WikiSearchWorkspace({ onReturnToDocument, onSelectDocument }: Wi
                     }}
                   >
                     <span className="searchResultContext">{result.category}{result.type ? ` · ${result.type}` : ''}</span>
-                    <strong>{getDisplayTitle(result)}</strong>
+                    <strong>{getPageTitle(result)}</strong>
                     {section ? <span className="searchResultSection">Matched section: {section}</span> : null}
                     <span className="searchResultEvidence">{result.status ?? 'state unknown'} · {result.evidenceLevel ?? 'evidence not recorded'}</span>
                     <span className="searchResultExcerpt">{(result.snippet ?? result.excerpt).slice(0, 180)}</span>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { WikiTaskNavigationGroup } from '../lib/types';
-import { getDisplayTitle } from '../lib/types';
+import { getNavigationTitle } from '../lib/types';
 import { WikiNavIcon } from './WikiNavIcon';
 
 export const WIKI_SIDEBAR_ID = 'wiki-sidebar';
@@ -105,7 +105,7 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
                         aria-current={document.slug === activeSlug ? 'page' : undefined}
                       >
                         <span className="docIcon"><WikiNavIcon name="document" /></span>
-                        <span className="docTitle">{getDisplayTitle(document)}</span>
+                        <span className="docTitle">{getNavigationTitle(document)}</span>
                       </button>
                     ))}
                   </div>

@@ -1,4 +1,9 @@
-import { resolveDisplayTitle } from './wikiTitle.mjs';
+import {
+  resolveDisplayTitle,
+  resolveNavigationTitle,
+  resolvePageTitle,
+  resolveReferenceTitle,
+} from './wikiTitle.mjs';
 import type { WikiFrontmatterCategory } from './wikiCategories';
 
 /** YAML `category:` on each wiki page (see wikiCategories.ts). */
@@ -149,12 +154,26 @@ export type SearchResult = SearchDocument & {
   readonly matchedSectionId?: string | null;
 };
 
-export function getDisplayTitle(document: {
+export type WikiTitleSource = {
   readonly displayTitle?: string;
   readonly navTitle?: string;
   readonly shortTitle?: string;
   readonly title?: string;
   readonly slug?: string;
-}): string {
+};
+
+export function getDisplayTitle(document: WikiTitleSource): string {
   return resolveDisplayTitle(document);
+}
+
+export function getPageTitle(document: WikiTitleSource): string {
+  return resolvePageTitle(document);
+}
+
+export function getNavigationTitle(document: WikiTitleSource): string {
+  return resolveNavigationTitle(document);
+}
+
+export function getReferenceTitle(document: WikiTitleSource): string {
+  return resolveReferenceTitle(document);
 }

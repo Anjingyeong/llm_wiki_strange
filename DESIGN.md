@@ -115,11 +115,11 @@ Do not add Inter as a competing Latin family. The Korean-capable system fallback
 
 Primary navigation groups answer reader questions rather than mirror repository folders:
 
-- Understand the system
-- Trace AI decisions
-- Debug runtime behaviour
-- Inspect evidence
-- Operate and reflect
+- 시스템 이해
+- AI 판단과 결정
+- 런타임 문제 해결
+- 검증과 근거
+- 운영과 회고
 
 Use stable machine IDs separately from Korean/English display labels. Each canonical page exposes:
 
