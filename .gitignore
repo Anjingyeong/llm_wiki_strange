@@ -13,3 +13,13 @@ mcps/
 # Raw RAG evaluation runs
 rag-evaluation/runs/
 .gjc/
+
+# Local agent terminal transcripts
+terminals/
+
+# Reference-only source tree (not part of this repository)
+/이상행동/
+
+# One-off local edit helpers
+scripts/.tmp-*
+

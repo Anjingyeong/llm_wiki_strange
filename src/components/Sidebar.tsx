@@ -21,10 +21,10 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
   );
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
-    groups.forEach((group) => {
+    for (const group of groups) {
       const hasActive = group.documents.some((doc) => doc.slug === activeSlug);
       initial[group.id] = !hasActive;
-    });
+    }
     return initial;
   });
 
@@ -40,12 +40,14 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
   useEffect(() => {
     groups.forEach((group) => {
       const hasActive = group.documents.some((doc) => doc.slug === activeSlug);
-      if (hasActive) {
-        setCollapsedGroups((prev) => ({
+      if (!hasActive) return;
+      setCollapsedGroups((prev) => {
+        if (prev[group.id] === false) return prev;
+        return {
           ...prev,
           [group.id]: false,
-        }));
-      }
+        };
+      });
     });
   }, [activeSlug, groups]);
 
@@ -77,6 +79,7 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
           {groups.map((group) => {
             const isCollapsed = collapsedGroups[group.id] ?? true;
             const itemsId = `wiki-task-${group.id}`;
+
             return (
               <section className="navGroup" key={group.id}>
                 <button
@@ -90,7 +93,7 @@ export function Sidebar({ groups, activeSlug, onSelect, mobileOpen = true, onClo
                   <span className="categoryTitle">{group.label}</span>
                   <span className="arrowIcon"><WikiNavIcon name="chevron" expanded={!isCollapsed} /></span>
                 </button>
-                
+
                 {!isCollapsed && (
                   <div className="navGroupItems" id={itemsId}>
                     {group.documents.map((document) => (

@@ -13,6 +13,7 @@ status: partial
 evidenceLevel: offline-benchmark
 portfolio_use: true
 evidence_type: decision
+implementation_status: implemented
 ---
 
 ## 1. 문제 정의

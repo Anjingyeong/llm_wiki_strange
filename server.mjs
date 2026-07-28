@@ -4,6 +4,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { answerQuestionFromIndex } from './scripts/lib/rag/answer.mjs';
+import { searchHybridForUi } from './scripts/lib/rag/search-api.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');
@@ -54,7 +55,6 @@ async function buildHealthPayloadForRequest() {
   return buildHealthPayload(index, { expectedCorpusHash: searchCorpusHash, env: process.env });
 }
 
-
 async function handleAsk(request, response) {
   if (WIKI_ACCESS_KEY) {
     const header = (request.headers['x-wiki-key'] || request.headers['X-Wiki-Key'] || '').toString();
@@ -76,6 +76,34 @@ async function handleAsk(request, response) {
       status: 'error',
       answer: `RAG API 처리 중 오류가 발생했습니다: ${error.message || error}`,
       sources: [],
+    });
+  }
+}
+
+async function handleSearch(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const query =
+      typeof body.query === 'string'
+        ? body.query
+        : typeof body.question === 'string'
+          ? body.question
+          : '';
+    const limit = Number.isFinite(body.limit) ? body.limit : 12;
+    const debug = body.debug === true || process.env.RAG_DEBUG === 'true';
+    const index = await loadRagIndex();
+    const payload = searchHybridForUi(index, query, {
+      limit,
+      debug,
+      env: process.env,
+    });
+    sendJson(response, 200, payload);
+  } catch (error) {
+    console.error('RAG handleSearch error:', error);
+    sendJson(response, 500, {
+      status: 'error',
+      error: String(error?.message || error),
+      results: [],
     });
   }
 }
@@ -133,6 +161,10 @@ const server = createServer((request, response) => {
   }
   if (request.method === 'POST' && pathname === '/api/rag/ask') {
     void handleAsk(request, response);
+    return;
+  }
+  if (request.method === 'POST' && pathname === '/api/rag/search') {
+    void handleSearch(request, response);
     return;
   }
   if (request.method === 'POST' && pathname === '/api/rag/reindex') {

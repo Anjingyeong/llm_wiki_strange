@@ -77,6 +77,13 @@ export type WikiTaskNavigationGroup = {
   readonly documents: readonly WikiDocument[];
 };
 
+export type ImplementationStatus =
+  | 'planned'
+  | 'implemented'
+  | 'verified'
+  | 'deprecated'
+  | 'unknown';
+
 export type Frontmatter = {
   readonly title: string;
   readonly type?: WikiDocumentType;
@@ -101,6 +108,10 @@ export type Frontmatter = {
   readonly sourcePath?: string;
   readonly relatedSlugs?: readonly string[];
   readonly entities?: readonly string[];
+  readonly evidence_type?: string;
+  readonly status_split?: string;
+  readonly implementation_status?: ImplementationStatus;
+  readonly last_verified_at?: string;
 };
 
 export type WikiDocument = Frontmatter & {

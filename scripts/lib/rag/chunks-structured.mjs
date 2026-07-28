@@ -388,8 +388,6 @@ function makeStructuredChunk(document, unit, content, chunkOrder, options) {
     chunkOrder,
     project: document.project,
     type: document.type,
-    portfolio_use: document.portfolio_use,
-    evidence_type: document.evidence_type,
     ...machineMetadata,
     metadata: {
       category: document.category,

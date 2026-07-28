@@ -17,13 +17,17 @@
     "rag:hybrid-stage3": "node scripts/rag-hybrid-stage3.mjs",
     "rag:abstention-eval": "node scripts/rag-abstention-eval.mjs",
     "rag:camera-registry-eval": "node scripts/rag-camera-registry-eval.mjs",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test tests",
     "start": "node server.mjs",
     "preview": "npm run build && node server.mjs",
     "preview:dist": "node server.mjs",
     "build": "npm run generate:index && npm run check:index && tsc -b && vite build",
     "benchmark:rag": "node scripts/run-benchmark.mjs",
-    "lint": "tsc -b --pretty false"
+    "lint": "tsc -b --pretty false",
+    "elastic:index": "node scripts/elasticsearch-index.mjs",
+    "elastic:search": "node scripts/elasticsearch-search.mjs",
+    "elastic:up": "docker-compose -f docker-compose.elasticsearch.yml up -d",
+    "elastic:down": "docker-compose -f docker-compose.elasticsearch.yml down"
   },
   "dependencies": {
     "@vitejs/plugin-react": "4.7.0",

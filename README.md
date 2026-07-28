@@ -52,16 +52,42 @@ RAG API까지 확인하려면 `npm run build && npm start`로 Node 서버를 실
 Wiki 문서는 정식 `title`과 UI 표시용 `displayTitle`/`navTitle`을 분리한다. 정식 `title`은 문서 의미를 보존하고, `displayTitle`은 본문 헤더·사이드바·검색 결과에서 가장 직관적인 제목으로 사용한다. 표시 우선순위는 `displayTitle || navTitle || shortTitle || title || slug`다.
 
 - 원문 문서: `content/*.md`
-- 검색 인덱스: `src/generated/searchIndex.ts`
-- RAG vector store: `data/ragVectorIndex.json`
-- RAG 코어: `scripts/lib/rag-core.mjs`
-- 서버 API: `server.mjs`
+- 클라이언트 보조 검색 인덱스: `src/generated/searchIndex.ts` (`npm run generate:index`)
+- Hybrid RAG vector store: `data/ragVectorIndex.json` (`npm run rag:index`)
+- Hybrid 검색 코어: `scripts/lib/rag/search.mjs` + `retrievers.mjs` (BM25 + Vector + RRF)
+- Hybrid 검색 API 포맷: `scripts/lib/rag/search-api.mjs`
+- 서버 API: `server.mjs` (`POST /api/rag/search`, `POST /api/rag/ask`)
+- Cloudflare Functions: `functions/api/rag/search.js`, `functions/api/rag/ask.js`
 
-`npm run rag:index`는 `content/*.md`를 섹션 단위 chunk로 나누고 local hash embedding을 생성해 `data/ragVectorIndex.json`에 저장한다. 문서를 새로 등록하거나 수정한 뒤에는 아래 명령으로 embedding/vector store를 갱신한다.
+### Hybrid 검색 인덱스 생성
 
 ```bash
+# 1) Wiki 문서 frontmatter/본문 → 클라이언트 검색 인덱스
+npm run generate:index
+
+# 2) content/*.md → structure-aware chunk + local embedding vector store
 npm run rag:index
+
+# 3) corpus hash 정합 확인
+npm run check:index
 ```
+
+`npm run rag:index`는 문서를 섹션 단위 chunk로 나누고 local hash embedding을 생성해 `data/ragVectorIndex.json`에 저장한다. UI Hybrid 검색(`POST /api/rag/search`)과 RAG 답변(`POST /api/rag/ask`)은 이 인덱스를 공유한다.
+
+검색 흐름:
+
+```text
+query
+-> BM25(keyword)
+-> Vector(cosine)
+-> RRF fusion
+-> document-level dedupe (Top-K)
+-> UI: title / snippet / sourcePath / type / keyword|vector badges
+```
+
+커밋 대상:
+- content 변경 후 갱신된 `src/generated/searchIndex.*`, `data/ragVectorIndex.json`, active `data/rag/*` pointer/manifest
+- 커밋하지 않음: `rag-evaluation/runs/`, `terminals/`, 로컬 `.env`
 
 ### Retrieval evaluation (baseline harness)
 
@@ -112,8 +138,6 @@ LLM Wiki는 Hybrid RAG 검색을 기본 기능으로 제공하고, LLM 답변 �
 ## Environment Variables
 
 외부 LLM은 선택 사항입니다. 무료/저비용 운영을 위해 기본값은 로컬 embedding과 로컬 추출 답변입니다.
-위키와 RAG API는 WIKI_ACCESS_KEY 미설정 시 공개(open)입니다. 보호된 배포에서는 Cloudflare Access/WAF/rate limit 등 배포 경계에서 보호하세요.
-
 ```bash
 PORT=4173
 WIKI_ACCESS_KEY= # unset → open; set → protected (server-side)
@@ -138,11 +162,25 @@ CLOUDFLARE_API_TOKEN=
 OPENAI_API_KEY=
 ```
 
-### 보안 범위 및 목적 안내 (Access Restriction Scope)
+## Cloudflare D1 RAG metadata
 
 > [!WARNING]
 > Wiki 문서와 RAG API는 WIKI_ACCESS_KEY 미설정 시 공개(open)입니다. 보호된 배포에서는 Cloudflare Access/WAF/rate limit 등 배포 경계에서 보호하세요.
 
+Cloudflare Pages 배포에서는 D1 binding을 `RAG_DB` 이름으로 연결할 수 있다. `DB`도 호환 이름으로 인식하지만 새 배포는 `RAG_DB`를 권장한다.
+
+```bash
+# D1 데이터베이스 생성 후 실제 데이터베이스 이름으로 실행
+npx wrangler d1 migrations apply <DATABASE_NAME> --remote
+```
+
+- 마이그레이션: `migrations/0001_rag_metadata.sql`
+- 저장 대상: 문서 제목, 상태, 분류, 태그, 관련 문서·파일, 코드 심볼, 문서별 chunk 수, corpus hash
+- 동기화: 정적 RAG 인덱스의 `corpusHash`가 D1 상태와 다르면 최초 검색·질의 요청에서 자동 upsert
+- fallback: D1 binding이 없거나 실패하면 기존 `data/ragVectorIndex.json` 메타데이터 사용
+- 범위: 벡터와 chunk 본문은 정적 JSON에 유지하고 D1은 문서 단위 메타데이터를 담당
+
+Cloudflare Pages의 D1 database bindings에서 변수 이름을 `RAG_DB`로 지정한다. Wiki와 RAG API는 별도 접근 키 없이 공개된다.
 
 OpenAI 호환 chat-completions API를 사용하는 경우, `OPENAI_API_KEY`(또는 레거시 호환용 `RAG_LLM_API_KEY`)를 설정하고 `LLM_MODEL` 환경변수를 설정해 원하는 모델(기본값: `gpt-4o-mini`)을 지정할 수 있습니다. (주: 코드베이스상 `RAG_LLM_ENDPOINT` 및 `RAG_LLM_MODEL`은 직접 파싱되지 않으며, `OPENAI_API_KEY`와 `LLM_MODEL`이 사용됩니다.)
 

@@ -11,6 +11,8 @@ status: partial
 project: smart-safety-wiki
 type: evidence
 portfolio_use: true
+implementation_status: verified
+last_verified_at: 2026-07-11
 ---
 
 ## 목적
