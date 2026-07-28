@@ -11,6 +11,7 @@ relatedFiles: [strange_ai/scripts/serve_ai_overlay.py, strange_front/src/feature
 updatedAt: 2026-07-15
 project: smart-safety-ai
 portfolio_use: true
+implementation_status: planned
 ---
 
 ## 1. 현황 및 문제 제기 (Background)

@@ -1,3 +1,5 @@
+import { resolveImplementationStatus } from '../doc-status.mjs';
+
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { isExcludedFromPublicIndex } from '../indexable-content.mjs';
@@ -41,6 +43,17 @@ export async function loadWikiDocuments(contentDir) {
     const parsed = parseWikiSourceDocument(raw, file);
     if (isExcludedFromPublicIndex(parsed.data)) continue;
     const slug = file.replace(/\.md$/, '');
+    const tags = Array.isArray(parsed.data.tags) ? parsed.data.tags : [];
+    const implementation_status = resolveImplementationStatus({
+      slug,
+      title: parsed.data.title,
+      type: parsed.data.type,
+      evidence_type: parsed.data.evidence_type,
+      status: parsed.data.status,
+      status_split: parsed.data.status_split,
+      implementation_status: parsed.data.implementation_status,
+      tags,
+    });
     documents.push({
       slug,
       title: parsed.data.title,
@@ -57,9 +70,14 @@ export async function loadWikiDocuments(contentDir) {
       tags: parsed.data.tags ?? [],
       relatedDocs: parsed.data.relatedDocs ?? [],
       relatedSlugs: parsed.data.relatedSlugs ?? [],
+      relatedFiles: parsed.data.relatedFiles ?? [],
       entities: parsed.data.entities ?? [],
       portfolio_use: parsed.data.portfolio_use,
       evidence_type: parsed.data.evidence_type,
+      status: parsed.data.status,
+      status_split: parsed.data.status_split,
+      implementation_status,
+      last_verified_at: parsed.data.last_verified_at,
       body: parsed.body,
       raw,
     });

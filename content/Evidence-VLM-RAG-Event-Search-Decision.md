@@ -15,6 +15,7 @@ summary: "VLM을 실시간 감지와 분리된 비동기 사고 설명·검색 �
 relations: [supports:VLM-RAG-DBless-Mock-MVP, related:Benchmark-Evidence-Hub]
 portfolio_use: true
 evidence_type: decision
+implementation_status: planned
 ---
 
 # VLM-RAG 알림 검색 도입 판단 기록

@@ -91,3 +91,23 @@ export function getInitialDocument(): WikiDocument {
     headings: [],
   };
 }
+
+export function resolveRelatedDocuments(
+  document: WikiDocument,
+): readonly WikiDocument[] {
+  const seen = new Set<string>();
+  const related: WikiDocument[] = [];
+
+  for (const raw of document.relatedDocs ?? []) {
+    const key = raw.replace(/\.md$/i, '').trim();
+    if (!key || seen.has(key) || key === document.slug) continue;
+    const match =
+      documentsBySlug.get(key) ??
+      documents.find((doc) => doc.slug.toLowerCase() === key.toLowerCase());
+    if (!match) continue;
+    seen.add(match.slug);
+    related.push(match);
+  }
+
+  return related;
+}

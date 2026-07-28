@@ -13,6 +13,7 @@ decision_domain: VLM & RAG
 status: partial
 evidenceLevel: unit-test
 portfolio_use: true
+implementation_status: implemented
 ---
 
 > **한 줄 결론**

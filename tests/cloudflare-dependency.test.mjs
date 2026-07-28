@@ -90,7 +90,29 @@ describe('Cloudflare Pages Functions dependency checks', () => {
       for (const imp of imports) {
         assert.ok(
           !nodeBuiltins.includes(imp),
-          `File ${file} imports forbidden Node module: ${imp}`
+          `File ${file} imports forbidden Node module: ${imp}`,
+        );
+      }
+    }
+  });
+
+  it('search.js should not import rag-core.mjs', async () => {
+    const searchPath = join(wikiRoot, 'functions/api/rag/search.js');
+    const content = await readFile(searchPath, 'utf8');
+    assert.doesNotMatch(content, /rag-core\.mjs/);
+  });
+
+  it('search.js dependencies must not include node:crypto, node:fs, or node:path', async () => {
+    const searchPath = join(wikiRoot, 'functions/api/rag/search.js');
+    const deps = await traceDependencies(searchPath);
+
+    const nodeBuiltins = ['node:crypto', 'node:fs', 'node:fs/promises', 'node:path', 'crypto', 'fs', 'path'];
+
+    for (const [file, imports] of Object.entries(deps)) {
+      for (const imp of imports) {
+        assert.ok(
+          !nodeBuiltins.includes(imp),
+          `File ${file} imports forbidden Node module: ${imp}`,
         );
       }
     }

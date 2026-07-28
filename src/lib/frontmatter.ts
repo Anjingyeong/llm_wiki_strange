@@ -15,6 +15,7 @@ import {
 } from './types';
 import { isWikiFrontmatterCategory } from './wikiCategories';
 import { allocateHeadingIds } from './wikiHeadings.mjs';
+import { resolveImplementationStatus } from './docStatus';
 
 class FrontmatterError extends Error {
   constructor(readonly filePath: string, message: string) {
@@ -65,17 +66,33 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
   const navTitle = values.get('navTitle');
   const shortTitle = values.get('shortTitle');
   const displayTitle = values.get('displayTitle');
-  const type = parseKnownValue(values.get('type'), WIKI_DOCUMENT_TYPES);
-  const status = parseKnownValue(values.get('status'), WIKI_DOCUMENT_STATUSES);
+  const docType = parseKnownValue(values.get('type'), WIKI_DOCUMENT_TYPES);
+  const docStatus = parseKnownValue(values.get('status'), WIKI_DOCUMENT_STATUSES);
   const evidenceLevel = parseKnownValue(values.get('evidenceLevel'), WIKI_EVIDENCE_LEVELS);
   const verifiedAt = parseOptionalScalar(values.get('verifiedAt'));
   const canonicalFor = parseCanonicalFor(values.get('canonicalFor'));
   const supersededBy = parseOptionalScalar(values.get('supersededBy'));
 
+  const rawType = values.get('type');
+  const evidenceType = values.get('evidence_type');
+  const rawStatus = values.get('status');
+  const statusSplit = values.get('status_split');
+  const lastVerifiedAt = values.get('last_verified_at');
+  const implementationStatus = resolveImplementationStatus({
+    implementation_status: parseOptionalScalar(values.get('implementation_status')),
+    status: parseOptionalScalar(rawStatus),
+    status_split: parseOptionalScalar(statusSplit),
+    type: parseOptionalScalar(rawType),
+    evidence_type: parseOptionalScalar(evidenceType),
+    tags: parseWikiFrontmatterList(values.get('tags') ?? ''),
+    title: stripWikiFrontmatterQuotes(title),
+    slug: filePath.split(/[/\\]/).pop()?.replace(/\.md$/i, ''),
+  });
+
   return {
     title: stripWikiFrontmatterQuotes(title),
-    ...(type ? { type } : {}),
-    ...(status ? { status } : {}),
+    ...(docType ? { type: docType } : {}),
+    ...(docStatus ? { status: docStatus } : {}),
     ...(evidenceLevel ? { evidenceLevel } : {}),
     ...(verifiedAt ? { verifiedAt } : {}),
     ...(canonicalFor !== undefined ? { canonicalFor } : {}),
@@ -95,6 +112,10 @@ function parseFrontmatterBlock(block: string, filePath: string): Frontmatter {
     relatedSlugs: parseWikiFrontmatterList(values.get('relatedSlugs') ?? ''),
     entities: parseWikiFrontmatterList(values.get('entities') ?? ''),
     ...(desc ? { description: stripWikiFrontmatterQuotes(desc) } : {}),
+    ...(evidenceType ? { evidence_type: stripWikiFrontmatterQuotes(evidenceType) } : {}),
+    ...(statusSplit ? { status_split: stripWikiFrontmatterQuotes(statusSplit) } : {}),
+    implementation_status: implementationStatus,
+    ...(lastVerifiedAt ? { last_verified_at: stripWikiFrontmatterQuotes(lastVerifiedAt) } : {}),
   };
 }
 

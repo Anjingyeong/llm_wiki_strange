@@ -1,3 +1,5 @@
+import { resolveImplementationStatus } from './lib/doc-status.mjs';
+
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -152,6 +154,7 @@ for (const file of files) {
     tags: parsed.data.tags ?? [],
     relatedDocs: parsed.data.relatedDocs ?? [],
     relatedFiles: parsed.data.relatedFiles ?? [],
+    entities: parsed.data.entities ?? [],
     updatedAt: parsed.data.updatedAt,
     ...extractWikiMachineMetadata(parsed.data),
     summary: parsed.data.summary ?? parsed.data.description ?? excerptFrom(parsed.body),
@@ -159,6 +162,21 @@ for (const file of files) {
     sourcePath: `content/${file}`,
     excerpt: excerptFrom(parsed.body),
     headings,
+    type: parsed.data.type,
+    evidence_type: parsed.data.evidence_type,
+    status: parsed.data.status,
+    status_split: parsed.data.status_split,
+    implementation_status: resolveImplementationStatus({
+      slug,
+      title: parsed.data.title,
+      type: parsed.data.type,
+      evidence_type: parsed.data.evidence_type,
+      status: parsed.data.status,
+      status_split: parsed.data.status_split,
+      implementation_status: parsed.data.implementation_status,
+      tags: parsed.data.tags,
+    }),
+    last_verified_at: parsed.data.last_verified_at,
     text: searchableText(
       [
         parsed.data.title,

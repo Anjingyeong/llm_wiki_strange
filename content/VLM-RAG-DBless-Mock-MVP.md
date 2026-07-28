@@ -16,6 +16,7 @@ relations: [implements:Evidence-VLM-RAG-Event-Search-Decision, depends-on:Archit
 portfolio_use: true
 evidence_type: mock-mvp
 status_split: "완료 / Mock 검증 / 미검증·후속"
+implementation_status: implemented
 ---
 
 # DB 없이 검증한 VLM·RAG 사고 검색 Mock MVP

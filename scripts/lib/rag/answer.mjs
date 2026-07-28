@@ -11,8 +11,23 @@ import {
   hasSufficientContext,
   detectNumericOrStatusIntent,
 } from './abstention.mjs';
+import {
+  implementationStatusLabel,
+  isHistoricalOrPlan,
+  resolveImplementationStatus,
+} from '../doc-status.mjs';
 
 function makeSource(chunk) {
+  const implementation_status = resolveImplementationStatus({
+    slug: chunk.slug ?? chunk.documentSlug ?? chunk.documentId,
+    title: chunk.title,
+    type: chunk.type,
+    evidence_type: chunk.evidence_type,
+    status: chunk.status,
+    status_split: chunk.status_split,
+    implementation_status: chunk.implementation_status,
+    tags: chunk.tags,
+  });
   return {
     documentId: chunk.documentId,
     section: chunk.sectionTitle ?? chunk.section,
@@ -28,6 +43,14 @@ function makeSource(chunk) {
     matchedBy: chunk.matchedBy ?? [],
     reason: chunk.reason ?? '',
     sourceLink: chunk.sectionId ? `#/${chunk.slug}/${encodeURIComponent(chunk.sectionId)}` : `#/${chunk.slug}`,
+    type: chunk.type,
+    implementation_status,
+    implementationStatusLabel: implementationStatusLabel(implementation_status),
+    codeSymbols: Array.isArray(chunk.codeSymbols) ? chunk.codeSymbols.slice(0, 4) : [],
+    referencedFiles: Array.isArray(chunk.referencedFiles)
+      ? chunk.referencedFiles.slice(0, 4)
+      : [],
+    historicalOrPlan: isHistoricalOrPlan(implementation_status),
   };
 }
 
@@ -89,6 +112,23 @@ function expandQuery(question) {
   // Paraphrase for post-EOF / end-of-video state cleanup (no alias spam of full stack)
   if (/영상\s*이\s*끝난|영상이\s*끝난|이전\s*상태\s*가\s*남|상태가\s*남지/.test(q)) {
     add('VIDEO_EOF', 'reset_analysis_session', 'streamRunId', 'sessionGeneration', 'WorkerSession');
+  }
+  // Tracker reset when video/source changes (session boundary, not threshold tuning)
+  if (
+    /(영상|비디오|source|스트림).{0,12}(바뀌|변경|교체|종료|끝)/.test(q)
+    || /(tracker|트래커|track_id|ByteTrack).{0,16}(초기화|reset|리셋)/.test(q)
+    || /(초기화|reset|리셋).{0,16}(tracker|트래커|track_id|ByteTrack)/.test(q)
+  ) {
+    add(
+      'reset_analysis_session',
+      'VIDEO_EOF',
+      'source change',
+      'tracker reset',
+      'streamRunId',
+      'sessionGeneration',
+      'WorkerSession',
+      'Multi-Camera-Worker-Session-Reliability',
+    );
   }
   // Concept group: static camera config vs dynamic registry / worker reconcile
   // (not a single-question hardcode; fires on hardcoded/fixed/dynamic/registry paraphrases)
@@ -183,7 +223,31 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
 
   const expandedQuery = expandQuery(normalizedQuestion);
   // Search with expanded query; gate uses original + expanded signals.
-  const chunks = searchRelevantChunks(index, expandedQuery, options);
+  let chunks = searchRelevantChunks(index, expandedQuery, options);
+
+  // For "current state" questions, surface verified/implemented before plan/deprecated.
+  const asksCurrentState =
+    /(현재|지금|실제|운영|적용됐|적용 여|기본\s*경로|기본값)/.test(normalizedQuestion);
+  if (asksCurrentState && Array.isArray(chunks) && chunks.length > 1) {
+    const rank = (chunk) => {
+      const status = resolveImplementationStatus({
+        slug: chunk.slug ?? chunk.documentSlug ?? chunk.documentId,
+        title: chunk.title,
+        type: chunk.type,
+        evidence_type: chunk.evidence_type,
+        status: chunk.status,
+        status_split: chunk.status_split,
+        implementation_status: chunk.implementation_status,
+        tags: chunk.tags,
+      });
+      if (status === 'verified') return 0;
+      if (status === 'implemented') return 1;
+      if (status === 'unknown') return 2;
+      if (status === 'planned') return 3;
+      return 4;
+    };
+    chunks = [...chunks].sort((a, b) => rank(a) - rank(b) || (b.score ?? 0) - (a.score ?? 0));
+  }
 
   const signals = computeContextSignals(chunks, normalizedQuestion, expandedQuery);
   const relevance = evaluateRetrievalRelevance(chunks, mode, {
@@ -206,24 +270,27 @@ export async function answerQuestionFromIndex(index, question, options = {}) {
   }
 
   const support = evaluateAnswerSupport(normalizedQuestion, chunks);
+  const answerMode = detectAnswerMode(normalizedQuestion);
   const sources = dedupeSourcesByDocument(chunks.map(makeSource));
 
   // Related retrieval but no direct answer evidence for numeric/status intents.
+  // Still return structured 결론/근거/미확인 so plan vs ops gaps stay visible.
   if (!support.supported) {
+    const structured = buildLocalTemplateAnswer(chunks, answerMode);
+    const answer =
+      `${structured}\n\n## 추가 미확인 사항\n\n- 질문한 수치·운영 적용 여부는 검색된 Wiki 근거만으로 확정할 수 없습니다. (${support.reason || 'unsupported'})\n- 현재 Wiki에 저장된 자료만으로는 실제 운영 적용 여부를 확인할 수 없습니다.`;
     return insufficientResponse({
-      answer:
-        '관련 문서는 찾았지만, 질문한 수치나 운영 결과는 문서에서 확인되지 않음.',
+      answer,
       sources,
       retrievalRelevant: true,
       answerSupported: false,
       reason: support.reason,
       debugInfo: options.debug
-        ? { expandedQuery, signals, abstention: relevance, support }
+        ? { expandedQuery, signals, abstention: relevance, support, answerMode }
         : undefined,
     });
   }
 
-  const answerMode = detectAnswerMode(normalizedQuestion);
 
   const maxContextChunks = readNumberEnv(env, 'LLM_MAX_CONTEXT_CHUNKS', 8);
   const contextChunks = buildContextChunks(chunks, maxContextChunks);

@@ -1,4 +1,4 @@
-﻿---
+---
 title: MQTT Event Schema
 navTitle: MQTT Schema
 shortTitle: MQTT Schema
