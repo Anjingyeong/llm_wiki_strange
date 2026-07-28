@@ -120,7 +120,7 @@ const fallbackTaskIndexByCategory: Readonly<Record<WikiCategory, number>> = {
 
 function resolveTaskPosition(document: WikiDocument): WikiTaskPosition {
   return taskPositionBySlug.get(document.slug) ?? {
-    taskIndex: fallbackTaskIndexByCategory[document.category],
+    taskIndex: fallbackTaskIndexByCategory[document.category] ?? 0,
     documentIndex: Number.MAX_SAFE_INTEGER,
   };
 }
@@ -149,7 +149,7 @@ export function groupWikiDocumentsByTask(
 
   for (const document of documents) {
     if (taskPositionBySlug.has(document.slug)) continue;
-    const fallbackGroup = groups[fallbackTaskIndexByCategory[document.category]];
+    const fallbackGroup = groups[fallbackTaskIndexByCategory[document.category] ?? 0];
     if (fallbackGroup) fallbackGroup.documents.push(document);
   }
 
