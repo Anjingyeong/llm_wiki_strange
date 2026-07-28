@@ -1,4 +1,5 @@
 import type {
+  WikiCategory,
   WikiDocument,
   WikiTaskNavigationGroup,
   WikiTaskNavigationId,
@@ -8,6 +9,11 @@ type WikiTaskDefinition = {
   readonly id: WikiTaskNavigationId;
   readonly label: string;
   readonly slugs: readonly string[];
+};
+
+type WikiTaskPosition = {
+  readonly taskIndex: number;
+  readonly documentIndex: number;
 };
 
 export const WIKI_TASK_NAVIGATION = [
@@ -91,42 +97,64 @@ export const WIKI_TASK_NAVIGATION = [
   },
 ] as const satisfies readonly WikiTaskDefinition[];
 
-const taskPositionBySlug = new Map<string, {
-  readonly taskIndex: number;
-  readonly documentIndex: number;
-}>(
+const taskPositionBySlug = new Map<string, WikiTaskPosition>(
   WIKI_TASK_NAVIGATION.flatMap((task, taskIndex) =>
     task.slugs.map((slug, documentIndex) => [slug, { taskIndex, documentIndex }] as const),
   ),
 );
 
+const fallbackTaskIndexByCategory: Readonly<Record<WikiCategory, number>> = {
+  Project: 0,
+  Architecture: 0,
+  Glossary: 0,
+  'AI Pipeline': 1,
+  ADR: 1,
+  Backend: 2,
+  Frontend: 2,
+  Infra: 2,
+  Bugs: 2,
+  Experiments: 3,
+  Evidence: 3,
+  '면접·이력서 정리': 4,
+};
+
+function resolveTaskPosition(document: WikiDocument): WikiTaskPosition {
+  return taskPositionBySlug.get(document.slug) ?? {
+    taskIndex: fallbackTaskIndexByCategory[document.category],
+    documentIndex: Number.MAX_SAFE_INTEGER,
+  };
+}
+
 export function compareWikiDocumentsByTask(left: WikiDocument, right: WikiDocument): number {
-  const leftPosition = taskPositionBySlug.get(left.slug);
-  const rightPosition = taskPositionBySlug.get(right.slug);
-  if (!leftPosition || !rightPosition) {
-    throw new Error(`Unmapped public wiki slug: ${!leftPosition ? left.slug : right.slug}`);
-  }
+  const leftPosition = resolveTaskPosition(left);
+  const rightPosition = resolveTaskPosition(right);
   return leftPosition.taskIndex - rightPosition.taskIndex
-    || leftPosition.documentIndex - rightPosition.documentIndex;
+    || leftPosition.documentIndex - rightPosition.documentIndex
+    || left.title.localeCompare(right.title, 'ko')
+    || left.slug.localeCompare(right.slug, 'en');
 }
 
 export function groupWikiDocumentsByTask(
   documents: readonly WikiDocument[],
 ): readonly WikiTaskNavigationGroup[] {
   const documentsBySlug = new Map(documents.map((document) => [document.slug, document]));
-  for (const document of documents) {
-    if (!taskPositionBySlug.has(document.slug)) {
-      throw new Error(`Unmapped public wiki slug: ${document.slug}`);
-    }
-  }
-
-  return WIKI_TASK_NAVIGATION.map((task) => ({
+  const groups = WIKI_TASK_NAVIGATION.map((task) => ({
     id: task.id,
     label: task.label,
-    documents: task.slugs.map((slug) => {
+    documents: task.slugs.flatMap((slug) => {
       const document = documentsBySlug.get(slug);
-      if (!document) throw new Error(`Task navigation references non-public wiki slug: ${slug}`);
-      return document;
+      return document ? [document] : [];
     }),
+  }));
+
+  for (const document of documents) {
+    if (taskPositionBySlug.has(document.slug)) continue;
+    const fallbackGroup = groups[fallbackTaskIndexByCategory[document.category]];
+    if (fallbackGroup) fallbackGroup.documents.push(document);
+  }
+
+  return groups.map((group) => ({
+    ...group,
+    documents: [...group.documents].sort(compareWikiDocumentsByTask),
   }));
 }

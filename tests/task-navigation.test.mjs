@@ -30,15 +30,17 @@ test('task navigation defines exactly five stable reader tasks', () => {
   ]);
 });
 
-test('task navigation covers every public document exactly once with Overview first', () => {
+test('task navigation keeps explicit slugs unique and safely assigns newly public documents', () => {
   const definitions = parseTaskDefinitions();
-  const slugs = definitions.flatMap((definition) => definition.slugs);
-  const publicSlugs = searchIndex.documents.map((document) => document.slug);
+  const explicitSlugs = definitions.flatMap((definition) => definition.slugs);
+  const publicSlugs = new Set(searchIndex.documents.map((document) => document.slug));
 
-  assert.equal(slugs.length, 48);
-  assert.equal(new Set(slugs).size, 48);
-  assert.deepEqual([...slugs].sort(), [...publicSlugs].sort());
-  assert.equal(slugs[0], 'Overview');
+  assert.equal(new Set(explicitSlugs).size, explicitSlugs.length);
+  assert.ok(explicitSlugs.every((slug) => publicSlugs.has(slug)));
+  assert.equal(explicitSlugs[0], 'Overview');
+  assert.match(navigationSource, /fallbackTaskIndexByCategory/u);
+  assert.match(navigationSource, /taskPositionBySlug\.has\(document\.slug\)/u);
+  assert.doesNotMatch(navigationSource, /Unmapped public wiki slug/u);
 });
 
 test('sidebar uses accessible task navigation and decorative SVG icons', () => {
