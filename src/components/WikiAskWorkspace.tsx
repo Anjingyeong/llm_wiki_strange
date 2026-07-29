@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { QUICK_QUESTIONS } from './ragPanelData';
-import { parseRagResponse, type RagResponse } from './wikiAskResponse';
+import { parseRagResponse, type RagResponse, type RetrievalSource } from './wikiAskResponse';
 import { clearWikiAccessKey, getWikiAccessKey } from '../lib/wikiAccessKey';
 
 type WikiAskWorkspaceProps = {
@@ -137,6 +137,36 @@ export function WikiAskWorkspace({ onAuthRequired, onReturnToDocument, onSelectD
                 ))}
               </ul>
             </section>
+          ) : null}
+          {response.retrievalMode ? (
+            <aside className="ragRetrievalMeta" aria-label="검색 메타데이터">
+              <span className="ragRetrievalBadge" data-mode={response.retrievalMode}>
+                {response.retrievalMode === 'elastic' ? 'Elasticsearch Hybrid' : 'Static Fallback'}
+              </span>
+              {response.retrievalLatencyMs != null ? (
+                <span className="ragRetrievalLatency">{response.retrievalLatencyMs}ms</span>
+              ) : null}
+              {response.fallbackUsed ? (
+                <span className="ragRetrievalFallback">fallback 사용</span>
+              ) : null}
+            </aside>
+          ) : null}
+          {response.retrievalSources && response.retrievalSources.length > 0 ? (
+            <details className="ragRetrievalSources">
+              <summary>검색 출처 ({response.retrievalSources.length}건)</summary>
+              <ul>
+                {response.retrievalSources.map((src: RetrievalSource) => (
+                  <li key={src.id}>
+                    <strong>{src.title}</strong>
+                    {src.section ? <span className="ragSrcSection"> · {src.section}</span> : null}
+                    <span className="ragSrcMeta">
+                      {src.implementationStatus !== 'unknown' ? <span data-status={src.implementationStatus}>{src.implementationStatus}</span> : null}
+                      {src.matchedBy.length > 0 ? <span className="ragSrcChannel">{src.matchedBy.join(', ')}</span> : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </details>
           ) : null}
           {response.debugInfo === undefined && response.fallbackReason === undefined ? null : (
             <details className="ragDebugDetails"><summary>검색 진단 정보</summary><pre>{JSON.stringify({ debugInfo: response.debugInfo, fallbackReason: response.fallbackReason }, null, 2)}</pre></details>

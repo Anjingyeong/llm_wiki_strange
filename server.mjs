@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import { answerQuestionFromIndex } from './scripts/lib/rag/answer.mjs';
 import { searchHybridForUi } from './scripts/lib/rag/search-api.mjs';
+import { searchRagChunks, resolveRetrieverMode, getElasticsearchStatus } from './scripts/lib/rag/search-retriever.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const distDir = join(root, 'dist');
@@ -68,14 +69,61 @@ async function handleAsk(request, response) {
     const question = typeof body.question === 'string' ? body.question : '';
     const debug = body.debug === true || process.env.RAG_DEBUG === 'true';
     const index = await loadRagIndex();
+
+    // Use Elasticsearch-integrated retriever for search phase
+    const retrieverMode = resolveRetrieverMode(process.env);
+    let retrievalMeta = null;
+
+    if (retrieverMode !== 'static') {
+      try {
+        const searchResult = await searchRagChunks(index, question, {
+          env: process.env,
+          limit: 8,
+          debug,
+        });
+        retrievalMeta = {
+          retrievalMode: searchResult.retrievalMode,
+          fallbackUsed: searchResult.fallbackUsed,
+          retrievalLatencyMs: searchResult.retrievalLatencyMs,
+          sources: searchResult.sources,
+        };
+      } catch {
+        // If retriever abstraction itself fails, fall through to standard answer
+      }
+    }
+
     const result = await answerQuestionFromIndex(index, question, { debug, env: process.env });
+
+    // Merge retrieval metadata into response
+    if (retrievalMeta) {
+      result.retrievalMode = retrievalMeta.retrievalMode;
+      result.fallbackUsed = retrievalMeta.fallbackUsed;
+      result.retrievalLatencyMs = retrievalMeta.retrievalLatencyMs;
+      // Merge source metadata from ES if available and answer has sources
+      if (retrievalMeta.sources && retrievalMeta.sources.length > 0) {
+        result.retrievalSources = retrievalMeta.sources;
+      }
+    } else {
+      result.retrievalMode = 'static';
+      result.fallbackUsed = false;
+      result.retrievalLatencyMs = 0;
+    }
+
+    // Strip sensitive debug info from non-debug responses
+    if (!debug && result.debugInfo) {
+      delete result.debugInfo;
+    }
+
     sendJson(response, 200, result);
   } catch (error) {
     console.error('RAG handleAsk error:', error);
     sendJson(response, 500, {
       status: 'error',
-      answer: `RAG API 처리 중 오류가 발생했습니다: ${error.message || error}`,
+      answer: `RAG API 처리 중 오류가 발생했습니다.`,
       sources: [],
+      retrievalMode: 'unknown',
+      fallbackUsed: false,
+      retrievalLatencyMs: 0,
     });
   }
 }
@@ -159,6 +207,10 @@ const server = createServer((request, response) => {
       });
     return;
   }
+  if (request.method === 'GET' && pathname === '/api/rag/status') {
+    void handleRagStatus(response);
+    return;
+  }
   if (request.method === 'POST' && pathname === '/api/rag/ask') {
     void handleAsk(request, response);
     return;
@@ -207,6 +259,32 @@ async function handleVerify(request, response) {
 
 function handleConfig(request, response) {
   sendJson(response, 200, { accessKeyRequired: !!WIKI_ACCESS_KEY });
+}
+
+async function handleRagStatus(response) {
+  try {
+    const retriever = resolveRetrieverMode(process.env);
+    const elasticsearch = await getElasticsearchStatus(process.env);
+
+    // Check static fallback availability
+    let staticAvailable = false;
+    try {
+      await stat(indexPath);
+      staticAvailable = true;
+    } catch {}
+
+    sendJson(response, 200, {
+      retriever,
+      elasticsearch,
+      staticFallback: { available: staticAvailable },
+    });
+  } catch (error) {
+    sendJson(response, 500, {
+      retriever: 'unknown',
+      elasticsearch: { configured: false, available: false, status: 'error' },
+      staticFallback: { available: false },
+    });
+  }
 }
 
 server.listen(port, () => {

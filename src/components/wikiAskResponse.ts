@@ -5,6 +5,23 @@ export type RagSource = {
   readonly displayTitle?: string;
   readonly title: string;
   readonly score?: number;
+  readonly category?: string;
+  readonly implementationStatus?: string;
+  readonly matchedBy?: readonly string[];
+  readonly codeSymbols?: readonly string[];
+};
+
+export type RetrievalSource = {
+  readonly id: string;
+  readonly documentId: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly section: string;
+  readonly category: string;
+  readonly implementationStatus: string;
+  readonly score: number;
+  readonly matchedBy: readonly string[];
+  readonly codeSymbols?: readonly string[];
 };
 
 export type RagResponse = {
@@ -15,6 +32,10 @@ export type RagResponse = {
   readonly fallback?: boolean;
   readonly fallbackReason?: string;
   readonly debugInfo?: unknown;
+  readonly retrievalMode?: string;
+  readonly fallbackUsed?: boolean;
+  readonly retrievalLatencyMs?: number;
+  readonly retrievalSources?: readonly RetrievalSource[];
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -37,7 +58,7 @@ function parseSource(value: unknown): RagSource | null {
 
 export function parseRagResponse(value: unknown): RagResponse {
   if (!isRecord(value)) return { status: 'error', answer: 'RAG API 응답을 읽을 수 없습니다.', sources: [] };
-  const { answer, answerMode, debugInfo, fallback, fallbackReason, sources, status } = value;
+  const { answer, answerMode, debugInfo, fallback, fallbackReason, sources, status, retrievalMode, fallbackUsed, retrievalLatencyMs, retrievalSources } = value;
   if ((status !== 'answered' && status !== 'insufficient_context' && status !== 'error') || typeof answer !== 'string') {
     return { status: 'error', answer: 'RAG API 응답 형식이 올바르지 않습니다.', sources: [] };
   }
@@ -49,5 +70,9 @@ export function parseRagResponse(value: unknown): RagResponse {
     ...(typeof fallback === 'boolean' ? { fallback } : {}),
     ...(typeof fallbackReason === 'string' ? { fallbackReason } : {}),
     ...(debugInfo === undefined ? {} : { debugInfo }),
+    ...(typeof retrievalMode === 'string' ? { retrievalMode } : {}),
+    ...(typeof fallbackUsed === 'boolean' ? { fallbackUsed } : {}),
+    ...(typeof retrievalLatencyMs === 'number' ? { retrievalLatencyMs } : {}),
+    ...(Array.isArray(retrievalSources) ? { retrievalSources: retrievalSources as RetrievalSource[] } : {}),
   };
 }

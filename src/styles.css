@@ -1080,6 +1080,24 @@ a:hover {
 .ragDebugDetails { margin-top: 16px; font-size: 0.8rem; }
 .ragDebugDetails pre { max-height: 320px; margin-top: 8px; padding: 12px; overflow: auto; border-radius: var(--radius-sm); background: var(--code-bg); color: var(--code-text); }
 
+/* Retrieval metadata display */
+.ragRetrievalMeta { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 8px 10px; border-radius: var(--radius-sm); background: var(--panel); font-size: 0.75rem; color: var(--muted); }
+.ragRetrievalBadge { padding: 2px 8px; border-radius: 3px; font-weight: 600; font-size: 0.7rem; text-transform: uppercase; }
+.ragRetrievalBadge[data-mode="elastic"] { background: color-mix(in srgb, var(--blue) 15%, transparent); color: var(--blue); }
+.ragRetrievalBadge[data-mode="static"] { background: color-mix(in srgb, var(--muted) 15%, transparent); color: var(--muted); }
+.ragRetrievalLatency { font-variant-numeric: tabular-nums; }
+.ragRetrievalFallback { color: var(--orange, #e97c2b); font-weight: 500; }
+.ragRetrievalSources { margin-top: 10px; font-size: 0.78rem; }
+.ragRetrievalSources summary { cursor: pointer; color: var(--muted); font-size: 0.75rem; }
+.ragRetrievalSources ul { margin-top: 6px; padding: 0; list-style: none; display: grid; gap: 4px; }
+.ragRetrievalSources li { padding: 4px 8px; background: var(--panel); border-radius: var(--radius-sm); }
+.ragSrcSection { color: var(--muted); font-size: 0.72rem; }
+.ragSrcMeta { display: inline-flex; gap: 6px; margin-left: 6px; font-size: 0.68rem; color: var(--muted); }
+.ragSrcMeta [data-status="verified"] { color: var(--green, #22c55e); }
+.ragSrcMeta [data-status="implemented"] { color: var(--blue); }
+.ragSrcMeta [data-status="planned"] { color: var(--orange, #e97c2b); }
+.ragSrcChannel { opacity: 0.7; }
+
 .documentEvidence {
   margin-bottom: 34px;
   padding-bottom: 26px;

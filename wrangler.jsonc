@@ -1,0 +1,27 @@
+﻿
+{
+
+  "$schema": "./node_modules/wrangler/config-schema.json",
+
+  "name": "llm-wiki-strange",
+
+  "pages_build_output_dir": "./dist",
+
+  "d1_databases": [
+
+    {
+
+      "binding": "RAG_DB",
+
+      "database_name": "llm-wiki-rag",
+
+      "database_id": "b8307374-3fc2-4b5b-a680-cb24c44bb188",
+
+      "migrations_dir": "./migrations"
+
+    }
+
+  ]
+
+}
+

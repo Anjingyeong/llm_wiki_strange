@@ -17,7 +17,7 @@
     "rag:hybrid-stage3": "node scripts/rag-hybrid-stage3.mjs",
     "rag:abstention-eval": "node scripts/rag-abstention-eval.mjs",
     "rag:camera-registry-eval": "node scripts/rag-camera-registry-eval.mjs",
-    "test": "node --test tests",
+    "test": "node --test \"tests/*.test.mjs\"",
     "start": "node server.mjs",
     "preview": "npm run build && node server.mjs",
     "preview:dist": "node server.mjs",

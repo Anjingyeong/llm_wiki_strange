@@ -6,7 +6,7 @@
     "dimensions": 256,
     "embeddingVersion": "local-hash-tfidf-v1"
   },
-  "generatedAt": "2026-07-28T14:01:17.346Z",
+  "generatedAt": "2026-07-29T12:00:02.121Z",
   "chunks": [
     {
       "id": "Develop-Code-Baseline-2026-07-15#e1932a02aa5285b5",

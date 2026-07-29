@@ -16,6 +16,8 @@ rag-evaluation/runs/
 
 # Local agent terminal transcripts
 terminals/
+.chatgpt2codex/
+
 
 # Reference-only source tree (not part of this repository)
 /이상행동/
