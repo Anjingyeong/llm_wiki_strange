@@ -1,496 +1,283 @@
 /* ================================================================
-   LLM Wiki – RAG Portfolio Assistant Styles
+   LLM Wiki – RAG Panel Styles (minimal document UI)
    ================================================================ */
 
 /* ── Panel Container ─────────────────────────────────────────── */
 .ragPanel {
-  max-width: var(--content-max, 900px);
-  margin: 0 auto 28px;
-  background: var(--panel);
-  border: 1.5px solid var(--line);
-  border-radius: var(--radius-xl, 20px);
-  box-shadow: var(--shadow-md);
+  max-width: var(--content-max, 820px);
+  margin: 0 auto 20px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 /* ── Panel Header ────────────────────────────────────────────── */
 .ragPanelHeader {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 18px 22px 14px;
+  gap: 8px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(135deg,
-    rgba(5,150,105,0.04) 0%,
-    rgba(37,99,235,0.04) 100%
-  );
+  background: var(--panel-strong);
 }
 
 .ragPanelHeader strong {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.2px;
 }
 
-.ragPanelHeader strong::before {
-  content: '⚡';
-  font-size: 16px;
-}
+.ragPanelHeader strong::before { content: none; }
 
 .ragPanelHeader p {
-  margin: 4px 0 0;
+  margin: 0;
   color: var(--muted);
-  font-size: 12.5px;
-  line-height: 1.5;
+  font-size: 11px;
 }
 
 /* ── Panel Body ──────────────────────────────────────────────── */
 .ragPanelBody {
-  padding: 18px 22px 22px;
+  padding: 12px 14px 14px;
 }
 
-/* ── Quick Question Pill Buttons ─────────────────────────────── */
+/* ── Quick Question Buttons ──────────────────────────────────── */
 .ragQuickButtons {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
 .ragQuickBtn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  background: var(--panel-strong, #F1F5F9);
-  color: var(--text-sub, #334155);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  transition: all 0.15s;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 9px;
+  transition: border-color 0.1s, color 0.1s;
   white-space: nowrap;
 }
 
 .ragQuickBtn:hover:not(:disabled) {
   border-color: var(--accent);
-  background: var(--accent-light);
-  color: var(--accent-text);
-  transform: translateY(-1px);
+  color: var(--accent);
 }
 
 .ragQuickBtn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 /* ── Input Area ──────────────────────────────────────────────── */
 .ragPanel label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
 }
 
-.ragInputWrap {
-  position: relative;
-}
+.ragInputWrap { position: relative; }
 
 .ragPanel textarea {
   width: 100%;
-  min-height: 90px;
+  min-height: 72px;
   resize: vertical;
-  border: 1.5px solid var(--line);
-  border-radius: var(--radius-lg, 14px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--text);
-  padding: 13px 16px;
-  font-size: 14px;
+  padding: 9px 12px;
+  font-size: 13px;
   line-height: 1.6;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s;
 }
 
-.ragPanel textarea::placeholder {
-  color: var(--muted-light, #94A3B8);
-}
-
-.ragPanel textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(5,150,105,0.12);
-}
+.ragPanel textarea::placeholder { color: var(--muted-light); }
+.ragPanel textarea:focus { border-color: var(--accent); }
 
 /* ── Submit Button ───────────────────────────────────────────── */
 .ragSubmitBtn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  width: 100%;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 8px;
   border: none;
-  border-radius: var(--radius-md, 10px);
-  background: linear-gradient(135deg, var(--accent) 0%, #0ea5e9 100%);
+  border-radius: var(--radius-sm);
+  background: var(--accent);
   color: white;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 20px;
-  box-shadow: 0 2px 8px rgba(5,150,105,0.25);
-  transition: all 0.15s;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  transition: background 0.1s;
 }
 
-.ragSubmitBtn:hover:not(:disabled) {
-  box-shadow: 0 4px 16px rgba(5,150,105,0.35);
-  transform: translateY(-1px);
-}
+.ragSubmitBtn:hover:not(:disabled) { background: var(--accent-hover); }
+.ragSubmitBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.ragSubmitBtn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.ragSubmitBtn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ── Loading Skeleton ────────────────────────────────────────── */
+/* ── Loading ─────────────────────────────────────────────────── */
 .ragLoadingCard {
-  margin-top: 16px;
+  margin-top: 12px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg, 14px);
-  padding: 20px;
+  border-radius: var(--radius-sm);
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .ragSkeleton {
-  background: linear-gradient(90deg,
-    var(--panel-strong) 0%,
-    var(--bg) 50%,
-    var(--panel-strong) 100%
-  );
+  background: linear-gradient(90deg, var(--panel-strong) 0%, var(--bg) 50%, var(--panel-strong) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-sm, 6px);
+  border-radius: var(--radius-sm);
 }
 
-@keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-.ragSkeleton.h-4 { height: 16px; }
-.ragSkeleton.h-3 { height: 12px; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.ragSkeleton.h-4 { height: 14px; }
+.ragSkeleton.h-3 { height: 10px; }
 .ragSkeleton.w-3\/4 { width: 75%; }
 .ragSkeleton.w-1\/2 { width: 50%; }
 .ragSkeleton.w-full { width: 100%; }
 
-/* ── Answer Card ─────────────────────────────────────────────── */
+/* ── Answer Card – document body style ───────────────────────── */
 .ragAnswer {
-  margin-top: 18px;
-  border: 1.5px solid var(--line);
-  border-radius: var(--radius-lg, 14px);
-  background: var(--panel);
-  /* overflow:hidden removed — was clipping markdown tables and long answers */
-  box-shadow: var(--shadow-sm);
+  margin-top: 14px;
+  border: none;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
 
 .ragAnswerHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel-strong);
+  gap: 6px;
+  padding: 8px 0;
 }
 
 .ragAnswerLabel {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: 600;
   color: var(--muted);
-  letter-spacing: 0.4px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
-/* answerMode badge */
 .ragAnswerMode {
   display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 999px;
-  padding: 3px 10px;
-  letter-spacing: 0.2px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  color: var(--muted);
+  background: var(--panel-strong);
 }
 
-.ragAnswerMode[data-mode="flow_mode"] {
-  background: var(--blue-light);
-  color: var(--blue-text);
-  border: 1px solid rgba(37,99,235,0.15);
-}
-
-.ragAnswerMode[data-mode="evidence_template"] {
-  background: #FFF7ED;
-  color: #9A3412;
-  border: 1px solid rgba(234,88,12,0.2);
-}
-
-.ragAnswerMode[data-mode="portfolio_mode"] {
-  background: #F5F3FF;
-  color: #5B21B6;
-  border: 1px solid rgba(109,40,217,0.2);
-}
-
-.ragAnswerMode[data-mode="troubleshooting_mode"] {
-  background: var(--danger-bg);
-  color: var(--danger);
-  border: 1px solid rgba(220,38,38,0.2);
-}
-
-.ragAnswerMode[data-mode="general"] {
-  background: var(--accent-light);
-  color: var(--accent-text);
-  border: 1px solid rgba(5,150,105,0.2);
-}
+.ragAnswerMode[data-mode="flow_mode"] { color: var(--accent-text); background: var(--accent-light); }
+.ragAnswerMode[data-mode="evidence_template"] { color: var(--warning); background: var(--warning-bg); }
+.ragAnswerMode[data-mode="portfolio_mode"] { color: #6D28D9; background: #F5F3FF; }
+.ragAnswerMode[data-mode="troubleshooting_mode"] { color: var(--danger); background: var(--danger-bg); }
+.ragAnswerMode[data-mode="general"] { color: var(--accent-text); background: var(--accent-light); }
 
 @media (prefers-color-scheme: dark) {
-  .ragAnswerMode[data-mode="flow_mode"] {
-    background: rgba(96,165,250,0.12);
-    color: var(--blue-text);
-  }
-  .ragAnswerMode[data-mode="evidence_template"] {
-    background: rgba(251,146,60,0.12);
-    color: #FB923C;
-  }
-  .ragAnswerMode[data-mode="portfolio_mode"] {
-    background: rgba(167,139,250,0.12);
-    color: #A78BFA;
-  }
+  .ragAnswerMode[data-mode="flow_mode"] { background: rgba(96,165,250,0.1); color: var(--blue-text); }
+  .ragAnswerMode[data-mode="evidence_template"] { background: rgba(251,146,60,0.1); color: #FB923C; }
+  .ragAnswerMode[data-mode="portfolio_mode"] { background: rgba(167,139,250,0.1); color: #A78BFA; }
 }
 
 /* ── Answer Body ─────────────────────────────────────────────── */
-.ragAnswerBody {
-  padding: 18px 20px;
-}
-
-/* Reset line-height for markdown inside answer */
-.ragAnswerBody .markdown {
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.ragAnswerBody .markdown h3 {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--text-sub);
-  margin: 20px 0 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px dashed var(--line);
-}
-
-/* Highlight first h3 (핵심 요약) */
-.ragAnswerBody .markdown h3:first-of-type {
-  font-size: 14px;
-  color: var(--accent-text);
-}
-
-/* Table inside answer */
-.ragAnswerBody .tableWrap {
-  margin: 12px 0;
-}
-
-.ragAnswerBody table th {
-  background: var(--panel-strong);
-  font-size: 0.75rem;
-}
-
-.ragAnswerBody table td {
-  font-size: 13px;
-}
+.ragAnswerBody { padding: 0; }
+.ragAnswerBody .markdown { font-size: 14px; line-height: 1.8; }
+.ragAnswerBody .markdown h3 { font-size: 13px; font-weight: 600; color: var(--text-sub); margin: 16px 0 6px; padding-bottom: 3px; border-bottom: 1px dashed var(--line); }
+.ragAnswerBody .markdown h3:first-of-type { color: var(--accent-text); }
+.ragAnswerBody .tableWrap { margin: 10px 0; }
+.ragAnswerBody table th { background: var(--panel-strong); font-size: 0.75rem; }
+.ragAnswerBody table td { font-size: 12px; }
 
 /* Insufficient context */
-.ragAnswer.insufficient {
-  border-color: var(--warning);
-  background: var(--panel);
-}
-
-.ragAnswer.insufficient .ragAnswerHeader {
-  background: var(--warning-bg);
-  border-color: rgba(217,119,6,0.2);
-}
+.ragAnswer.insufficient { border-top-color: var(--warning); }
+.ragAnswer.insufficient .ragAnswerHeader { background: transparent; }
 
 /* Error state */
-.ragAnswer.error {
-  border-color: var(--danger);
-}
+.ragAnswer.error { border-top-color: var(--danger); }
+.ragAnswer.error .ragAnswerHeader { background: transparent; }
 
-.ragAnswer.error .ragAnswerHeader {
-  background: var(--danger-bg);
-  border-color: rgba(220,38,38,0.15);
-}
-
-/* ── Sources Section ─────────────────────────────────────────── */
+/* ── Sources – reference list ────────────────────────────────── */
 .ragSources {
-  padding: 12px 16px 14px;
+  padding: 12px 0 0;
   border-top: 1px solid var(--line);
-  background: var(--panel-strong);
+  margin-top: 14px;
+  background: transparent;
 }
 
 .ragSourcesLabel {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-weight: 600;
   color: var(--muted);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .ragSourceList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+  flex-direction: column;
+  gap: 3px;
 }
 
-/* Source badge chips */
 .ragSourceChip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--panel);
+  gap: 4px;
+  border: none;
+  border-radius: 0;
+  border-left: 2px solid var(--accent);
+  background: transparent;
   color: var(--text-sub);
-  padding: 5px 12px;
+  padding: 3px 8px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.12s;
-  max-width: 260px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  transition: background 0.1s;
 }
 
 .ragSourceChip:hover {
-  border-color: var(--blue);
-  background: var(--blue-light);
-  color: var(--blue-text);
+  background: var(--panel-strong);
   text-decoration: none;
-  transform: translateY(-1px);
 }
 
 .ragSourceChip .chipSection {
-  font-size: 10.5px;
+  font-size: 10px;
   color: var(--muted);
-  font-weight: 500;
 }
 
 /* ── Debug Details ───────────────────────────────────────────── */
-.ragDebugDetails {
-  border-top: 1px dashed var(--line);
-}
+.ragDebugDetails { border-top: 1px solid var(--line); margin-top: 10px; }
+.ragDebugDetails summary { display: flex; align-items: center; gap: 4px; padding: 8px 0; font-size: 0.7rem; color: var(--muted-light); cursor: pointer; list-style: none; }
+.ragDebugDetails summary:hover { color: var(--text); }
+.ragDebugDetails summary::before { content: '›'; font-size: 12px; transition: transform 0.15s; display: inline-block; }
+.ragDebugDetails[open] summary::before { transform: rotate(90deg); }
+.ragDebugPre { margin: 0; padding: 10px 12px; background: var(--code-bg); color: var(--code-text); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; line-height: 1.5; overflow-x: auto; }
 
-.ragDebugDetails summary {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  font-size: 0.75rem;
-  color: var(--muted);
-  cursor: pointer;
-  user-select: none;
-  list-style: none;
-  transition: color 0.12s;
-}
-
-.ragDebugDetails summary:hover {
-  color: var(--text);
-}
-
-.ragDebugDetails summary::before {
-  content: '›';
-  font-size: 14px;
-  transition: transform 0.2s;
-  display: inline-block;
-}
-
-.ragDebugDetails[open] summary::before {
-  transform: rotate(90deg);
-}
-
-.ragDebugPre {
-  margin: 0;
-  padding: 14px 16px;
-  background: var(--code-bg);
-  color: var(--code-text);
-  font-family: 'SFMono-Regular', Consolas, ui-monospace, monospace;
-  font-size: 0.75rem;
-  line-height: 1.6;
-  overflow-x: auto;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ── Empty state (before first question) ─────────────────────── */
-.ragEmptyHint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 24px 16px;
-  color: var(--muted);
-  font-size: 13px;
-  text-align: center;
-}
-
-.ragEmptyHint .ragEmptyIcon {
-  font-size: 28px;
-  opacity: 0.5;
-}
+/* ── Empty state ─────────────────────────────────────────────── */
+.ragEmptyHint { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+.ragEmptyHint .ragEmptyIcon { font-size: 20px; opacity: 0.4; }
 
 /* ── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 720px) {
-  .ragPanel {
-    border-radius: var(--radius-lg, 14px);
-  }
-
-  .ragPanelBody {
-    padding: 14px 14px 18px;
-  }
-
-  .ragQuickButtons {
-    gap: 5px;
-  }
-
-  .ragQuickBtn {
-    font-size: 0.75rem;
-    padding: 5px 11px;
-  }
-
-  .ragSourceList {
-    gap: 5px;
-  }
-
-  .ragSourceChip {
-    max-width: 200px;
-    font-size: 0.75rem;
-  }
+  .ragPanel { border-radius: var(--radius-sm); }
+  .ragPanelBody { padding: 10px 10px 12px; }
+  .ragQuickBtn { font-size: 10px; padding: 3px 7px; }
+  .ragSourceChip { font-size: 11px; }
 }

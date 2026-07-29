@@ -5,11 +5,11 @@
   "embeddingDimensions": 256,
   "documentCount": 52,
   "chunkCount": 696,
-  "generatedAt": "2026-07-29T12:00:02.121Z",
-  "sourceCommit": "361cf82",
+  "generatedAt": "2026-07-29T12:18:15.397Z",
+  "sourceCommit": "390340f",
   "indexPath": "data/rag/indexes/structure-aware-contextual-v1.json",
   "meanChunkChars": 469,
   "duplicateDocRatio": 1,
-  "manifestHash": "48162f9758ff6352",
+  "manifestHash": "658b8a4dfd9a5d83",
   "corpusHash": "7819b71cc1bff20be839d3acdd618d25b63800115fb037da8e15cbcd19901a52"
 }

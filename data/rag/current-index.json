@@ -5,7 +5,7 @@
   "chunkCount": 696,
   "documentCount": 52,
   "corpusHash": "7819b71cc1bff20be839d3acdd618d25b63800115fb037da8e15cbcd19901a52",
-  "generatedAt": "2026-07-29T12:00:02.121Z",
-  "updatedAt": "2026-07-29T12:00:02.321Z",
+  "generatedAt": "2026-07-29T12:18:15.397Z",
+  "updatedAt": "2026-07-29T12:18:15.577Z",
   "note": "Operational index is data/ragVectorIndex.json (Node + Cloudflare)."
 }
