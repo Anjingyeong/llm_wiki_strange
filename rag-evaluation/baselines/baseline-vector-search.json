@@ -1,7 +1,7 @@
 {
-  "runId": "20260825-052905647_b762a1c_baseline-vector-search",
-  "timestamp": "2026-08-25T05:29:05.662Z",
-  "gitCommit": "b762a1c",
+  "runId": "20260825-110110261_0ffc7ce_baseline-vector-search",
+  "timestamp": "2026-08-25T11:01:10.271Z",
+  "gitCommit": "0ffc7ce",
   "gitBranch": "main",
   "dirtyWorkingTree": true,
   "experimentName": "baseline-vector-search",
@@ -14,7 +14,7 @@
   "topK": 5,
   "datasetVersion": "golden_queries.v1",
   "documentCount": 54,
-  "chunkCount": 880,
+  "chunkCount": 893,
   "environment": {
     "node": "v22.23.2",
     "platform": "linux",
@@ -34,8 +34,8 @@
     "metadataFilterAccuracy": 0,
     "duplicateIncidentOrDocumentCount": 172,
     "noResultAccuracy": 0,
-    "p50LatencyMs": 1.662085999999988,
-    "p95LatencyMs": 6.257581999999957,
+    "p50LatencyMs": 1.7199259999999867,
+    "p95LatencyMs": 6.066419999999994,
     "meanRetrievedChunks": 5,
     "failureTaxonomy": {
       "EXPECTED_DOC_NOT_RETRIEVED": 20,
@@ -57,5 +57,5 @@
     "meanCost": null,
     "p95EndToEndLatencyMs": null
   },
-  "runDir": "rag-evaluation/runs/20260825-052905647_b762a1c_baseline-vector-search"
+  "runDir": "rag-evaluation/runs/20260825-110110261_0ffc7ce_baseline-vector-search"
 }

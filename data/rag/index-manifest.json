@@ -4,12 +4,12 @@
   "embeddingVersion": "local-hash-tfidf-v1",
   "embeddingDimensions": 256,
   "documentCount": 54,
-  "chunkCount": 880,
-  "generatedAt": "2026-08-25T05:28:57.034Z",
-  "sourceCommit": "b762a1c",
+  "chunkCount": 893,
+  "generatedAt": "2026-08-25T11:08:02.628Z",
+  "sourceCommit": "0ffc7ce",
   "indexPath": "data/ragVectorIndex.json",
-  "meanChunkChars": 470,
+  "meanChunkChars": 472,
   "duplicateDocRatio": 1,
-  "manifestHash": "ffee869a3776d364",
-  "corpusHash": "26d20bf4f272c6979fcc8320f6e6d7843d7780fa1c38d6a3025d079d8b0822d0"
+  "manifestHash": "5c539e6f31f6311e",
+  "corpusHash": "ae05bc597284062fb293b95d0f2beb90da5928f763eb467845e1a9428063d6ea"
 }
