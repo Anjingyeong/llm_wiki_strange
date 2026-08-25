@@ -3,15 +3,11 @@ import { wikiUxMeta } from '../generated/wikiUxMeta';
 type WikiCommandBarProps = {
   readonly onOpenAsk: () => void;
   readonly onOpenSearch: () => void;
-  readonly onOpenCompany: () => void;
 };
 
-function CommandIcon({ kind }: { readonly kind: 'ask' | 'search' | 'company' | 'status' }) {
+function CommandIcon({ kind }: { readonly kind: 'ask' | 'search' | 'status' }) {
   if (kind === 'search') {
     return <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>;
-  }
-  if (kind === 'company') {
-    return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V8l8-4 8 4v12" /><path d="M8 20v-6h8v6M8 10h.01M12 10h.01M16 10h.01" /></svg>;
   }
   if (kind === 'ask') {
     return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z" /><path d="M9 9h6M9 13h4" /></svg>;
@@ -19,13 +15,14 @@ function CommandIcon({ kind }: { readonly kind: 'ask' | 'search' | 'company' | '
   return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" /><circle cx="8" cy="6" r="1" /><circle cx="16" cy="12" r="1" /><circle cx="10" cy="18" r="1" /></svg>;
 }
 
-export function WikiCommandBar({ onOpenAsk, onOpenSearch, onOpenCompany }: WikiCommandBarProps) {
+export function WikiCommandBar({ onOpenAsk, onOpenSearch }: WikiCommandBarProps) {
   const { rag, search } = wikiUxMeta;
   return (
     <nav aria-label="Wiki tools" className="wikiCommandBar">
-      <button onClick={onOpenSearch} type="button"><CommandIcon kind="search" />Search</button>
-      <button onClick={onOpenAsk} type="button"><CommandIcon kind="ask" />Ask</button>
-      <button onClick={onOpenCompany} type="button"><CommandIcon kind="company" />Company</button>
+      <div className="wikiCommandActions">
+        <button onClick={onOpenSearch} type="button"><CommandIcon kind="search" />Search</button>
+        <button onClick={onOpenAsk} type="button"><CommandIcon kind="ask" />Ask</button>
+      </div>
       <details className="wikiSystemStatus">
         <summary><CommandIcon kind="status" />System status</summary>
         <dl>

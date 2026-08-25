@@ -188,7 +188,7 @@ export function App() {
         <main className="content" id="wiki-main-content">
           {contentView === 'doc' && activeDocument ? (
             <>
-              <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} onOpenCompany={() => openWorkspace('company')} />
+              <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} />
               <InlineTableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
               <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
             </>

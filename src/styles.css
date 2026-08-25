@@ -342,9 +342,12 @@ a:hover { text-decoration: underline; }
 .tagRow small { display: inline-block; font-size: 10px; font-weight: 500; color: var(--muted); background: var(--panel-strong); border-radius: var(--radius-sm); padding: 2px 7px; }
 
 /* ── Command Bar ─────────────────────────────────────────────── */
-.wikiCommandBar { max-width: var(--content-max); margin: 0 auto 8px; display: flex; align-items: center; gap: 2px; min-height: 36px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.wikiCommandBar button, .wikiSystemStatus summary { display: inline-flex; align-items: center; gap: 5px; min-height: 32px; padding: 4px 8px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--muted); font-size: 0.8rem; font-weight: 500; cursor: pointer; }
-.wikiCommandBar button:hover, .wikiSystemStatus summary:hover { background: var(--panel-strong); color: var(--text); }
+.wikiCommandBar { max-width: var(--content-max); margin: 0 auto 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 34px; }
+.wikiCommandActions { display: flex; align-items: center; gap: 6px; }
+.wikiCommandBar button { display: inline-flex; align-items: center; gap: 5px; min-height: 30px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--text-sub); font-size: 0.78rem; font-weight: 550; cursor: pointer; }
+.wikiCommandBar button:hover { border-color: var(--line-strong); background: var(--panel-strong); color: var(--text); }
+.wikiSystemStatus summary { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 3px 4px; border: 0; background: transparent; color: var(--muted-light); font-size: 0.72rem; font-weight: 500; cursor: pointer; }
+.wikiSystemStatus summary:hover { color: var(--muted); }
 .wikiCommandBar svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .wikiSystemStatus { position: relative; }
 .wikiSystemStatus summary { list-style: none; }
