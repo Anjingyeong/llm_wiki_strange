@@ -7,8 +7,8 @@ tags: [interview, beaus, llm, automation, vibe-coding, rag]
 relatedDocs: [PROJECT-CS-INTERVIEW-MAP, Evidence-LLM-Wiki-RAG, Evidence-Smart-Safety-System]
 updatedAt: 2026-08-26
 type: meta
-status: stable
-evidenceLevel: mixed
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 ---
 
