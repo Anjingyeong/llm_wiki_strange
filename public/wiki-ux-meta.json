@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-07-29T12:18:15.649Z",
+  "generatedAt": "2026-08-25T01:54:56.181Z",
   "search": {
-    "corpusHash": "7819b71cc1bff20be839d3acdd618d25b63800115fb037da8e15cbcd19901a52",
-    "documentCount": 52,
-    "generatedAt": "2026-07-29T12:18:14.690Z",
+    "corpusHash": "e13952fc954dc9cda3d359b44ef57c258a31dd89560cb1d382493600f7d70c2c",
+    "documentCount": 54,
+    "generatedAt": "2026-08-25T01:54:55.270Z",
     "source": "content/*.md"
   },
-  "searchDocCount": 52,
+  "searchDocCount": 54,
   "rag": {
-    "chunkCount": 696,
-    "documentCount": 52,
-    "corpusHash": "7819b71cc1bff20be839d3acdd618d25b63800115fb037da8e15cbcd19901a52",
-    "meanChunkChars": 469,
-    "indexGeneratedAt": "2026-07-29T12:18:15.397Z"
+    "chunkCount": 860,
+    "documentCount": 54,
+    "corpusHash": "e13952fc954dc9cda3d359b44ef57c258a31dd89560cb1d382493600f7d70c2c",
+    "meanChunkChars": 470,
+    "indexGeneratedAt": "2026-08-25T01:54:55.859Z"
   },
   "benchmark": {
     "operationalRetrieval": "Hybrid RRF (BM25 + local hash vector), k=60, lex=1, vec=1",

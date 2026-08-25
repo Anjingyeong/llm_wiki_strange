@@ -3,7 +3,7 @@
 
   "$schema": "./node_modules/wrangler/config-schema.json",
 
-  "name": "llm-wiki-strange",
+  "name": "smart-safety-llm-wiki",
 
   "pages_build_output_dir": "./dist",
 
@@ -24,4 +24,3 @@
   ]
 
 }
-

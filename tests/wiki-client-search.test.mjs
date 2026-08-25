@@ -77,6 +77,24 @@ describe('client document search against real searchIndex', () => {
     assert.ok(results.some((r) => r.slug === 'ED-MQTT-Backend-Event-Path'));
   });
 
+  it('keeps strong technical hits for conversational Korean queries', async () => {
+    const index = await loadSearchIndex();
+    const cases = [
+      ['mqtt 왜썼지', ['ED-MQTT-Backend-Event-Path', 'MQTT-Event-Schema']],
+      ['webrtc 왜 안썼어', ['WebRTC-vs-HLS', 'ADR-001-WebRTC', 'mjpeg-display-rollback']],
+      ['mjpeg로 왜 돌아갔지', ['mjpeg-display-rollback']],
+    ];
+
+    for (const [query, expectedSlugs] of cases) {
+      const results = searchDocumentsInIndex(index, query, { limit: 12 });
+      assert.ok(results.length > 0, `${query} should return normal hits`);
+      assert.ok(
+        results.some((result) => expectedSlugs.includes(result.slug)),
+        `${query} should include one of ${expectedSlugs.join(', ')}`,
+      );
+    }
+  });
+
   it('does not cap at 8 only — returns more when available', async () => {
     const index = await loadSearchIndex();
     const results = searchDocumentsInIndex(index, 'camera', { limit: 24 });

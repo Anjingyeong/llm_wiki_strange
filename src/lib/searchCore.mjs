@@ -20,6 +20,25 @@ const STOP_EN = new Set([
   'why', 'when', 'which',
 ]);
 
+const CONVERSATIONAL_COVERAGE_FILLERS = new Set([
+  '그거', '이거', '저거', '뭐임', '어떰', '알려줘', '보여줘',
+]);
+
+/**
+ * Ignore conversational Korean predicates/endings only for the final coverage
+ * guard. They still participate in normal scoring when a document contains
+ * them, but a strong technical hit such as `MQTT` should not disappear just
+ * because the user naturally typed `왜썼지` after it.
+ *
+ * @param {string} token
+ */
+function isConversationalCoverageFiller(token) {
+  const value = stripKoreanParticles(String(token ?? '').trim());
+  if (!value || !/^[가-힣]+$/u.test(value)) return false;
+  if (CONVERSATIONAL_COVERAGE_FILLERS.has(value)) return true;
+  return /(?:왜썼지|왜썼어|왜씀|안씀|안썼어|안썼지|돌아갔지|돌아갔어|뭐나옴|뭐나와|했지|했어|했음|됐지|됐어|됐음|되는지|있는지|없는지|생김|생겼어|생겼지|알려줘|보여줘|정리해줘|설명해줘)$/u.test(value);
+}
+
 /**
  * @param {string} value
  */
@@ -299,22 +318,23 @@ export function scoreSearchDocument(document, q) {
       return { original, variants, matched: variants.some((variant) => field.includes(variant)) };
     })
     .filter((group) => group.variants.length > 0);
+  const coverageGroups = tokenGroups.filter((group) => !isConversationalCoverageFiller(group.original));
 
   if (!strong && score > 0) {
-    const matched = tokenGroups.filter((group) => group.matched);
+    const matched = coverageGroups.filter((group) => group.matched);
     const hasLongHit = matched.some((group) => group.variants.some((variant) => variant.length >= 3));
-    const coverage = tokenGroups.length ? matched.length / tokenGroups.length : 0;
+    const coverage = coverageGroups.length ? matched.length / coverageGroups.length : 0;
     if (!hasLongHit || coverage < 0.6) {
       score = Math.min(score, NO_RESULT_THRESHOLD - 1);
     }
   }
 
-  if (strong && tokenGroups.length >= 2) {
+  if (strong && coverageGroups.length >= 2) {
     const genericTerms = new Set([
       '알고리즘', '구조', '방식', '문제', '오류', '검색', '처리',
       '언제', '어디서', '누가', '맞지', '않음',
     ]);
-    const concreteGroups = tokenGroups.filter((group) => !genericTerms.has(group.original));
+    const concreteGroups = coverageGroups.filter((group) => !genericTerms.has(group.original));
     const matchedConcrete = concreteGroups.filter((group) => group.matched);
     const concreteCoverage = concreteGroups.length
       ? matchedConcrete.length / concreteGroups.length
