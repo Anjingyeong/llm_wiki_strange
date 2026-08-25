@@ -17,6 +17,27 @@ evidence_type: RAG
 
 # LLM Wiki RAG Evidence Wiki
 
+## 먼저 말로 외우기
+
+**한 줄로:** 프로젝트 문서를 먼저 찾아보고, 찾은 내용 안에서만 답하게 만든 검색형 챗봇이다.
+
+**면접에서 이렇게 말하기:**
+
+> "그냥 LLM한테 프로젝트 질문을 하면 없는 내용도 그럴듯하게 말할 수 있어서 RAG를 붙였습니다. 질문이 들어오면 먼저 제 Wiki 문서를 검색하고, 관련된 chunk를 찾은 다음 그 내용만 근거로 답하게 했습니다. 문서에 근거가 없으면 억지로 답하지 않고 `insufficient_context`로 끊도록 만든 게 핵심입니다."
+
+**왜 이렇게 했나:** 이 Wiki에서 중요한 건 일반 지식이 아니라 실제 프로젝트에서 어떤 모델을 골랐고, MQTT payload를 어떻게 정했고, 어떤 장애가 있었는지 같은 내부 근거이기 때문이다.
+
+**내가 직접 한 부분:** Markdown section 분리, chunk 생성, local embedding/vector store, 검색 점수 조합, 근거 부족 응답, 선택적 외부 LLM 호출 구조를 구현했다.
+
+**기억할 단어 3개:** `문서 먼저 검색`, `근거만 답변`, `없으면 모른다고 하기`
+
+**바로 나올 꼬리질문:**
+
+- 왜 vector DB를 안 썼나요?
+- local hash embedding이면 semantic 검색이 약하지 않나요?
+- hallucination을 완전히 막을 수 있나요?
+- chunk 크기는 왜 그렇게 정했나요?
+
 ## 문제 정의
 
 LLM Wiki는 프로젝트 문서, 실험 결과, ADR, 장애 기록을 검색 가능한 지식베이스로 만들기 위한 Wiki다. 단순 챗봇은 모델의 일반 지식으로 답을 보완할 수 있으므로, 프로젝트 내부 근거와 다른 답을 만들 위험이 있다. 그래서 질문 전에 Markdown 문서를 검색하고, 검색된 chunk를 근거로만 답하는 RAG 구조가 필요했다.
@@ -61,13 +82,13 @@ local hash embedding은 전문 semantic embedding보다 검색 품질은 제한�
 ## 면접에서 받을 수 있는 질문과 답변
 
 Q. 왜 그냥 챗봇이 아니라 RAG를 썼나요?
-A. 프로젝트의 모델 선택, MQTT 계약, frame evidence chain은 일반 지식이 아니라 내부 문서 근거가 중요합니다. RAG는 저장된 문서를 먼저 검색하고 검색된 chunk만 답변 근거로 쓰기 때문에 답변의 출처를 제시할 수 있습니다.
+A. "이 Wiki는 일반 지식을 묻는 서비스가 아니라 제가 실제로 한 프로젝트를 다시 찾는 용도였습니다. 그래서 LLM 기억에 맡기기보다 문서를 먼저 검색하고, 검색된 내용 안에서만 답하게 했습니다. 이렇게 해야 '왜 YOLO26n을 골랐는지' 같은 질문에 실제 실험 문서를 근거로 답할 수 있습니다."
 
 Q. vector DB를 썼나요?
-A. 현재는 완전한 vector DB가 아니라 `data/ragVectorIndex.json` 파일 기반 vector store를 사용합니다. 작은 Wiki에는 단순하고 재현 가능하지만, 대규모 문서나 동시 reindex에는 후속 개선이 필요합니다.
+A. "아니요. 지금 규모에서는 전용 DB까지 쓰는 게 오히려 복잡하다고 봐서 `ragVectorIndex.json` 파일로 시작했습니다. 문서가 많지 않을 때는 구조가 단순하고 결과를 재현하기도 쉬웠습니다. 대신 문서가 훨씬 많아지거나 여러 사용자가 동시에 색인해야 하면 그때는 vector DB로 옮기는 게 맞다고 생각합니다."
 
 Q. 외부 LLM이 기본인가요?
-A. 아닙니다. `RAG_LLM_API_KEY`가 없으면 local extractive answer를 사용합니다. 키가 있을 때만 서버에서 OpenAI 호환 chat completions API를 선택적으로 호출합니다.
+A. "아닙니다. 키가 없어도 검색과 로컬 답변은 돌아가게 했습니다. 외부 LLM은 답변을 더 자연스럽게 만들고 싶을 때만 서버에서 선택적으로 쓰고, 프론트에는 API Key가 노출되지 않게 했습니다."
 
 Q. hallucination은 어떻게 줄였나요?
-A. 검색된 chunk가 없으면 answered가 아니라 insufficient_context를 반환합니다. 검색된 경우에도 sources를 함께 반환하고, 외부 LLM에는 검색된 chunk만 context로 전달합니다.
+A. "완전히 없앤다고 말하긴 어렵습니다. 대신 답할 근거가 없을 때 억지로 생성하지 않는 쪽으로 막았습니다. 검색 결과가 부족하면 `insufficient_context`를 반환하고, LLM을 쓰더라도 검색된 chunk만 넘겨서 답변 범위를 좁혔습니다."

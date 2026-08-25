@@ -17,6 +17,28 @@ evidence_type: STAR
 
 # 스마트 안전 관제 시스템 Evidence Wiki
 
+## 먼저 말로 외우기
+
+**한 줄로:** CCTV에서 쓰러짐을 잡는 AI를 만들고, 그 판단이 실제 관제 화면까지 틀어지지 않게 연결한 프로젝트다.
+
+**면접에서 이렇게 말하기:**
+
+> "이 프로젝트는 카메라 영상을 받아서 YOLO Pose로 사람 자세를 잡고, ByteTrack으로 같은 사람을 따라간 다음, LSTM이 시간 흐름을 보고 Normal/Faint를 분류하는 구조입니다. 그런데 제가 해보니까 모델 정확도만 보는 걸로는 부족했습니다. 실제로는 어떤 프레임의 어떤 사람이 이벤트였는지 MQTT, 백엔드, 화면 overlay까지 같은 기준으로 이어지는지가 중요해서 그 전체 흐름을 같이 봤습니다."
+
+**왜 이렇게 했나:** 실신은 놓치면 위험하고, 반대로 오탐이 많으면 관제자가 알림을 믿지 않게 된다. 그래서 단순 accuracy보다 미탐, tracking 안정성, 이벤트 전달 정합성을 같이 봐야 했다.
+
+**내가 직접 한 부분:** 모델 비교와 선택 근거 정리, YOLO Pose + ByteTrack + LSTM 파이프라인, tracking/frame 정합성 진단, MQTT 이벤트 흐름, overlay 문제 분석과 검증 기준을 맡았다.
+
+**기억할 단어 3개:** `Pose → Tracking → LSTM`, `미탐 우선`, `프레임 끝까지 연결`
+
+**바로 나올 꼬리질문:**
+
+- 왜 YOLO 단독이 아니라 LSTM까지 썼나요?
+- 왜 accuracy가 더 좋은 모델 대신 YOLO26n-pose를 골랐나요?
+- ByteTrack ID가 바뀌면 LSTM에 어떤 문제가 생기나요?
+- WebRTC가 잘 안 됐을 때 왜 MJPEG로 돌아갔나요?
+- MQTT에 영상을 직접 보내지 않은 이유는 뭔가요?
+
 ## 문제 정의
 
 스마트 안전 관제 시스템은 CCTV 또는 RTSP 카메라 영상을 실시간으로 분석해 실신, 쓰러짐 같은 안전 이벤트를 감지하고 관제 화면과 알림 흐름으로 전달하는 프로젝트다. 핵심 문제는 단순히 AI 모델이 Faint를 맞히는 것이 아니라, 어떤 프레임에서 어떤 사람이 왜 이벤트로 판단되었는지 overlay, event, frame_sync, clip metadata까지 추적 가능한 evidence chain을 유지하는 것이다.
@@ -78,13 +100,13 @@ Synthetic Data는 현재 구현 완료가 아니라 hard case 보강 계획이�
 ## 면접에서 받을 수 있는 질문과 답변
 
 Q. 왜 YOLO26n-pose를 선택했나요?
-A. 이 프로젝트는 실신 미탐 비용이 크기 때문에 Faint Recall을 우선했습니다. fast comparison 기준 yolo26n-pose는 Faint Recall 0.750877로 가장 높고 FN이 142로 가장 낮아 기본 후보로 유지했습니다. 다만 FP가 400개라 threshold, cooldown, 알림 scope와 함께 검증해야 한다고 문서화했습니다.
+A. "처음에는 accuracy나 F1만 보고 고를 수도 있었는데, 이 프로젝트는 실신을 놓치는 게 더 위험하다고 봤습니다. 그래서 Faint Recall과 FN을 우선해서 비교했고, 그 기준에서는 yolo26n-pose가 가장 유리했습니다. 대신 FP가 늘어나는 문제가 있어서 threshold나 cooldown 같은 운영 로직과 같이 봐야 한다고 판단했습니다."
 
 Q. WebRTC와 HLS를 어떻게 나누었나요?
-A. WebRTC는 MediaMTX WHEP 기반 저지연 live view에 적합해 primary로 두고, HLS는 segment buffering으로 지연이 크지만 안정적인 fallback으로 유지했습니다. AI to MQTT to Backend 이벤트 경로는 영상 송출 경로와 분리했습니다.
+A. "WebRTC는 지연이 짧아서 실시간 관제 화면에 더 잘 맞았고, HLS는 느리지만 상대적으로 단순해서 fallback으로 봤습니다. 중요한 건 영상이 끊긴다고 이벤트까지 같이 죽으면 안 된다는 점이라, AI 이벤트가 MQTT와 백엔드로 가는 경로는 영상 송출과 분리했습니다."
 
 Q. evidenceId가 왜 필요한가요?
-A. 관제 시스템에서는 어떤 프레임의 어떤 bbox가 어떤 이벤트와 clip으로 이어졌는지 추적해야 합니다. cameraLoginId, frameId, capturedAtMs를 묶은 evidenceId를 기준으로 overlay, event, frame_sync, clip metadata를 연결하면 디버깅과 감사 가능성이 높아집니다.
+A. "화면에 박스가 이상하게 뜨면 '어느 프레임 기준이었지?'를 찾을 수 있어야 했습니다. 그래서 카메라, frameId, capturedAt 같은 값을 묶어서 같은 사건의 증거를 따라갈 기준을 만들었습니다. 덕분에 AI가 본 프레임과 화면이 보여준 프레임이 같은지 단계별로 확인할 수 있습니다."
 
 Q. Self-Improving AI는 구현됐나요?
-A. 아닙니다. 현재는 확장 설계와 실험 계획 단계입니다. 먼저 evidence chain 정합성을 확보하고, 그 다음 FP/FN을 review_status 기반 후보 데이터로 수집해 training_manifest_v2를 만드는 방향입니다.
+A. "완성했다고 말하면 안 됩니다. 제가 실제로 구현한 핵심 파이프라인과는 별개로, 오탐과 미탐 데이터를 모아서 재학습 후보로 만드는 확장 방향까지 설계한 상태입니다. 자동으로 바로 재학습시키기보다 사람이 한 번 확인한 데이터만 넣는 구조를 생각했습니다."

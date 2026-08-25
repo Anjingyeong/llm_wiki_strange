@@ -1,63 +1,91 @@
-# Interview Answers
+# Interview Answers — 말로 연습하는 버전
 
-총 14개 예상 질문과 답변이다. 완료 구현과 확장 계획을 명확히 구분한다.
+이 문서는 정답지를 외우는 용도가 아니다. **굵은 한 줄만 먼저 기억하고**, 아래 답변은 실제 면접에서 내가 설명하는 말투를 잡는 참고용으로 쓴다. 문장 순서가 조금 바뀌어도 핵심 근거만 맞으면 된다.
 
 ## 스마트 안전 관제 시스템
 
 ### Q1. YOLO26n-pose를 선택한 근거는 무엇인가요?
 
-A. 실신 감지는 미탐 비용이 크기 때문에 Faint Recall을 우선했습니다. fast comparison 기준 yolo26n-pose는 Faint Recall 0.750877, F1 0.612303, FP 400, FN 142로 기록되어 기본 후보로 유지했습니다. 다만 FP도 함께 증가하므로 threshold, cooldown, 알림 scope와 함께 검증해야 한다고 정리했습니다.
+**기억할 것: 실신은 놓치는 비용이 커서 Recall/FN을 먼저 봤다.**
+
+"accuracy가 제일 높은 모델을 그냥 고르지는 않았습니다. 이 프로젝트는 실신을 놓치는 게 더 위험해서 Faint Recall과 FN을 우선해서 봤고, 그 기준에서 yolo26n-pose가 가장 유리했습니다. 다만 FP는 많았기 때문에 모델 하나로 끝내지 않고 threshold나 cooldown 같은 운영 로직과 같이 조정해야 한다고 봤습니다."
 
 ### Q2. 왜 YOLO Pose + ByteTrack + LSTM 구조인가요?
 
-A. YOLO Pose는 사람 bbox와 keypoint를 추출하고, ByteTrack은 동일 인물의 track continuity를 유지합니다. LSTM은 track별 keypoint sequence를 받아 Normal/Faint를 판단하므로 단일 프레임보다 행동 변화 관찰에 적합합니다.
+**기억할 것: 자세를 잡고 → 같은 사람을 따라가고 → 시간 변화를 본다.**
+
+"YOLO Pose로 한 프레임의 사람 자세를 잡고, ByteTrack으로 그 사람이 다음 프레임에서도 같은 사람인지 이어줍니다. 그다음 LSTM에 사람별 keypoint sequence를 넣어서 쓰러지는 변화 자체를 보게 했습니다. 쓰러짐은 한 장의 사진보다 시간에 따른 자세 변화가 중요해서 이렇게 나눴습니다."
 
 ### Q3. WebRTC와 HLS는 어떻게 나누었나요?
 
-A. WebRTC는 MediaMTX WHEP 경로로 저지연 live view에 적합해 primary로 두었습니다. HLS는 segment와 buffer 때문에 지연이 크지만 안정적인 fallback으로 유지했습니다.
+**기억할 것: WebRTC는 빠르고, HLS는 느리지만 fallback으로 보기 쉽다.**
+
+"관제 화면은 지연이 짧아야 해서 WebRTC를 우선했습니다. HLS는 segment buffering 때문에 실시간성은 떨어지지만 fallback으로는 쓸 수 있었습니다. 실제 개발 과정에서는 송출 안정화 비용도 커서 결국 시연 안정성을 위해 MJPEG로 단순화한 경험도 있고, 이 과정에서 '기술적으로 좋은 방식'과 '지금 안정적으로 운영되는 방식'은 다를 수 있다는 걸 배웠습니다."
 
 ### Q4. MQTT metadata 분리는 왜 필요한가요?
 
-A. AI payload가 사용자 권한이나 기관 scope를 직접 결정하면 보안과 책임 경계가 흐려집니다. MQTT에는 eventId, timestampMs, streamId, camera_login_id, events 같은 metadata만 담고, Backend가 camera registry를 기준으로 권한과 알림 scope를 resolve하도록 분리했습니다.
+**기억할 것: AI는 사건만 말하고, 권한 판단은 백엔드가 한다.**
+
+"AI가 '누구에게 알림을 보여줄지'까지 판단하게 만들고 싶지 않았습니다. AI 쪽은 어떤 카메라에서 어떤 이벤트가 났는지만 MQTT로 보내고, 사용자 권한이나 기관 범위는 백엔드가 카메라 정보와 사용자 정보를 보고 결정하게 나눴습니다. 그래야 책임 경계도 명확하고 권한 로직을 AI 코드에 섞지 않아도 됩니다."
 
 ### Q5. evidenceId는 왜 별도로 필요한가요?
 
-A. 관제 시스템에서는 특정 overlay, event, frame_sync, clip metadata가 같은 프레임을 가리키는지 추적해야 합니다. cameraLoginId, frameId, capturedAtMs를 묶은 evidenceId는 디버깅과 감사 가능성을 높이는 기준입니다.
+**기억할 것: AI가 본 장면과 화면에 뜬 장면이 같은지 따라가기 위한 번호다.**
+
+"실시간 시스템에서는 화면에 이상한 박스가 떠도 어느 프레임에서 시작된 문제인지 찾기 어렵습니다. 그래서 카메라와 frameId, timestamp를 묶어서 같은 사건을 따라갈 기준을 두었습니다. 그러면 AI 결과, MQTT 이벤트, overlay, clip이 같은 프레임을 가리키는지 확인할 수 있습니다."
 
 ### Q6. Self-Improving AI는 구현됐나요?
 
-A. 구현 완료가 아니라 확장 설계와 실험 계획입니다. 먼저 evidence chain 정합성을 확보한 뒤, FP/FN을 review_status 기반 후보 데이터로 수집해 training_manifest_v2를 만드는 방향입니다.
+**기억할 것: 구현 완료 아님. 오탐/미탐 수집과 재학습 후보 설계까지.**
+
+"완성된 기능이라고 말하면 안 됩니다. 실제로는 오탐이나 미탐을 다시 학습 데이터 후보로 모으는 구조를 설계한 단계입니다. 특히 잘못된 데이터를 자동으로 다시 학습시키면 더 위험해서, 사람이 검수한 데이터만 다음 학습 manifest에 넣는 방향으로 잡았습니다."
 
 ### Q7. Synthetic Data는 어떻게 사용할 계획인가요?
 
-A. 생성형 영상 모델보다 기존 clip 기반 brightness, noise, blur, compression, occlusion 같은 vision augmentation부터 검토합니다. parent_clip_id를 보존하고 train/test split을 parent 단위로 유지해 leakage를 막는 것이 핵심입니다.
+**기억할 것: 새 영상을 멋지게 만드는 것보다, 기존 데이터 변형과 leakage 방지가 먼저다.**
+
+"처음부터 생성형 영상 모델을 쓰기보다 기존 클립에 blur, 밝기 변화, 압축, 가림 같은 변형을 주는 쪽부터 봤습니다. 여기서 중요한 건 같은 원본에서 나온 변형본이 train과 test에 동시에 들어가면 안 된다는 점이라 `parent_clip_id` 기준으로 split을 유지하려고 했습니다."
 
 ### Q8. VLM은 어떤 역할인가요?
 
-A. 현재 구현 완료가 아니라 snapshot 또는 clip 기반 사건 설명을 보조하는 확장 방향입니다. VLM이 최종 판단을 대신하기 전에 frame evidence chain과 clip metadata 정합성이 먼저 필요합니다.
+**기억할 것: 실시간 판정 모델 대체가 아니라, 사건 설명/검색을 돕는 보조 레이어다.**
+
+"VLM을 YOLO나 LSTM 대신 실시간 판정기로 넣으려는 건 아니었습니다. 이벤트가 이미 발생한 뒤에 스냅샷이나 클립을 보고 '사람이 쓰러져 있다' 같은 설명을 만들어 검색과 확인을 돕는 쪽으로 생각했습니다. 실시간 루프에 바로 넣으면 무겁고 안정성도 떨어질 수 있어서 분리하는 게 맞다고 봤습니다."
 
 ## LLM Wiki RAG
 
 ### Q9. 왜 단순 챗봇이 아니라 RAG인가요?
 
-A. 이 프로젝트의 답변은 내부 문서의 근거가 중요합니다. RAG는 질문 전에 Wiki 문서를 검색하고 검색된 chunk만 답변 context로 사용하므로, 모델이 일반 지식으로 아는 척할 위험을 줄일 수 있습니다.
+**기억할 것: 내 프로젝트 질문은 일반 지식보다 내 문서가 정답이다.**
+
+"LLM에게 그냥 물어보면 없는 구현도 그럴듯하게 말할 수 있습니다. 그래서 질문 전에 제 Wiki 문서를 먼저 검색하고, 찾은 내용 안에서만 답하게 했습니다. 면접 준비용 Wiki라서 '그럴듯한 답'보다 '내가 실제로 한 근거가 있는 답'이 더 중요했습니다."
 
 ### Q10. Markdown chunking은 어떻게 하나요?
 
-A. `content/*.md`를 읽고 frontmatter와 본문을 분리한 뒤, `#`, `##`, `###` heading 기준으로 section을 나눕니다. code fence와 일부 Markdown 기호를 제거한 plain text를 기본 1100자 chunk로 나눕니다.
+**기억할 것: 제목 구조를 먼저 살리고, 너무 긴 section만 다시 자른다.**
+
+"Wiki가 Markdown이라서 heading 구조를 그대로 활용했습니다. 먼저 `#`, `##`, `###` 기준으로 section을 나누고, 너무 긴 내용은 다시 일정 길이로 chunking했습니다. 그냥 글자 수만 자르면 서로 다른 주제가 한 chunk에 섞일 수 있어서 문서 구조를 먼저 살렸습니다."
 
 ### Q11. local hash embedding은 어떤 구조인가요?
 
-A. 외부 embedding API를 쓰지 않고 토큰을 stable hash로 256차원 vector bucket에 누적한 뒤 정규화합니다. 검색에서는 cosine similarity 0.7과 keyword overlap 0.3을 조합합니다.
+**기억할 것: 최고 품질보다 무료·재현 가능한 baseline을 먼저 만들었다.**
+
+"처음부터 유료 embedding API에 의존하고 싶지 않아서 deterministic한 local hash embedding으로 baseline을 만들었습니다. semantic 성능에는 한계가 있지만 비용이 없고 같은 입력이면 결과가 같아서 검색 파이프라인을 검증하기 좋았습니다. 이후 검색에서는 vector 점수만 믿지 않고 keyword overlap도 같이 섞었습니다."
 
 ### Q12. vector DB를 사용했나요?
 
-A. 전용 vector DB는 사용하지 않았습니다. 현재는 `data/ragVectorIndex.json` 파일 기반 vector store입니다. 작은 Wiki에는 단순하고 재현 가능하지만 대규모 문서나 동시 reindex에는 한계가 있습니다.
+**기억할 것: 지금 규모에선 JSON이면 충분했고, 커지면 DB로 바꾸면 된다.**
+
+"전용 vector DB는 안 썼습니다. 개인 Wiki 규모에서는 JSON 파일이 구조가 단순하고 디버깅하기 쉬워서 먼저 그렇게 만들었습니다. 문서가 훨씬 많아지거나 여러 사용자가 동시에 검색·색인하는 서비스가 되면 그때 DB가 필요합니다."
 
 ### Q13. hallucination은 어떻게 막나요?
 
-A. 검색 결과가 없으면 `answered`가 아니라 `insufficient_context`를 반환하고 sources를 빈 배열로 둡니다. 외부 LLM을 쓸 때도 검색된 chunk만 context로 전달합니다.
+**기억할 것: 모르면 답하지 않게 만든다.**
+
+"hallucination을 완전히 없앴다고 말하진 않습니다. 대신 답할 만한 문서 근거가 없으면 `insufficient_context`로 끝내고, LLM을 쓰더라도 검색된 chunk만 context로 넘깁니다. 생성 모델을 더 똑똑하게 만드는 것보다 답변 가능한 범위를 제한하는 방식으로 줄였습니다."
 
 ### Q14. API Key는 frontend에 노출되나요?
 
-A. 노출되지 않습니다. frontend는 `/api/rag/ask`만 호출하고, `RAG_LLM_API_KEY`는 서버 측 `answer.mjs`에서만 사용합니다.
+**기억할 것: 브라우저는 내 서버만 호출하고, 외부 API Key는 서버에만 둔다.**
+
+"프론트에는 키를 주지 않았습니다. 브라우저는 제 `/api/rag/ask` endpoint만 호출하고, 외부 LLM을 쓸 때 필요한 키는 서버에서만 읽습니다. 그래서 사용자가 개발자 도구를 열어도 API Key 자체는 볼 수 없습니다."
