@@ -68,6 +68,16 @@ describe('parseMarkdownBlocks paragraphs', () => {
     assert.deepEqual(blocks[1].items, ['항목1', '항목2']);
   });
 
+  it('renders h4 sections and numbered interview questions as structured blocks', () => {
+    const blocks = parseMarkdownBlocks('#### B. 인성·경험 — 8~13\n\n8. 성공 경험은?\n9. 실패 경험은?');
+    assert.equal(blocks[0].kind, 'heading');
+    assert.equal(blocks[0].level, 4);
+    assert.equal(blocks[1].kind, 'list');
+    assert.equal(blocks[1].ordered, true);
+    assert.equal(blocks[1].start, 8);
+    assert.deepEqual(blocks[1].items, ['성공 경험은?', '실패 경험은?']);
+  });
+
   it('keeps code fence newlines intact', () => {
     const blocks = parseMarkdownBlocks('```js\nconst a = 1;\nconst b = 2;\n```');
     assert.equal(blocks[0].kind, 'code');

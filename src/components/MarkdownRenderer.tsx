@@ -64,6 +64,9 @@ export function MarkdownRenderer({
                 </h2>
               );
             }
+            if (block.level === 4) {
+              return <h4 id={id} key={`${id}-${index}`}>{inlineMarkdown(block.text)}</h4>;
+            }
             return (
               <h3 id={id} key={`${id}-${index}`}>
                 {inlineMarkdown(block.text)}{' '}
@@ -82,10 +85,19 @@ export function MarkdownRenderer({
               <p key={`p-${index}`}>{renderParagraphLines(block.lines)}</p>
             );
           case 'list':
+            if (block.ordered) {
+              return (
+                <ol key={`list-${index}`} start={block.start}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`${itemIndex}-${item}`}>{inlineMarkdown(item)}</li>
+                  ))}
+                </ol>
+              );
+            }
             return (
               <ul key={`list-${index}`}>
-                {block.items.map((item) => (
-                  <li key={item}>{inlineMarkdown(item)}</li>
+                {block.items.map((item, itemIndex) => (
+                  <li key={`${itemIndex}-${item}`}>{inlineMarkdown(item)}</li>
                 ))}
               </ul>
             );

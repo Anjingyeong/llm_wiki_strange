@@ -11,7 +11,7 @@ export { resolveWikiMarkdownHref } from './wikiMarkdownLinks.mjs';
  * @typedef {|
  *   { kind: 'heading', level: number, text: string } |
  *   { kind: 'paragraph', lines: ParagraphLine[] } |
- *   { kind: 'list', items: string[] } |
+ *   { kind: 'list', items: string[], ordered?: boolean, start?: number } |
  *   { kind: 'code', language: string, code: string } |
  *   { kind: 'table', rows: string[][], alignments: (null | 'left' | 'center' | 'right')[] } |
  *   { kind: 'quote', lines: string[] }
@@ -143,7 +143,7 @@ export function parseMarkdownBlocks(markdown) {
       index += 1;
       continue;
     }
-    const heading = /^(#{1,3})\s+(.+)$/u.exec(line);
+    const heading = /^(#{1,4})\s+(.+)$/u.exec(line);
     if (heading?.[1] && heading[2]) {
       blocks.push({ kind: 'heading', level: heading[1].length, text: heading[2].trim() });
       index += 1;
@@ -192,6 +192,17 @@ export function parseMarkdownBlocks(markdown) {
       blocks.push({ kind: 'list', items });
       continue;
     }
+    if (/^\d+\.\s+/u.test(line)) {
+      /** @type {string[]} */
+      const items = [];
+      const start = Number.parseInt(/^([0-9]+)\./u.exec(line)?.[1] ?? '1', 10);
+      while (index < lines.length && /^\d+\.\s+/u.test(lines[index] ?? '')) {
+        items.push((lines[index] ?? '').replace(/^\d+\.\s+/u, ''));
+        index += 1;
+      }
+      blocks.push({ kind: 'list', items, ordered: true, start });
+      continue;
+    }
     if (line.startsWith('>')) {
       /** @type {string[]} */
       const quoteLines = [];
@@ -210,7 +221,8 @@ export function parseMarkdownBlocks(markdown) {
         current.startsWith('```')
         || current.startsWith('|')
         || current.startsWith('>')
-        || /^(#{1,3}|[-*])\s+/u.test(current)
+        || /^(#{1,4}|[-*])\s+/u.test(current)
+        || /^\d+\.\s+/u.test(current)
       ) {
         break;
       }
