@@ -616,3 +616,36 @@ blockquote { margin: 16px 0; border-left: 3px solid var(--accent); padding: 10px
 .llm22-answer-card .ragAnswerQuestion .qtext { margin-left: 4px; color: var(--text-sub); }
 .llm22-answer-card .ragAnswerSummary { font-size: 12px; color: var(--muted); margin: 3px 0 6px; }
 .llm22-answer-card .ragAnswerActions { display: flex; gap: 6px; margin-bottom: 6px; }
+
+
+/* Beaus company activity workspace */
+.companyActivityLead { margin-top: 6px; max-width: 680px; color: var(--muted); font-size: .88rem; }
+.companyActivitySection { margin-top: 28px; }
+.companySectionHeading { margin-bottom: 12px; }
+.companySectionHeading > span, .companyActivityCallout > span { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.companySectionHeading h2 { margin: 3px 0 0; font-size: 1.05rem; }
+.companyThemeGrid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+.companyThemeCard, .companySignalCard, .companyActivityCallout { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.companyThemeCard { padding: 14px; }
+.companyThemeCard strong { font-size: .9rem; }
+.companyThemeCard p { margin: 5px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+.companySignalList { display: grid; gap: 12px; }
+.companySignalCard { padding: 18px; }
+.companySignalMeta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .72rem; }
+.companySignalCard h3 { margin: 8px 0 7px; font-size: 1rem; }
+.companySignalCard > p { margin: 0 0 12px; line-height: 1.65; }
+.companySignalCard dl { display: grid; gap: 8px; margin: 0 0 12px; }
+.companySignalCard dl div { display: grid; grid-template-columns: 88px 1fr; gap: 10px; }
+.companySignalCard dt { color: var(--muted); font-size: .76rem; font-weight: 600; }
+.companySignalCard dd { margin: 0; font-size: .84rem; line-height: 1.55; }
+.companySignalCard a, .companyChannelList a { font-size: .8rem; font-weight: 600; }
+.companyChannelList { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.companyChannelList li { display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.companyChannelList span, .companyCrawlNote { color: var(--muted); font-size: .8rem; line-height: 1.55; }
+.companyCrawlNote { margin: 12px 0 0; }
+.companyActivityCallout { margin-top: 28px; padding: 20px; }
+.companyActivityCallout h2 { margin: 6px 0 8px; max-width: 780px; font-size: 1.08rem; line-height: 1.5; }
+.companyActivityCallout p { margin: 0 0 14px; color: var(--muted); line-height: 1.6; }
+.companyActivityCallout button { width: auto; }
+@media (max-width: 900px) { .companyThemeGrid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 600px) { .companyThemeGrid { grid-template-columns: 1fr; } .companySignalCard dl div, .companyChannelList li { grid-template-columns: 1fr; gap: 4px; } .companySignalMeta { flex-direction: column; gap: 2px; } }

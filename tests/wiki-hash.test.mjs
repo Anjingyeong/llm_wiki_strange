@@ -18,9 +18,10 @@ test('parseLocationHash: doc slug and section', () => {
   assert.equal(p.sectionId, 'star-result');
 });
 
-test('parseLocationHash: search and rag views', () => {
+test('parseLocationHash: search, rag, and company views', () => {
   assert.deepEqual(parseLocationHash('#/__search__'), { view: 'search', slug: '', sectionId: null });
   assert.deepEqual(parseLocationHash('#/__rag__'), { view: 'rag', slug: '', sectionId: null });
+  assert.deepEqual(parseLocationHash('#/__company__'), { view: 'company', slug: '', sectionId: null });
 });
 
 test('wikiLink matches SPA hash convention', () => {

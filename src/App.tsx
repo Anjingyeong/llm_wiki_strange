@@ -6,6 +6,7 @@ import { InlineTableOfContents, TableOfContents } from './components/TableOfCont
 import { WikiAskWorkspace } from './components/WikiAskWorkspace';
 import { WikiCommandBar } from './components/WikiCommandBar';
 import { WikiSearchWorkspace } from './components/WikiSearchWorkspace';
+import { BeausActivityWorkspace } from './components/BeausActivityWorkspace';
 import { AccessGate } from './components/AccessGate';
 import { documentsBySlug, documentsByTask, getInitialDocument } from './lib/documents';
 import { getPageTitle } from './lib/types';
@@ -38,7 +39,9 @@ export function App() {
       ? getPageTitle(activeDocument)
       : contentView === 'search'
         ? '문서 검색'
-        : 'AI 질문';
+        : contentView === 'company'
+          ? '뷰스컴퍼니 기업 활동'
+          : 'AI 질문';
     document.title = `${pageName} | Smart Safety AI Wiki`;
   }, [activeDocument, contentView]);
 
@@ -185,13 +188,16 @@ export function App() {
         <main className="content" id="wiki-main-content">
           {contentView === 'doc' && activeDocument ? (
             <>
-              <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} />
+              <WikiCommandBar onOpenAsk={() => openWorkspace('rag')} onOpenSearch={() => openWorkspace('search')} onOpenCompany={() => openWorkspace('company')} />
               <InlineTableOfContents documentSlug={activeDocument.slug} headings={activeDocument.headings} />
               <DocumentArticle document={activeDocument} onSelectDocument={selectDocument} />
             </>
           ) : null}
           {contentView === 'search' ? (
             <WikiSearchWorkspace onReturnToDocument={returnToDocument} onSelectDocument={selectDocument} />
+          ) : null}
+          {contentView === 'company' ? (
+            <BeausActivityWorkspace onReturnToDocument={returnToDocument} onSelectDocument={selectDocument} />
           ) : null}
           {contentView === 'rag' ? (
             <WikiAskWorkspace

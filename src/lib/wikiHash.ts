@@ -1,6 +1,6 @@
-/** SPA routes: #/Slug, #/Slug/section-id, #/__search__, #/__rag__ */
+/** SPA routes: #/Slug, #/Slug/section-id, #/__search__, #/__rag__, #/__company__ */
 
-export type WikiView = 'doc' | 'search' | 'rag';
+export type WikiView = 'doc' | 'search' | 'rag' | 'company';
 
 export function parseLocationHash(hash = typeof window !== 'undefined' ? window.location.hash : ''): {
   view: WikiView;
@@ -23,6 +23,9 @@ export function parseLocationHash(hash = typeof window !== 'undefined' ? window.
   if (decoded === '__rag__' || decoded === '__rag') {
     return { view: 'rag', slug: '', sectionId: null };
   }
+  if (decoded === '__company__' || decoded === '__company') {
+    return { view: 'company', slug: '', sectionId: null };
+  }
 
   const slash = decoded.indexOf('/');
   if (slash === -1) {
@@ -42,7 +45,7 @@ export function writeDocumentHash(slug: string, sectionId?: string | null) {
 }
 
 export function writeViewHash(view: Exclude<WikiView, 'doc'>) {
-  window.location.hash = view === 'search' ? '#/__search__' : '#/__rag__';
+  window.location.hash = view === 'search' ? '#/__search__' : view === 'rag' ? '#/__rag__' : '#/__company__';
 }
 
 export function wikiLink(slug: string, sectionId?: string | null): string {
