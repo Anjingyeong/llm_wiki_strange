@@ -5,6 +5,9 @@ shortTitle: Search Benchmark
 category: Experiments
 relatedDocs: [Source-Code-Knowledge-Map, Code-Symbol-Index-Notes]
 updatedAt: 2026-07-28
+type: experiment
+status: partial
+evidenceLevel: offline-benchmark
 implementation_status: implemented
 ---
 

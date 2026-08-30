@@ -6,6 +6,9 @@ category: Architecture
 relatedDocs: [Architecture, AI-Pipeline, MQTT-Event-Schema, Graphify-Semantic-Map]
 relatedFiles: [이상행동/ai, 이상행동/back, 이상행동/front, 이상행동/infra]
 updatedAt: 2026-07-28
+type: architecture
+status: partial
+evidenceLevel: code-only
 implementation_status: implemented
 ---
 

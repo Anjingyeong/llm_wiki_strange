@@ -9,6 +9,8 @@ relatedFiles: [strange_ai/ai/vlm/processing_scheduler.py, strange_ai/ai/vlm/clip
 entities: [VlmProcessingScheduler, clip_end_sec, clip_start_sec, reset_analysis_session]
 updatedAt: 2026-07-18
 type: evidence
+status: partial
+evidenceLevel: code-only
 portfolio_use: true
 implementation_status: implemented
 ---

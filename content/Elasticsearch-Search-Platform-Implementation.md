@@ -6,6 +6,9 @@ category: Infra
 relatedDocs: [RAG-Legacy-Retrieval-Benchmark-2026-07-28, Source-Code-Knowledge-Map]
 relatedFiles: [docker-compose.elasticsearch.yml, scripts/lib/rag/elasticsearch/client.mjs, scripts/lib/rag/elasticsearch/index.mjs, scripts/lib/rag/elasticsearch/search.mjs, scripts/elasticsearch-index.mjs, scripts/elasticsearch-search.mjs]
 updatedAt: 2026-07-28
+type: architecture
+status: partial
+evidenceLevel: unit-test
 implementation_status: implemented
 ---
 

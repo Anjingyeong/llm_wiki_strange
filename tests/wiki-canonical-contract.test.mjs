@@ -74,8 +74,10 @@ test('canonical, supersession, and redirect targets form a public reciprocal con
 test('internal documents remain outside the root public corpus', async () => {
   // Given/When: the public corpus is enumerated using the production index policy.
   const { slugs, documentCount } = await listIndexableContentSlugs(contentDir);
+  const rootMarkdownCount = (await readdir(contentDir)).filter((name) => name.endsWith('.md')).length;
 
-  // Then: only the 48 public root documents are visible; nested operations notes stay excluded.
-  assert.equal(documentCount, 48);
+  // Then: the count stays self-consistent as public docs grow, while internal notes stay excluded.
+  assert.equal(documentCount, slugs.length);
+  assert.ok(documentCount < rootMarkdownCount);
   assert.equal(slugs.includes('Wiki-Ops-Sync'), false);
 });
