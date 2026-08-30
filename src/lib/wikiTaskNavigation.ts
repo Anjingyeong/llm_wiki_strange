@@ -23,6 +23,7 @@ export const WIKI_TASK_NAVIGATION = [
     slugs: [
       'Overview',
       'Architecture',
+      'CJK-Company-AI-Gateway-Architecture',
       'Evidence-Smart-Safety-System',
       'AI-Pipeline',
       'AI-Output-JSON',
