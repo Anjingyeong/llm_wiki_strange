@@ -5,11 +5,11 @@
   "embeddingDimensions": 256,
   "documentCount": 55,
   "chunkCount": 818,
-  "generatedAt": "2026-08-30T04:55:48.660Z",
-  "sourceCommit": "3bbcfd4",
+  "generatedAt": "2026-09-08T02:34:11.976Z",
+  "sourceCommit": "6d6ff8f",
   "indexPath": "data/ragVectorIndex.json",
   "meanChunkChars": 468,
   "duplicateDocRatio": 1,
-  "manifestHash": "c22c510809ce55d5",
-  "corpusHash": "8052eec2e516f35bbc8a92f69dc2c2753b56bb1f9d2c3466d38af3c212d0a35e"
+  "manifestHash": "86ed1d44ce5ae43b",
+  "corpusHash": "f18bd60000e579630aa47f805558a23eab74de97905557be365d67532730b14a"
 }
